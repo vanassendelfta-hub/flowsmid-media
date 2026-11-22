@@ -239,7 +239,22 @@
       ]);
     }));
   }
+  var mailGeladen = false;
+  async function laadMail() {
+    if (mailGeladen) return;
+    var r = await sb.rpc('shop_mail_ophalen', { p_slug: SLUG });
+    if (!r.error) { $('mailAdres').value = r.data || ''; mailGeladen = true; }
+  }
+  $('mailSet').addEventListener('submit', async function (e) {
+    e.preventDefault();
+    var m = $('mailAdres').value.trim();
+    if (m && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(m)) return toast('Dit e-mailadres klopt niet.', true);
+    var r = await sb.rpc('shop_mail_instellen', { p_slug: SLUG, p_mail: m });
+    if (r.error) return toast(r.error.message || 'Opslaan lukte niet.', true);
+    toast(m ? 'Opgeslagen. Mails gaan nu naar ' + m : 'Opgeslagen.');
+  });
   async function laadBestellingen() {
+    laadMail();
     var r = await sb.from('shop_bestellingen').select('*').eq('slug', SLUG).order('aangemaakt_op', { ascending: false }).limit(200);
     if (!r.error) { bestellingen = r.data || []; tekenBestellingen(); }
   }

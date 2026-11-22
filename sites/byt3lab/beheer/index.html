@@ -97,6 +97,7 @@ textarea{min-height:110px;resize:vertical}
 .best .tot{display:flex;justify-content:space-between;border-top:1px dashed var(--line);padding-top:8px;font:700 1.05rem var(--tech)}
 .best .info{color:var(--muted);font-size:.9rem;margin:8px 0 0}
 .tikkie{display:flex;gap:8px;margin-top:12px}.tikkie input{flex:1;padding:10px 12px;font-size:15px}
+.mailset{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;margin:0 0 16px}.mailset label{display:block;font-weight:700;font-size:.9rem}
 .tikkie-link{display:block;margin-top:10px;font-size:.85rem;word-break:break-all;color:var(--muted)}
 .st.Wacht-op-betaling{background:rgba(201,164,92,.18);color:var(--gold)}.st.Betaald{background:rgba(140,255,46,.15);color:var(--neon)}.st.Geannuleerd{color:var(--rood)}
 .toast{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom));transform:translateX(-50%);background:var(--panel2);border:1px solid var(--neon);color:#fff;border-radius:12px;padding:12px 18px;font-weight:600;z-index:60;width:max-content;max-width:calc(100vw - 24px);text-align:center;box-shadow:0 14px 30px -12px rgba(0,0,0,.6)}
@@ -142,6 +143,11 @@ textarea{min-height:110px;resize:vertical}
     <div id="tabBestellingen" hidden>
       <div class="kop"><h1>Bestellingen</h1></div>
       <p class="hint" style="margin:-6px 0 16px">Nieuwe bestelling? Maak in de Tikkie-app een betaalverzoek voor het totaalbedrag, plak de link hieronder en tik op Stuur Tikkie. De klant krijgt hem meteen per mail.</p>
+      <form class="mailset" id="mailSet">
+        <label for="mailAdres">Bestellingen en antwoorden van klanten gaan naar</label>
+        <div class="tikkie"><input id="mailAdres" type="email" inputmode="email" autocomplete="email" placeholder="jouw@mailadres.nl"><button class="btn btn-g btn-k" type="submit">Opslaan</button></div>
+        <p class="hint" style="margin:8px 0 0">Klanten krijgen de bevestiging en de Tikkie namens Byt3lab Customs. Beantwoorden ze de mail, dan komt dat hier binnen, en je krijgt zelf een kopie.</p>
+      </form>
       <div id="bestLijst"></div>
     </div>
 
