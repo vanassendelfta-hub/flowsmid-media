@@ -1,0 +1,602 @@
+<title>Cutebizz</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Cutebizz – handgemaakte taarten, cupcakes en surprise boxes. Celebrate life, the cute way.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,400..800,100,1;1,9..144,400..800,100,1&family=Jost:wght@400;500;600&family=Nunito:wght@400;600;700&display=swap">
+<style>
+/* Layout: patisserie window — blush ground, arched photo frames like shop windows, gold hairlines, one raspberry accent */
+:root{
+  --bg:#FFF6F8; --bg-2:#FDE9EF; --card:#FFFFFF; --ink:#3D1A2E; --ink-soft:#7A4E64;
+  --rasp:#C2185B; --rasp-2:#E0457F; --blush:#F7B6CC; --lilac:#D9C3EE; --gold:#B98A3A; --gold-soft:#E9CF8F;
+  --line:#EBCFD9; --on-rasp:#FFFFFF; --word-fill:url(#hword); --tag-fill:#7A3B5C;
+  --intro-bg:#2A0E1E; --intro-glow:#5B1E3F;
+  --f-display:"Fraunces", "Iowan Old Style", Georgia, serif;
+  --f-ui:"Jost", "Avenir Next", "Segoe UI", sans-serif;
+  --f-body:"Nunito", "Segoe UI", system-ui, sans-serif;
+  --radius:22px; --arch:999px 999px 22px 22px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#1F0D18; --bg-2:#2A1220; --card:#2F1626; --ink:#FBE8EF; --ink-soft:#D7AFC2;
+  --rasp:#F06A9E; --rasp-2:#F48DB4; --blush:#7A2E50; --lilac:#4E3866; --gold:#E3C27A; --gold-soft:#8A6A2C;
+  --line:#4A2438; --on-rasp:#2A0E1E; --word-fill:#FFD3E3; --tag-fill:#E9CF8F; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#1F0D18; --bg-2:#2A1220; --card:#2F1626; --ink:#FBE8EF; --ink-soft:#D7AFC2;
+  --rasp:#F06A9E; --rasp-2:#F48DB4; --blush:#7A2E50; --lilac:#4E3866; --gold:#E3C27A; --gold-soft:#8A6A2C;
+  --line:#4A2438; --on-rasp:#2A0E1E; --word-fill:#FFD3E3; --tag-fill:#E9CF8F; color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font:400 17px/1.65 var(--f-body);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--bg)}
+.wrap{max-width:1180px;margin-inline:auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--f-display);font-variation-settings:"SOFT" 100,"WONK" 1;line-height:1.05;text-wrap:balance;margin:0}
+h2{font-size:clamp(2rem,4.4vw,3.3rem);font-weight:700}
+h3{font-size:1.4rem;font-weight:650}
+p{margin:0}
+a{color:inherit}
+.eyebrow{font:600 .78rem/1 var(--f-ui);letter-spacing:.22em;text-transform:uppercase;color:var(--gold);display:inline-flex;align-items:center;gap:.7em}
+.eyebrow::before{content:"";width:28px;height:1px;background:currentColor}
+.script{font-style:italic;color:var(--rasp)}
+.btn{display:inline-flex;align-items:center;gap:.55em;font:600 .98rem/1 var(--f-ui);letter-spacing:.02em;padding:1em 1.5em;border-radius:999px;text-decoration:none;border:1.5px solid transparent;transition:transform .2s,box-shadow .2s,background .2s;cursor:pointer}
+.btn-primary{background:var(--rasp);color:var(--on-rasp);box-shadow:0 10px 24px -10px var(--rasp)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 30px -12px var(--rasp)}
+.btn-ghost{border-color:var(--line);color:var(--ink);background:transparent}
+.btn-ghost:hover{border-color:var(--rasp);color:var(--rasp)}
+:focus-visible{outline:2.5px solid var(--rasp);outline-offset:3px;border-radius:6px}
+
+/* header */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-block:12px}
+.site-logo{display:block;width:210px;max-width:52vw}
+.site-logo svg{display:block;width:100%;height:auto}
+.logo-sym .wordmark{fill:var(--word-fill)} .logo-sym .tagline{fill:var(--tag-fill)}
+.nav{display:flex;align-items:center;gap:26px;font:500 .95rem/1 var(--f-ui)}
+.nav a{text-decoration:none;color:var(--ink-soft)} .nav a:hover{color:var(--rasp)}
+.nav .btn{padding:.8em 1.2em;color:var(--on-rasp)}
+@media (max-width:900px){.nav a:not(.btn){display:none}}
+
+/* hero */
+.hero{padding-block:clamp(40px,7vw,90px) clamp(50px,7vw,100px);position:relative}
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(30px,5vw,70px);align-items:center}
+.hero h1{font-size:clamp(2.7rem,6.4vw,5.4rem);font-weight:750;letter-spacing:-.01em}
+.hero h1 .script{font-weight:500}
+.hero-copy{display:grid;gap:26px;min-width:0}
+.hero-copy .lead{font-size:1.15rem;color:var(--ink-soft);max-width:34em}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px}
+.hero-facts{display:flex;flex-wrap:wrap;gap:10px 22px;font:500 .9rem/1.3 var(--f-ui);color:var(--ink-soft)}
+.hero-facts span{display:inline-flex;align-items:center;gap:8px}
+.hero-facts svg{width:16px;height:16px;fill:var(--rasp)}
+.hero-art{position:relative;justify-self:center;width:min(100%,440px)}
+.arch{border-radius:var(--arch);overflow:hidden;background:var(--bg-2);position:relative;box-shadow:0 30px 60px -30px rgba(120,20,60,.45)}
+.arch img{display:block;width:100%;height:100%;object-fit:cover}
+.hero-art .arch{aspect-ratio:4/5;border:8px solid var(--card)}
+.hero-art .frame{position:absolute;inset:-16px;border:1.5px solid var(--gold-soft);border-radius:var(--arch);pointer-events:none}
+.stamp{position:absolute;width:132px;height:132px;left:-36px;bottom:34px;animation:spin 22s linear infinite}
+.stamp text{font:600 11.5px var(--f-ui);letter-spacing:.24em;fill:var(--rasp);text-transform:uppercase}
+.stamp-core{position:absolute;left:-36px;bottom:34px;width:132px;height:132px;display:grid;place-items:center;pointer-events:none}
+.stamp-core span{width:70px;height:70px;border-radius:50%;background:var(--rasp);display:grid;place-items:center}
+.stamp-core svg{width:30px;fill:var(--on-rasp)}
+.caption-chip{position:absolute;right:-14px;top:42px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px 14px;font:500 .82rem/1.35 var(--f-ui);max-width:190px;box-shadow:0 14px 30px -18px rgba(90,20,50,.5)}
+.caption-chip b{display:block;font-family:var(--f-display);font-size:1rem;color:var(--rasp)}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (max-width:860px){.hero .wrap{grid-template-columns:1fr}.hero-art{width:min(100%,380px);margin-top:10px}.stamp,.stamp-core{left:-10px;width:110px;height:110px}.caption-chip{right:-4px}}
+
+/* ribbon */
+.ribbon{background:var(--rasp);color:var(--on-rasp);overflow:hidden;padding-block:14px;font:500 1.05rem/1 var(--f-display);font-style:italic}
+.ribbon-track{display:flex;gap:40px;white-space:nowrap;width:max-content;animation:marq 38s linear infinite}
+.ribbon-track span{display:inline-flex;align-items:center;gap:40px}
+.ribbon-track svg{width:14px;fill:var(--on-rasp);opacity:.8}
+@keyframes marq{to{transform:translateX(-50%)}}
+
+section{padding-block:clamp(70px,9vw,120px)}
+.sec-head{display:grid;gap:16px;max-width:640px;margin-bottom:clamp(36px,5vw,56px)}
+.sec-head p{color:var(--ink-soft);font-size:1.07rem}
+
+/* assortiment */
+.menu{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.menu-item{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:26px 22px 24px;display:grid;gap:12px;align-content:start;min-width:0;transition:transform .25s,border-color .25s}
+.menu-item:hover{transform:translateY(-4px);border-color:var(--blush)}
+.menu-item .ico{width:54px;height:54px;border-radius:50%;background:var(--bg-2);display:grid;place-items:center}
+.menu-item .ico svg{width:28px;height:28px}
+.menu-item p{color:var(--ink-soft);font-size:.97rem}
+.menu-item .from{font:600 .82rem/1 var(--f-ui);letter-spacing:.08em;text-transform:uppercase;color:var(--gold)}
+@media (max-width:980px){.menu{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:520px){.menu{grid-template-columns:1fr}}
+
+/* gallery */
+.gallery-sec{background:var(--bg-2)}
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:minmax(0,auto);gap:20px}
+.g-item{margin:0;display:grid;gap:12px;min-width:0}
+.g-item .ph{border-radius:var(--radius);overflow:hidden;aspect-ratio:9/10;background:var(--card)}
+.g-item.wide{grid-column:span 2}
+.g-item.wide .ph{aspect-ratio:9/5}
+.g-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s}
+.g-item:hover img{transform:scale(1.04)}
+.g-item figcaption{font:500 .95rem/1.4 var(--f-ui);color:var(--ink-soft)}
+.g-item figcaption b{font-family:var(--f-display);font-weight:650;font-size:1.15rem;color:var(--ink);display:block}
+.g-cta{grid-column:1/-1;border-radius:var(--radius);background:var(--rasp);color:var(--on-rasp);padding:clamp(28px,4vw,44px);display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:14px 36px;position:relative;overflow:hidden}
+.g-cta h3{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:700;max-width:16em}
+.g-cta .txt{display:grid;gap:10px;min-width:0;position:relative}
+@media (max-width:860px){.g-cta{grid-template-columns:1fr}}
+.g-cta p{opacity:.92}
+.g-cta .btn{background:var(--on-rasp);color:var(--rasp);justify-self:start;position:relative}
+.g-cta svg.bg{position:absolute;right:-50px;bottom:-30px;width:240px;opacity:.16}
+@media (max-width:860px){.gallery{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.gallery{grid-template-columns:1fr}}
+
+/* surprise box */
+.box{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,70px);align-items:center}
+.box-card{background:var(--card);border:1px solid var(--line);border-radius:28px;padding:clamp(26px,4vw,44px);position:relative;min-width:0}
+.price{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-block:6px 18px}
+.price b{font:750 3.4rem/1 var(--f-display);color:var(--rasp)}
+.price span{font:500 .95rem var(--f-ui);color:var(--ink-soft)}
+.moments{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+.moments span{font:600 .8rem/1 var(--f-ui);letter-spacing:.1em;text-transform:uppercase;padding:.65em 1em;border-radius:999px;background:var(--bg-2);color:var(--rasp)}
+.checklist{list-style:none;padding:0;margin:0 0 24px;display:grid;gap:10px}
+.checklist li{display:flex;gap:12px;align-items:flex-start}
+.checklist svg{flex:none;width:20px;height:20px;margin-top:4px;fill:var(--rasp)}
+.info-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;border-top:1px dashed var(--line);padding-top:20px;font-size:.95rem}
+.info-row b{display:block;font:600 .78rem/1.4 var(--f-ui);letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
+.box-visual{position:relative;display:grid;place-items:center}
+.box-visual svg{width:min(100%,430px);height:auto}
+@media (max-width:860px){.box{grid-template-columns:1fr}.box-visual{order:-1}.info-row{grid-template-columns:1fr}}
+
+/* rewards */
+.rewards{background:linear-gradient(160deg,var(--bg-2),var(--bg))}
+.rw{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(30px,5vw,70px);align-items:center}
+.rw-photo{position:relative;justify-self:center;width:min(100%,360px)}
+.rw-photo .arch{aspect-ratio:3/4;border:8px solid var(--card)}
+.rw-badge{position:absolute;right:-20px;top:20px;width:118px;height:118px;border-radius:50%;background:var(--gold);color:#2A0E1E;display:grid;place-items:center;text-align:center;font:600 .72rem/1.15 var(--f-ui);letter-spacing:.08em;text-transform:uppercase;box-shadow:0 14px 30px -14px rgba(0,0,0,.4);transform:rotate(8deg)}
+.rw-badge b{display:block;font:800 2.2rem/1 var(--f-display);letter-spacing:0}
+.steps{list-style:none;padding:0;margin:26px 0 0;display:grid;gap:14px;counter-reset:s}
+.steps li{display:grid;grid-template-columns:44px 1fr;gap:16px;align-items:start;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px 18px}
+.steps li::before{counter-increment:s;content:counter(s);width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--bg-2);color:var(--rasp);font:700 1.15rem/1 var(--f-display)}
+.steps b{font-family:var(--f-ui);font-weight:600}
+.steps p{color:var(--ink-soft);font-size:.95rem}
+@media (max-width:860px){.rw{grid-template-columns:1fr}.rw-badge{right:-6px}}
+
+/* travel */
+.travel{background:var(--intro-bg);color:#FBE8EF;position:relative;overflow:hidden}
+.travel .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;position:relative}
+.travel h2{color:#FFFFFF}
+.travel .script{color:#F48DB4}
+.travel p{color:#E7C4D4;max-width:36em}
+.travel .eyebrow{color:#E9CF8F}
+.travel-card{border:1px solid rgba(233,207,143,.4);border-radius:24px;padding:28px;display:grid;gap:14px;background:rgba(255,255,255,.04)}
+.travel-card div{display:flex;justify-content:space-between;gap:12px;border-bottom:1px dashed rgba(233,207,143,.3);padding-bottom:12px;font-family:var(--f-ui)}
+.travel-card div:last-child{border:0;padding:0}
+.travel-card span{color:#E9CF8F;font-size:.85rem;letter-spacing:.12em;text-transform:uppercase}
+.travel .btn-primary{background:#F06A9E;color:#2A0E1E}
+.travel .plane{position:absolute;top:40px;right:6%;width:120px;opacity:.12;fill:#F48DB4}
+@media (max-width:860px){.travel .wrap{grid-template-columns:1fr}}
+
+/* bestellen */
+.order{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(30px,5vw,70px);align-items:start}
+.how{list-style:none;padding:0;margin:28px 0 0;display:grid;gap:22px}
+.how li{display:grid;grid-template-columns:auto 1fr;gap:18px}
+.how .n{font:italic 700 2.4rem/1 var(--f-display);color:var(--blush);min-width:40px}
+.how b{font-family:var(--f-ui);font-weight:600;font-size:1.05rem}
+.how p{color:var(--ink-soft);font-size:.96rem}
+.contact{margin-top:30px;display:grid;gap:10px;font-family:var(--f-ui)}
+.contact div{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.contact svg{width:20px;height:20px;fill:var(--rasp);flex:none}
+.copy{font:600 .75rem/1 var(--f-ui);letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--line);background:transparent;color:var(--ink-soft);border-radius:999px;padding:.55em .9em;cursor:pointer}
+.copy:hover{color:var(--rasp);border-color:var(--rasp)}
+form.card{background:var(--card);border:1px solid var(--line);border-radius:28px;padding:clamp(24px,4vw,40px);display:grid;gap:16px;min-width:0}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+label{display:grid;gap:6px;font:500 .88rem/1.2 var(--f-ui);color:var(--ink-soft)}
+input,select,textarea{font:400 1rem var(--f-body);color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:14px;padding:.8em .95em;width:100%;min-width:0}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--rasp)}
+textarea{min-height:110px;resize:vertical}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips input{position:absolute;opacity:0;width:1px;height:1px}
+.chips label{display:inline-flex;cursor:pointer}
+.chips label span{padding:.6em 1em;border-radius:999px;border:1.5px solid var(--line);font:500 .9rem/1 var(--f-ui);color:var(--ink)}
+.chips input:checked+span{background:var(--rasp);border-color:var(--rasp);color:var(--on-rasp)}
+.chips input:focus-visible+span{outline:2.5px solid var(--rasp);outline-offset:2px}
+.form-note{font-size:.85rem;color:var(--ink-soft)}
+.thanks{display:grid;gap:10px;text-align:center;padding:30px 10px;justify-items:center}
+.thanks svg{width:90px}
+@media (max-width:860px){.order{grid-template-columns:1fr}}
+@media (max-width:520px){.row2{grid-template-columns:1fr}}
+
+/* footer */
+footer{border-top:1px solid var(--line);padding-block:44px 30px;background:var(--bg)}
+footer .wrap{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:30px;align-items:start}
+footer .site-logo{width:230px}
+footer h4{font:600 .78rem/1 var(--f-ui);letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin:6px 0 14px}
+footer ul{list-style:none;margin:0;padding:0;display:grid;gap:8px;font-family:var(--f-ui);color:var(--ink-soft)}
+footer ul a{text-decoration:none} footer ul a:hover{color:var(--rasp)}
+.legal{grid-column:1/-1;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;border-top:1px solid var(--line);padding-top:20px;font:400 .85rem var(--f-ui);color:var(--ink-soft)}
+.legal button{background:none;border:0;color:var(--rasp);font:inherit;cursor:pointer;padding:0;text-decoration:underline}
+@media (max-width:760px){footer .wrap{grid-template-columns:1fr}}
+
+/* =========== INTRO =========== */
+#intro{position:fixed;inset:0;z-index:100;background:radial-gradient(120% 90% at 50% 55%,var(--intro-glow) 0%,var(--intro-bg) 62%);display:grid;place-items:center;overflow:hidden}
+#intro .stage{width:min(92vw,78vh,620px);aspect-ratio:600/640;position:relative}
+#intro svg.main{width:100%;height:100%;overflow:visible}
+#intro .wordmark{fill:url(#iword)}
+#intro .tagline{fill:#E9CF8F}
+#intro canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+#intro .skip{position:absolute;right:max(20px,env(safe-area-inset-right,0px));bottom:calc(20px + env(safe-area-inset-bottom,0px));font:500 .85rem/1 var(--f-ui);letter-spacing:.14em;text-transform:uppercase;color:#E7C4D4;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:.8em 1.2em;cursor:pointer}
+#intro .skip:hover{color:#fff;border-color:#fff}
+#intro .count{position:absolute;left:max(20px,env(safe-area-inset-left,0px));bottom:calc(24px + env(safe-area-inset-bottom,0px));font:500 .78rem/1 var(--f-ui);letter-spacing:.3em;text-transform:uppercase;color:rgba(233,207,143,.75)}
+#intro .count b{font-weight:600;color:#E9CF8F}
+.intro-done #intro{display:none}
+.no-intro #intro{display:none}
+
+@media (prefers-reduced-motion: reduce){
+  .stamp,.ribbon-track{animation:none}
+  *{transition:none!important}
+}
+</style>
+
+<!-- ================= INTRO ================= -->
+<div id="intro" aria-label="Intro: er wordt een taart gebouwd" role="img">
+  <div class="stage">
+    <svg class="main" viewBox="0 30 600 600" aria-hidden="true">
+      <defs><linearGradient id="igold" x1="0" x2="1"><stop offset="0" stop-color="#B8893A"/><stop offset=".45" stop-color="#F1D58A"/><stop offset="1" stop-color="#B8893A"/></linearGradient>
+<linearGradient id="it1" x1="0" x2="1"><stop offset="0" stop-color="#E9799F"/><stop offset=".35" stop-color="#F6A9C2"/><stop offset="1" stop-color="#E06E96"/></linearGradient>
+<linearGradient id="it2" x1="0" x2="1"><stop offset="0" stop-color="#C7A6E0"/><stop offset=".35" stop-color="#E2CDF2"/><stop offset="1" stop-color="#BB98D8"/></linearGradient>
+<linearGradient id="it3" x1="0" x2="1"><stop offset="0" stop-color="#F4B8CB"/><stop offset=".35" stop-color="#FFE0EA"/><stop offset="1" stop-color="#EFA9C0"/></linearGradient>
+<linearGradient id="icream" x1="0" x2="1"><stop offset="0" stop-color="#F3E4E8"/><stop offset=".4" stop-color="#FFFDFB"/><stop offset="1" stop-color="#EEDCE2"/></linearGradient>
+<radialGradient id="ipearl" cx=".35" cy=".35" r=".7"><stop offset="0" stop-color="#FFF6D8"/><stop offset=".5" stop-color="#E2BE6A"/><stop offset="1" stop-color="#A97B2C"/></radialGradient>
+<linearGradient id="iheart" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F0609B"/><stop offset="1" stop-color="#B0174F"/></linearGradient>
+<linearGradient id="iword" x1="0" x2="1"><stop offset="0" stop-color="#B3124F"/><stop offset=".55" stop-color="#E0457F"/><stop offset="1" stop-color="#F07AA6"/></linearGradient>
+        <radialGradient id="ishadow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#000" stop-opacity=".45"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
+        <radialGradient id="ishine" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#FFE7A8" stop-opacity=".9"/><stop offset="1" stop-color="#FFE7A8" stop-opacity="0"/></radialGradient>
+      </defs>
+      <ellipse class="i-glow" cx="300" cy="260" rx="250" ry="250" fill="url(#ishine)" opacity="0"/>
+      <g id="i-cakewrap">
+        <g transform="translate(100 0)">
+          <ellipse class="i-shadow" cx="200" cy="380" rx="140" ry="12" fill="url(#ishadow)"/>
+          <g class="i-stand"><rect x="64" y="332" width="272" height="11" rx="5.5" fill="url(#igold)"/><path d="M184 343 L216 343 L210 368 L190 368 Z" fill="url(#igold)"/><rect x="150" y="366" width="100" height="9" rx="4.5" fill="url(#igold)"/></g><g class="i-tier i-tier1"><rect x="88" y="250" width="224" height="82" rx="12" fill="url(#it1)"/><rect x="88" y="320" width="224" height="12" rx="6" fill="#000" opacity=".06"/><path class="i-drip" d="M88,262 Q88,250 100,250 L300,250 Q312,250 312,262 L312,286 C307.8,269.8 308.08,271.6 304.048,283.12 Q298.0,290.32 291.952,283.12 C287.92,271.6 288.2,269.8 284.0,270 C279.8,261.0 280.08,262.0 276.048,268.4 Q270.0,272.4 263.952,268.4 C259.92,262.0 260.2,261.0 256.0,280 C251.8,266.5 252.08,268.0 248.048,277.6 Q242.0,283.6 235.952,277.6 C231.92,268.0 232.2,266.5 228.0,276 C223.8,264.3 224.08,265.6 220.048,273.92 Q214.0,279.12 207.952,273.92 C203.92,265.6 204.2,264.3 200.0,290 C195.8,272.0 196.08,274.0 192.048,286.8 Q186.0,294.8 179.952,286.8 C175.92,274.0 176.2,272.0 172.0,268 C167.8,259.9 168.08,260.8 164.048,266.56 Q158.0,270.16 151.952,266.56 C147.92,260.8 148.2,259.9 144.0,284 C139.8,268.7 140.08,270.4 136.048,281.28 Q130.0,288.08 123.952,281.28 C119.92,270.4 120.2,268.7 116.0,272 C111.8,262.1 112.08,263.2 108.048,270.24 Q102.0,274.64 95.952,270.24 C91.92,263.2 92.2,262.1 88.0,263.2 L88,262 Z" fill="url(#icream)"/><g class="i-pearls"><circle class="i-pearl" cx="98.0" cy="326" r="4.2" fill="url(#ipearl)"/><circle class="i-pearl" cx="116.5" cy="326" r="4.2" fill="url(#ipearl)"/><circle class="i-pearl" cx="135.1" cy="326" r="4.2" fill="url(#ipearl)"/><circle class="i-pearl" cx="153.6" cy="326" r="4.2" fill="url(#ipearl)"/><circle class="i-pearl" cx="172.2" cy="326" r="4.2" fill="url(#ipearl)"/><circle class="i-pearl" cx="190.7" cy="326" r="4.2" fill="url(#ipearl)"/><circle class="i-pearl" cx="209.3" cy="326" r="4.2" fill="url(#ipearl)"/><circle class="i-pearl" cx="227.8" cy="326" r="4.2" fill="url(#ipearl)"/><circle class="i-pearl" cx="246.4" cy="326" r="4.2" fill="url(#ipearl)"/><circle class="i-pearl" cx="264.9" cy="326" r="4.2" fill="url(#ipearl)"/><circle class="i-pearl" cx="283.5" cy="326" r="4.2" fill="url(#ipearl)"/><circle class="i-pearl" cx="302.0" cy="326" r="4.2" fill="url(#ipearl)"/></g></g><g class="i-tier i-tier2"><rect x="120" y="184" width="160" height="68" rx="12" fill="url(#it2)"/><rect x="120" y="240" width="160" height="12" rx="6" fill="#000" opacity=".06"/><path class="i-drip" d="M120,196 Q120,184 132,184 L268,184 Q280,184 280,196 L280,212 C276.0,199.4 276.2666666666667,200.8 272.4266666666667,209.76 Q266.6666666666667,215.36 260.9066666666667,209.76 C257.06666666666666,200.8 257.33333333333337,199.4 253.33333333333334,208 C249.33333333333334,197.2 249.60000000000002,198.4 245.76000000000002,206.08 Q240.00000000000003,210.88 234.24000000000004,206.08 C230.40000000000003,198.4 230.66666666666669,197.2 226.66666666666669,218 C222.66666666666666,202.7 222.93333333333334,204.4 219.09333333333333,215.28 Q213.33333333333334,222.08 207.57333333333335,215.28 C203.73333333333335,204.4 204.0,202.7 200.0,200 C196.0,192.8 196.26666666666668,193.6 192.42666666666668,198.72 Q186.66666666666669,201.92000000000002 180.9066666666667,198.72 C177.0666666666667,193.6 177.33333333333334,192.8 173.33333333333334,214 C169.33333333333331,200.5 169.6,202.0 165.76,211.6 Q160.0,217.6 154.24,211.6 C150.4,202.0 150.66666666666666,200.5 146.66666666666666,204 C142.66666666666666,195.0 142.93333333333334,196.0 139.09333333333333,202.4 Q133.33333333333334,206.4 127.57333333333334,202.4 C123.73333333333335,196.0 124.0,195.0 120.0,196.0 L120,196 Z" fill="url(#icream)"/><g class="i-pearls"><circle class="i-pearl" cx="130.0" cy="246" r="4.2" fill="url(#ipearl)"/><circle class="i-pearl" cx="150.0" cy="246" r="4.2" fill="url(#ipearl)"/><circle class="i-pearl" cx="170.0" cy="246" r="4.2" fill="url(#ipearl)"/><circle class="i-pearl" cx="190.0" cy="246" r="4.2" fill="url(#ipearl)"/><circle class="i-pearl" cx="210.0" cy="246" r="4.2" fill="url(#ipearl)"/><circle class="i-pearl" cx="230.0" cy="246" r="4.2" fill="url(#ipearl)"/><circle class="i-pearl" cx="250.0" cy="246" r="4.2" fill="url(#ipearl)"/><circle class="i-pearl" cx="270.0" cy="246" r="4.2" fill="url(#ipearl)"/></g></g><g class="i-tier i-tier3"><rect x="150" y="130" width="100" height="56" rx="12" fill="url(#it3)"/><rect x="150" y="174" width="100" height="12" rx="6" fill="#000" opacity=".06"/><path class="i-drip" d="M150,142 Q150,130 162,130 L238,130 Q250,130 250,142 L250,152 C246.25,142.1 246.5,143.2 242.9,150.24 Q237.5,154.64 232.1,150.24 C228.5,143.2 228.75,142.1 225.0,144 C221.25,137.7 221.5,138.4 217.9,142.88 Q212.5,145.68 207.1,142.88 C203.5,138.4 203.75,137.7 200.0,156 C196.25,144.3 196.5,145.6 192.9,153.92000000000002 Q187.5,159.12 182.1,153.92000000000002 C178.5,145.6 178.75,144.3 175.0,146 C171.25,138.8 171.5,139.6 167.9,144.72 Q162.5,147.92000000000002 157.1,144.72 C153.5,139.6 153.75,138.8 150.0,139.6 L150,142 Z" fill="url(#icream)"/><g class="i-pearls"><circle class="i-pearl" cx="160.0" cy="180" r="4.2" fill="url(#ipearl)"/><circle class="i-pearl" cx="180.0" cy="180" r="4.2" fill="url(#ipearl)"/><circle class="i-pearl" cx="200.0" cy="180" r="4.2" fill="url(#ipearl)"/><circle class="i-pearl" cx="220.0" cy="180" r="4.2" fill="url(#ipearl)"/><circle class="i-pearl" cx="240.0" cy="180" r="4.2" fill="url(#ipearl)"/></g></g><g class="i-topper"><path transform="translate(200 104) scale(24)" d="M0 0.72C-0.12 0.62-1 0.02-1-0.46C-1-0.86-0.56-1.02-0.3-0.96C-0.16-0.93-0.05-0.83 0-0.72C0.05-0.83 0.16-0.93 0.3-0.96C0.56-1.02 1-0.86 1-0.46C1 0.02 0.12 0.62 0 0.72Z" fill="url(#iheart)"/><path d="M193 96 q5 -6 11 -3" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" opacity=".7"/></g>
+          <g class="i-rays" stroke="#E9CF8F" stroke-width="3" stroke-linecap="round" opacity="0">
+            <line x1="242.0" y1="104.0" x2="270.0" y2="104.0"/><line x1="236.4" y1="125.0" x2="260.6" y2="139.0"/><line x1="221.0" y1="140.4" x2="235.0" y2="164.6"/><line x1="200.0" y1="146.0" x2="200.0" y2="174.0"/><line x1="179.0" y1="140.4" x2="165.0" y2="164.6"/><line x1="163.6" y1="125.0" x2="139.4" y2="139.0"/><line x1="158.0" y1="104.0" x2="130.0" y2="104.0"/><line x1="163.6" y1="83.0" x2="139.4" y2="69.0"/><line x1="179.0" y1="67.6" x2="165.0" y2="43.4"/><line x1="200.0" y1="62.0" x2="200.0" y2="34.0"/><line x1="221.0" y1="67.6" x2="235.0" y2="43.4"/><line x1="236.4" y1="83.0" x2="260.6" y2="69.0"/>
+          </g>
+        </g>
+      </g>
+      <g class="wordmark " transform="translate(36.99000000000001 490) scale(0.06)" fill="url(#iword)"><path class="wl" d="M1241 -457Q1268 -446 1278.0 -404.5Q1288 -363 1247 -288Q1201 -200 1113.5 -128.0Q1026 -56 909.0 -13.0Q792 30 654 30Q472 30 337.5 -52.0Q203 -134 144.5 -293.0Q86 -452 129 -685Q160 -846 235.0 -982.0Q310 -1118 418.5 -1218.5Q527 -1319 660.0 -1374.5Q793 -1430 937 -1430Q998 -1430 1040.0 -1421.0Q1082 -1412 1111.5 -1400.5Q1141 -1389 1162.5 -1380.0Q1184 -1371 1204 -1371Q1225 -1371 1241.0 -1380.0Q1257 -1389 1272.0 -1400.5Q1287 -1412 1305.0 -1421.0Q1323 -1430 1347 -1430Q1383 -1430 1406.5 -1407.5Q1430 -1385 1430 -1343L1432 -1012Q1432 -966 1406.0 -945.0Q1380 -924 1342 -924Q1272 -924 1246 -1006L1226 -1073Q1198 -1165 1141.5 -1206.5Q1085 -1248 991 -1248Q915 -1248 847.0 -1210.5Q779 -1173 721.5 -1103.5Q664 -1034 621.5 -938.0Q579 -842 556 -725Q520 -541 541.5 -427.5Q563 -314 627.0 -261.5Q691 -209 779 -209Q839 -209 894.0 -229.5Q949 -250 1000.0 -290.0Q1051 -330 1098 -388Q1142 -435 1174.5 -453.5Q1207 -472 1241 -457Z"/><path class="wl" d="M2549 -272Q2570 -258 2571.0 -225.0Q2572 -192 2546 -154Q2492 -72 2395.0 -22.5Q2298 27 2197 27Q2118 27 2075.5 -4.0Q2033 -35 2033 -94Q2033 -129 2050.5 -172.0Q2068 -215 2093.0 -266.5Q2118 -318 2142.0 -378.0Q2166 -438 2178 -507L2223 -497Q2154 -350 2078.5 -249.5Q2003 -149 1924.5 -88.0Q1846 -27 1767.5 0.0Q1689 27 1614 27Q1521 27 1481.5 -19.5Q1442 -66 1448.0 -146.0Q1454 -226 1494 -326L1585 -559Q1608 -616 1605.5 -644.0Q1603 -672 1573 -672Q1559 -672 1547.5 -668.5Q1536 -665 1516 -653Q1498 -642 1483.5 -640.5Q1469 -639 1453 -651Q1435 -666 1434.5 -697.0Q1434 -728 1457 -771Q1502 -855 1588.5 -907.0Q1675 -959 1782 -959Q1876 -959 1920.5 -919.0Q1965 -879 1967.5 -808.5Q1970 -738 1936 -647L1845 -392Q1821 -324 1827.5 -286.5Q1834 -249 1884 -249Q1916 -249 1951.5 -265.5Q1987 -282 2021.0 -314.0Q2055 -346 2083.5 -391.5Q2112 -437 2132 -495Q2150 -546 2162.0 -578.5Q2174 -611 2179.0 -633.0Q2184 -655 2184 -673Q2184 -705 2173.0 -737.0Q2162 -769 2162 -808Q2162 -877 2236.5 -918.0Q2311 -959 2441 -959Q2538 -959 2564.0 -879.5Q2590 -800 2534 -677L2406 -376Q2373 -300 2376.0 -271.5Q2379 -243 2411 -243Q2425 -243 2439.0 -249.0Q2453 -255 2473 -266Q2498 -280 2516.5 -281.0Q2535 -282 2549 -272Z"/><path class="wl" d="M2834 -728 2791 -748Q2765 -765 2751.0 -785.0Q2737 -805 2737 -834Q2737 -874 2767.0 -898.0Q2797 -922 2847 -922H2882Q2927 -922 2958.5 -935.5Q2990 -949 3025 -990L3108 -1090Q3125 -1111 3151.0 -1128.5Q3177 -1146 3218 -1146Q3257 -1146 3278.0 -1125.0Q3299 -1104 3299 -1072Q3299 -1046 3292.5 -1008.0Q3286 -970 3272 -924L3109 -399Q3078 -295 3092.0 -259.5Q3106 -224 3152 -224Q3186 -224 3212.0 -238.0Q3238 -252 3271 -282Q3295 -302 3308.5 -308.5Q3322 -315 3339 -315Q3362 -315 3374.5 -299.5Q3387 -284 3387 -258Q3387 -217 3352.0 -168.0Q3317 -119 3254.5 -75.5Q3192 -32 3110.0 -4.0Q3028 24 2933 24Q2845 24 2792.5 -18.5Q2740 -61 2733.5 -147.5Q2727 -234 2775 -367L2845 -572Q2870 -640 2869.5 -673.5Q2869 -707 2834 -728Z M3123 -718 3185 -912H3445Q3505 -912 3505 -849Q3505 -789 3461.5 -753.5Q3418 -718 3346 -718Z"/><path class="wl" d="M3687 -424Q3687 -424 3721.0 -433.5Q3755 -443 3810.5 -459.5Q3866 -476 3930.0 -495.0Q3994 -514 4055.5 -533.0Q4117 -552 4163 -568L4137 -539Q4149 -568 4155.0 -605.5Q4161 -643 4161 -688Q4161 -734 4138.5 -761.5Q4116 -789 4075 -789Q4041 -789 4007.5 -763.5Q3974 -738 3945.5 -691.5Q3917 -645 3897.5 -583.0Q3878 -521 3873 -448Q3865 -316 3912.5 -250.5Q3960 -185 4049 -185Q4101 -185 4148.5 -201.5Q4196 -218 4236.0 -248.5Q4276 -279 4305 -322Q4336 -359 4358.0 -373.5Q4380 -388 4410 -388Q4441 -388 4454.5 -366.0Q4468 -344 4468 -315Q4468 -233 4402.0 -154.5Q4336 -76 4210.5 -24.5Q4085 27 3906 27Q3765 27 3677.5 -22.5Q3590 -72 3553.5 -160.5Q3517 -249 3525 -365Q3533 -488 3583.5 -596.0Q3634 -704 3719.5 -785.5Q3805 -867 3918.0 -913.0Q4031 -959 4165 -959Q4255 -959 4314.0 -930.0Q4373 -901 4406.5 -848.5Q4440 -796 4455 -727Q4459 -708 4467.0 -692.0Q4475 -676 4485 -672Q4501 -667 4511.5 -654.5Q4522 -642 4522 -618Q4522 -585 4500.0 -557.0Q4478 -529 4420 -514Q4363 -499 4288.5 -477.5Q4214 -456 4132.5 -433.5Q4051 -411 3973.5 -389.0Q3896 -367 3834.0 -350.0Q3772 -333 3734.5 -322.5Q3697 -312 3697 -312Z"/><path class="wl" d="M5179 -1043 5036 -600 4999 -603Q5045 -707 5114.0 -787.0Q5183 -867 5268.5 -912.5Q5354 -958 5449 -958Q5576 -958 5646.5 -881.5Q5717 -805 5716 -668Q5716 -523 5665.0 -397.5Q5614 -272 5528.0 -177.5Q5442 -83 5335.5 -29.5Q5229 24 5116 24Q4994 24 4918.0 -41.5Q4842 -107 4842 -255L4924 -192L4807 -54Q4788 -33 4759.0 -16.0Q4730 1 4691 1Q4627 1 4600.0 -50.5Q4573 -102 4613 -239L4824 -960Q4868 -1112 4962.0 -1218.5Q5056 -1325 5203.5 -1382.0Q5351 -1439 5556 -1439Q5686 -1439 5765.0 -1384.5Q5844 -1330 5844 -1242Q5844 -1178 5802.5 -1133.0Q5761 -1088 5689 -1088Q5635 -1088 5589.5 -1111.0Q5544 -1134 5504.0 -1165.0Q5464 -1196 5425.5 -1219.0Q5387 -1242 5347 -1242Q5288 -1242 5250.5 -1196.0Q5213 -1150 5179 -1043Z M5280 -766Q5244 -766 5203.5 -735.0Q5163 -704 5124.5 -651.0Q5086 -598 5055.5 -531.0Q5025 -464 5006.5 -391.5Q4988 -319 4988 -250Q4988 -193 5008.5 -166.0Q5029 -139 5070 -139Q5105 -139 5145.0 -163.5Q5185 -188 5223.5 -233.5Q5262 -279 5293.5 -341.5Q5325 -404 5344.0 -480.0Q5363 -556 5364 -643Q5364 -692 5352.5 -718.5Q5341 -745 5321.5 -755.5Q5302 -766 5280 -766Z"/><path class="wl" d="M6223 -376Q6197 -314 6200.5 -286.0Q6204 -258 6234 -258Q6247 -258 6258.5 -262.5Q6270 -267 6291 -279Q6309 -290 6324.5 -291.5Q6340 -293 6355 -280Q6373 -266 6373.5 -234.5Q6374 -203 6351 -160Q6305 -78 6219.0 -25.5Q6133 27 6026 27Q5934 27 5886.5 -13.5Q5839 -54 5835.0 -125.0Q5831 -196 5871 -286L5985 -556Q6019 -634 6015.0 -661.5Q6011 -689 5980 -689Q5966 -689 5951.5 -682.5Q5937 -676 5918 -665Q5893 -653 5874.5 -651.5Q5856 -650 5842 -659Q5820 -674 5819.0 -707.0Q5818 -740 5845 -778Q5894 -851 5987.0 -905.0Q6080 -959 6181 -959Q6266 -959 6314.0 -919.5Q6362 -880 6367.0 -805.0Q6372 -730 6326 -623Z"/><path class="wl" d="M6981 -271Q6989 -284 7008.5 -303.0Q7028 -322 7081.0 -366.0Q7134 -410 7237 -498Q7269 -527 7297.0 -549.5Q7325 -572 7349.5 -588.5Q7374 -605 7398.5 -615.0Q7423 -625 7448 -630Q7538 -649 7584.5 -697.5Q7631 -746 7634 -830Q7636 -889 7607.5 -924.0Q7579 -959 7520 -959Q7479 -959 7449.5 -940.5Q7420 -922 7397.5 -894.5Q7375 -867 7356.0 -839.5Q7337 -812 7317.0 -793.5Q7297 -775 7272 -775Q7249 -775 7231.0 -793.5Q7213 -812 7190.0 -839.5Q7167 -867 7131.5 -894.5Q7096 -922 7039.0 -940.5Q6982 -959 6894 -959Q6786 -959 6709.5 -911.0Q6633 -863 6593.0 -786.5Q6553 -710 6553 -625Q6553 -547 6592.0 -505.0Q6631 -463 6694 -463Q6728 -463 6756.0 -481.0Q6784 -499 6784 -530Q6784 -551 6776.5 -571.0Q6769 -591 6751 -598Q6733 -608 6725.5 -620.0Q6718 -632 6718 -644Q6718 -660 6735.5 -671.5Q6753 -683 6789 -683Q6825 -683 6877.0 -670.5Q6929 -658 6985.0 -641.5Q7041 -625 7089.5 -612.5Q7138 -600 7168 -600V-663Q7157 -649 7130.5 -624.5Q7104 -600 7058.0 -558.5Q7012 -517 6941 -450Q6909 -419 6884.0 -397.5Q6859 -376 6837.5 -361.0Q6816 -346 6795.5 -336.5Q6775 -327 6754 -322Q6651 -298 6590.5 -260.0Q6530 -222 6505.0 -178.0Q6480 -134 6480 -91Q6480 -32 6510.5 -2.5Q6541 27 6591 27Q6636 27 6667.5 8.0Q6699 -11 6721.5 -39.5Q6744 -68 6761.0 -97.0Q6778 -126 6794.5 -145.0Q6811 -164 6831 -164Q6855 -164 6876.0 -145.0Q6897 -126 6920.5 -97.5Q6944 -69 6976.0 -40.0Q7008 -11 7055.0 8.0Q7102 27 7171 27Q7268 27 7348.0 -21.0Q7428 -69 7476.5 -152.5Q7525 -236 7525 -341Q7525 -383 7513.0 -401.0Q7501 -419 7480 -419Q7463 -419 7446.5 -411.5Q7430 -404 7418 -383Q7394 -337 7354.5 -315.5Q7315 -294 7267 -294Q7230 -294 7179.5 -302.0Q7129 -310 7080.0 -317.5Q7031 -325 6999 -325Z"/><path class="wl" d="M8138 -271Q8146 -284 8165.5 -303.0Q8185 -322 8238.0 -366.0Q8291 -410 8394 -498Q8426 -527 8454.0 -549.5Q8482 -572 8506.5 -588.5Q8531 -605 8555.5 -615.0Q8580 -625 8605 -630Q8695 -649 8741.5 -697.5Q8788 -746 8791 -830Q8793 -889 8764.5 -924.0Q8736 -959 8677 -959Q8636 -959 8606.5 -940.5Q8577 -922 8554.5 -894.5Q8532 -867 8513.0 -839.5Q8494 -812 8474.0 -793.5Q8454 -775 8429 -775Q8406 -775 8388.0 -793.5Q8370 -812 8347.0 -839.5Q8324 -867 8288.5 -894.5Q8253 -922 8196.0 -940.5Q8139 -959 8051 -959Q7943 -959 7866.5 -911.0Q7790 -863 7750.0 -786.5Q7710 -710 7710 -625Q7710 -547 7749.0 -505.0Q7788 -463 7851 -463Q7885 -463 7913.0 -481.0Q7941 -499 7941 -530Q7941 -551 7933.5 -571.0Q7926 -591 7908 -598Q7890 -608 7882.5 -620.0Q7875 -632 7875 -644Q7875 -660 7892.5 -671.5Q7910 -683 7946 -683Q7982 -683 8034.0 -670.5Q8086 -658 8142.0 -641.5Q8198 -625 8246.5 -612.5Q8295 -600 8325 -600V-663Q8314 -649 8287.5 -624.5Q8261 -600 8215.0 -558.5Q8169 -517 8098 -450Q8066 -419 8041.0 -397.5Q8016 -376 7994.5 -361.0Q7973 -346 7952.5 -336.5Q7932 -327 7911 -322Q7808 -298 7747.5 -260.0Q7687 -222 7662.0 -178.0Q7637 -134 7637 -91Q7637 -32 7667.5 -2.5Q7698 27 7748 27Q7793 27 7824.5 8.0Q7856 -11 7878.5 -39.5Q7901 -68 7918.0 -97.0Q7935 -126 7951.5 -145.0Q7968 -164 7988 -164Q8012 -164 8033.0 -145.0Q8054 -126 8077.5 -97.5Q8101 -69 8133.0 -40.0Q8165 -11 8212.0 8.0Q8259 27 8328 27Q8425 27 8505.0 -21.0Q8585 -69 8633.5 -152.5Q8682 -236 8682 -341Q8682 -383 8670.0 -401.0Q8658 -419 8637 -419Q8620 -419 8603.5 -411.5Q8587 -404 8575 -383Q8551 -337 8511.5 -315.5Q8472 -294 8424 -294Q8387 -294 8336.5 -302.0Q8286 -310 8237.0 -317.5Q8188 -325 8156 -325Z"/><g class="idot"><path transform="translate(6291 -1242) scale(250)" d="M0 0.72C-0.12 0.62-1 0.02-1-0.46C-1-0.86-0.56-1.02-0.3-0.96C-0.16-0.93-0.05-0.83 0-0.72C0.05-0.83 0.16-0.93 0.3-0.96C0.56-1.02 1-0.86 1-0.46C1 0.02 0.12 0.62 0 0.72Z" fill="url(#igold)"/></g></g>
+      <g class="tagline" transform="translate(42.99000000000001 548) scale(0.02541)" fill="#E9CF8F"><path class="tl" d="M166 -350Q166 -425 199.5 -480.5Q233 -536 287.0 -566.5Q341 -597 405 -597Q455 -597 495.5 -584.0Q536 -571 568.0 -548.5Q600 -526 624 -498V-638Q581 -675 529.5 -694.0Q478 -713 401 -713Q324 -713 257.5 -686.5Q191 -660 142.0 -611.5Q93 -563 65.5 -496.5Q38 -430 38 -350Q38 -271 65.5 -204.5Q93 -138 142.0 -89.0Q191 -40 257.5 -14.0Q324 12 401 12Q478 12 529.5 -7.0Q581 -26 624 -62V-203Q600 -174 568.0 -151.5Q536 -129 495.5 -116.0Q455 -103 405 -103Q341 -103 287.0 -134.0Q233 -165 199.5 -220.5Q166 -276 166 -350Z"/><path class="tl" d="M1022 0H1375V-104H1022Z"/><path class="tl" d="M1022 -596H1375V-700H1022Z"/><path class="tl" d="M1022 -324H1355V-426H1022Z"/><path class="tl" d="M949 -700V0H1065V-700Z"/><path class="tl" d="M1700 -700V0H2096V-106H1818V-700Z"/><path class="tl" d="M2434 0H2787V-104H2434Z"/><path class="tl" d="M2434 -596H2787V-700H2434Z"/><path class="tl" d="M2434 -324H2767V-426H2434Z"/><path class="tl" d="M2361 -700V0H2477V-700Z"/><path class="tl" d="M3202 -361H3323Q3390 -361 3440.0 -380.0Q3490 -399 3518.5 -435.5Q3547 -472 3547 -524Q3547 -584 3518.5 -623.0Q3490 -662 3440.0 -681.0Q3390 -700 3323 -700H3112V0H3335Q3410 0 3466.5 -21.5Q3523 -43 3555.0 -88.0Q3587 -133 3587 -202Q3587 -252 3567.0 -288.0Q3547 -324 3512.0 -347.0Q3477 -370 3431.5 -381.5Q3386 -393 3335 -393H3202V-327H3328Q3358 -327 3383.0 -320.5Q3408 -314 3427.0 -299.5Q3446 -285 3456.0 -264.0Q3466 -243 3466 -214Q3466 -175 3448.0 -149.5Q3430 -124 3399.0 -111.0Q3368 -98 3328 -98H3230V-603H3315Q3365 -603 3395.5 -579.0Q3426 -555 3426 -511Q3426 -482 3412.0 -461.5Q3398 -441 3373.0 -430.0Q3348 -419 3315 -419H3202Z"/><path class="tl" d="M4038 -334 4260 0H4403L4165 -334Z"/><path class="tl" d="M3893 -700V0H4011V-700Z"/><path class="tl" d="M3963 -598H4104Q4145 -598 4175.0 -584.0Q4205 -570 4222.0 -544.0Q4239 -518 4239 -480Q4239 -443 4222.0 -416.5Q4205 -390 4175.0 -376.5Q4145 -363 4104 -363H3963V-265H4109Q4186 -265 4242.0 -292.0Q4298 -319 4329.5 -368.0Q4361 -417 4361 -483Q4361 -549 4329.5 -597.5Q4298 -646 4242.0 -673.0Q4186 -700 4109 -700H3963Z"/><path class="tl" d="M4752 -180H5122L5100 -280H4775Z"/><path class="tl" d="M4935 -502 5047 -242 5049 -213 5144 0H5278L4935 -739L4593 0H4726L4823 -219L4825 -245Z"/><path class="tl" d="M5468 -591H5653V0H5771V-591H5956V-700H5468Z"/><path class="tl" d="M6295 0H6648V-104H6295Z"/><path class="tl" d="M6295 -596H6648V-700H6295Z"/><path class="tl" d="M6295 -324H6628V-426H6295Z"/><path class="tl" d="M6222 -700V0H6338V-700Z"/><path class="tl" d="M7453 -700V0H7849V-106H7571V-700Z"/><path class="tl" d="M8114 -700V0H8234V-700Z"/><path class="tl" d="M8642 -594H8955V-700H8642Z"/><path class="tl" d="M8642 -316H8945V-419H8642Z"/><path class="tl" d="M8569 -700V0H8685V-700Z"/><path class="tl" d="M9343 0H9696V-104H9343Z"/><path class="tl" d="M9343 -596H9696V-700H9343Z"/><path class="tl" d="M9343 -324H9676V-426H9343Z"/><path class="tl" d="M9270 -700V0H9386V-700Z"/><path class="tl" d="M10080 -110 9992 149 10072 171 10189 -79Z"/><path class="tl" d="M10925 -591H11110V0H11228V-591H11413V-700H10925Z"/><path class="tl" d="M11726 -321H12226V-430H11726Z"/><path class="tl" d="M12149 -700V0H12267V-700Z"/><path class="tl" d="M11679 -700V0H11797V-700Z"/><path class="tl" d="M12676 0H13029V-104H12676Z"/><path class="tl" d="M12676 -596H13029V-700H12676Z"/><path class="tl" d="M12676 -324H13009V-426H12676Z"/><path class="tl" d="M12603 -700V0H12719V-700Z"/><path class="tl" d="M13922 -350Q13922 -425 13955.5 -480.5Q13989 -536 14043.0 -566.5Q14097 -597 14161 -597Q14211 -597 14251.5 -584.0Q14292 -571 14324.0 -548.5Q14356 -526 14380 -498V-638Q14337 -675 14285.5 -694.0Q14234 -713 14157 -713Q14080 -713 14013.5 -686.5Q13947 -660 13898.0 -611.5Q13849 -563 13821.5 -496.5Q13794 -430 13794 -350Q13794 -271 13821.5 -204.5Q13849 -138 13898.0 -89.0Q13947 -40 14013.5 -14.0Q14080 12 14157 12Q14234 12 14285.5 -7.0Q14337 -26 14380 -62V-203Q14356 -174 14324.0 -151.5Q14292 -129 14251.5 -116.0Q14211 -103 14161 -103Q14097 -103 14043.0 -134.0Q13989 -165 13955.5 -220.5Q13922 -276 13922 -350Z"/><path class="tl" d="M14700 -700V-230Q14700 -172 14718.5 -126.5Q14737 -81 14771.0 -49.0Q14805 -17 14852.0 0.0Q14899 17 14955 17Q15011 17 15058.0 0.0Q15105 -17 15139.5 -49.0Q15174 -81 15192.5 -126.5Q15211 -172 15211 -230V-700H15092V-235Q15092 -171 15057.5 -131.0Q15023 -91 14955 -91Q14888 -91 14853.0 -131.0Q14818 -171 14818 -235V-700Z"/><path class="tl" d="M15471 -591H15656V0H15774V-591H15959V-700H15471Z"/><path class="tl" d="M16298 0H16651V-104H16298Z"/><path class="tl" d="M16298 -596H16651V-700H16298Z"/><path class="tl" d="M16298 -324H16631V-426H16298Z"/><path class="tl" d="M16225 -700V0H16341V-700Z"/><path class="tl" d="M18090 -232 17888 -735 17690 -232 17523 -700H17386L17672 37L17888 -458L18104 37L18391 -700H18253Z"/><path class="tl" d="M18740 -180H19110L19088 -280H18763Z"/><path class="tl" d="M18923 -502 19035 -242 19037 -213 19132 0H19266L18923 -739L18581 0H18714L18811 -219L18813 -245Z"/><path class="tl" d="M19911 -700 19748 -401 19586 -700H19451L19689 -294V0H19809V-295L20046 -700Z"/></g>
+    </svg>
+    <canvas id="sprinkles"></canvas>
+  </div>
+  <div class="count" aria-hidden="true"><b id="layer-n">0</b> / 3 lagen</div>
+  <button class="skip" id="skip" type="button">Intro overslaan</button>
+</div>
+
+<svg class="logo-sym" width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="cb-logo" viewBox="16 14 646.02 128"><defs><linearGradient id="hgold" x1="0" x2="1"><stop offset="0" stop-color="#B8893A"/><stop offset=".45" stop-color="#F1D58A"/><stop offset="1" stop-color="#B8893A"/></linearGradient>
+<linearGradient id="ht1" x1="0" x2="1"><stop offset="0" stop-color="#E9799F"/><stop offset=".35" stop-color="#F6A9C2"/><stop offset="1" stop-color="#E06E96"/></linearGradient>
+<linearGradient id="ht2" x1="0" x2="1"><stop offset="0" stop-color="#C7A6E0"/><stop offset=".35" stop-color="#E2CDF2"/><stop offset="1" stop-color="#BB98D8"/></linearGradient>
+<linearGradient id="ht3" x1="0" x2="1"><stop offset="0" stop-color="#F4B8CB"/><stop offset=".35" stop-color="#FFE0EA"/><stop offset="1" stop-color="#EFA9C0"/></linearGradient>
+<linearGradient id="hcream" x1="0" x2="1"><stop offset="0" stop-color="#F3E4E8"/><stop offset=".4" stop-color="#FFFDFB"/><stop offset="1" stop-color="#EEDCE2"/></linearGradient>
+<radialGradient id="hpearl" cx=".35" cy=".35" r=".7"><stop offset="0" stop-color="#FFF6D8"/><stop offset=".5" stop-color="#E2BE6A"/><stop offset="1" stop-color="#A97B2C"/></radialGradient>
+<linearGradient id="hheart" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F0609B"/><stop offset="1" stop-color="#B0174F"/></linearGradient>
+<linearGradient id="hword" x1="0" x2="1"><stop offset="0" stop-color="#B3124F"/><stop offset=".55" stop-color="#E0457F"/><stop offset="1" stop-color="#F07AA6"/></linearGradient></defs><g transform="translate(0 8) scale(0.34)"><g class="h-stand"><rect x="64" y="332" width="272" height="11" rx="5.5" fill="url(#hgold)"/><path d="M184 343 L216 343 L210 368 L190 368 Z" fill="url(#hgold)"/><rect x="150" y="366" width="100" height="9" rx="4.5" fill="url(#hgold)"/></g><g class="h-tier h-tier1"><rect x="88" y="250" width="224" height="82" rx="12" fill="url(#ht1)"/><path class="h-drip" d="M88,262 Q88,250 100,250 L300,250 Q312,250 312,262 L312,286 C307.8,269.8 308.08,271.6 304.048,283.12 Q298.0,290.32 291.952,283.12 C287.92,271.6 288.2,269.8 284.0,270 C279.8,261.0 280.08,262.0 276.048,268.4 Q270.0,272.4 263.952,268.4 C259.92,262.0 260.2,261.0 256.0,280 C251.8,266.5 252.08,268.0 248.048,277.6 Q242.0,283.6 235.952,277.6 C231.92,268.0 232.2,266.5 228.0,276 C223.8,264.3 224.08,265.6 220.048,273.92 Q214.0,279.12 207.952,273.92 C203.92,265.6 204.2,264.3 200.0,290 C195.8,272.0 196.08,274.0 192.048,286.8 Q186.0,294.8 179.952,286.8 C175.92,274.0 176.2,272.0 172.0,268 C167.8,259.9 168.08,260.8 164.048,266.56 Q158.0,270.16 151.952,266.56 C147.92,260.8 148.2,259.9 144.0,284 C139.8,268.7 140.08,270.4 136.048,281.28 Q130.0,288.08 123.952,281.28 C119.92,270.4 120.2,268.7 116.0,272 C111.8,262.1 112.08,263.2 108.048,270.24 Q102.0,274.64 95.952,270.24 C91.92,263.2 92.2,262.1 88.0,263.2 L88,262 Z" fill="url(#hcream)"/></g><g class="h-tier h-tier2"><rect x="120" y="184" width="160" height="68" rx="12" fill="url(#ht2)"/><path class="h-drip" d="M120,196 Q120,184 132,184 L268,184 Q280,184 280,196 L280,212 C276.0,199.4 276.2666666666667,200.8 272.4266666666667,209.76 Q266.6666666666667,215.36 260.9066666666667,209.76 C257.06666666666666,200.8 257.33333333333337,199.4 253.33333333333334,208 C249.33333333333334,197.2 249.60000000000002,198.4 245.76000000000002,206.08 Q240.00000000000003,210.88 234.24000000000004,206.08 C230.40000000000003,198.4 230.66666666666669,197.2 226.66666666666669,218 C222.66666666666666,202.7 222.93333333333334,204.4 219.09333333333333,215.28 Q213.33333333333334,222.08 207.57333333333335,215.28 C203.73333333333335,204.4 204.0,202.7 200.0,200 C196.0,192.8 196.26666666666668,193.6 192.42666666666668,198.72 Q186.66666666666669,201.92000000000002 180.9066666666667,198.72 C177.0666666666667,193.6 177.33333333333334,192.8 173.33333333333334,214 C169.33333333333331,200.5 169.6,202.0 165.76,211.6 Q160.0,217.6 154.24,211.6 C150.4,202.0 150.66666666666666,200.5 146.66666666666666,204 C142.66666666666666,195.0 142.93333333333334,196.0 139.09333333333333,202.4 Q133.33333333333334,206.4 127.57333333333334,202.4 C123.73333333333335,196.0 124.0,195.0 120.0,196.0 L120,196 Z" fill="url(#hcream)"/></g><g class="h-tier h-tier3"><rect x="150" y="130" width="100" height="56" rx="12" fill="url(#ht3)"/><path class="h-drip" d="M150,142 Q150,130 162,130 L238,130 Q250,130 250,142 L250,152 C246.25,142.1 246.5,143.2 242.9,150.24 Q237.5,154.64 232.1,150.24 C228.5,143.2 228.75,142.1 225.0,144 C221.25,137.7 221.5,138.4 217.9,142.88 Q212.5,145.68 207.1,142.88 C203.5,138.4 203.75,137.7 200.0,156 C196.25,144.3 196.5,145.6 192.9,153.92000000000002 Q187.5,159.12 182.1,153.92000000000002 C178.5,145.6 178.75,144.3 175.0,146 C171.25,138.8 171.5,139.6 167.9,144.72 Q162.5,147.92000000000002 157.1,144.72 C153.5,139.6 153.75,138.8 150.0,139.6 L150,142 Z" fill="url(#hcream)"/></g><g class="h-topper"><path transform="translate(200 104) scale(24)" d="M0 0.72C-0.12 0.62-1 0.02-1-0.46C-1-0.86-0.56-1.02-0.3-0.96C-0.16-0.93-0.05-0.83 0-0.72C0.05-0.83 0.16-0.93 0.3-0.96C0.56-1.02 1-0.86 1-0.46C1 0.02 0.12 0.62 0 0.72Z" fill="url(#hheart)"/><path d="M193 96 q5 -6 11 -3" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" opacity=".7"/></g></g><g class="wordmark " transform="translate(128 112) scale(0.06)" fill="url(#hword)"><path class="wl" d="M1241 -457Q1268 -446 1278.0 -404.5Q1288 -363 1247 -288Q1201 -200 1113.5 -128.0Q1026 -56 909.0 -13.0Q792 30 654 30Q472 30 337.5 -52.0Q203 -134 144.5 -293.0Q86 -452 129 -685Q160 -846 235.0 -982.0Q310 -1118 418.5 -1218.5Q527 -1319 660.0 -1374.5Q793 -1430 937 -1430Q998 -1430 1040.0 -1421.0Q1082 -1412 1111.5 -1400.5Q1141 -1389 1162.5 -1380.0Q1184 -1371 1204 -1371Q1225 -1371 1241.0 -1380.0Q1257 -1389 1272.0 -1400.5Q1287 -1412 1305.0 -1421.0Q1323 -1430 1347 -1430Q1383 -1430 1406.5 -1407.5Q1430 -1385 1430 -1343L1432 -1012Q1432 -966 1406.0 -945.0Q1380 -924 1342 -924Q1272 -924 1246 -1006L1226 -1073Q1198 -1165 1141.5 -1206.5Q1085 -1248 991 -1248Q915 -1248 847.0 -1210.5Q779 -1173 721.5 -1103.5Q664 -1034 621.5 -938.0Q579 -842 556 -725Q520 -541 541.5 -427.5Q563 -314 627.0 -261.5Q691 -209 779 -209Q839 -209 894.0 -229.5Q949 -250 1000.0 -290.0Q1051 -330 1098 -388Q1142 -435 1174.5 -453.5Q1207 -472 1241 -457Z"/><path class="wl" d="M2549 -272Q2570 -258 2571.0 -225.0Q2572 -192 2546 -154Q2492 -72 2395.0 -22.5Q2298 27 2197 27Q2118 27 2075.5 -4.0Q2033 -35 2033 -94Q2033 -129 2050.5 -172.0Q2068 -215 2093.0 -266.5Q2118 -318 2142.0 -378.0Q2166 -438 2178 -507L2223 -497Q2154 -350 2078.5 -249.5Q2003 -149 1924.5 -88.0Q1846 -27 1767.5 0.0Q1689 27 1614 27Q1521 27 1481.5 -19.5Q1442 -66 1448.0 -146.0Q1454 -226 1494 -326L1585 -559Q1608 -616 1605.5 -644.0Q1603 -672 1573 -672Q1559 -672 1547.5 -668.5Q1536 -665 1516 -653Q1498 -642 1483.5 -640.5Q1469 -639 1453 -651Q1435 -666 1434.5 -697.0Q1434 -728 1457 -771Q1502 -855 1588.5 -907.0Q1675 -959 1782 -959Q1876 -959 1920.5 -919.0Q1965 -879 1967.5 -808.5Q1970 -738 1936 -647L1845 -392Q1821 -324 1827.5 -286.5Q1834 -249 1884 -249Q1916 -249 1951.5 -265.5Q1987 -282 2021.0 -314.0Q2055 -346 2083.5 -391.5Q2112 -437 2132 -495Q2150 -546 2162.0 -578.5Q2174 -611 2179.0 -633.0Q2184 -655 2184 -673Q2184 -705 2173.0 -737.0Q2162 -769 2162 -808Q2162 -877 2236.5 -918.0Q2311 -959 2441 -959Q2538 -959 2564.0 -879.5Q2590 -800 2534 -677L2406 -376Q2373 -300 2376.0 -271.5Q2379 -243 2411 -243Q2425 -243 2439.0 -249.0Q2453 -255 2473 -266Q2498 -280 2516.5 -281.0Q2535 -282 2549 -272Z"/><path class="wl" d="M2834 -728 2791 -748Q2765 -765 2751.0 -785.0Q2737 -805 2737 -834Q2737 -874 2767.0 -898.0Q2797 -922 2847 -922H2882Q2927 -922 2958.5 -935.5Q2990 -949 3025 -990L3108 -1090Q3125 -1111 3151.0 -1128.5Q3177 -1146 3218 -1146Q3257 -1146 3278.0 -1125.0Q3299 -1104 3299 -1072Q3299 -1046 3292.5 -1008.0Q3286 -970 3272 -924L3109 -399Q3078 -295 3092.0 -259.5Q3106 -224 3152 -224Q3186 -224 3212.0 -238.0Q3238 -252 3271 -282Q3295 -302 3308.5 -308.5Q3322 -315 3339 -315Q3362 -315 3374.5 -299.5Q3387 -284 3387 -258Q3387 -217 3352.0 -168.0Q3317 -119 3254.5 -75.5Q3192 -32 3110.0 -4.0Q3028 24 2933 24Q2845 24 2792.5 -18.5Q2740 -61 2733.5 -147.5Q2727 -234 2775 -367L2845 -572Q2870 -640 2869.5 -673.5Q2869 -707 2834 -728Z M3123 -718 3185 -912H3445Q3505 -912 3505 -849Q3505 -789 3461.5 -753.5Q3418 -718 3346 -718Z"/><path class="wl" d="M3687 -424Q3687 -424 3721.0 -433.5Q3755 -443 3810.5 -459.5Q3866 -476 3930.0 -495.0Q3994 -514 4055.5 -533.0Q4117 -552 4163 -568L4137 -539Q4149 -568 4155.0 -605.5Q4161 -643 4161 -688Q4161 -734 4138.5 -761.5Q4116 -789 4075 -789Q4041 -789 4007.5 -763.5Q3974 -738 3945.5 -691.5Q3917 -645 3897.5 -583.0Q3878 -521 3873 -448Q3865 -316 3912.5 -250.5Q3960 -185 4049 -185Q4101 -185 4148.5 -201.5Q4196 -218 4236.0 -248.5Q4276 -279 4305 -322Q4336 -359 4358.0 -373.5Q4380 -388 4410 -388Q4441 -388 4454.5 -366.0Q4468 -344 4468 -315Q4468 -233 4402.0 -154.5Q4336 -76 4210.5 -24.5Q4085 27 3906 27Q3765 27 3677.5 -22.5Q3590 -72 3553.5 -160.5Q3517 -249 3525 -365Q3533 -488 3583.5 -596.0Q3634 -704 3719.5 -785.5Q3805 -867 3918.0 -913.0Q4031 -959 4165 -959Q4255 -959 4314.0 -930.0Q4373 -901 4406.5 -848.5Q4440 -796 4455 -727Q4459 -708 4467.0 -692.0Q4475 -676 4485 -672Q4501 -667 4511.5 -654.5Q4522 -642 4522 -618Q4522 -585 4500.0 -557.0Q4478 -529 4420 -514Q4363 -499 4288.5 -477.5Q4214 -456 4132.5 -433.5Q4051 -411 3973.5 -389.0Q3896 -367 3834.0 -350.0Q3772 -333 3734.5 -322.5Q3697 -312 3697 -312Z"/><path class="wl" d="M5179 -1043 5036 -600 4999 -603Q5045 -707 5114.0 -787.0Q5183 -867 5268.5 -912.5Q5354 -958 5449 -958Q5576 -958 5646.5 -881.5Q5717 -805 5716 -668Q5716 -523 5665.0 -397.5Q5614 -272 5528.0 -177.5Q5442 -83 5335.5 -29.5Q5229 24 5116 24Q4994 24 4918.0 -41.5Q4842 -107 4842 -255L4924 -192L4807 -54Q4788 -33 4759.0 -16.0Q4730 1 4691 1Q4627 1 4600.0 -50.5Q4573 -102 4613 -239L4824 -960Q4868 -1112 4962.0 -1218.5Q5056 -1325 5203.5 -1382.0Q5351 -1439 5556 -1439Q5686 -1439 5765.0 -1384.5Q5844 -1330 5844 -1242Q5844 -1178 5802.5 -1133.0Q5761 -1088 5689 -1088Q5635 -1088 5589.5 -1111.0Q5544 -1134 5504.0 -1165.0Q5464 -1196 5425.5 -1219.0Q5387 -1242 5347 -1242Q5288 -1242 5250.5 -1196.0Q5213 -1150 5179 -1043Z M5280 -766Q5244 -766 5203.5 -735.0Q5163 -704 5124.5 -651.0Q5086 -598 5055.5 -531.0Q5025 -464 5006.5 -391.5Q4988 -319 4988 -250Q4988 -193 5008.5 -166.0Q5029 -139 5070 -139Q5105 -139 5145.0 -163.5Q5185 -188 5223.5 -233.5Q5262 -279 5293.5 -341.5Q5325 -404 5344.0 -480.0Q5363 -556 5364 -643Q5364 -692 5352.5 -718.5Q5341 -745 5321.5 -755.5Q5302 -766 5280 -766Z"/><path class="wl" d="M6223 -376Q6197 -314 6200.5 -286.0Q6204 -258 6234 -258Q6247 -258 6258.5 -262.5Q6270 -267 6291 -279Q6309 -290 6324.5 -291.5Q6340 -293 6355 -280Q6373 -266 6373.5 -234.5Q6374 -203 6351 -160Q6305 -78 6219.0 -25.5Q6133 27 6026 27Q5934 27 5886.5 -13.5Q5839 -54 5835.0 -125.0Q5831 -196 5871 -286L5985 -556Q6019 -634 6015.0 -661.5Q6011 -689 5980 -689Q5966 -689 5951.5 -682.5Q5937 -676 5918 -665Q5893 -653 5874.5 -651.5Q5856 -650 5842 -659Q5820 -674 5819.0 -707.0Q5818 -740 5845 -778Q5894 -851 5987.0 -905.0Q6080 -959 6181 -959Q6266 -959 6314.0 -919.5Q6362 -880 6367.0 -805.0Q6372 -730 6326 -623Z"/><path class="wl" d="M6981 -271Q6989 -284 7008.5 -303.0Q7028 -322 7081.0 -366.0Q7134 -410 7237 -498Q7269 -527 7297.0 -549.5Q7325 -572 7349.5 -588.5Q7374 -605 7398.5 -615.0Q7423 -625 7448 -630Q7538 -649 7584.5 -697.5Q7631 -746 7634 -830Q7636 -889 7607.5 -924.0Q7579 -959 7520 -959Q7479 -959 7449.5 -940.5Q7420 -922 7397.5 -894.5Q7375 -867 7356.0 -839.5Q7337 -812 7317.0 -793.5Q7297 -775 7272 -775Q7249 -775 7231.0 -793.5Q7213 -812 7190.0 -839.5Q7167 -867 7131.5 -894.5Q7096 -922 7039.0 -940.5Q6982 -959 6894 -959Q6786 -959 6709.5 -911.0Q6633 -863 6593.0 -786.5Q6553 -710 6553 -625Q6553 -547 6592.0 -505.0Q6631 -463 6694 -463Q6728 -463 6756.0 -481.0Q6784 -499 6784 -530Q6784 -551 6776.5 -571.0Q6769 -591 6751 -598Q6733 -608 6725.5 -620.0Q6718 -632 6718 -644Q6718 -660 6735.5 -671.5Q6753 -683 6789 -683Q6825 -683 6877.0 -670.5Q6929 -658 6985.0 -641.5Q7041 -625 7089.5 -612.5Q7138 -600 7168 -600V-663Q7157 -649 7130.5 -624.5Q7104 -600 7058.0 -558.5Q7012 -517 6941 -450Q6909 -419 6884.0 -397.5Q6859 -376 6837.5 -361.0Q6816 -346 6795.5 -336.5Q6775 -327 6754 -322Q6651 -298 6590.5 -260.0Q6530 -222 6505.0 -178.0Q6480 -134 6480 -91Q6480 -32 6510.5 -2.5Q6541 27 6591 27Q6636 27 6667.5 8.0Q6699 -11 6721.5 -39.5Q6744 -68 6761.0 -97.0Q6778 -126 6794.5 -145.0Q6811 -164 6831 -164Q6855 -164 6876.0 -145.0Q6897 -126 6920.5 -97.5Q6944 -69 6976.0 -40.0Q7008 -11 7055.0 8.0Q7102 27 7171 27Q7268 27 7348.0 -21.0Q7428 -69 7476.5 -152.5Q7525 -236 7525 -341Q7525 -383 7513.0 -401.0Q7501 -419 7480 -419Q7463 -419 7446.5 -411.5Q7430 -404 7418 -383Q7394 -337 7354.5 -315.5Q7315 -294 7267 -294Q7230 -294 7179.5 -302.0Q7129 -310 7080.0 -317.5Q7031 -325 6999 -325Z"/><path class="wl" d="M8138 -271Q8146 -284 8165.5 -303.0Q8185 -322 8238.0 -366.0Q8291 -410 8394 -498Q8426 -527 8454.0 -549.5Q8482 -572 8506.5 -588.5Q8531 -605 8555.5 -615.0Q8580 -625 8605 -630Q8695 -649 8741.5 -697.5Q8788 -746 8791 -830Q8793 -889 8764.5 -924.0Q8736 -959 8677 -959Q8636 -959 8606.5 -940.5Q8577 -922 8554.5 -894.5Q8532 -867 8513.0 -839.5Q8494 -812 8474.0 -793.5Q8454 -775 8429 -775Q8406 -775 8388.0 -793.5Q8370 -812 8347.0 -839.5Q8324 -867 8288.5 -894.5Q8253 -922 8196.0 -940.5Q8139 -959 8051 -959Q7943 -959 7866.5 -911.0Q7790 -863 7750.0 -786.5Q7710 -710 7710 -625Q7710 -547 7749.0 -505.0Q7788 -463 7851 -463Q7885 -463 7913.0 -481.0Q7941 -499 7941 -530Q7941 -551 7933.5 -571.0Q7926 -591 7908 -598Q7890 -608 7882.5 -620.0Q7875 -632 7875 -644Q7875 -660 7892.5 -671.5Q7910 -683 7946 -683Q7982 -683 8034.0 -670.5Q8086 -658 8142.0 -641.5Q8198 -625 8246.5 -612.5Q8295 -600 8325 -600V-663Q8314 -649 8287.5 -624.5Q8261 -600 8215.0 -558.5Q8169 -517 8098 -450Q8066 -419 8041.0 -397.5Q8016 -376 7994.5 -361.0Q7973 -346 7952.5 -336.5Q7932 -327 7911 -322Q7808 -298 7747.5 -260.0Q7687 -222 7662.0 -178.0Q7637 -134 7637 -91Q7637 -32 7667.5 -2.5Q7698 27 7748 27Q7793 27 7824.5 8.0Q7856 -11 7878.5 -39.5Q7901 -68 7918.0 -97.0Q7935 -126 7951.5 -145.0Q7968 -164 7988 -164Q8012 -164 8033.0 -145.0Q8054 -126 8077.5 -97.5Q8101 -69 8133.0 -40.0Q8165 -11 8212.0 8.0Q8259 27 8328 27Q8425 27 8505.0 -21.0Q8585 -69 8633.5 -152.5Q8682 -236 8682 -341Q8682 -383 8670.0 -401.0Q8658 -419 8637 -419Q8620 -419 8603.5 -411.5Q8587 -404 8575 -383Q8551 -337 8511.5 -315.5Q8472 -294 8424 -294Q8387 -294 8336.5 -302.0Q8286 -310 8237.0 -317.5Q8188 -325 8156 -325Z"/><g class="idot"><path transform="translate(6291 -1242) scale(250)" d="M0 0.72C-0.12 0.62-1 0.02-1-0.46C-1-0.86-0.56-1.02-0.3-0.96C-0.16-0.93-0.05-0.83 0-0.72C0.05-0.83 0.16-0.93 0.3-0.96C0.56-1.02 1-0.86 1-0.46C1 0.02 0.12 0.62 0 0.72Z" fill="url(#hgold)"/></g></g><g class="tagline" transform="translate(132 136) scale(0.02561)" fill="#7A3B5C"><path class="tl" d="M166 -350Q166 -425 199.5 -480.5Q233 -536 287.0 -566.5Q341 -597 405 -597Q455 -597 495.5 -584.0Q536 -571 568.0 -548.5Q600 -526 624 -498V-638Q581 -675 529.5 -694.0Q478 -713 401 -713Q324 -713 257.5 -686.5Q191 -660 142.0 -611.5Q93 -563 65.5 -496.5Q38 -430 38 -350Q38 -271 65.5 -204.5Q93 -138 142.0 -89.0Q191 -40 257.5 -14.0Q324 12 401 12Q478 12 529.5 -7.0Q581 -26 624 -62V-203Q600 -174 568.0 -151.5Q536 -129 495.5 -116.0Q455 -103 405 -103Q341 -103 287.0 -134.0Q233 -165 199.5 -220.5Q166 -276 166 -350Z"/><path class="tl" d="M1022 0H1375V-104H1022Z"/><path class="tl" d="M1022 -596H1375V-700H1022Z"/><path class="tl" d="M1022 -324H1355V-426H1022Z"/><path class="tl" d="M949 -700V0H1065V-700Z"/><path class="tl" d="M1700 -700V0H2096V-106H1818V-700Z"/><path class="tl" d="M2434 0H2787V-104H2434Z"/><path class="tl" d="M2434 -596H2787V-700H2434Z"/><path class="tl" d="M2434 -324H2767V-426H2434Z"/><path class="tl" d="M2361 -700V0H2477V-700Z"/><path class="tl" d="M3202 -361H3323Q3390 -361 3440.0 -380.0Q3490 -399 3518.5 -435.5Q3547 -472 3547 -524Q3547 -584 3518.5 -623.0Q3490 -662 3440.0 -681.0Q3390 -700 3323 -700H3112V0H3335Q3410 0 3466.5 -21.5Q3523 -43 3555.0 -88.0Q3587 -133 3587 -202Q3587 -252 3567.0 -288.0Q3547 -324 3512.0 -347.0Q3477 -370 3431.5 -381.5Q3386 -393 3335 -393H3202V-327H3328Q3358 -327 3383.0 -320.5Q3408 -314 3427.0 -299.5Q3446 -285 3456.0 -264.0Q3466 -243 3466 -214Q3466 -175 3448.0 -149.5Q3430 -124 3399.0 -111.0Q3368 -98 3328 -98H3230V-603H3315Q3365 -603 3395.5 -579.0Q3426 -555 3426 -511Q3426 -482 3412.0 -461.5Q3398 -441 3373.0 -430.0Q3348 -419 3315 -419H3202Z"/><path class="tl" d="M4038 -334 4260 0H4403L4165 -334Z"/><path class="tl" d="M3893 -700V0H4011V-700Z"/><path class="tl" d="M3963 -598H4104Q4145 -598 4175.0 -584.0Q4205 -570 4222.0 -544.0Q4239 -518 4239 -480Q4239 -443 4222.0 -416.5Q4205 -390 4175.0 -376.5Q4145 -363 4104 -363H3963V-265H4109Q4186 -265 4242.0 -292.0Q4298 -319 4329.5 -368.0Q4361 -417 4361 -483Q4361 -549 4329.5 -597.5Q4298 -646 4242.0 -673.0Q4186 -700 4109 -700H3963Z"/><path class="tl" d="M4752 -180H5122L5100 -280H4775Z"/><path class="tl" d="M4935 -502 5047 -242 5049 -213 5144 0H5278L4935 -739L4593 0H4726L4823 -219L4825 -245Z"/><path class="tl" d="M5468 -591H5653V0H5771V-591H5956V-700H5468Z"/><path class="tl" d="M6295 0H6648V-104H6295Z"/><path class="tl" d="M6295 -596H6648V-700H6295Z"/><path class="tl" d="M6295 -324H6628V-426H6295Z"/><path class="tl" d="M6222 -700V0H6338V-700Z"/><path class="tl" d="M7453 -700V0H7849V-106H7571V-700Z"/><path class="tl" d="M8114 -700V0H8234V-700Z"/><path class="tl" d="M8642 -594H8955V-700H8642Z"/><path class="tl" d="M8642 -316H8945V-419H8642Z"/><path class="tl" d="M8569 -700V0H8685V-700Z"/><path class="tl" d="M9343 0H9696V-104H9343Z"/><path class="tl" d="M9343 -596H9696V-700H9343Z"/><path class="tl" d="M9343 -324H9676V-426H9343Z"/><path class="tl" d="M9270 -700V0H9386V-700Z"/><path class="tl" d="M10080 -110 9992 149 10072 171 10189 -79Z"/><path class="tl" d="M10925 -591H11110V0H11228V-591H11413V-700H10925Z"/><path class="tl" d="M11726 -321H12226V-430H11726Z"/><path class="tl" d="M12149 -700V0H12267V-700Z"/><path class="tl" d="M11679 -700V0H11797V-700Z"/><path class="tl" d="M12676 0H13029V-104H12676Z"/><path class="tl" d="M12676 -596H13029V-700H12676Z"/><path class="tl" d="M12676 -324H13009V-426H12676Z"/><path class="tl" d="M12603 -700V0H12719V-700Z"/><path class="tl" d="M13922 -350Q13922 -425 13955.5 -480.5Q13989 -536 14043.0 -566.5Q14097 -597 14161 -597Q14211 -597 14251.5 -584.0Q14292 -571 14324.0 -548.5Q14356 -526 14380 -498V-638Q14337 -675 14285.5 -694.0Q14234 -713 14157 -713Q14080 -713 14013.5 -686.5Q13947 -660 13898.0 -611.5Q13849 -563 13821.5 -496.5Q13794 -430 13794 -350Q13794 -271 13821.5 -204.5Q13849 -138 13898.0 -89.0Q13947 -40 14013.5 -14.0Q14080 12 14157 12Q14234 12 14285.5 -7.0Q14337 -26 14380 -62V-203Q14356 -174 14324.0 -151.5Q14292 -129 14251.5 -116.0Q14211 -103 14161 -103Q14097 -103 14043.0 -134.0Q13989 -165 13955.5 -220.5Q13922 -276 13922 -350Z"/><path class="tl" d="M14700 -700V-230Q14700 -172 14718.5 -126.5Q14737 -81 14771.0 -49.0Q14805 -17 14852.0 0.0Q14899 17 14955 17Q15011 17 15058.0 0.0Q15105 -17 15139.5 -49.0Q15174 -81 15192.5 -126.5Q15211 -172 15211 -230V-700H15092V-235Q15092 -171 15057.5 -131.0Q15023 -91 14955 -91Q14888 -91 14853.0 -131.0Q14818 -171 14818 -235V-700Z"/><path class="tl" d="M15471 -591H15656V0H15774V-591H15959V-700H15471Z"/><path class="tl" d="M16298 0H16651V-104H16298Z"/><path class="tl" d="M16298 -596H16651V-700H16298Z"/><path class="tl" d="M16298 -324H16631V-426H16298Z"/><path class="tl" d="M16225 -700V0H16341V-700Z"/><path class="tl" d="M18090 -232 17888 -735 17690 -232 17523 -700H17386L17672 37L17888 -458L18104 37L18391 -700H18253Z"/><path class="tl" d="M18740 -180H19110L19088 -280H18763Z"/><path class="tl" d="M18923 -502 19035 -242 19037 -213 19132 0H19266L18923 -739L18581 0H18714L18811 -219L18813 -245Z"/><path class="tl" d="M19911 -700 19748 -401 19586 -700H19451L19689 -294V0H19809V-295L20046 -700Z"/></g></symbol></svg>
+<!-- ================= SITE ================= -->
+<header class="top">
+  <div class="wrap">
+    <a href="#top" class="site-logo" aria-label="Cutebizz, naar boven"><svg viewBox="16 14 646.02 128" aria-hidden="true"><use href="#cb-logo"/></svg></a>
+    <nav class="nav" aria-label="Hoofdmenu">
+      <a href="#assortiment">Assortiment</a>
+      <a href="#creaties">Creaties</a>
+      <a href="#surprise-box">Surprise box</a>
+      <a href="#rewards">Rewards</a>
+      <a href="#cute-travel">Cute Travel</a>
+      <a href="#bestellen" class="btn btn-primary">Bestel je taart</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-copy">
+        <span class="eyebrow">Handgemaakte taarten &amp; traktaties</span>
+        <h1>Elk feest verdient een taart die <span class="script">blijft hangen.</span></h1>
+        <p class="lead">Cutebizz maakt taarten, cupcakes en surprise boxes die net zo mooi zijn als het moment zelf. Van een lila kroontaart met dawet-vulling tot vegan gender reveal cupcakes: alles op maat, met liefde gebakken.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#bestellen">Vraag je taart aan
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.2 5.3 20 12l-6.8 6.7-1.4-1.4 4.3-4.3H4v-2h12.1l-4.3-4.3z"/></svg></a>
+          <a class="btn btn-ghost" href="#creaties">Bekijk creaties</a>
+        </div>
+        <div class="hero-facts">
+          <span><svg viewBox="-1.1 -1.1 2.2 2" aria-hidden="true"><path d="M0 0.72C-0.12 0.62-1 0.02-1-0.46C-1-0.86-0.56-1.02-0.3-0.96C-0.16-0.93-0.05-0.83 0-0.72C0.05-0.83 0.16-0.93 0.3-0.96C0.56-1.02 1-0.86 1-0.46C1 0.02 0.12 0.62 0 0.72Z"/></svg> Taarten op maat</span>
+          <span><svg viewBox="-1.1 -1.1 2.2 2" aria-hidden="true"><path d="M0 0.72C-0.12 0.62-1 0.02-1-0.46C-1-0.86-0.56-1.02-0.3-0.96C-0.16-0.93-0.05-0.83 0-0.72C0.05-0.83 0.16-0.93 0.3-0.96C0.56-1.02 1-0.86 1-0.46C1 0.02 0.12 0.62 0 0.72Z"/></svg> Vegan opties</span>
+          <span><svg viewBox="-1.1 -1.1 2.2 2" aria-hidden="true"><path d="M0 0.72C-0.12 0.62-1 0.02-1-0.46C-1-0.86-0.56-1.02-0.3-0.96C-0.16-0.93-0.05-0.83 0-0.72C0.05-0.83 0.16-0.93 0.3-0.96C0.56-1.02 1-0.86 1-0.46C1 0.02 0.12 0.62 0 0.72Z"/></svg> Bezorging mogelijk</span>
+        </div>
+      </div>
+      <div class="hero-art">
+        <div class="frame" aria-hidden="true"></div>
+        <div class="arch"><img src="img/crown.webp" alt="Lila taart met gouden kroon en parels, gemaakt door Cutebizz"></div>
+        <svg class="stamp" viewBox="0 0 140 140" aria-hidden="true"><defs><path id="circ" d="M70,70 m-56,0 a56,56 0 1,1 112,0 a56,56 0 1,1 -112,0"/></defs><text><textPath href="#circ">Celebrate life · the cute way · </textPath></text></svg>
+        <div class="stamp-core" aria-hidden="true"><span><svg viewBox="-1.1 -1.1 2.2 2"><path d="M0 0.72C-0.12 0.62-1 0.02-1-0.46C-1-0.86-0.56-1.02-0.3-0.96C-0.16-0.93-0.05-0.83 0-0.72C0.05-0.83 0.16-0.93 0.3-0.96C0.56-1.02 1-0.86 1-0.46C1 0.02 0.12 0.62 0 0.72Z"/></svg></span></div>
+        <div class="caption-chip"><b>Lila kroontaart</b>Vanille cake met romige dawet-vulling en luchtige lila dawet-crème.</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ribbon" aria-hidden="true"><div class="ribbon-track"><span>Taarten op maat<svg viewBox="-1.1 -1.1 2.2 2"><path d="M0 0.72C-0.12 0.62-1 0.02-1-0.46C-1-0.86-0.56-1.02-0.3-0.96C-0.16-0.93-0.05-0.83 0-0.72C0.05-0.83 0.16-0.93 0.3-0.96C0.56-1.02 1-0.86 1-0.46C1 0.02 0.12 0.62 0 0.72Z"/></svg></span><span>Cupcakes<svg viewBox="-1.1 -1.1 2.2 2"><path d="M0 0.72C-0.12 0.62-1 0.02-1-0.46C-1-0.86-0.56-1.02-0.3-0.96C-0.16-0.93-0.05-0.83 0-0.72C0.05-0.83 0.16-0.93 0.3-0.96C0.56-1.02 1-0.86 1-0.46C1 0.02 0.12 0.62 0 0.72Z"/></svg></span><span>Cake &amp; Dip<svg viewBox="-1.1 -1.1 2.2 2"><path d="M0 0.72C-0.12 0.62-1 0.02-1-0.46C-1-0.86-0.56-1.02-0.3-0.96C-0.16-0.93-0.05-0.83 0-0.72C0.05-0.83 0.16-0.93 0.3-0.96C0.56-1.02 1-0.86 1-0.46C1 0.02 0.12 0.62 0 0.72Z"/></svg></span><span>Surprise boxes<svg viewBox="-1.1 -1.1 2.2 2"><path d="M0 0.72C-0.12 0.62-1 0.02-1-0.46C-1-0.86-0.56-1.02-0.3-0.96C-0.16-0.93-0.05-0.83 0-0.72C0.05-0.83 0.16-0.93 0.3-0.96C0.56-1.02 1-0.86 1-0.46C1 0.02 0.12 0.62 0 0.72Z"/></svg></span><span>Vegan opties<svg viewBox="-1.1 -1.1 2.2 2"><path d="M0 0.72C-0.12 0.62-1 0.02-1-0.46C-1-0.86-0.56-1.02-0.3-0.96C-0.16-0.93-0.05-0.83 0-0.72C0.05-0.83 0.16-0.93 0.3-0.96C0.56-1.02 1-0.86 1-0.46C1 0.02 0.12 0.62 0 0.72Z"/></svg></span><span>Celebrate life, the cute way<svg viewBox="-1.1 -1.1 2.2 2"><path d="M0 0.72C-0.12 0.62-1 0.02-1-0.46C-1-0.86-0.56-1.02-0.3-0.96C-0.16-0.93-0.05-0.83 0-0.72C0.05-0.83 0.16-0.93 0.3-0.96C0.56-1.02 1-0.86 1-0.46C1 0.02 0.12 0.62 0 0.72Z"/></svg></span><span>Taarten op maat<svg viewBox="-1.1 -1.1 2.2 2"><path d="M0 0.72C-0.12 0.62-1 0.02-1-0.46C-1-0.86-0.56-1.02-0.3-0.96C-0.16-0.93-0.05-0.83 0-0.72C0.05-0.83 0.16-0.93 0.3-0.96C0.56-1.02 1-0.86 1-0.46C1 0.02 0.12 0.62 0 0.72Z"/></svg></span><span>Cupcakes<svg viewBox="-1.1 -1.1 2.2 2"><path d="M0 0.72C-0.12 0.62-1 0.02-1-0.46C-1-0.86-0.56-1.02-0.3-0.96C-0.16-0.93-0.05-0.83 0-0.72C0.05-0.83 0.16-0.93 0.3-0.96C0.56-1.02 1-0.86 1-0.46C1 0.02 0.12 0.62 0 0.72Z"/></svg></span><span>Cake &amp; Dip<svg viewBox="-1.1 -1.1 2.2 2"><path d="M0 0.72C-0.12 0.62-1 0.02-1-0.46C-1-0.86-0.56-1.02-0.3-0.96C-0.16-0.93-0.05-0.83 0-0.72C0.05-0.83 0.16-0.93 0.3-0.96C0.56-1.02 1-0.86 1-0.46C1 0.02 0.12 0.62 0 0.72Z"/></svg></span><span>Surprise boxes<svg viewBox="-1.1 -1.1 2.2 2"><path d="M0 0.72C-0.12 0.62-1 0.02-1-0.46C-1-0.86-0.56-1.02-0.3-0.96C-0.16-0.93-0.05-0.83 0-0.72C0.05-0.83 0.16-0.93 0.3-0.96C0.56-1.02 1-0.86 1-0.46C1 0.02 0.12 0.62 0 0.72Z"/></svg></span><span>Vegan opties<svg viewBox="-1.1 -1.1 2.2 2"><path d="M0 0.72C-0.12 0.62-1 0.02-1-0.46C-1-0.86-0.56-1.02-0.3-0.96C-0.16-0.93-0.05-0.83 0-0.72C0.05-0.83 0.16-0.93 0.3-0.96C0.56-1.02 1-0.86 1-0.46C1 0.02 0.12 0.62 0 0.72Z"/></svg></span><span>Celebrate life, the cute way<svg viewBox="-1.1 -1.1 2.2 2"><path d="M0 0.72C-0.12 0.62-1 0.02-1-0.46C-1-0.86-0.56-1.02-0.3-0.96C-0.16-0.93-0.05-0.83 0-0.72C0.05-0.83 0.16-0.93 0.3-0.96C0.56-1.02 1-0.86 1-0.46C1 0.02 0.12 0.62 0 0.72Z"/></svg></span></div></div>
+
+  <section id="assortiment">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Assortiment</span>
+        <h2>Zoet, hartig en <span class="script">altijd cute.</span></h2>
+        <p>Of het nu gaat om een verjaardag, een babyshower of gewoon een dinsdag die wel wat extra mag: kies waar je zin in hebt, wij maken het persoonlijk.</p>
+      </div>
+      <div class="menu">
+        <article class="menu-item"><div class="ico"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="17" width="22" height="9" rx="2.5" fill="#F48DB4"/><rect x="9" y="10" width="14" height="8" rx="2" fill="#D9C3EE"/><path d="M9 12.5q2 2 3.5 0t3.5 0 3.5 0 3.5 0V12a2 2 0 0 0-2-2H11a2 2 0 0 0-2 2z" fill="#fff"/><path d="M5 19.5q2.7 2.5 5.5 0t5.5 0 5.5 0 5.5 0V19a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2z" fill="#fff"/><rect x="3" y="26" width="26" height="2.4" rx="1.2" fill="#C9A24B"/><path transform="translate(16 6.5) scale(3)" d="M0 0.72C-0.12 0.62-1 0.02-1-0.46C-1-0.86-0.56-1.02-0.3-0.96C-0.16-0.93-0.05-0.83 0-0.72C0.05-0.83 0.16-0.93 0.3-0.96C0.56-1.02 1-0.86 1-0.46C1 0.02 0.12 0.62 0 0.72Z" fill="#C2185B"/></svg></div><h3>Taarten op maat</h3><p>Stapeltaarten, drip cakes en thema-taarten met jouw tekst, kleuren en smaak.</p><span class="from">Op aanvraag</span></article>
+        <article class="menu-item"><div class="ico"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M8 17h16l-2.2 11H10.2z" fill="#D9C3EE"/><path d="M10.5 17l1 11M16 17v11M21.5 17l-1 11" stroke="#B998D6" stroke-width="1.2"/><path d="M6.5 17.5c0-3 2-4.5 4-4.5 0-3 2.5-5 5.5-5s5.5 2 5.5 5c2 0 4 1.5 4 4.5z" fill="#F7B6CC"/><circle cx="16" cy="6" r="2.4" fill="#C2185B"/><circle cx="12" cy="13.5" r=".9" fill="#C9A24B"/><circle cx="19.5" cy="12" r=".9" fill="#C9A24B"/></svg></div><h3>Cupcakes</h3><p>Per doos, in elk thema. Ook vegan, zoals onze gender reveal cupcakes.</p><span class="from">Per 6 of 12 stuks</span></article>
+        <article class="menu-item"><div class="ico"><svg viewBox="0 0 32 32" aria-hidden="true"><ellipse cx="16" cy="22" rx="12" ry="5" fill="#F7B6CC"/><ellipse cx="16" cy="20.5" rx="9" ry="3" fill="#FFF6E9"/><rect x="5" y="7" width="7" height="7" rx="1.4" transform="rotate(-12 8.5 10.5)" fill="#E9CF8F"/><rect x="19" y="5" width="7" height="7" rx="1.4" transform="rotate(14 22.5 8.5)" fill="#D9C3EE"/><path d="M13 13l2.5 6" stroke="#C9A24B" stroke-width="1.4" stroke-linecap="round"/></svg></div><h3>Cake &amp; Dip</h3><p>Stukjes cake met een romige dip om samen te delen. Perfect voor op tafel.</p><span class="from">Om te delen</span></article>
+        <article class="menu-item"><div class="ico"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M3 21c2-8 8-12 13-12s11 4 13 12c-3 2-8 3-13 3S6 23 3 21z" fill="#E9B36A"/><path d="M8 13.5l3 9M14 10.5l1.5 13M20 11l-1 12.5M25 14.5l-3.5 8.5" stroke="#C98A3E" stroke-width="1.3"/><path d="M3 21c3 1.8 8 2.6 13 2.6S26 22.8 29 21" stroke="#B8793A" stroke-width="1.2" fill="none"/></svg></div><h3>Snacks</h3><p>Hartige hapjes zoals kaas- en saucijzenbroodjes voor bij de koffie of op je feestje.</p><span class="from">Zoet &amp; hartig</span></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="creaties" class="gallery-sec">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Uit de keuken</span>
+        <h2>Recente <span class="script">creaties</span></h2>
+        <p>Een greep uit wat er de afgelopen tijd uit de oven kwam. Meer zien? Volg <a href="https://www.instagram.com/cutebizz_/" target="_blank" rel="noopener">@cutebizz_</a> op Instagram.</p>
+      </div>
+      <div class="gallery">
+        <figure class="g-item"><div class="ph"><img src="img/moms.webp" alt="Witte verjaardagstaart met lila toefjes en een uitgesneden 'Mom's Slice' vol bloemen"></div><figcaption><b>Mom's Slice</b>Verjaardagstaart met een verrassing: één punt vol bloemen, speciaal voor mama.</figcaption></figure>
+        <figure class="g-item"><div class="ph"><img src="img/toast.webp" alt="Taart met blauwe en witte toefjes, zwarte drip en de tekst Let me raise a toast to the man I love"></div><figcaption><b>Raise a toast</b>Blauw, wit en zwart met gouden accenten. Voor de man van je leven.</figcaption></figure>
+
+        <figure class="g-item"><div class="ph"><img src="img/cupcakes.webp" alt="Vegan cupcakes met roze-blauwe fondant, wolkjes en gouden sterren"></div><figcaption><b>Vegan gender reveal cupcakes</b>Roze of blauw? Wolkjes en gouden sterretjes houden het spannend.</figcaption></figure>
+        <aside class="g-cta">
+          <svg class="bg" viewBox="0 0 400 400" aria-hidden="true"><g fill="currentColor"><g class="g-stand"><rect x="64" y="332" width="272" height="11" rx="5.5" data-f="gold)"/><path d="M184 343 L216 343 L210 368 L190 368 Z" data-f="gold)"/><rect x="150" y="366" width="100" height="9" rx="4.5" data-f="gold)"/></g><g class="g-tier g-tier1"><rect x="88" y="250" width="224" height="82" rx="12" data-f="t1)"/><path class="g-drip" opacity=".5" d="M88,262 Q88,250 100,250 L300,250 Q312,250 312,262 L312,286 C307.8,269.8 308.08,271.6 304.048,283.12 Q298.0,290.32 291.952,283.12 C287.92,271.6 288.2,269.8 284.0,270 C279.8,261.0 280.08,262.0 276.048,268.4 Q270.0,272.4 263.952,268.4 C259.92,262.0 260.2,261.0 256.0,280 C251.8,266.5 252.08,268.0 248.048,277.6 Q242.0,283.6 235.952,277.6 C231.92,268.0 232.2,266.5 228.0,276 C223.8,264.3 224.08,265.6 220.048,273.92 Q214.0,279.12 207.952,273.92 C203.92,265.6 204.2,264.3 200.0,290 C195.8,272.0 196.08,274.0 192.048,286.8 Q186.0,294.8 179.952,286.8 C175.92,274.0 176.2,272.0 172.0,268 C167.8,259.9 168.08,260.8 164.048,266.56 Q158.0,270.16 151.952,266.56 C147.92,260.8 148.2,259.9 144.0,284 C139.8,268.7 140.08,270.4 136.048,281.28 Q130.0,288.08 123.952,281.28 C119.92,270.4 120.2,268.7 116.0,272 C111.8,262.1 112.08,263.2 108.048,270.24 Q102.0,274.64 95.952,270.24 C91.92,263.2 92.2,262.1 88.0,263.2 L88,262 Z" data-f="cream)"/></g><g class="g-tier g-tier2"><rect x="120" y="184" width="160" height="68" rx="12" data-f="t2)"/><path class="g-drip" opacity=".5" d="M120,196 Q120,184 132,184 L268,184 Q280,184 280,196 L280,212 C276.0,199.4 276.2666666666667,200.8 272.4266666666667,209.76 Q266.6666666666667,215.36 260.9066666666667,209.76 C257.06666666666666,200.8 257.33333333333337,199.4 253.33333333333334,208 C249.33333333333334,197.2 249.60000000000002,198.4 245.76000000000002,206.08 Q240.00000000000003,210.88 234.24000000000004,206.08 C230.40000000000003,198.4 230.66666666666669,197.2 226.66666666666669,218 C222.66666666666666,202.7 222.93333333333334,204.4 219.09333333333333,215.28 Q213.33333333333334,222.08 207.57333333333335,215.28 C203.73333333333335,204.4 204.0,202.7 200.0,200 C196.0,192.8 196.26666666666668,193.6 192.42666666666668,198.72 Q186.66666666666669,201.92000000000002 180.9066666666667,198.72 C177.0666666666667,193.6 177.33333333333334,192.8 173.33333333333334,214 C169.33333333333331,200.5 169.6,202.0 165.76,211.6 Q160.0,217.6 154.24,211.6 C150.4,202.0 150.66666666666666,200.5 146.66666666666666,204 C142.66666666666666,195.0 142.93333333333334,196.0 139.09333333333333,202.4 Q133.33333333333334,206.4 127.57333333333334,202.4 C123.73333333333335,196.0 124.0,195.0 120.0,196.0 L120,196 Z" data-f="cream)"/></g><g class="g-tier g-tier3"><rect x="150" y="130" width="100" height="56" rx="12" data-f="t3)"/><path class="g-drip" opacity=".5" d="M150,142 Q150,130 162,130 L238,130 Q250,130 250,142 L250,152 C246.25,142.1 246.5,143.2 242.9,150.24 Q237.5,154.64 232.1,150.24 C228.5,143.2 228.75,142.1 225.0,144 C221.25,137.7 221.5,138.4 217.9,142.88 Q212.5,145.68 207.1,142.88 C203.5,138.4 203.75,137.7 200.0,156 C196.25,144.3 196.5,145.6 192.9,153.92000000000002 Q187.5,159.12 182.1,153.92000000000002 C178.5,145.6 178.75,144.3 175.0,146 C171.25,138.8 171.5,139.6 167.9,144.72 Q162.5,147.92000000000002 157.1,144.72 C153.5,139.6 153.75,138.8 150.0,139.6 L150,142 Z" data-f="cream)"/></g><g class="g-topper"><path transform="translate(200 104) scale(24)" d="M0 0.72C-0.12 0.62-1 0.02-1-0.46C-1-0.86-0.56-1.02-0.3-0.96C-0.16-0.93-0.05-0.83 0-0.72C0.05-0.83 0.16-0.93 0.3-0.96C0.56-1.02 1-0.86 1-0.46C1 0.02 0.12 0.62 0 0.72Z" data-f="heart)"/><path d="M193 96 q5 -6 11 -3" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" opacity=".7"/></g></g></svg>
+          <div class="txt"><span class="eyebrow" style="color:inherit">Jouw idee</span>
+          <h3>Heb je een idee in je hoofd? Wij bakken het.</h3></div>
+          <p class="txt">Stuur een foto, een kleur of alleen een gevoel. Samen maken we er jouw taart van.</p>
+          <a class="btn" href="#bestellen">Start je aanvraag</a>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section id="surprise-box">
+    <div class="wrap box">
+      <div class="box-card">
+        <span class="eyebrow">Cute. Surprise Box</span>
+        <h2 style="margin-top:14px">Een doos vol <span class="script">zoet &amp; hartig</span></h2>
+        <div class="price"><b>€&nbsp;7,50</b><span>Waarde €&nbsp;10 tot €&nbsp;20</span></div>
+        <div class="moments"><span>Ontbijt</span><span>Brunch</span><span>Lunch</span></div>
+        <ul class="checklist">
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 14.2-4-4 1.4-1.4 2.6 2.6 5.6-5.6 1.4 1.4z"/></svg><span>Gevulde croissantjes</span></li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 14.2-4-4 1.4-1.4 2.6 2.6 5.6-5.6 1.4 1.4z"/></svg><span>Donuts</span></li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 14.2-4-4 1.4-1.4 2.6 2.6 5.6-5.6 1.4 1.4z"/></svg><span>Kaas- en saucijzenbroodjes</span></li>
+          <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.2 14.2-4-4 1.4-1.4 2.6 2.6 5.6-5.6 1.4 1.4z"/></svg><span>Zoete en hartige snacks, elke keer een verrassing</span></li>
+        </ul>
+        <div class="info-row">
+          <div><b>Beschikbaar</b>Woensdag t/m zondag, 10:00 tot 13:00</div>
+          <div><b>Bezorging</b>Mogelijk, € 0,65 per km vanaf Maassluis</div>
+        </div>
+        <p class="form-note" style="margin-top:16px">Extra leuk: speciale boxen voor Moederdag, Vaderdag en Valentijn.</p>
+        <a href="#bestellen" class="btn btn-primary" style="margin-top:20px" data-pick="Surprise box">Bestel een box</a>
+      </div>
+      <div class="box-visual" aria-hidden="true"><svg viewBox="0 0 440 400">
+<ellipse cx="220" cy="362" rx="160" ry="14" fill="var(--line)"/>
+<g><rect x="80" y="200" width="280" height="160" rx="14" fill="var(--blush)"/>
+<rect x="80" y="200" width="280" height="30" fill="#000" opacity=".06"/>
+<rect x="205" y="200" width="30" height="160" fill="var(--gold)"/>
+<text x="220" y="300" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-style="italic" font-weight="700" font-size="34" fill="var(--rasp)" opacity="0">.</text></g>
+<g class="treats">
+<circle cx="150" cy="196" r="34" fill="#E0A065"/><circle cx="150" cy="196" r="34" fill="#F48DB4" clip-path="inset(0 0 50% 0)"/><path d="M118 192a32 30 0 0 1 64 0c-6 4-10-2-16 2s-10-3-16 1-10-3-16 1-10-4-16-4z" fill="#F48DB4"/><circle cx="150" cy="190" r="10" fill="var(--bg)"/>
+<g fill="#fff"><rect x="128" y="176" width="7" height="2.6" rx="1.3" transform="rotate(30 131 177)"/><rect x="165" y="178" width="7" height="2.6" rx="1.3" transform="rotate(-20 168 179)"/><rect x="140" y="170" width="7" height="2.6" rx="1.3" fill="#E9CF8F"/></g>
+<path d="M236 200c4-26 26-44 58-44s50 18 54 44z" fill="#E9B36A"/><path d="M258 168l8 32M292 158v42M322 166l-8 34" stroke="#C98A3E" stroke-width="3"/>
+</g>
+<g transform="rotate(-14 120 120)"><rect x="60" y="120" width="300" height="46" rx="12" fill="var(--rasp)"/><rect x="195" y="120" width="30" height="46" fill="var(--gold)"/>
+<path d="M210 120c-30-36-64-30-60-6 3 18 40 10 60 6zM210 120c30-36 64-30 60-6-3 18-40 10-60 6z" fill="var(--gold)"/><circle cx="210" cy="118" r="9" fill="var(--gold)"/></g>
+<g fill="var(--gold)"><path d="M380 70l5 13 13 5-13 5-5 13-5-13-13-5 13-5z"/><path d="M60 260l3.5 9 9 3.5-9 3.5-3.5 9-3.5-9-9-3.5 9-3.5z"/><path d="M390 250l3 7 7 3-7 3-3 7-3-7-7-3 7-3z"/></g>
+<text x="220" y="300" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-style="italic" font-weight="700" font-size="40" fill="var(--card)">cute.</text>
+</svg></div>
+    </div>
+  </section>
+
+  <section id="rewards" class="rewards">
+    <div class="wrap rw">
+      <div class="rw-photo">
+        <div class="arch"><img src="img/world.webp" alt="Roze taart met een wereldkaart, drip en een koffertje als topper"></div>
+        <div class="rw-badge"><span>tot wel<b>50%</b>korting</span></div>
+      </div>
+      <div>
+        <span class="eyebrow">Cutebizz Rewards</span>
+        <h2 style="margin-top:14px">Verdien korting op <span class="script">jouw volgende taart</span></h2>
+        <p style="color:var(--ink-soft);margin-top:16px;max-width:34em">Hoe meer je doet, hoe meer je bespaart. Jij kiest je eigen route naar korting en Cutebizz betaalt je beloning uit in taart.</p>
+        <ol class="steps">
+          <li><div><b>Bekijk een presentatie</b><p>Ontdek hoe het werkt tijdens een Travel &amp; Tea of online.</p></div></li>
+          <li><div><b>Nodig vrienden uit</b><p>Neem iemand mee of deel je persoonlijke link.</p></div></li>
+          <li><div><b>Spaar je korting op</b><p>Elke stap levert korting op, tot wel 50% op je volgende taart.</p></div></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section id="cute-travel" class="travel">
+    <svg class="plane" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z"/></svg>
+    <div class="wrap">
+      <div style="display:grid;gap:18px">
+        <span class="eyebrow">Cute Travel</span>
+        <h2>Travel &amp; Tea: reizen op een <span class="script">andere manier</span></h2>
+        <p>Naast taart deelt Cutebizz nog een passie: reizen. Tijdens Travel &amp; Tea ontdek je onder het genot van thee en iets lekkers hoe je via de VIP-reisclub voordeliger op reis gaat.</p>
+        <div><a class="btn btn-primary" href="#bestellen" data-pick="Travel &amp; Tea">Meld je aan voor Travel &amp; Tea</a></div>
+      </div>
+      <div class="travel-card">
+        <div><span>Wat</span><b>Gratis presentatie</b></div>
+        <div><span>Inclusief</span><b>Thee &amp; zoete lekkernijen</b></div>
+        <div><span>VIP-reisclub</span><b>Toegang vanaf € 90</b></div>
+        <div><span>Vragen?</span><b>Stuur een DM met TRAVEL</b></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="bestellen">
+    <div class="wrap order">
+      <div>
+        <span class="eyebrow">Bestellen</span>
+        <h2 style="margin-top:14px">Zo komt jouw taart <span class="script">tot leven</span></h2>
+        <ol class="how">
+          <li><span class="n">1</span><div><b>Vertel je idee</b><p>Vul het formulier in met datum, aantal personen en je wensen.</p></div></li>
+          <li><span class="n">2</span><div><b>Ontwerp &amp; prijs</b><p>Je krijgt een voorstel met ontwerp en prijs, afgestemd op jouw wensen.</p></div></li>
+          <li><span class="n">3</span><div><b>Ophalen of bezorgen</b><p>Haal je bestelling op of laat hem bezorgen, precies op tijd voor je feest.</p></div></li>
+        </ol>
+        <div class="contact">
+          <div><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm1 2.4V17h16V7.4l-8 5.3zM5.2 7 12 11.5 18.8 7z"/></svg><span id="mail">cutebizz@gmail.com</span><button class="copy" type="button" data-copy="cutebizz@gmail.com">Kopieer</button></div>
+          <div><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3zm5 3.5a4.5 4.5 0 1 1 0 9 4.5 4.5 0 0 1 0-9zm0 2a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM17.3 5.6a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2z"/></svg><a href="https://www.instagram.com/cutebizz_/" target="_blank" rel="noopener">@cutebizz_ op Instagram</a></div>
+        </div>
+      </div>
+      <form class="card" id="orderform" novalidate>
+        <div class="chips" role="group" aria-label="Wat wil je bestellen?">
+          <label><input type="radio" name="soort" id="s-taart" value="Taart" checked><span>Taart</span></label>
+          <label><input type="radio" name="soort" id="s-cupcakes" value="Cupcakes"><span>Cupcakes</span></label>
+          <label><input type="radio" name="soort" id="s-dip" value="Cake &amp; Dip"><span>Cake &amp; Dip</span></label>
+          <label><input type="radio" name="soort" id="s-box" value="Surprise box"><span>Surprise box</span></label>
+          <label><input type="radio" name="soort" id="s-travel" value="Travel &amp; Tea"><span>Travel &amp; Tea</span></label>
+        </div>
+        <div class="row2">
+          <label for="f-naam">Naam<input id="f-naam" name="naam" autocomplete="name" placeholder="Je naam" required></label>
+          <label for="f-tel">Telefoon<input id="f-tel" name="tel" type="tel" autocomplete="tel" placeholder="06 12 34 56 78"></label>
+        </div>
+        <div class="row2">
+          <label for="f-datum">Datum van je feest<input id="f-datum" name="datum" type="date"></label>
+          <label for="f-pers">Aantal personen<select id="f-pers" name="pers"><option>6 tot 10</option><option selected>10 tot 20</option><option>20 tot 40</option><option>Meer dan 40</option></select></label>
+        </div>
+        <label for="f-wens">Jouw wensen<textarea id="f-wens" name="wens" placeholder="Bijvoorbeeld: lila met goud, vanille met dawet-vulling, tekst 'Happy birthday Mom!'"></textarea></label>
+        <button class="btn btn-primary" type="submit" style="justify-content:center">Verstuur aanvraag</button>
+        <p class="form-note">Demo-formulier: aanvragen worden in deze preview nog niet echt verstuurd.</p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div style="display:grid;gap:14px">
+      <span class="site-logo"><svg viewBox="16 14 646.02 128" aria-hidden="true"><use href="#cb-logo"/></svg></span>
+      <p style="color:var(--ink-soft);max-width:28em">Handgemaakte taarten, cupcakes en surprise boxes. Celebrate life, the cute way.</p>
+    </div>
+    <div><h4>Ontdek</h4><ul><li><a href="#assortiment">Assortiment</a></li><li><a href="#creaties">Creaties</a></li><li><a href="#surprise-box">Surprise box</a></li><li><a href="#rewards">Rewards</a></li><li><a href="#cute-travel">Cute Travel</a></li></ul></div>
+    <div><h4>Contact</h4><ul><li>cutebizz@gmail.com</li><li><a href="https://www.instagram.com/cutebizz_/" target="_blank" rel="noopener">Instagram @cutebizz_</a></li><li>Bezorging vanaf Maassluis</li></ul></div>
+    <div class="legal"><span>© 2026 Cutebizz · Website door Flowforge</span><button type="button" id="replay">Speel de intro opnieuw</button></div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script>
+(function(){
+  var root=document.documentElement, intro=document.getElementById('intro');
+  var reduce=window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var tl=null, rafId=0;
+
+  /* ---------- sprinkles (canvas) ---------- */
+  var cv=document.getElementById('sprinkles'), ctx=cv.getContext('2d'), parts=[];
+  var COLORS=['#F7B6CC','#E0457F','#E9CF8F','#D9C3EE','#FFFFFF','#9FD8E8'];
+  function size(){var r=cv.getBoundingClientRect(),d=Math.min(2,window.devicePixelRatio||1);cv.width=r.width*d;cv.height=r.height*d;ctx.setTransform(d,0,0,d,0,0)}
+  function burst(n,mode){
+    var r=cv.getBoundingClientRect(),w=r.width,h=r.height;
+    for(var i=0;i<n;i++){
+      var p={c:COLORS[i%COLORS.length],r:Math.random()*Math.PI,vr:(Math.random()-.5)*.3,l:6+Math.random()*7,life:0};
+      if(mode==='rain'){p.x=w*.22+Math.random()*w*.56;p.y=-20-Math.random()*h*.4;p.vx=(Math.random()-.5)*.6;p.vy=2+Math.random()*2.5;p.g=.06}
+      else{var a=-Math.PI/2+(Math.random()-.5)*Math.PI*1.4,s=4+Math.random()*7;p.x=w*.5;p.y=h*.23;p.vx=Math.cos(a)*s;p.vy=Math.sin(a)*s;p.g=.18}
+      parts.push(p)
+    }
+    if(!rafId)loop();
+  }
+  function loop(){
+    var r=cv.getBoundingClientRect();ctx.clearRect(0,0,r.width,r.height);
+    parts=parts.filter(function(p){return p.y<r.height+30&&p.life<400});
+    parts.forEach(function(p){p.life++;p.vy+=p.g;p.vx*=.99;p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;
+      ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.r);ctx.fillStyle=p.c;ctx.beginPath();
+      if(ctx.roundRect)ctx.roundRect(-p.l/2,-2,p.l,4,2);else ctx.rect(-p.l/2,-2,p.l,4);ctx.fill();ctx.restore()});
+    rafId=parts.length?requestAnimationFrame(loop):0;
+  }
+
+  function finish(){
+    if(tl){tl.kill();tl=null}
+    root.classList.add('intro-done');
+    parts=[];
+    document.body.style.overflow='';
+  }
+  function play(){
+    root.classList.remove('intro-done');
+    intro.style.transform='';intro.style.opacity='';intro.style.clipPath='';
+    window.scrollTo(0,0);
+    document.body.style.overflow='hidden';
+    if(typeof gsap==='undefined'){setTimeout(finish,1200);return}
+    size();
+    var q=function(s){return intro.querySelectorAll(s)};
+    var n=document.getElementById('layer-n');
+    gsap.set(q('.i-tier,.i-stand,.i-topper,.i-pearl,.i-drip,.wl,.tl,.idot,.i-shadow'),{clearProps:'all'});
+    gsap.set('#i-cakewrap',{clearProps:'all'});
+    if(reduce){
+      gsap.set('#i-cakewrap',{scale:.62,y:-58,transformOrigin:'300px 330px'});
+      tl=gsap.timeline({onComplete:finish}).from(q('.wordmark,.tagline'),{opacity:0,duration:.6}).to(intro,{opacity:0,duration:.6},'+=1.2');
+      return;
+    }
+    n.textContent='0';
+    tl=gsap.timeline({defaults:{ease:'power3.out'},onComplete:finish});
+    gsap.set(q('.wl'),{opacity:0,y:420,scale:.6,transformOrigin:'50% 100%'});
+    gsap.set(q('.tl'),{opacity:0});
+    gsap.set(q('.idot'),{scale:0,transformOrigin:'50% 50%'});
+    gsap.set(q('.i-tier'),{y:-620,opacity:1});
+    gsap.set(q('.i-drip'),{scaleY:0,transformOrigin:'50% 0%'});
+    gsap.set(q('.i-pearl'),{scale:0,transformBox:'fill-box',transformOrigin:'50% 50%'});
+    gsap.set(q('.i-topper'),{y:-500,rotation:-25,transformBox:'fill-box',transformOrigin:'50% 100%'});
+    gsap.set(q('.i-stand rect, .i-stand path'),{scaleX:0,transformBox:'fill-box',transformOrigin:'50% 50%'});
+    gsap.set(q('.i-shadow'),{scale:0,transformBox:'fill-box',transformOrigin:'50% 50%'});
+
+    tl.to(q('.i-stand rect, .i-stand path'),{scaleX:1,duration:.7,stagger:.12,ease:'expo.out'},.2)
+      .to(q('.i-shadow'),{scale:1,duration:.8},.3);
+    [1,2,3].forEach(function(k,i){
+      var t=.85+i*.95, tier=q('.i-tier'+k)[0];
+      tl.to(tier,{y:0,duration:.55,ease:'power2.in'},t)
+        .to(tier,{scaleY:.86,scaleX:1.06,transformBox:'fill-box',transformOrigin:'50% 100%',duration:.09,ease:'power1.out'},t+.55)
+        .to(tier,{scaleY:1,scaleX:1,duration:.5,ease:'elastic.out(1,.35)'},t+.64)
+        .call(function(){n.textContent=k},null,t+.55)
+        .to(tier.querySelector('.i-drip'),{scaleY:1,duration:.7,ease:'power2.out'},t+.62)
+        .to(tier.querySelectorAll('.i-pearl'),{scale:1,duration:.35,stagger:{each:.025,from:'center'},ease:'back.out(3)'},t+.7);
+    });
+    tl.to(q('.i-topper'),{y:0,rotation:0,duration:.7,ease:'bounce.out'},3.75)
+      .call(function(){burst(90,'pop')},null,4.05)
+      .fromTo(q('.i-rays'),{opacity:1,scale:.4,transformOrigin:'200px 104px'},{opacity:0,scale:1.5,duration:.9,ease:'power2.out',immediateRender:false},4.05)
+      .fromTo(q('.i-glow'),{opacity:0},{opacity:.55,duration:.8,yoyo:true,repeat:1,immediateRender:false},4.0)
+      .to('#i-cakewrap',{scale:.62,y:-58,transformOrigin:'300px 330px',duration:1.1,ease:'power3.inOut'},4.7)
+      .to(q('.wl'),{opacity:1,y:0,scale:1,duration:.85,stagger:.07,ease:'back.out(1.6)'},5.05)
+      .to(q('.idot'),{scale:1,duration:.7,ease:'elastic.out(1.1,.4)'},5.75)
+      .call(function(){burst(70,'rain')},null,5.8)
+      .to(q('.tl'),{opacity:1,duration:.35,stagger:.018},5.9)
+      .to(intro,{clipPath:'circle(0% at 50% 45%)',duration:1.1,ease:'power3.inOut'},7.6);
+    gsap.set(intro,{clipPath:'circle(150% at 50% 45%)'});
+  }
+
+  document.getElementById('skip').addEventListener('click',function(){
+    if(typeof gsap!=='undefined'){gsap.to(intro,{opacity:0,duration:.4,onComplete:function(){finish();intro.style.opacity=''}});if(tl)tl.pause()}else finish();
+  });
+  document.getElementById('replay').addEventListener('click',play);
+  window.addEventListener('resize',function(){if(!root.classList.contains('intro-done'))size()});
+  play();
+
+  /* ---------- page bits ---------- */
+  document.querySelectorAll('[data-pick]').forEach(function(a){a.addEventListener('click',function(){
+    var v=a.getAttribute('data-pick');document.querySelectorAll('input[name=soort]').forEach(function(r){if(r.value===v)r.checked=true});
+  })});
+  document.querySelectorAll('[data-copy]').forEach(function(b){b.addEventListener('click',function(){
+    var t=b.getAttribute('data-copy');
+    function sel(){var r=document.createRange();r.selectNodeContents(document.getElementById('mail'));var s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Geselecteerd'}
+    try{navigator.clipboard.writeText(t).then(function(){b.textContent='Gekopieerd'},sel)}catch(e){sel()}
+    setTimeout(function(){b.textContent='Kopieer'},2200);
+  })});
+  var form=document.getElementById('orderform');
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var naam=document.getElementById('f-naam');
+    if(!naam.value.trim()){naam.focus();naam.setAttribute('aria-invalid','true');naam.placeholder='Vul je naam in zodat we je kunnen bereiken';return}
+    var soort=(form.querySelector('input[name=soort]:checked')||{}).value||'taart';
+    form.innerHTML='<div class="thanks"><svg viewBox="0 0 400 400" aria-hidden="true">'+document.querySelector('.g-cta svg.bg').innerHTML+'</svg><h3>Dankjewel, '+naam.value.trim().replace(/[<>&]/g,'')+'!</h3><p style="color:var(--ink-soft)">Je aanvraag voor: '+soort.replace(/[<>]/g,'')+'. In de echte website komt dit bericht direct bij Cutebizz binnen. Dit is een demo, er is niets verstuurd.</p></div>';
+  });
+})();
+</script>
