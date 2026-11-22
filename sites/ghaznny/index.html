@@ -101,12 +101,12 @@ nav.hoofd .knop:hover{color:var(--zwart)}
 
 /* ---------- Hero ---------- */
 .hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;padding:140px 0 clamp(56px,9vh,110px);overflow:hidden;isolation:isolate}
-.hero .plafond{position:absolute;inset:0;width:100%;height:100%;z-index:-2}
-.hero .plafond .hx{fill:none;stroke:#fbfbf4;stroke-width:4.5;opacity:.55}
+.hero .foto{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 35%;z-index:-2;transform:scale(1.06);animation:zoomuit 14s ease-out forwards}
+@keyframes zoomuit{to{transform:scale(1)}}
+@media (prefers-reduced-motion: reduce){.hero .foto{animation:none;transform:none}}
 .hero::before{content:"";position:absolute;inset:0;z-index:-1;background:
-  linear-gradient(90deg,rgba(12,12,12,.9) 0%,rgba(12,12,12,.55) 45%,rgba(12,12,12,.15) 100%),
-  radial-gradient(120% 80% at 70% 0%,rgba(12,12,12,.1),rgba(12,12,12,.8) 65%,var(--zwart) 100%),
-  linear-gradient(180deg,rgba(12,12,12,.35),var(--zwart) 92%)}
+  linear-gradient(90deg,rgba(12,12,12,.92) 0%,rgba(12,12,12,.7) 40%,rgba(12,12,12,.25) 100%),
+  linear-gradient(180deg,rgba(12,12,12,.55) 0%,rgba(12,12,12,0) 30%,rgba(12,12,12,.2) 60%,var(--zwart) 100%)}
 .hero .inhoud{max-width:760px}
 .hero .kicker{margin-bottom:26px;display:flex;align-items:center;gap:14px}
 .hero .kicker::before{content:"";width:40px;height:1px;background:var(--salie)}
@@ -127,10 +127,14 @@ section{padding:clamp(80px,11vw,140px) 0;position:relative}
 
 /* Diensten */
 .diensten{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--lijn);border-left:1px solid var(--lijn)}
-.dienst{padding:38px 30px 34px;border-right:1px solid var(--lijn);border-bottom:1px solid var(--lijn);position:relative;transition:background .35s}
+.dienst{padding:0 0 34px;border-right:1px solid var(--lijn);border-bottom:1px solid var(--lijn);position:relative;transition:background .35s}
+.dienst .beeld{aspect-ratio:4/5;overflow:hidden;margin-bottom:26px;background:var(--kool)}
+.dienst .beeld img{width:100%;height:100%;object-fit:cover;filter:grayscale(.25) contrast(1.05);transition:transform .9s cubic-bezier(.2,.7,.2,1),filter .6s}
+.dienst:hover .beeld img{transform:scale(1.05);filter:none}
+.dienst .nr,.dienst h3,.dienst p{margin-left:26px;margin-right:26px}
+.dienst .nr{display:block;margin-bottom:12px}
 .dienst:hover{background:var(--nacht)}
 .dienst .nr{font:400 .72rem/1 var(--f-tekst);letter-spacing:.2em;color:var(--salie)}
-.dienst svg{width:42px;height:42px;margin:34px 0 26px;stroke:var(--ivoor);stroke-width:1.2;fill:none}
 .dienst h3{font-size:1.45rem;margin-bottom:12px}
 .dienst p{color:var(--tekst);font-size:.95rem}
 @media (max-width:1000px){.diensten{grid-template-columns:repeat(2,1fr)}}
@@ -138,7 +142,11 @@ section{padding:clamp(80px,11vw,140px) 0;position:relative}
 
 /* Uitgelicht */
 .uitgelicht{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:20px}
-.kaart{background:var(--nacht);border:1px solid var(--lijn);padding:30px;display:flex;flex-direction:column;gap:12px}
+.kaart{background:var(--nacht);border:1px solid var(--lijn);padding:0 0 28px;display:flex;flex-direction:column;gap:12px;overflow:hidden}
+.kaart>*:not(.beeld){margin-left:28px;margin-right:28px}
+.kaart .beeld{aspect-ratio:3/2;overflow:hidden;margin-bottom:12px}
+.kaart .beeld img{width:100%;height:100%;object-fit:cover;transition:transform .9s cubic-bezier(.2,.7,.2,1)}
+.kaart:hover .beeld img{transform:scale(1.05)}
 .kaart .meta{display:flex;gap:18px;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--salie)}
 .kaart h3{font-size:1.35rem}
 .kaart p{color:var(--tekst);font-size:.94rem;flex:1}
@@ -171,8 +179,9 @@ section{padding:clamp(80px,11vw,140px) 0;position:relative}
 /* Werkwijze */
 .werkwijze{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(40px,7vw,110px);align-items:center}
 .stoel{position:relative;aspect-ratio:4/5;border:1px solid var(--lijn);background:radial-gradient(80% 60% at 50% 30%,#1d2322,#0c0c0c 70%);overflow:hidden}
-.stoel svg.plafond{position:absolute;inset:0;width:100%;height:55%}
-.stoel svg.plafond .hx{fill:none;stroke:#fbfbf4;stroke-width:4.5;opacity:.75}
+.stoel img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.stoel::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,12,12,0) 35%,rgba(12,12,12,.9) 100%)}
+.stoel .citaat{z-index:1}
 .stoel .citaat{position:absolute;left:28px;right:28px;bottom:28px;font-family:var(--f-kop);font-size:clamp(1.3rem,2.2vw,1.75rem);line-height:1.3}
 .stoel .citaat small{display:block;font:400 .72rem/1 var(--f-tekst);letter-spacing:.24em;text-transform:uppercase;color:var(--salie);margin-top:16px}
 .punten{display:grid;gap:0;margin-top:34px}
@@ -182,7 +191,9 @@ section{padding:clamp(80px,11vw,140px) 0;position:relative}
 .punt h3{font-size:1.3rem;margin-bottom:6px}
 .punt p{color:var(--tekst);font-size:.95rem}
 .apart{margin-top:30px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.apart div{border:1px solid var(--lijn);padding:20px}
+.apart>div{border:1px solid var(--lijn);padding:0 0 20px;overflow:hidden}
+.apart>div>*:not(img){margin-left:20px;margin-right:20px}
+.apart img{width:100%;aspect-ratio:16/10;object-fit:cover;margin-bottom:16px}
 .apart b{display:block;font:500 .7rem/1 var(--f-tekst);letter-spacing:.22em;text-transform:uppercase;color:var(--ivoor);margin-bottom:10px}
 .apart p{font-size:.88rem;color:var(--tekst)}
 @media (max-width:900px){.werkwijze{grid-template-columns:1fr}.stoel{aspect-ratio:4/3}}
@@ -254,6 +265,31 @@ section{padding:clamp(80px,11vw,140px) 0;position:relative}
   .stappen .totaal{display:none}
 }
 
+/* Over Ghaznny */
+.over{display:grid;grid-template-columns:1fr 1fr;gap:clamp(36px,6vw,90px);align-items:center}
+.over .fotos{position:relative;aspect-ratio:1/1}
+.over .fotos img{position:absolute;object-fit:cover;border:1px solid var(--lijn)}
+.over .fotos .a{left:0;top:0;width:78%;height:72%}
+.over .fotos .b{right:0;bottom:0;width:52%;height:52%;border:6px solid var(--zwart);outline:1px solid var(--lijn)}
+.over p{color:var(--tekst);margin-top:22px}
+.over .handtekening{margin-top:30px;display:flex;gap:30px;flex-wrap:wrap}
+.over .handtekening div{border-top:1px solid var(--lijn);padding-top:14px;min-width:120px}
+.over .handtekening b{display:block;font:400 1.8rem/1 var(--f-kop)}
+.over .handtekening span{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--tekst)}
+@media (max-width:900px){.over{grid-template-columns:1fr}}
+
+/* Portfolio */
+#portfolio{padding-bottom:0}
+.galerij{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:clamp(160px,20vw,280px);gap:8px}
+.galerij figure{margin:0;position:relative;overflow:hidden;background:var(--kool)}
+.galerij figure.hoog{grid-row:span 2}
+.galerij figure.breed{grid-column:span 2}
+.galerij img{width:100%;height:100%;object-fit:cover;transition:transform 1s cubic-bezier(.2,.7,.2,1),filter .6s;filter:grayscale(.2)}
+.galerij figure:hover img{transform:scale(1.06);filter:none}
+.galerij figcaption{position:absolute;left:0;right:0;bottom:0;padding:30px 16px 14px;background:linear-gradient(180deg,transparent,rgba(0,0,0,.75));font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;opacity:0;transform:translateY(8px);transition:.4s}
+.galerij figure:hover figcaption{opacity:1;transform:none}
+@media (max-width:760px){.galerij{grid-template-columns:repeat(2,1fr)}.galerij figure.breed{grid-column:span 2}}
+
 /* Reviews */
 .reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 .review{border-top:1px solid var(--ivoor);padding-top:28px}
@@ -264,6 +300,7 @@ section{padding:clamp(80px,11vw,140px) 0;position:relative}
 
 /* Openingstijden + contact */
 .contact{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,6vw,90px)}
+.urenfoto{width:100%;aspect-ratio:16/7;object-fit:cover;margin:26px 0 6px;border:1px solid var(--lijn)}
 .uren{border-top:1px solid var(--lijn)}
 .uren div{display:flex;justify-content:space-between;padding:15px 0;border-bottom:1px solid var(--lijn);font-size:1rem}
 .uren div.vandaag{color:var(--salie)}
@@ -290,7 +327,9 @@ section{padding:clamp(80px,11vw,140px) 0;position:relative}
 @media (max-width:860px){.contact{grid-template-columns:1fr}}
 
 /* CTA */
-.cta{text-align:center;padding:clamp(80px,10vw,130px) 0;border-top:1px solid var(--lijn);border-bottom:1px solid var(--lijn);position:relative;overflow:hidden}
+.cta{text-align:center;padding:clamp(90px,12vw,160px) 0;border-top:1px solid var(--lijn);border-bottom:1px solid var(--lijn);position:relative;overflow:hidden;isolation:isolate}
+.cta>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+.cta::before{content:"";position:absolute;inset:0;z-index:-1;background:rgba(10,10,10,.78)}
 .cta h2{font-size:clamp(2.2rem,5vw,4rem);margin:18px 0 22px}
 .cta p{color:var(--tekst);max-width:520px;margin:0 auto 34px}
 .cta .knoppen{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
@@ -352,6 +391,7 @@ footer .legal .rechts{display:flex;gap:22px;align-items:center;flex-wrap:wrap}
     <a href="#top" class="merk" aria-label="Ghaznny, naar boven"><span class="wm"><i>G</i><i>H</i><i class="lam"><svg viewBox="0 0 66 100"><use href="#lambda"/></svg></i><i>Z</i><i>N</i><i>N</i><i>Y</i></span></a>
     <nav class="hoofd" id="menu" aria-label="Hoofdmenu">
       <a href="#behandelingen">Behandelingen</a>
+      <a href="#portfolio">Portfolio</a>
       <a href="#tarieven">Tarieven</a>
       <a href="#werkwijze">Werkwijze</a>
       <a href="#contact">Openingstijden</a>
@@ -363,7 +403,7 @@ footer .legal .rechts{display:flex;gap:22px;align-items:center;flex-wrap:wrap}
 
 <main id="top">
   <section class="hero">
-    <svg class="plafond" id="plafond-hero" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true"></svg>
+    <img class="foto" src="/img/salon.jpg" alt="De salon van Ghaznny in Spijkenisse met het zeshoekige lichtplafond" fetchpriority="high">
     <div class="wrap">
       <div class="inhoud reveal">
         <div class="kicker">Barbershop &amp; Clinic · Spijkenisse</div>
@@ -386,44 +426,47 @@ footer .legal .rechts{display:flex;gap:22px;align-items:center;flex-wrap:wrap}
       </div>
       <div class="diensten reveal">
         <article class="dienst">
+          <div class="beeld"><img src="/img/knippen.jpg" alt="Strak geknipt herenkapsel met fade bij Ghaznny" loading="lazy"></div>
           <span class="nr">01</span>
-          <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="13" cy="36" r="6"/><circle cx="35" cy="36" r="6"/><path d="M17 31 38 6M31 31 10 6"/></svg>
           <h3>Knippen en stylen</h3>
           <p>Voor dames en heren die gaan voor een fris, stijlvol en perfect afgewerkt kapsel.</p>
         </article>
         <article class="dienst">
+          <div class="beeld"><img src="/img/kleur.jpg" alt="Getextureerd kapsel bij Ghaznny" loading="lazy"></div>
           <span class="nr">02</span>
-          <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 4c7 9 12 16 12 23a12 12 0 0 1-24 0c0-7 5-14 12-23Z"/><path d="M18 30a6 6 0 0 0 6 6"/></svg>
           <h3>Kleurbehandelingen</h3>
           <p>Van subtiele highlights tot volledige kleursessies met professionele verzorgingsproducten.</p>
         </article>
         <article class="dienst">
+          <div class="beeld"><img src="/img/clinic.jpg" alt="Gezichtsbehandeling in de clinic" loading="lazy"></div>
           <span class="nr">03</span>
-          <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 6c9 0 15 7 15 17s-6 19-15 19S9 33 9 23 15 6 24 6Z"/><path d="M18 22h.01M30 22h.01M19 31c3 2 7 2 10 0"/><path d="M38 6l2-2M41 10h3M36 3V0"/></svg>
           <h3>Clinic-behandelingen</h3>
           <p>Doelgerichte esthetische behandelingen, uitgevoerd met uiterste precisie en hygiëne.</p>
         </article>
         <article class="dienst">
+          <div class="beeld"><img src="/img/verzorging.jpg" alt="Haar wassen en verzorgen" loading="lazy"></div>
           <span class="nr">04</span>
-          <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 40c10-2 18-10 20-22l8-8"/><path d="M30 8l10 10"/><path d="M12 28c4 0 8 4 8 8"/></svg>
           <h3>Verzorging en herstel</h3>
           <p>Intensieve verzorgingskuren voor glanzend, gezond haar en een vitale hoofdhuid.</p>
         </article>
       </div>
       <div class="uitgelicht reveal">
         <article class="kaart">
+          <div class="beeld"><img src="/img/knipbeurt.jpg" alt="Knipbeurt in de barberstoel" loading="lazy"></div>
           <div class="meta"><span>30 min</span><span>€ 25</span></div>
           <h3>Knippen en stylen</h3>
           <p>Een complete knipbeurt afgestemd op jouw wensen en haarstructuur. Inclusief wassen, stylen en professioneel advies.</p>
           <button class="knop" type="button" data-boek="knippen">Boek deze behandeling</button>
         </article>
         <article class="kaart">
+          <div class="beeld"><img src="/img/fade.jpg" alt="Skin fade met tondeuse" loading="lazy"></div>
           <div class="meta"><span>45 min</span><span>€ 40</span></div>
           <h3>Haar &amp; baard</h3>
           <p>Onze befaamde strakke fades gecombineerd met een nette baardverzorging en precieze contouren.</p>
           <button class="knop" type="button" data-boek="haar-baard">Boek deze behandeling</button>
         </article>
         <article class="kaart">
+          <div class="beeld"><img src="/img/clinicruimte.jpg" alt="Behandelruimte van de clinic" loading="lazy"></div>
           <div class="meta"><span>60 min</span><span>€ 45</span></div>
           <h3>Clinic en verzorging</h3>
           <p>Gespecialiseerde verzorgende behandelingen voor huid en hoofdhuid in een rustige, brandschone clinic-omgeving.</p>
@@ -447,7 +490,7 @@ footer .legal .rechts{display:flex;gap:22px;align-items:center;flex-wrap:wrap}
   <section id="werkwijze">
     <div class="wrap werkwijze">
       <div class="stoel reveal">
-        <svg class="plafond" id="plafond-stoel" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true"></svg>
+        <img src="/img/fades.jpg" alt="Precisiewerk aan een fade" loading="lazy">
         <p class="citaat">Eén stoel. Volledige toewijding. Geen drukte, geen wachttijd.<small>De Ghaznny-werkwijze</small></p>
       </div>
       <div class="reveal">
@@ -460,9 +503,44 @@ footer .legal .rechts{display:flex;gap:22px;align-items:center;flex-wrap:wrap}
           <div class="punt"><span class="n">III</span><div><h3>Strak resultaat</h3><p>Of het nu gaat om een modern kapsel of een clinic-behandeling, we garanderen een strakke en stijlvolle afwerking.</p></div></div>
         </div>
         <div class="apart">
-          <div><b>Kapper afspraak</b><p>Neem plaats in onze exclusieve stoel. We nemen de tijd om jouw haar exact naar wens te stylen.</p></div>
-          <div><b>Clinic afspraak</b><p>Specialistische zorg in een serene, klinisch schone omgeving met hoogwaardige apparatuur.</p></div>
+          <div><img src="/img/kapperstoel.jpg" alt="Barberstoel" loading="lazy"><b>Kapper afspraak</b><p>Neem plaats in onze exclusieve stoel. We nemen de tijd om jouw haar exact naar wens te stylen.</p></div>
+          <div><img src="/img/clinic-wit.jpg" alt="Klinisch schone behandelruimte" loading="lazy"><b>Clinic afspraak</b><p>Specialistische zorg in een serene, klinisch schone omgeving met hoogwaardige apparatuur.</p></div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="over">
+    <div class="wrap over">
+      <div class="fotos reveal">
+        <img class="a" src="/img/salon.jpg" alt="Interieur van Ghaznny met zeshoekig lichtplafond" loading="lazy">
+        <img class="b" src="/img/over.jpg" alt="De clinic-ruimte van Ghaznny" loading="lazy">
+      </div>
+      <div class="reveal">
+        <span class="kicker">Over Ghaznny</span>
+        <h2 style="margin-top:20px">Opgericht vanuit passie voor <em>precisie</em></h2>
+        <p>Ghaznny is opgericht vanuit een passie voor schoonheid, precisie en ultieme verwennerij. Onze salon en clinic in Spijkenisse onderscheidt zich door een prachtige, eigentijdse inrichting en de allerhoogste normen op het gebied van hygiëne.</p>
+        <p>We nemen de tijd voor elke klant en zorgen ervoor dat je ontspannen en met een stralend resultaat onze salon verlaat.</p>
+        <div class="handtekening"><div><b>1-op-1</b><span>Eén stoel, alle aandacht</span></div><div><b>7 dagen</b><span>Per week geopend</span></div><div><b>3.500+</b><span>Volgers op Instagram</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="portfolio">
+    <div class="wrap">
+      <div class="sectiekop reveal">
+        <div><span class="kicker">Portfolio</span><h2>Vakmanschap en <em>oog voor detail</em></h2></div>
+        <p>Laat je inspireren door onze nieuwste creaties. Van moderne haartrends tot verfijnde clinic-resultaten: bekijk het niveau van Ghaznny.</p>
+      </div>
+      <div class="galerij reveal">
+        <figure class="hoog"><img src="/img/knippen.jpg" alt="Herenkapsel met strakke fade" loading="lazy"><figcaption>Fade &amp; slick back</figcaption></figure>
+        <figure class="breed"><img src="/img/salon.jpg" alt="De salon van Ghaznny" loading="lazy"><figcaption>Onze salon</figcaption></figure>
+        <figure class="hoog"><img src="/img/kleur.jpg" alt="Getextureerd kapsel met fade" loading="lazy"><figcaption>Textured crop</figcaption></figure>
+        <figure><img src="/img/baard.jpg" alt="Baard trimmen" loading="lazy"><figcaption>Baardverzorging</figcaption></figure>
+        <figure><img src="/img/over.jpg" alt="De clinic" loading="lazy"><figcaption>De clinic</figcaption></figure>
+        <figure class="breed"><img src="/img/salon-donker.jpg" alt="Sfeervolle barbershop" loading="lazy"><figcaption>Sfeer</figcaption></figure>
+        <figure><img src="/img/fade.jpg" alt="Skin fade" loading="lazy"><figcaption>Skin fade</figcaption></figure>
+        <figure><img src="/img/knipbeurt.jpg" alt="Knipbeurt" loading="lazy"><figcaption>Precisiewerk</figcaption></figure>
       </div>
     </div>
   </section>
@@ -505,6 +583,7 @@ footer .legal .rechts{display:flex;gap:22px;align-items:center;flex-wrap:wrap}
       <div class="reveal">
         <span class="kicker">Openingstijden</span>
         <h2 style="margin-top:20px">Dagelijks geopend <em>vanaf 10:00</em></h2>
+        <img class="urenfoto" src="/img/openingstijden.jpg" alt="Interieur van een moderne barbershop" loading="lazy">
         <div class="status" id="status"><i></i><span>…</span></div>
         <div class="uren" id="uren"></div>
         <p style="color:var(--tekst);margin-top:20px;font-size:.92rem">Elke donderdag extra lang open tot 21:00 uur. Behandelingen uitsluitend op afspraak.</p>
@@ -526,6 +605,7 @@ footer .legal .rechts{display:flex;gap:22px;align-items:center;flex-wrap:wrap}
   </section>
 
   <div class="cta">
+    <img src="/img/afspraak.jpg" alt="" loading="lazy">
     <div class="wrap reveal">
       <span class="kicker">Klaar voor een nieuwe look?</span>
       <h2>Kies voor kwaliteit en <em>ontspanning</em></h2>
@@ -542,7 +622,7 @@ footer .legal .rechts{display:flex;gap:22px;align-items:center;flex-wrap:wrap}
         <span class="wm" aria-label="Ghaznny"><i>G</i><i>H</i><i class="lam"><svg viewBox="0 0 66 100"><use href="#lambda"/></svg></i><i>Z</i><i>N</i><i>N</i><i>Y</i></span>
         <p>Jouw barbershop en clinic in Spijkenisse. Professionele haarstyling en hoogwaardige clinic-behandelingen in een stijlvolle, hygiënische salon.</p>
       </div>
-      <div><h4>Ontdek</h4><ul><li><a href="#behandelingen">Behandelingen</a></li><li><a href="#tarieven">Tarieven</a></li><li><a href="#werkwijze">Werkwijze</a></li><li><a href="#afspraak">Afspraak maken</a></li></ul></div>
+      <div><h4>Ontdek</h4><ul><li><a href="#behandelingen">Behandelingen</a></li><li><a href="#portfolio">Portfolio</a></li><li><a href="#tarieven">Tarieven</a></li><li><a href="#werkwijze">Werkwijze</a></li><li><a href="#afspraak">Afspraak maken</a></li></ul></div>
       <div><h4>Contact</h4><ul><li>Nieuwstraat 358</li><li>3201 EG Spijkenisse</li><li><a href="tel:+31684949819">+31 6 84949819</a></li><li><a href="mailto:ghaznny@gmail.com">ghaznny@gmail.com</a></li></ul></div>
       <div><h4>Volg ons</h4><ul><li><a href="https://instagram.com/ghaznny" target="_blank" rel="noopener">Instagram</a></li><li><a href="https://tiktok.com/@ghaznny" target="_blank" rel="noopener">TikTok</a></li><li><a href="https://youtube.com/@ghaznny" target="_blank" rel="noopener">YouTube</a></li><li><a href="https://facebook.com/ghaznny" target="_blank" rel="noopener">Facebook</a></li></ul></div>
     </div>
@@ -606,8 +686,6 @@ footer .legal .rechts{display:flex;gap:22px;align-items:center;flex-wrap:wrap}
     svg.appendChild(g);
   }
   plafond(document.getElementById('plafond-intro'),1200,800,62,true);
-  plafond(document.getElementById('plafond-hero'),1200,800,70,false);
-  plafond(document.getElementById('plafond-stoel'),600,400,46,false);
 
   /* ---------- Intro ---------- */
   var intro=document.getElementById('intro'), introTimer;
