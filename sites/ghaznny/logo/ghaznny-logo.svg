@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 100" role="img" aria-label="Ghaznny">
+  <title>Ghaznny</title>
+  <!-- Woordmerk GHΛZNNY: dunne, contrastrijke schreefletters met ruime spatiëring; de A zonder dwarsstreep -->
+  <g fill="currentColor">
+    <text x="0" y="78" font-family="'Bodoni Moda','Didot','Bodoni 72',serif" font-size="80" font-weight="400" letter-spacing="0">G</text>
+    <text x="104" y="78" font-family="'Bodoni Moda','Didot','Bodoni 72',serif" font-size="80" font-weight="400">H</text>
+    <!-- Λ: dunne linkerhaal, dikke rechterhaal, schreven aan de voet -->
+    <path d="M232 78 L256 22 L259 22 L235 78 Z"/>
+    <path d="M254 22 L262 22 L288 78 L277 78 Z"/>
+    <rect x="224" y="76.6" width="19" height="1.4"/>
+    <rect x="270" y="76.6" width="25" height="1.4"/>
+    <text x="330" y="78" font-family="'Bodoni Moda','Didot','Bodoni 72',serif" font-size="80" font-weight="400">Z</text>
+    <text x="428" y="78" font-family="'Bodoni Moda','Didot','Bodoni 72',serif" font-size="80" font-weight="400">N</text>
+    <text x="530" y="78" font-family="'Bodoni Moda','Didot','Bodoni 72',serif" font-size="80" font-weight="400">N</text>
+    <text x="632" y="78" font-family="'Bodoni Moda','Didot','Bodoni 72',serif" font-size="80" font-weight="400">Y</text>
+  </g>
+</svg>
