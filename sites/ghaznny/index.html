@@ -45,7 +45,10 @@ p{margin:0}
 .wm{display:inline-flex;align-items:baseline;font-family:var(--f-logo);font-weight:400;text-transform:uppercase;line-height:1;white-space:nowrap}
 .wm i{font-style:normal;display:inline-block;margin-right:.46em}
 .wm i:last-child{margin-right:0}
-.wm .lam svg{height:.705em;width:.66em;fill:currentColor;display:inline-block;vertical-align:baseline}
+.wm .lam svg{height:.705em;width:.66em;fill:currentColor;display:inline-block;vertical-align:baseline;flex:none;min-width:.66em}
+.wm i{flex:none}
+header.kop .merk{flex:none}
+nav.hoofd .knop{white-space:nowrap}
 
 /* ---------- Intro ---------- */
 #intro{position:fixed;inset:0;z-index:100;background:#070707;display:grid;place-items:center;overflow:hidden;transition:opacity .9s ease,visibility .9s}
@@ -88,7 +91,7 @@ nav.hoofd .knop:hover{color:var(--zwart)}
 .menuknop span,.menuknop span::before,.menuknop span::after{display:block;width:18px;height:1px;background:currentColor;position:relative;transition:transform .3s}
 .menuknop span::before,.menuknop span::after{content:"";position:absolute;left:0}
 .menuknop span::before{top:-6px}.menuknop span::after{top:6px}
-@media (max-width:900px){
+@media (max-width:1100px){
   .menuknop{display:grid}
   nav.hoofd{position:fixed;inset:0;background:rgba(10,10,10,.97);flex-direction:column;justify-content:center;gap:28px;opacity:0;visibility:hidden;transition:opacity .3s}
   nav.hoofd a{font-size:.95rem}
