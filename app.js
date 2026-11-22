@@ -494,7 +494,7 @@
   }
 
   /* ---------------- Materiaal ---------------- */
-  function matSoort(m) { var t = m.type || ''; return m.soort === 'tekst' ? 'tekst' : m.soort === 'link' ? 'link' : /^video\//.test(t) ? 'video' : /^image\//.test(t) ? 'beeld' : 'bestand'; }
+  function matSoort(m) { var t = m.type || ''; return m.soort === 'tekst' ? 'tekst' : /^video\//.test(t) ? 'video' : m.soort === 'link' ? 'link' : /^image\//.test(t) ? 'beeld' : 'bestand'; }
   function materiaalPagina() {
     var alles = [];
     zichtbaar().slice().sort(function (a, b) { return a.datum < b.datum ? 1 : a.datum > b.datum ? -1 : 0; }).forEach(function (t) {
@@ -871,7 +871,7 @@
         for (var k = 0; k < t.materiaal.length; k++) {
           var m = t.materiaal[k];
           if (m.tekst != null) mat.push({ id: uuid(), soort: 'tekst', naam: String(m.naam || 'Tekst'), tekst: String(m.tekst) });
-          else if (m.url) mat.push({ id: uuid(), soort: 'link', naam: String(m.naam || m.url), url: String(m.url) });
+          else if (m.url) mat.push(Object.assign({ id: uuid(), soort: 'link', naam: String(m.naam || m.url), url: String(m.url) }, /^(video|image)\/[\w.+-]+$/.test(String(m.type || '')) ? { type: String(m.type) } : {}));
           else if (m.bestand) {
             var f = st.bestanden[String(m.bestand).toLowerCase()];
             if (!f) { overgeslagen++; continue; }
