@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dagzet · Elke dag je marketingzet</title>
+<meta name="description" content="Dagzet zet je marketing om in kleine taken per dag, met de teksten, foto's en video's er meteen bij. Een product van Flowsmid.">
+<meta name="theme-color" content="#F7F5FD">
+<link rel="icon" href="/logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700;9..40,800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/app.css?v=1">
+</head>
+<body>
+
+<div id="laden" class="laden" aria-live="polite"><span class="spinner" aria-label="Laden"></span></div>
+
+<!-- ============ Introductie (niet ingelogd) ============ -->
+<div id="intro" hidden>
+  <header class="intro-kop">
+    <div class="wrap intro-kop-in">
+      <a href="/" class="merk" aria-label="Dagzet"><img src="/logo.svg" alt="" width="34" height="34"><span class="merk-naam" data-naam>Dagzet</span></a>
+      <nav class="intro-nav" aria-label="Introductie">
+        <a href="#zo-werkt-het">Zo werkt het</a>
+        <a href="#demo">Demo aanvragen</a>
+        <button type="button" class="btn btn-zacht btn-klein" data-open-login>Inloggen</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap hero-in">
+        <div class="hero-tekst">
+          <span class="eyebrow">Marketing voor ondernemers zonder marketingafdeling</span>
+          <h1><span class="grad">Elke dag</span> je marketingzet.</h1>
+          <p class="hero-sub">Dagzet maakt van je marketing kleine, duidelijke taken per dag. De tekst, foto of video die je nodig hebt staat er meteen bij. Jij opent de app, doet je taak en vinkt hem af.</p>
+          <div class="hero-knoppen">
+            <a href="#demo" class="btn btn-primair">Vraag een demo aan</a>
+            <button type="button" class="btn btn-zacht" data-open-login>Inloggen</button>
+          </div>
+          <ul class="hero-punten">
+            <li>Een plan voor weken vooruit, in één keer ingeladen</li>
+            <li>Per bedrijf of project overzichtelijk gescheiden</li>
+            <li>Taken verslepen in de kalender als het even niet uitkomt</li>
+          </ul>
+        </div>
+        <div class="hero-beeld" aria-hidden="true">
+          <div class="voorbeeld">
+            <div class="vb-kop"><span class="vb-dag">Dinsdag 24 november</span><span class="vb-voortgang"><i style="width:50%"></i></span></div>
+            <div class="vb-taak klaar">
+              <span class="vb-check"></span>
+              <div><span class="pill" style="--pc:#D4864A">Moms Thai Food</span><b>Post de foto van de Pad Thai op Instagram</b><span class="vb-meta">Instagram · 10 min · tekst en foto klaar</span></div>
+            </div>
+            <div class="vb-taak">
+              <span class="vb-check"></span>
+              <div><span class="pill" style="--pc:#6D5BD0">Flowsmid</span><b>Vraag twee klanten om een Google-review</b><span class="vb-meta">E-mail · 15 min · berichttekst klaar</span></div>
+            </div>
+            <div class="vb-materiaal"><span>caption-pad-thai.txt</span><span>pad-thai.jpg</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sectie" id="zo-werkt-het">
+      <div class="wrap">
+        <span class="eyebrow">Zo werkt het</span>
+        <h2>Van plan naar dagelijkse zet in drie stappen</h2>
+        <ol class="stappen">
+          <li><b>Je krijgt een plan</b><p>Samen met Flowsmid maak je een marketingplan voor de komende weken. Dat plan laad je in één keer in Dagzet en alle taken komen vanzelf in je kalender.</p></li>
+          <li><b>Elke dag je taken</b><p>Open Dagzet en je ziet wat je vandaag doet. Kort, concreet en met de stappen erbij. Geen marketingkennis nodig.</p></li>
+          <li><b>Materiaal staat klaar</b><p>Teksten, foto's en video's hangen aan de taak. Downloaden, plaatsen, afvinken. Lukt het vandaag niet? Sleep de taak naar een andere dag.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="sectie sectie-zacht">
+      <div class="wrap kenmerken">
+        <div><h3>Overzicht per project</h3><p>Heb je meer dan één bedrijf? Elk project krijgt een eigen kleur en je filtert met één klik.</p></div>
+        <div><h3>Kalender met slepen</h3><p>Zie je hele maand in één oogopslag en schuif taken naar een dag die beter past.</p></div>
+        <div><h3>Zelf taken toevoegen</h3><p>Ook een eigen idee? Maak een taak aan en zet er je eigen bestanden bij.</p></div>
+        <div><h3>Bijhouden wat je doet</h3><p>Afgevinkte taken blijven zichtbaar, zodat je ziet hoeveel je al gedaan hebt.</p></div>
+      </div>
+    </section>
+
+    <section class="sectie" id="demo">
+      <div class="wrap demo-in">
+        <div>
+          <span class="eyebrow">Demo aanvragen</span>
+          <h2>Zien hoe Dagzet werkt voor jouw bedrijf?</h2>
+          <p class="zacht">Laat je gegevens achter. We nemen binnen twee werkdagen contact op en laten Dagzet zien met een voorbeeldplan voor jouw bedrijf.</p>
+        </div>
+        <form class="kaart demo-form" id="demoForm" novalidate>
+          <div class="melding fout" id="demoFout" role="alert" hidden></div>
+          <div class="velden2">
+            <div class="veld"><label for="dNaam">Naam</label><input id="dNaam" autocomplete="name" required maxlength="80"></div>
+            <div class="veld"><label for="dBedrijf">Bedrijf</label><input id="dBedrijf" autocomplete="organization" maxlength="120"></div>
+            <div class="veld"><label for="dEmail">E-mailadres</label><input id="dEmail" type="email" autocomplete="email" required maxlength="120"></div>
+            <div class="veld"><label for="dTelefoon">Telefoon <span class="opt">(optioneel)</span></label><input id="dTelefoon" type="tel" autocomplete="tel" maxlength="30"></div>
+          </div>
+          <div class="veld"><label for="dBericht">Waar wil je hulp bij? <span class="opt">(optioneel)</span></label><textarea id="dBericht" rows="3" maxlength="2000" placeholder="Bijvoorbeeld: meer bestellingen via Instagram"></textarea></div>
+          <div class="hp" aria-hidden="true"><label for="dWebsite">Website</label><input id="dWebsite" tabindex="-1" autocomplete="off"></div>
+          <button class="btn btn-primair btn-breed" id="demoKnop" type="submit">Demo aanvragen</button>
+        </form>
+        <div class="kaart demo-bedankt" id="demoBedankt" hidden>
+          <h3>Bedankt, je aanvraag is binnen</h3>
+          <p class="zacht">We nemen binnen twee werkdagen contact met je op.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="voet">
+    <div class="wrap voet-in">
+      <span><span data-naam>Dagzet</span> is een product van</span>
+      <a href="https://flowsmid.nl" class="voet-flowsmid" rel="noopener"><img src="https://flowsmid.nl/assets/flowsmid-logo-horizontaal-kleur.svg" alt="Flowsmid" height="22"></a>
+    </div>
+  </footer>
+</div>
+
+<!-- ============ Inloggen ============ -->
+<div class="overlay" id="loginOverlay" hidden>
+  <form class="kaart login-kaart" id="loginForm" autocomplete="on" novalidate role="dialog" aria-modal="true" aria-labelledby="loginTitel">
+    <button type="button" class="sluit" data-sluit-login aria-label="Sluiten">×</button>
+    <img src="/logo.svg" alt="" width="44" height="44">
+    <h2 id="loginTitel">Inloggen bij <span data-naam>Dagzet</span></h2>
+    <p class="zacht">Gebruik je Flowsmid-account.</p>
+    <div class="melding fout" id="loginFout" role="alert" hidden></div>
+    <div class="veld"><label for="gebruiker">Gebruikersnaam</label><input id="gebruiker" name="username" autocomplete="username" autocapitalize="none" spellcheck="false" required></div>
+    <div class="veld"><label for="wachtwoord">Wachtwoord</label><input id="wachtwoord" name="password" type="password" autocomplete="current-password" required></div>
+    <button class="btn btn-primair btn-breed" id="loginKnop" type="submit">Inloggen</button>
+    <p class="klein">Wachtwoord vergeten? Herstel het via <a href="https://flowsmid.nl/mijn/">Mijn Flowsmid</a>.</p>
+  </form>
+</div>
+
+<!-- ============ App (ingelogd) ============ -->
+<div id="appScherm" hidden>
+  <header class="app-kop">
+    <div class="wrap app-kop-in">
+      <a href="#/vandaag" class="merk" aria-label="Dagzet, vandaag"><img src="/logo.svg" alt="" width="30" height="30"><span class="merk-naam" data-naam>Dagzet</span></a>
+      <nav class="app-nav" id="appNav" aria-label="Dagzet">
+        <a href="#/vandaag" data-route="vandaag">Vandaag</a>
+        <a href="#/kalender" data-route="kalender">Kalender</a>
+        <a href="#/materiaal" data-route="materiaal">Materiaal</a>
+        <a href="#/projecten" data-route="projecten">Projecten</a>
+        <a href="#/plan" data-route="plan">Plan inladen</a>
+      </nav>
+      <div class="app-acties">
+        <button type="button" class="btn btn-primair btn-klein" id="nieuweTaakKnop"><span aria-hidden="true">+</span> Taak</button>
+        <button type="button" class="avatar" id="avatarKnop" aria-haspopup="menu" aria-expanded="false" aria-label="Account"><span id="avatarLetter">?</span></button>
+        <div class="menu" id="menu" role="menu" hidden>
+          <div class="menu-kop"><b id="menuNaam"></b><span class="klein">Flowsmid-account</span></div>
+          <button type="button" role="menuitem" id="uitloggenKnop">Uitloggen</button>
+        </div>
+      </div>
+    </div>
+    <div class="wrap filterbalk" id="filterbalk" role="group" aria-label="Project"></div>
+  </header>
+  <main class="wrap app-inhoud" id="app"></main>
+</div>
+
+<div class="overlay" id="dialoog" hidden><div class="kaart dialoog" role="dialog" aria-modal="true" aria-labelledby="dialoogTitel" id="dialoogKaart"></div></div>
+<div class="toasts" id="toasts" aria-live="polite"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.58.0/dist/umd/supabase.js" integrity="sha384-KX6Y/AMIv9qA8TLCDul2JatZWeyrJVgj3Xu/0r30Nr05xO8md1+wHAgtdsRV9LoE" crossorigin="anonymous"></script>
+<script src="/config.js?v=1"></script>
+<script src="/app.js?v=1"></script>
+</body>
+</html>
