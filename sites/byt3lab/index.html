@@ -216,6 +216,7 @@
       <p class="m-prijs" id="mPrijs"></p>
       <p class="m-oms" id="mOms"></p>
       <div class="m-btns">
+        <button class="btn btn-neon" type="button" id="mMand" hidden>In mandje</button>
         <a class="btn btn-neon" id="mDm" href="https://ig.me/m/byt3labcustoms" target="_blank" rel="noopener">Bestel via DM</a>
         <button class="btn btn-ghost" type="button" id="mVraag">Vraag het aan</button>
       </div>
@@ -224,6 +225,49 @@
   </div>
 </div>
 
+<button class="mand-knop" id="mandKnop" type="button" hidden aria-label="Bekijk je mandje"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l-1.2 11.2a2 2 0 0 1-2 1.8H9.2a2 2 0 0 1-2-1.8z"/><path d="M9 7V6a3 3 0 0 1 6 0v1"/></svg><span>Mandje</span><b id="mandAantal">0</b></button>
+
+<div class="modal" id="mand" hidden>
+  <div class="modal-bg" data-mdicht></div>
+  <div class="modal-box mand-box" role="dialog" aria-modal="true" aria-labelledby="mandTitel">
+    <button class="modal-x" type="button" data-mdicht aria-label="Sluiten">✕</button>
+    <div class="mand-in">
+      <p class="label">Bestellen</p>
+      <h3 id="mandTitel">Je mandje</h3>
+      <div id="mandRegels"></div>
+      <div class="mand-tot"><span>Totaal</span><b id="mandTotaal">€ 0,00</b></div>
+      <form id="bestel" novalidate>
+        <div class="rij2">
+          <div class="veld"><label for="bNaam">Naam</label><input id="bNaam" autocomplete="name" required></div>
+          <div class="veld"><label for="bTel">Telefoon</label><input id="bTel" type="tel" inputmode="tel" autocomplete="tel" required></div>
+        </div>
+        <div class="veld"><label for="bMail">E-mail <small>(hier komt je Tikkie)</small></label><input id="bMail" type="email" autocomplete="email" required></div>
+        <div class="veld"><label>Hoe wil je het ontvangen?</label>
+          <div class="keuze">
+            <label><input type="radio" name="lev" value="Ophalen" checked><span>Ophalen in Rotterdam-Zuid</span></label>
+            <label><input type="radio" name="lev" value="Verzenden"><span>Verzenden</span></label>
+          </div>
+        </div>
+        <div id="bAdres" hidden>
+          <div class="veld"><label for="bStraat">Straat en huisnummer</label><input id="bStraat" autocomplete="street-address"></div>
+          <div class="rij2">
+            <div class="veld"><label for="bPc">Postcode</label><input id="bPc" autocomplete="postal-code"></div>
+            <div class="veld"><label for="bPlaats">Plaats</label><input id="bPlaats" autocomplete="address-level2"></div>
+          </div>
+          <p class="m-klein" style="margin:-4px 0 14px">Verzendkosten worden bij je Tikkie opgeteld.</p>
+        </div>
+        <div class="veld"><label for="bOpm">Opmerking <small>(optioneel)</small></label><input id="bOpm" placeholder="Bijv. kleur of tekst"></div>
+        <input class="lok" id="bLok" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <div class="tikkie-uitleg"><b>Betalen met Tikkie</b>Na je bestelling krijg je van Byt3lab een Tikkie per mail. Betaal je, dan gaan we voor je aan de slag.</div>
+        <p class="fout" id="bFout" role="alert" hidden></p>
+        <button class="btn btn-neon btn-vol" type="submit" id="bKnop">Bestelling plaatsen</button>
+      </form>
+      <div class="gelukt" id="bGelukt" hidden><b id="bGeluktTitel">Bestelling binnen! 🚀</b><span id="bGeluktTekst"></span></div>
+    </div>
+  </div>
+</div>
+
 <script src="/app.js"></script>
+<script src="/mandje.js"></script>
 </body>
 </html>

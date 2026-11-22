@@ -206,12 +206,65 @@
     var r = await sb.from('site_aanvragen').select('id,nummer,naam,telefoon,email,soort_werk,omschrijving,status,aangemaakt_op').eq('slug', SLUG).order('aangemaakt_op', { ascending: false }).limit(200);
     if (!r.error) { aanvragen = r.data || []; tekenAanvragen(); }
   }
+  /* ---------- Bestellingen (betalen met Tikkie) ---------- */
+  var bestellingen = [];
+  function tekenBestellingen() {
+    var n = bestellingen.filter(function (b) { return b.status === 'Nieuw'; }).length;
+    $('nBest').textContent = n; $('nBest').hidden = !n;
+    var doel = $('bestLijst');
+    if (!bestellingen.length) { doel.replaceChildren(el('div', { class: 'leeg' }, [el('b', { text: 'Nog geen bestellingen' }), 'Bestellingen uit je webshop komen hier binnen.'])); return; }
+    doel.replaceChildren.apply(doel, bestellingen.map(function (b) {
+      var acties = [], invoer;
+      if (b.status === 'Nieuw') {
+        invoer = el('input', { type: 'url', inputmode: 'url', placeholder: 'Plak hier je Tikkie-link', 'aria-label': 'Tikkie-link' });
+        acties.push(el('div', { class: 'tikkie' }, [invoer, el('button', { class: 'btn btn-p btn-k', type: 'button', onclick: function () { stuurTikkie(b, invoer.value, this); } }, ['Stuur Tikkie'])]));
+      }
+      if (b.betaal_url) acties.push(el('span', { class: 'tikkie-link', text: 'Tikkie: ' + b.betaal_url }));
+      var knoppen = [];
+      if (b.status === 'Wacht op betaling') {
+        knoppen.push(el('button', { class: 'btn btn-p btn-k', type: 'button', onclick: function () { zetBest(b, { status: 'Betaald', betaald_op: new Date().toISOString() }, 'Betaald'); } }, ['Betaald']));
+        knoppen.push(el('a', { class: 'btn btn-g btn-k', href: wa(b.telefoon) + '?text=' + encodeURIComponent('Hoi ' + b.naam + ', hier is je Tikkie voor bestelling #' + b.nummer + ' bij Byt3lab Customs: ' + b.betaal_url), target: '_blank', rel: 'noopener' }, ['Tikkie via WhatsApp']));
+      }
+      if (b.status === 'Betaald') knoppen.push(el('button', { class: 'btn btn-p btn-k', type: 'button', onclick: function () { zetBest(b, { status: b.levering === 'Verzenden' ? 'Verzonden' : 'Afgerond' }, b.levering === 'Verzenden' ? 'Verzonden' : 'Opgehaald'); } }, [b.levering === 'Verzenden' ? 'Verzonden' : 'Opgehaald']));
+      if (b.status === 'Verzonden') knoppen.push(el('button', { class: 'btn btn-p btn-k', type: 'button', onclick: function () { zetBest(b, { status: 'Afgerond' }, 'Afgerond'); } }, ['Afronden']));
+      knoppen.push(el('a', { class: 'btn btn-g btn-k', href: wa(b.telefoon), target: '_blank', rel: 'noopener' }, ['WhatsApp']));
+      if (['Nieuw', 'Wacht op betaling'].indexOf(b.status) >= 0) knoppen.push(el('button', { class: 'btn btn-r btn-k', type: 'button', onclick: function () { if (window.confirm('Bestelling #' + b.nummer + ' annuleren?')) zetBest(b, { status: 'Geannuleerd' }, 'Geannuleerd'); } }, ['Annuleren']));
+      return el('article', { class: 'kaart aanv best' }, [
+        el('div', { class: 'bk' }, [el('div', null, [el('b', { text: '#' + b.nummer + ' · ' + b.naam }), el('small', { text: new Date(b.aangemaakt_op).toLocaleString('nl-NL', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) })]), el('span', { class: 'st ' + b.status.replace(/\s+/g, '-'), text: b.status })]),
+        el('ul', { class: 'regels' }, (b.regels || []).map(function (r) { return el('li', null, [el('b', { text: r.aantal + '×' }), r.naam]); })),
+        el('div', { class: 'tot' }, [el('span', { text: 'Totaal' }), el('span', { text: eur(b.totaal) })]),
+        el('p', { class: 'info', text: (b.levering === 'Verzenden' ? 'Verzenden naar ' + [b.adres, b.postcode, b.plaats].filter(Boolean).join(', ') : 'Ophalen') + ' · ' + b.email + (b.opmerking ? ' · ' + b.opmerking : '') }),
+        acties.length ? el('div', null, acties) : null,
+        el('div', { class: 'acties', style: 'margin-top:12px' }, knoppen)
+      ]);
+    }));
+  }
+  async function laadBestellingen() {
+    var r = await sb.from('shop_bestellingen').select('*').eq('slug', SLUG).order('aangemaakt_op', { ascending: false }).limit(200);
+    if (!r.error) { bestellingen = r.data || []; tekenBestellingen(); }
+  }
+  async function stuurTikkie(b, url, knop) {
+    url = String(url || '').trim();
+    if (!/^https:\/\/\S+$/.test(url)) return toast('Plak de volledige Tikkie-link (begint met https://).', true);
+    knop.disabled = true;
+    var r = await sb.rpc('shop_tikkie_versturen', { p_id: b.id, p_url: url });
+    knop.disabled = false;
+    if (r.error) return toast(r.error.message, true);
+    b.betaal_url = url; b.status = 'Wacht op betaling'; tekenBestellingen(); toast('Tikkie verstuurd naar ' + b.email);
+  }
+  async function zetBest(b, velden, tekst) {
+    var r = await sb.from('shop_bestellingen').update(velden).eq('id', b.id);
+    if (r.error) return toast('Opslaan lukte niet.', true);
+    Object.assign(b, velden); tekenBestellingen(); toast('#' + b.nummer + ': ' + tekst);
+  }
+
   document.querySelectorAll('.tab').forEach(function (t) {
     t.addEventListener('click', function () {
       var w = t.getAttribute('data-tab');
       document.querySelectorAll('.tab').forEach(function (x) { x.classList.toggle('aan', x === t); });
-      $('tabProducten').hidden = w !== 'producten'; $('tabAanvragen').hidden = w !== 'aanvragen';
+      $('tabProducten').hidden = w !== 'producten'; $('tabAanvragen').hidden = w !== 'aanvragen'; $('tabBestellingen').hidden = w !== 'bestellingen';
       if (w === 'aanvragen') laadAanvragen();
+      if (w === 'bestellingen') laadBestellingen();
     });
   });
 
@@ -219,7 +272,7 @@
   async function start() {
     var r = await sb.from('site_inhoud').select('klant_id').eq('slug', SLUG).maybeSingle();
     if (r.error || !r.data) { await sb.auth.signOut(); toon(false); $('lfout').textContent = 'Dit account hoort niet bij deze website.'; $('lfout').hidden = false; return; }
-    klantId = r.data.klant_id; toon(true); laad(); laadAanvragen();
+    klantId = r.data.klant_id; toon(true); laad(); laadAanvragen(); laadBestellingen();
   }
   $('lform').addEventListener('submit', async function (e) {
     e.preventDefault();
@@ -233,6 +286,6 @@
     $('lp').value = ''; start();
   });
   $('toon').addEventListener('click', function () { var i = $('lp'), aan = i.type === 'password'; i.type = aan ? 'text' : 'password'; this.textContent = aan ? 'Verberg' : 'Toon'; });
-  $('uit').addEventListener('click', async function () { await sb.auth.signOut(); lijst = []; aanvragen = []; klantId = null; toon(false); });
+  $('uit').addEventListener('click', async function () { await sb.auth.signOut(); lijst = []; aanvragen = []; bestellingen = []; klantId = null; toon(false); });
   sb.auth.getSession().then(function (r) { if (r.data.session) start(); else toon(false); });
 })();

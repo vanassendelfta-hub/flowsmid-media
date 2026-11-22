@@ -114,7 +114,7 @@
         headers: { apikey: SB.key, Authorization: 'Bearer ' + SB.key, 'Accept-Profile': 'flowsmid' }
       });
       if (!r.ok) throw new Error(r.status);
-      producten = await r.json();
+      producten = await r.json(); window.__producten = producten;
       chips(); teken();
     } catch (e) {
       $('producten').replaceChildren(el('div', { class: 'leeg' }, ['De shop kon even niet laden. ', el('a', { href: IG_DM, target: '_blank', rel: 'noopener', text: 'Stuur ons een DM' }), ' en we helpen je direct.']));
@@ -143,12 +143,17 @@
     $('mPrijs').replaceChildren(prijsTekst(p), p.status !== 'Te koop' ? el('small', { text: p.status }) : null);
     $('mOms').textContent = p.omschrijving || '';
     $('mDm').textContent = p.status === 'Uitverkocht' ? 'Vraag naar nieuwe voorraad' : p.status === 'Binnenkort' ? 'Reserveer via DM' : 'Bestel via DM';
+    var bestelbaar = window.Mandje && window.Mandje.bestelbaar(p);
+    $('mMand').hidden = !bestelbaar;
+    $('mDm').className = 'btn ' + (bestelbaar ? 'btn-ghost' : 'btn-neon');
+    if (bestelbaar) $('mDm').textContent = 'Vraag via DM';
     modal.hidden = false; document.body.style.overflow = 'hidden';
     modal.querySelector('.modal-x').focus();
   }
   function sluitModal() { modal.hidden = true; document.body.style.overflow = ''; if (vorigeFocus) vorigeFocus.focus(); }
   modal.addEventListener('click', function (e) { if (e.target.closest('[data-sluit]')) sluitModal(); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !modal.hidden) sluitModal(); });
+  $('mMand').addEventListener('click', function () { var p = huidig; sluitModal(); window.Mandje.voegToe(p); });
   $('mVraag').addEventListener('click', function () {
     var p = huidig; sluitModal();
     var soort = /shirt/i.test(p.categorie) ? 'Shirts' : /3d/i.test(p.categorie) ? '3D Print' : /sticker/i.test(p.categorie) ? 'Stickers' : 'Anders';
