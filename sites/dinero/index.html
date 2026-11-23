@@ -118,6 +118,9 @@ section{padding:96px 0}
 .kapper{padding:26px;border-radius:var(--r);background:linear-gradient(160deg,#1e1e1e,#141414);border:1px solid var(--lijn);text-align:center}
 .kapper .mono{width:92px;height:92px;margin:0 auto 16px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 30% 30%,#3a3a3a,#161616);border:2px solid #3a3a3a;
   font:400 54px/1 'Monsieur La Doulaise',cursive;color:#fff;padding-top:10px}
+.kapper .portret{width:132px;height:132px;margin:0 auto 16px;border-radius:50%;overflow:hidden;border:2px solid #3a3a3a;background:#161616}
+.kapper .portret img{width:100%;height:100%;object-fit:cover;display:block}
+.keuze .mini{width:34px;height:34px;border-radius:50%;object-fit:cover;float:left;margin:0 10px 0 0;border:1px solid #3a3a3a}
 .kapper h3{font-size:26px}
 .kapper p{color:var(--zacht);font-size:14px;margin:6px 0 16px}
 .kapper .knop{height:40px;font-size:14px;padding:0 18px}
@@ -404,6 +407,7 @@ footer a:hover{color:#fff}
   function iso(d){return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());}
   function euro(n){n=Number(n)||0;return '€ '+(Math.round(n)===n?n:n.toFixed(2).replace('.',','));}
   function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+  function fotoOk(u){return typeof u==='string'&&(u.indexOf('https://uywydquzvdbpfjjrwsbt.supabase.co/storage/v1/object/public/flowsmid-sites/')===0||/^\/img\/[\w.-]+$/.test(u));}
   function rpc(naam,body){
     return fetch(SUPA+'/rest/v1/rpc/'+naam,{method:'POST',headers:{apikey:KEY,Authorization:'Bearer '+KEY,'Content-Type':'application/json','Content-Profile':'flowsmid','Accept-Profile':'flowsmid'},body:JSON.stringify(body)})
       .then(function(r){return r.json().then(function(j){if(!r.ok) throw new Error(j&&j.message||'Er ging iets mis'); return j;});});
@@ -437,7 +441,7 @@ footer a:hover{color:#fff}
   }
   function tekenTeam(){
     $('teamlijst').innerHTML=Z.kappers.map(function(k){
-      return '<article class="kapper zichtbaar in"><div class="mono">'+esc(k.naam.charAt(0))+'</div><h3>'+esc(k.naam)+'</h3><p>'+esc(k.bio||'')+'</p><button class="knop lijn" data-kapper="'+k.id+'">Boek bij '+esc(k.naam)+'</button></article>';
+      return '<article class="kapper zichtbaar in">'+(fotoOk(k.foto)?'<div class="portret"><img src="'+esc(k.foto)+'" alt="'+esc(k.naam)+'" loading="lazy"></div>':'<div class="mono">'+esc(k.naam.charAt(0))+'</div>')+'<h3>'+esc(k.naam)+'</h3><p>'+esc(k.bio||'')+'</p><button class="knop lijn" data-kapper="'+k.id+'">Boek bij '+esc(k.naam)+'</button></article>';
     }).join('');
   }
   function tekenTijdenlijst(){
@@ -452,7 +456,7 @@ footer a:hover{color:#fff}
   }
   function tekenStap2(){
     var lijst=[{id:'',naam:'Geen voorkeur',bio:'Eerste vrije kapper'}].concat(Z.kappers);
-    knoppen($('k-kapper'),lijst,B.kapper,function(k){return '<button type="button" class="keuze" data-id="'+k.id+'" aria-pressed="'+(B.kapper===k.id)+'"><b>'+esc(k.naam)+'</b><small>'+esc(k.bio||'')+'</small></button>';});
+    knoppen($('k-kapper'),lijst,B.kapper,function(k){return '<button type="button" class="keuze" data-id="'+k.id+'" aria-pressed="'+(B.kapper===k.id)+'">'+(fotoOk(k.foto)?'<img class="mini" src="'+esc(k.foto)+'" alt="">':'')+'<b>'+esc(k.naam)+'</b><small>'+esc(k.bio||'')+'</small></button>';});
   }
   function tekenDagen(){
     var html='', nu=new Date(); nu.setHours(0,0,0,0);
