@@ -21,7 +21,8 @@
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-body{background:var(--zwart);color:var(--tekst);font:16px/1.6 Inter,system-ui,sans-serif;overflow-x:hidden}
+html{overflow-x:clip;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{background:var(--zwart);color:var(--tekst);font:16px/1.6 Inter,system-ui,sans-serif;overflow-x:hidden;overflow-x:clip;max-width:100%}
 img{display:block;max-width:100%}
 a{color:inherit}
 button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
@@ -75,7 +76,7 @@ header .knop{height:42px;padding:0 20px;font-size:14px}
 .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,13,13,.25) 0%,rgba(13,13,13,.45) 50%,var(--zwart) 100%)}
 @media (max-width:760px){.hero .bg{height:100%;background:url(/img/fade-baard.jpg) center 20%/cover no-repeat;filter:grayscale(1) brightness(.45);-webkit-mask-image:none;mask-image:none}}
 .hero .wrap{position:relative;z-index:2;width:100%}
-.hero .logo-hero{width:min(520px,86vw);margin:0 0 18px -10px;filter:drop-shadow(0 20px 40px rgba(0,0,0,.55))}
+.hero .logo-hero{width:min(520px,100%);margin:0 0 18px;filter:drop-shadow(0 20px 40px rgba(0,0,0,.55))}
 .hero h1{font-size:clamp(40px,7vw,84px);max-width:13ch}
 .hero h1 .script{font-size:1.15em;display:inline-block;transform:translateY(.08em);color:#fff;margin-left:-.05em}
 .hero .tags{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0 30px}
@@ -162,7 +163,7 @@ section{padding:96px 0}
 .veld label{font-size:13px;color:var(--zacht)}
 .veld input,.veld textarea{width:100%;padding:13px 14px;border-radius:10px;border:1.5px solid #333;background:#111;color:#fff;font:inherit;outline:none}
 .veld input:focus,.veld textarea:focus{border-color:#bbb}
-.lok{position:absolute;left:-9999px}
+.lok{position:absolute;left:0;top:0;width:1px;height:1px;opacity:0;pointer-events:none;overflow:hidden}
 .keuze-regel{margin:-6px 0 16px;padding:12px 14px;border-radius:10px;background:#141414;border:1px solid #2c2c2c;color:#ddd;font-size:15px}
 .keuze-regel:empty{display:none}
 .melding-fout{color:var(--fout);font-size:14px;min-height:20px;margin-top:10px}
