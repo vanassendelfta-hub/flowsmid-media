@@ -148,12 +148,16 @@ section{position:relative;padding:96px 0}
 .waarde p{color:#bfb6b1;font-size:15px}
 @media (max-width:820px){.waarden{grid-template-columns:1fr}}
 
-/* Oprichter */
-.oprichter{display:grid;grid-template-columns:340px 1fr;gap:44px;align-items:center;margin-top:64px}
-.oprichter .kader{padding:3px}
-.oprichter .kader img{border-radius:4px;width:100%}
-.oprichter h3{font-family:Rye,serif;font-weight:400;font-size:clamp(30px,4vw,44px);line-height:1.05;margin:10px 0 14px}
-@media (max-width:820px){.oprichter{grid-template-columns:1fr;gap:26px}.oprichter .kader{max-width:340px}}
+/* First 4 */
+.first4{display:grid;grid-template-columns:360px 1fr;gap:48px;align-items:center;margin-top:64px}
+.f4-embleem{width:100%;height:auto;border-radius:50%;filter:drop-shadow(0 0 34px rgba(255,80,20,.28))}
+.first4 h3{font-family:Rye,serif;font-weight:400;font-size:clamp(30px,4vw,44px);line-height:1.05;margin:10px 0 10px}
+.f4-lijst{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:22px}
+.f4-lijst .binnen{padding:16px 18px;display:flex;flex-direction:column;gap:6px}
+.f4-lijst b{font-family:Rye,serif;font-weight:400;font-size:24px;line-height:1;color:#fff}
+.f4-lijst span{font:600 12px/1.2 Oswald,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--oranje)}
+@media (max-width:820px){.first4{grid-template-columns:1fr;gap:26px}.first4>div:first-child{max-width:300px;margin:0 auto}}
+@media (max-width:420px){.f4-lijst{grid-template-columns:1fr}}
 
 /* Mededeling */
 .mededeling{position:relative;z-index:3;margin:-40px auto 0;max-width:var(--max);padding:0 20px}
@@ -287,12 +291,18 @@ footer .rye{color:#cfc7c3;font-size:16px}
         <div class="kader waarde op"><div class="binnen"><h3 class="vuurtekst">Respect</h3><p>Respect verdien je. Voor de kleuren, voor elkaar en voor de mensen om ons heen.</p></div></div>
         <div class="kader waarde op"><div class="binnen"><h3 class="vuurtekst">Broederschap</h3><p>Samen op de weg, samen aan tafel. Een familie die je zelf kiest.</p></div></div>
       </div>
-      <div class="oprichter">
-        <div class="kader op"><img src="/img/oprichter.webp" alt="Mar, oprichter van Deathwish Brotherhood" loading="lazy" width="880" height="900"></div>
+      <div class="first4">
+        <div class="op"><img class="f4-embleem" src="/img/first4.webp" alt="Embleem van de First 4 Outlaws" loading="lazy" width="800" height="800"></div>
         <div class="op">
-          <span class="label">De oprichter</span>
-          <h3><span class="vuurtekst">Mar</span></h3>
-          <p class="lead">Mar heeft Deathwish Brotherhood opgericht. Met hem begon het: een handvol broeders, een idee en de kleuren die we nu met trots dragen. Hij staat nog steeds vooraan.</p>
+          <span class="label">Waar het begon</span>
+          <h3><span class="vuurtekst">De First 4</span></h3>
+          <p class="lead">Vier broeders die het vuur aanstaken.</p>
+          <ul class="f4-lijst">
+            <li class="kader"><div class="binnen"><b>Marko</b><span>President</span></div></li>
+            <li class="kader"><div class="binnen"><b>Henk</b><span>Sergeant at Arms</span></div></li>
+            <li class="kader"><div class="binnen"><b>Marlon</b><span>Captain</span></div></li>
+            <li class="kader"><div class="binnen"><b>Ray</b><span>Nomad</span></div></li>
+          </ul>
         </div>
       </div>
     </div>
