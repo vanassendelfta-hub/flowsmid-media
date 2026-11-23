@@ -11,7 +11,7 @@ Homepagina met intro voor Deathwish Brotherhood Netherlands (prospect in Flowsmi
 - `portaal.html` is de ledenomgeving en wordt bij de build gezet op `/leden` (members: prikbord met reacties, events, ledenlijst, eigen wachtwoord) en `/beheer` (eigenaar met Flowsmid-account: members aanmaken zonder e-mail, rechten, toegang, nieuw wachtwoord, events openbaar/besloten, bericht op de homepage).
 - Data in Supabase, schema `flowsmid`, tabellen `mc_*` (mc_clubs, mc_leden, mc_events, mc_posts, mc_reacties, mc_mededelingen), RLS via `mc_rol`/`mc_recht`. Homepage leest `mc_publiek` (openbare events en zichtbare berichten).
 - Member-accounts via edge function `mc-account` (inlog `<naam>@deathwish423.lid.flowsmid.nl`, het member typt alleen `<naam>`).
-- `img/first4.webp`: embleem van de First 4 Outlaws (sectie "De First 4": Marko President, Henk Sergeant at Arms, Marlon Captain, Ray Nomad). De eerdere oprichtersfoto is op verzoek verwijderd.
+- `img/first4.webp`: embleem van de First 4 Outlaws (sectie "De First 4", in deze volgorde: Marlon Captain, Marko President, Ray Nomad, Henk Sergeant at Arms). De eerdere oprichtersfoto is op verzoek verwijderd.
 - Teksten zijn voorbeeldteksten; contactgegevens en de betekenis van BG en DFFD nog navragen.
 
 ## Rangen
