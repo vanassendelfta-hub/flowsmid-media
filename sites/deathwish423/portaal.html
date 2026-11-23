@@ -48,6 +48,15 @@ textarea{resize:vertical;min-height:90px}
 .vink{display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none;margin:6px 0;font-size:14px}
 .vink input{width:18px;height:18px;accent-color:var(--oranje)}
 .hint{color:var(--zacht);font-size:13px}
+select{background:#0b0808;border:1px solid #3a2e2b;border-radius:4px;padding:9px 10px;color:#fff;outline:none;max-width:100%}
+select:focus{border-color:var(--oranje)}
+label.veld select{width:100%;padding:11px 12px}
+.rang{display:inline-block;font:600 10.5px/1 Oswald,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#ffad7a;padding:4px 7px;border-radius:3px;box-shadow:0 0 0 1px rgba(255,106,19,.4) inset;background:rgba(255,106,19,.1);vertical-align:middle;white-space:nowrap}
+.rangrij{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid #241b19}
+.rangrij input{flex:1;min-width:0;padding:8px 10px}
+.rangrij button{color:var(--zacht);font-size:13px;padding:6px}
+.rangrij button:hover{color:#fff}
+.rangrij button:disabled{opacity:.3;cursor:default}
 .fouttekst{color:var(--fout);font-size:14px;min-height:20px;margin-top:6px}
 
 /* Kader zoals patches */
@@ -188,7 +197,7 @@ details.verleden summary{cursor:pointer;color:var(--zacht);margin:18px 0 12px;fo
   var DAGEN=['zondag','maandag','dinsdag','woensdag','donderdag','vrijdag','zaterdag'];
   var $=function(id){return document.getElementById(id);};
   var sessie=null, club=null, rol=null, ik=null, tab=null;
-  var D={posts:[],reacties:[],events:[],leden:[],mededelingen:[]};
+  var D={posts:[],reacties:[],events:[],leden:[],mededelingen:[],rangen:[]};
 
   /* ---------- hulp ---------- */
   function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
@@ -293,10 +302,20 @@ details.verleden summary{cursor:pointer;color:var(--zacht);margin:18px 0 12px;fo
   }
 
   /* ---------- Prikbord ---------- */
+  /* ---------- Rangen ---------- */
+  function laadRangen(){return api('mc_rangen?select=*&klant_id=eq.'+club.klant_id+'&order=volgorde,naam').then(function(r){D.rangen=r;});}
+  function rangVan(id){for(var i=0;i<D.rangen.length;i++) if(D.rangen[i].id===id) return D.rangen[i]; return null;}
+  function rangVolgorde(l){var r=rangVan(l.rang_id);return r?r.volgorde:1e9;}
+  function rangVanGebruiker(uid){for(var i=0;i<D.leden.length;i++) if(D.leden[i].user_id===uid){var r=rangVan(D.leden[i].rang_id);return r?r.naam:'';} return '';}
+  function rangLabel(n){return n?' <span class="rang">'+esc(n)+'</span>':'';}
+  function sorteerLeden(l){return l.slice().sort(function(a,b){return rangVolgorde(a)-rangVolgorde(b)||String(a.naam).localeCompare(b.naam,'nl');});}
+  function rangOpties(gekozen){return '<option value="">Geen rang</option>'+D.rangen.map(function(r){return '<option value="'+r.id+'"'+(r.id===gekozen?' selected':'')+'>'+esc(r.naam)+'</option>';}).join('');}
+
   function laadPrikbord(){
     var k='klant_id=eq.'+club.klant_id;
-    return Promise.all([api('mc_posts?select=*&'+k+'&order=aangemaakt_op.desc&limit=60'),api('mc_reacties?select=*&'+k+'&order=aangemaakt_op&limit=1000')])
-      .then(function(r){D.posts=r[0];D.reacties=r[1];toonPrikbord();});
+    return Promise.all([api('mc_posts?select=*&'+k+'&order=aangemaakt_op.desc&limit=60'),api('mc_reacties?select=*&'+k+'&order=aangemaakt_op&limit=1000'),
+        api('mc_leden?select=id,user_id,rang_id&'+k),laadRangen()])
+      .then(function(r){D.posts=r[0];D.reacties=r[1];D.leden=r[2];toonPrikbord();});
   }
   function magBeheren(rij){return eigenaar()||rij.auteur_id===mijnId();}
   function mijnId(){try{return JSON.parse(atob(sessie.token.split('.')[1].replace(/-/g,'+').replace(/_/g,'/'))).sub;}catch(e){return null;}}
@@ -307,12 +326,12 @@ details.verleden summary{cursor:pointer;color:var(--zacht);margin:18px 0 12px;fo
     if(!D.posts.length) h+='<div class="leeg">Nog geen berichten. '+(recht('mag_posten')?'Plaats het eerste.':'')+'</div>';
     D.posts.forEach(function(p){
       var re=D.reacties.filter(function(r){return r.post_id===p.id;});
-      h+='<article class="kaart" data-post="'+p.id+'"><div class="meta"><div class="avatar">'+letter(p.auteur_naam)+'</div><div><div class="naam">'+esc(p.auteur_naam)+'</div><div class="tijd">'+esc(geleden(p.aangemaakt_op))+(p.bewerkt_op?' · bewerkt':'')+'</div></div>'+
+      h+='<article class="kaart" data-post="'+p.id+'"><div class="meta"><div class="avatar">'+letter(p.auteur_naam)+'</div><div><div class="naam">'+esc(p.auteur_naam)+rangLabel(rangVanGebruiker(p.auteur_id))+'</div><div class="tijd">'+esc(geleden(p.aangemaakt_op))+(p.bewerkt_op?' · bewerkt':'')+'</div></div>'+
         (magBeheren(p)?'<div class="acties">'+(p.auteur_id===mijnId()?'<button type="button" data-bewerk="'+p.id+'">Bewerken</button>':'')+'<button type="button" data-wegpost="'+p.id+'">Verwijderen</button></div>':'')+
         '</div><div class="tekst">'+esc(p.tekst)+'</div>';
       if(re.length||recht('mag_reageren')){
         h+='<div class="reacties">'+re.map(function(r){
-          return '<div class="reactie"><div class="avatar">'+letter(r.auteur_naam)+'</div><div class="bol"><div class="kop"><b>'+esc(r.auteur_naam)+'</b><span class="tijd">'+esc(geleden(r.aangemaakt_op))+'</span>'+
+          return '<div class="reactie"><div class="avatar">'+letter(r.auteur_naam)+'</div><div class="bol"><div class="kop"><b>'+esc(r.auteur_naam)+'</b>'+rangLabel(rangVanGebruiker(r.auteur_id))+'<span class="tijd">'+esc(geleden(r.aangemaakt_op))+'</span>'+
             (magBeheren(r)?'<span class="acties"><button type="button" data-wegreactie="'+r.id+'">Verwijderen</button></span>':'')+'</div><div class="tekst">'+esc(r.tekst)+'</div></div></div>';
         }).join('');
         if(recht('mag_reageren')) h+='<form class="reageer" data-reageer="'+p.id+'"><input type="text" maxlength="2000" placeholder="Reageer…" required><button class="knop klein" type="submit">Stuur</button></form>';
@@ -344,6 +363,7 @@ details.verleden summary{cursor:pointer;color:var(--zacht);margin:18px 0 12px;fo
     if(b.dataset.lidweg) lidVerwijderen(b.dataset.lidweg);
     if(b.dataset.lidbewerk) lidForm(D.leden.filter(function(x){return x.id===b.dataset.lidbewerk;})[0]);
     if(b.id==='nieuwlid') lidForm(null);
+    if(b.id==='rangenbeheer') rangenForm();
     if(b.dataset.med) medForm(D.mededelingen.filter(function(x){return x.id===b.dataset.med;})[0]);
     if(b.dataset.medweg) medVerwijderen(b.dataset.medweg);
     if(b.id==='nieuwmed') medForm(null);
@@ -405,21 +425,22 @@ details.verleden summary{cursor:pointer;color:var(--zacht);margin:18px 0 12px;fo
 
   /* ---------- Members ---------- */
   function laadLeden(){
-    return api('mc_leden?select=*&klant_id=eq.'+club.klant_id+'&order=naam').then(function(r){D.leden=r;BEHEER?toonLedenBeheer():toonLeden();});
+    return Promise.all([api('mc_leden?select=*&klant_id=eq.'+club.klant_id+'&order=naam'),laadRangen()]).then(function(r){D.leden=sorteerLeden(r[0]);BEHEER?toonLedenBeheer():toonLeden();});
   }
   function toonLeden(){
     var l=D.leden.filter(function(x){return x.actief;});
     var h='<div class="kopje"><div><span class="label">Broeders</span><h2 class="vuurtekst">Members</h2></div><span class="hint">'+l.length+' members</span></div>';
-    h+=l.length?'<div class="ledenlijst">'+l.map(function(x){return '<div class="kaart"><div class="avatar">'+letter(x.naam)+'</div><div><div class="naam">'+esc(x.naam)+'</div>'+(x.functie?'<div class="tijd">'+esc(x.functie)+'</div>':'')+'</div></div>';}).join('')+'</div>':'<div class="leeg">Nog geen members.</div>';
+    h+=l.length?'<div class="ledenlijst">'+l.map(function(x){return '<div class="kaart"><div class="avatar">'+letter(x.naam)+'</div><div><div class="naam">'+esc(x.naam)+'</div>'+(rangVan(x.rang_id)?'<div style="margin-top:4px">'+rangLabel(rangVan(x.rang_id).naam)+'</div>':'')+'</div></div>';}).join('')+'</div>':'<div class="leeg">Nog geen members.</div>';
     $('inhoud').innerHTML=h;
   }
   var RECHTEN=[['mag_posten','Berichten plaatsen'],['mag_reageren','Reageren'],['ziet_besloten','Besloten events zien'],['mag_events','Events beheren']];
   function toonLedenBeheer(){
-    var h='<div class="kopje"><div><span class="label">Beheer</span><h2 class="vuurtekst">Members</h2></div><button class="knop" type="button" id="nieuwlid">Nieuw member</button></div>'+
-      '<p class="hint" style="margin:-6px 0 16px">Members loggen in op <b>'+esc(location.host)+'/leden</b> met alleen hun gebruikersnaam en wachtwoord, zonder e-mail. Vink rechten direct aan of uit.</p>';
+    var h='<div class="kopje"><div><span class="label">Beheer</span><h2 class="vuurtekst">Members</h2></div><div style="display:flex;gap:10px;flex-wrap:wrap"><button class="knop lijn" type="button" id="rangenbeheer">Rangen</button><button class="knop" type="button" id="nieuwlid">Nieuw member</button></div></div>'+
+      '<p class="hint" style="margin:-6px 0 16px">Members loggen in op <b>'+esc(location.host)+'/leden</b> met alleen hun gebruikersnaam en wachtwoord, zonder e-mail. Kies per member een rang en vink rechten direct aan of uit. De rangen zelf pas je aan met de knop Rangen.</p>';
     if(!D.leden.length) h+='<div class="leeg">Nog geen members. Maak het eerste account aan.</div>';
     D.leden.forEach(function(x){
-      h+='<div class="kaart lid'+(x.actief?'':' uit')+'" data-lid="'+x.id+'"><div><div class="meta" style="margin:0"><div class="avatar">'+letter(x.naam)+'</div><div><div class="naam">'+esc(x.naam)+(x.functie?' <span class="tijd">· '+esc(x.functie)+'</span>':'')+'</div><div class="tijd">'+(x.gebruikersnaam?'Gebruikersnaam: '+esc(x.gebruikersnaam):'Geen account')+'</div></div>'+(x.actief?'':'<span class="badge grijs">Geblokkeerd</span>')+'</div>'+
+      h+='<div class="kaart lid'+(x.actief?'':' uit')+'" data-lid="'+x.id+'"><div><div class="meta" style="margin:0"><div class="avatar">'+letter(x.naam)+'</div><div><div class="naam">'+esc(x.naam)+'</div><div class="tijd">'+(x.gebruikersnaam?'Gebruikersnaam: '+esc(x.gebruikersnaam):'Geen account')+'</div></div>'+(x.actief?'':'<span class="badge grijs">Geblokkeerd</span>')+'</div>'+
+        '<div style="margin-top:10px"><label class="hint" style="display:inline-flex;align-items:center;gap:8px">Rang <select data-rang>'+rangOpties(x.rang_id)+'</select></label></div>'+
         '<div class="rechten">'+RECHTEN.map(function(r){return '<label class="vink"><input type="checkbox" data-recht="'+r[0]+'"'+(x[r[0]]?' checked':'')+'> '+r[1]+'</label>';}).join('')+
         '<label class="vink"><input type="checkbox" data-recht="actief"'+(x.actief?' checked':'')+'> Toegang</label></div></div>'+
         '<div class="knoppen"><button class="knop lijn klein" type="button" data-lidbewerk="'+x.id+'">Naam</button><button class="knop lijn klein" type="button" data-lidww="'+x.id+'">Nieuw wachtwoord</button><button class="knop gevaar klein" type="button" data-lidweg="'+x.id+'">Verwijderen</button></div></div>';
@@ -427,6 +448,14 @@ details.verleden summary{cursor:pointer;color:var(--zacht);margin:18px 0 12px;fo
     $('inhoud').innerHTML=h;
   }
   $('inhoud').addEventListener('change',function(e){
+    var sel=e.target; if(sel.dataset&&sel.dataset.rang!==undefined&&sel.tagName==='SELECT'){
+      var lidId=sel.closest('[data-lid]').dataset.lid, oud=(D.leden.filter(function(x){return x.id===lidId;})[0]||{}).rang_id||'';
+      sel.disabled=true;
+      api('mc_leden?id=eq.'+lidId,{methode:'PATCH',body:{rang_id:sel.value||null},terug:true}).then(function(r){
+        var i=D.leden.findIndex(function(x){return x.id===lidId;}); D.leden[i]=r[0]; D.leden=sorteerLeden(D.leden); toonLedenBeheer(); melding('Rang opgeslagen');
+      }).catch(function(err){sel.value=oud;sel.disabled=false;melding(err.message,true);});
+      return;
+    }
     var c=e.target; if(!c.dataset||!c.dataset.recht) return;
     var kaart=c.closest('[data-lid]'), id=kaart.dataset.lid, body={}; body[c.dataset.recht]=c.checked;
     c.disabled=true;
@@ -437,10 +466,10 @@ details.verleden summary{cursor:pointer;color:var(--zacht);margin:18px 0 12px;fo
   function lidForm(x){
     if(x){
       open('<h3>Member bewerken</h3><form id="mf"><label class="veld"><span>Naam</span><input type="text" id="n-naam" maxlength="60" required value="'+esc(x.naam)+'"></label>'+
-        '<label class="veld"><span>Functie (optioneel)</span><input type="text" id="n-functie" maxlength="40" placeholder="bijv. President, Road captain" value="'+esc(x.functie||'')+'"></label>'+
+        '<label class="veld"><span>Rang</span><select id="n-rang">'+rangOpties(x.rang_id)+'</select></label>'+
         '<p class="hint">Gebruikersnaam: '+esc(x.gebruikersnaam||'-')+' (vast)</p><div class="fouttekst" id="m-fout"></div><div class="knoppen"><button class="knop lijn" type="button" data-sluit>Annuleren</button><button class="knop" type="submit">Opslaan</button></div></form>');
       $('mf').addEventListener('submit',function(e){e.preventDefault();
-        api('mc_leden?id=eq.'+x.id,{methode:'PATCH',body:{naam:$('n-naam').value.trim(),functie:$('n-functie').value.trim()||null},terug:true}).then(function(){sluit();melding('Opgeslagen');return laadLeden();}).catch(function(err){$('m-fout').textContent=err.message;});});
+        api('mc_leden?id=eq.'+x.id,{methode:'PATCH',body:{naam:$('n-naam').value.trim(),rang_id:$('n-rang').value||null},terug:true}).then(function(){sluit();melding('Opgeslagen');return laadLeden();}).catch(function(err){$('m-fout').textContent=err.message;});});
       return;
     }
     var ww=maakWachtwoord();
@@ -448,7 +477,7 @@ details.verleden summary{cursor:pointer;color:var(--zacht);margin:18px 0 12px;fo
       '<label class="veld"><span>Naam</span><input type="text" id="n-naam" maxlength="60" required placeholder="Zoals de broeders hem kennen"></label>'+
       '<div class="twee"><label class="veld"><span>Gebruikersnaam</span><input type="text" id="n-gebr" maxlength="30" required autocapitalize="none" spellcheck="false"></label>'+
       '<label class="veld"><span>Wachtwoord</span><input type="text" id="n-ww" minlength="8" maxlength="128" required value="'+ww+'" spellcheck="false"></label></div>'+
-      '<label class="veld"><span>Functie (optioneel)</span><input type="text" id="n-functie" maxlength="40" placeholder="bijv. President, Road captain"></label>'+
+      '<label class="veld"><span>Rang</span><select id="n-rang">'+rangOpties(null)+'</select></label>'+
       '<div class="rechten" style="margin-bottom:12px">'+RECHTEN.map(function(r){return '<label class="vink"><input type="checkbox" data-nr="'+r[0]+'"'+(r[0]!=='mag_events'?' checked':'')+'> '+r[1]+'</label>';}).join('')+'</div>'+
       '<p class="hint">Geen e-mail nodig. Geef de gebruikersnaam en het wachtwoord zelf door; het member kan het wachtwoord daarna wijzigen.</p>'+
       '<div class="fouttekst" id="m-fout"></div><div class="knoppen"><button class="knop lijn" type="button" data-sluit>Annuleren</button><button class="knop" type="submit">Account aanmaken</button></div></form>');
@@ -459,10 +488,47 @@ details.verleden summary{cursor:pointer;color:var(--zacht);margin:18px 0 12px;fo
       e.preventDefault(); var b=this.querySelector('button[type=submit]'); b.disabled=true; $('m-fout').textContent='';
       var rechten={}; [].forEach.call(document.querySelectorAll('[data-nr]'),function(c){rechten[c.dataset.nr]=c.checked;});
       var gebr=$('n-gebr').value.trim().toLowerCase(), pw=$('n-ww').value;
-      functie({actie:'nieuw',naam:$('n-naam').value.trim(),gebruikersnaam:gebr,wachtwoord:pw,functie:$('n-functie').value.trim()||null,rechten:rechten})
-        .then(function(){toonGegevens('Account aangemaakt',gebr,pw);return laadLeden();})
+      var rangId=$('n-rang').value||null;
+      functie({actie:'nieuw',naam:$('n-naam').value.trim(),gebruikersnaam:gebr,wachtwoord:pw,functie:null,rechten:rechten})
+        .then(function(){toonGegevens('Account aangemaakt',gebr,pw);
+          if(!rangId) return laadLeden();
+          return api('mc_leden?klant_id=eq.'+club.klant_id+'&gebruikersnaam=eq.'+encodeURIComponent(gebr),{methode:'PATCH',body:{rang_id:rangId}}).catch(function(err){melding('Account staat, maar de rang is niet opgeslagen: '+err.message,true);}).then(laadLeden);})
         .catch(function(err){$('m-fout').textContent=err.message;b.disabled=false;});
     });
+  }
+  function rangenForm(){
+    function teken(){
+      D.leden=sorteerLeden(D.leden); if(tab==='beheer-leden') toonLedenBeheer();
+      var h='<h3>Rangen</h3><p class="hint" style="margin-bottom:8px">Van hoog naar laag. De volgorde bepaalt hoe members in de ledenlijst staan. Pas een naam aan en klik ernaast, of verplaats met de pijltjes.</p><div id="rlijst">'+
+        D.rangen.map(function(r,i){var n=D.leden.filter(function(x){return x.rang_id===r.id;}).length;
+          return '<div class="rangrij" data-rid="'+r.id+'"><input type="text" maxlength="40" value="'+esc(r.naam)+'" aria-label="Naam van de rang"><span class="hint" title="Members met deze rang">'+n+'</span>'+
+            '<button type="button" data-r="op"'+(i===0?' disabled':'')+' aria-label="Hoger">▲</button><button type="button" data-r="neer"'+(i===D.rangen.length-1?' disabled':'')+' aria-label="Lager">▼</button><button type="button" data-r="weg" aria-label="Verwijderen">✕</button></div>';
+        }).join('')+(D.rangen.length?'':'<div class="leeg" style="padding:18px">Nog geen rangen.</div>')+'</div>'+
+        '<form id="rnieuw" style="display:flex;gap:8px;margin-top:14px"><input type="text" id="r-naam" maxlength="40" placeholder="Nieuwe rang, bijv. Road Captain" required style="flex:1;min-width:0"><button class="knop klein" type="submit">Toevoegen</button></form>'+
+        '<div class="fouttekst" id="m-fout"></div><div class="knoppen"><button class="knop" type="button" data-sluit>Klaar</button></div>';
+      open(h);
+      $('rnieuw').addEventListener('submit',function(e){e.preventDefault();var n=$('r-naam').value.trim();if(!n)return;
+        var v=D.rangen.length?D.rangen[D.rangen.length-1].volgorde+10:10;
+        api('mc_rangen',{methode:'POST',body:{klant_id:club.klant_id,naam:n,volgorde:v},terug:true}).then(function(){return laadRangen();}).then(teken).catch(fout);});
+      [].forEach.call(document.querySelectorAll('#rlijst .rangrij input'),function(inp){
+        inp.addEventListener('change',function(){var id=inp.closest('[data-rid]').dataset.rid,n=inp.value.trim();if(!n){teken();return;}
+          api('mc_rangen?id=eq.'+id,{methode:'PATCH',body:{naam:n},terug:true}).then(function(){return laadRangen();}).then(function(){melding('Rang opgeslagen');}).catch(fout);});
+      });
+      $('rlijst').addEventListener('click',function(e){var b=e.target.closest('button[data-r]');if(!b)return;
+        var id=b.closest('[data-rid]').dataset.rid, i=D.rangen.findIndex(function(r){return r.id===id;}), r=D.rangen[i];
+        if(b.dataset.r==='weg'){
+          var n=D.leden.filter(function(x){return x.rang_id===id;}).length;
+          if(n&&!b.dataset.zeker){b.dataset.zeker='1';b.textContent='Zeker? '+n+' member'+(n>1?'s':'')+' verliest deze rang';return;}
+          api('mc_rangen?id=eq.'+id,{methode:'DELETE'}).then(function(){D.leden.forEach(function(x){if(x.rang_id===id)x.rang_id=null;});return laadRangen();}).then(teken).catch(fout);return;
+        }
+        var j=b.dataset.r==='op'?i-1:i+1, ander=D.rangen[j]; if(!ander) return;
+        var va=r.volgorde, vb=ander.volgorde; if(va===vb){va=i*10+10;vb=j*10+10;}
+        Promise.all([api('mc_rangen?id=eq.'+r.id,{methode:'PATCH',body:{volgorde:vb}}),api('mc_rangen?id=eq.'+ander.id,{methode:'PATCH',body:{volgorde:va}})])
+          .then(function(){return laadRangen();}).then(teken).catch(fout);
+      });
+    }
+    function fout(err){var m=/duplicate|unique/i.test(err.message)?'Die rang bestaat al.':err.message; if($('m-fout')) $('m-fout').textContent=m; else melding(m,true);}
+    teken();
   }
   function toonGegevens(titel,gebr,pw){
     open('<h3>'+esc(titel)+'</h3><p>Geef deze gegevens door aan het member. Het wachtwoord zie je hierna niet meer.</p>'+
@@ -486,7 +552,7 @@ details.verleden summary{cursor:pointer;color:var(--zacht);margin:18px 0 12px;fo
     var h='<div class="kopje"><div><span class="label">Account</span><h2 class="vuurtekst">Mijn account</h2></div></div>';
     if(!ik){ h+='<div class="kaart">Je bent ingelogd als eigenaar met je Flowsmid-account. Je wachtwoord wijzig je in Mijn Flowsmid. Leden, events en de homepage beheer je via <a href="/beheer">Beheer</a>.</div>'; $('inhoud').innerHTML=h; return; }
     var rr=RECHTEN.filter(function(r){return ik[r[0]];}).map(function(r){return r[1].toLowerCase();});
-    h+='<div class="kaart"><div class="meta"><div class="avatar">'+letter(ik.naam)+'</div><div><div class="naam">'+esc(ik.naam)+(ik.functie?' <span class="tijd">· '+esc(ik.functie)+'</span>':'')+'</div><div class="tijd">Gebruikersnaam: '+esc(ik.gebruikersnaam)+'</div></div></div><p class="hint">Je mag: '+esc(rr.join(', ')||'alleen lezen')+'.</p></div>'+
+    h+='<div class="kaart"><div class="meta"><div class="avatar">'+letter(ik.naam)+'</div><div><div class="naam">'+esc(ik.naam)+rangLabel(ik.rang)+'</div><div class="tijd">Gebruikersnaam: '+esc(ik.gebruikersnaam)+'</div></div></div><p class="hint">Je mag: '+esc(rr.join(', ')||'alleen lezen')+'.</p></div>'+
       '<div class="kaart" style="max-width:460px"><h3 class="rye" style="font-size:20px;margin-bottom:12px">Wachtwoord wijzigen</h3><form id="wwform">'+
       '<label class="veld"><span>Nieuw wachtwoord</span><input type="password" id="a-ww1" minlength="8" maxlength="128" autocomplete="new-password" required></label>'+
       '<label class="veld"><span>Herhaal wachtwoord</span><input type="password" id="a-ww2" minlength="8" maxlength="128" autocomplete="new-password" required></label>'+

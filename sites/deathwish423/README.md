@@ -13,3 +13,6 @@ Homepagina met intro voor Deathwish Brotherhood Netherlands (prospect in Flowsmi
 - Member-accounts via edge function `mc-account` (inlog `<naam>@deathwish423.lid.flowsmid.nl`, het member typt alleen `<naam>`).
 - `img/oprichter.webp`: foto van Mar met het zwarte balkje over de ogen ingebrand (origineel staat niet online).
 - Teksten zijn voorbeeldteksten; contactgegevens en de betekenis van BG en DFFD nog navragen.
+
+## Rangen
+Elke club heeft een eigen lijst rangen in `flowsmid.mc_rangen` (naam, volgorde; standaard President t/m Hangaround). Een member heeft `mc_leden.rang_id`. De eigenaar beheert de lijst via Beheer > Members > Rangen en kiest per member een rang. De rang staat in de ledenlijst (gesorteerd op rang), bij berichten en reacties op het prikbord en bij Mijn account. Het oude vrije veld `functie` wordt niet meer gebruikt.
