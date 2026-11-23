@@ -16,3 +16,6 @@ Homepagina met intro voor Deathwish Brotherhood Netherlands (prospect in Flowsmi
 
 ## Rangen
 Elke club heeft een eigen lijst rangen in `flowsmid.mc_rangen` (naam, volgorde; standaard President t/m Hangaround). Een member heeft `mc_leden.rang_id`. De eigenaar beheert de lijst via Beheer > Members > Rangen en kiest per member een rang. De rang staat in de ledenlijst (gesorteerd op rang), bij berichten en reacties op het prikbord en bij Mijn account. Het oude vrije veld `functie` wordt niet meer gebruikt.
+
+## Doneerknop
+De eigenaar plakt in Beheer > Homepage > Doneerknop de (maandelijkse) Tikkie-link (`mc_clubs.doneer_url`, alleen https). Zolang er een link is, staat er een knop Doneer in de menubalk, in de hero en in het support-blok. Na 30 dagen krijgt de eigenaar in Beheer een melding dat de link waarschijnlijk verlopen is.

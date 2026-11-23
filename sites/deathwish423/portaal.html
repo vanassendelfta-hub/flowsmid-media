@@ -588,7 +588,28 @@ details.verleden summary{cursor:pointer;color:var(--zacht);margin:18px 0 12px;fo
         return '<div class="kaart"><label class="vink" style="margin:0"><input type="radio" name="intro" value="'+i[0]+'"'+(nu===i[0]?' checked':'')+'> <b>'+i[1]+'</b>'+(nu===i[0]?' <span class="badge open">Actief</span>':'')+'</label>'+
           '<div class="tekst" style="margin:6px 0 0 28px">'+i[2]+' <a class="linkje" href="/?intro='+i[0]+'" target="_blank" rel="noopener">Bekijk</a></div></div>';
       }).join('');
+    var du=club.doneer_url||'', db=club.doneer_bijgewerkt, oud=db&&(Date.now()-new Date(db))>30*864e5;
+    h+='<div class="kopje" style="margin-top:30px"><div><span class="label">Beheer</span><h2 class="vuurtekst">Doneerknop</h2></div></div>'+
+      '<p class="hint" style="margin:-6px 0 16px">Plak hier elke maand de nieuwe Tikkie-link. De knop Doneer staat op de homepage zolang er een link is ingevuld.</p>'+
+      '<div class="kaart"><form id="doneerform"><label class="veld" style="margin-bottom:10px"><span>Tikkie-link</span><input type="text" id="d-url" inputmode="url" maxlength="500" placeholder="https://tikkie.me/pay/..." value="'+esc(du)+'" spellcheck="false" autocapitalize="none"></label>'+
+      '<p class="hint" style="margin-bottom:12px">'+(du?(db?'Laatst bijgewerkt: '+esc(datum(db))+'.':'')+(oud?' <b style="color:#ffad7a">Deze link is ouder dan een maand. Tikkie-links verlopen, dus plak een nieuwe.</b>':'')+' <a class="linkje" href="'+esc(du)+'" target="_blank" rel="noopener">Test de link</a>':'Er staat nu geen doneerknop op de homepage.')+'</p>'+
+      '<div class="fouttekst" id="d-fout" style="margin:0 0 8px"></div><div style="display:flex;gap:10px;flex-wrap:wrap"><button class="knop" type="submit">Opslaan</button>'+(du?'<button class="knop gevaar" type="button" id="d-weg">Knop weghalen</button>':'')+'</div></form></div>';
     $('inhoud').innerHTML=h;
+    function bewaarDoneer(url){
+      return api('mc_clubs?klant_id=eq.'+club.klant_id,{methode:'PATCH',body:{doneer_url:url,doneer_bijgewerkt:url?new Date().toISOString():null},terug:true}).then(function(x){
+        if(!x||!x.length) throw new Error('Opslaan lukte niet.');
+        club.doneer_url=x[0].doneer_url;club.doneer_bijgewerkt=x[0].doneer_bijgewerkt;toonHomepage();melding(url?'Doneerlink opgeslagen':'Doneerknop weggehaald');
+      });
+    }
+    $('doneerform').addEventListener('submit',function(e){e.preventDefault();
+      var u=$('d-url').value.trim(); $('d-fout').textContent='';
+      if(!u){$('d-fout').textContent='Plak een link, of kies Knop weghalen.';return;}
+      if(!/^https:\/\//i.test(u)) u='https://'+u.replace(/^http:\/\//i,'');
+      if(!/^https:\/\/[^\s<>"]+\.[^\s<>"]+$/.test(u)){$('d-fout').textContent='Dit lijkt geen geldige link.';return;}
+      if(!/(^|\.)tikkie\.me$/i.test(new URL(u).hostname)&&!$('d-url').dataset.ok){$('d-url').dataset.ok='1';$('d-fout').textContent='Dit is geen tikkie.me-link. Klik nog een keer op Opslaan als je hem toch wilt gebruiken.';return;}
+      bewaarDoneer(u).catch(function(err){$('d-fout').textContent=err.message;});
+    });
+    if($('d-weg')) $('d-weg').addEventListener('click',function(){confirm2('De doneerknop van de homepage halen?',function(){bewaarDoneer(null).catch(function(err){melding(err.message,true);});});});
     Array.prototype.forEach.call(document.querySelectorAll('input[name=intro]'),function(r){
       r.addEventListener('change',function(){
         var keuze=r.value;

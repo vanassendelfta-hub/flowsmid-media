@@ -111,7 +111,12 @@ header nav{display:flex;gap:26px;align-items:center}
 header nav a{font:500 13px/1 Oswald,sans-serif;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;color:#cbc3bf}
 header nav a:hover{color:#fff}
 header nav a.nav-members{padding:10px 14px;border-radius:4px;box-shadow:0 0 0 1.5px #c9ccd0 inset;color:#fff}
-@media (max-width:820px){header nav a:not(.nav-members){display:none}}
+header nav a.nav-doneer{padding:10px 14px;border-radius:4px;color:#fff;background:linear-gradient(180deg,#ff7a1f,#c8200f);box-shadow:0 0 0 1.5px #e9ebee inset}
+.doneer[hidden]{display:none!important}
+.doneerblok{margin-top:22px}
+@media (max-width:820px){header nav a:not(.nav-members):not(.nav-doneer){display:none}}
+@media (max-width:380px){header nav a.nav-doneer,header nav a.nav-members{padding:9px 10px}}
+@media (max-width:480px){body.met-doneer header .merk span{display:none}}
 
 /* ---------- Hero ---------- */
 .hero{position:relative;min-height:100svh;display:flex;align-items:center;padding:96px 0 60px;overflow:hidden;
@@ -250,6 +255,7 @@ footer .rye{color:#cfc7c3;font-size:16px}
       <a href="#kleuren">Onze kleuren</a>
       <a href="#events">Events</a>
       <a href="#contact">Contact</a>
+      <a href="#" class="nav-doneer doneer" target="_blank" rel="noopener" hidden>Doneer</a>
       <a href="/leden" class="nav-members">Members</a>
     </nav>
   </div>
@@ -268,6 +274,7 @@ footer .rye{color:#cfc7c3;font-size:16px}
         <div class="knoppen">
           <a class="knop" href="#over">Leer ons kennen</a>
           <a class="knop lijn" href="#contact">Neem contact op</a>
+          <a class="knop doneer" href="#" target="_blank" rel="noopener" hidden>Doneer</a>
         </div>
       </div>
       <img class="logo" src="/img/logo-volledig.webp" alt="Rugembleem van Deathwish Brotherhood Netherlands: bovenboog DEATHWISH, schild met de reaper, onderboog NETHERLANDS, kogel, BG, DFFD en 423" width="1024" height="1430">
@@ -356,6 +363,7 @@ footer .rye{color:#cfc7c3;font-size:16px}
     <div class="wrap op">
       <div class="banner"><img src="/img/support.webp" alt="Support your local Deathwish Brotherhood" loading="lazy" width="1600" height="630"></div>
       <p class="lead" style="margin:0 auto">Support-gear zoals shirts, hoodies en stickers komt binnenkort. Zo laat jij zien dat je achter de broederschap staat.</p>
+      <div class="doneerblok doneer" hidden><p class="lead" style="margin:0 auto 16px">Wil je de broederschap nu al steunen? Elke bijdrage helpt.</p><a class="knop doneer" href="#" target="_blank" rel="noopener">Doneer via Tikkie</a></div>
     </div>
   </section>
 
@@ -457,6 +465,9 @@ footer .rye{color:#cfc7c3;font-size:16px}
   function tijd(d){return p2(d.getHours())+':'+p2(d.getMinutes());}
   publiek.then(function(j){
       if(!j) return;
+      if(typeof j.doneer_url==='string'&&/^https:\/\/[^\s<>"]+$/.test(j.doneer_url)){
+        [].forEach.call(document.querySelectorAll('.doneer'),function(e){if(e.tagName==='A')e.href=j.doneer_url;e.hidden=false;});document.body.classList.add('met-doneer');
+      }
       $m=document.getElementById('mededelingen');
       $m.innerHTML=(j.mededelingen||[]).map(function(m){
         return '<div class="mededeling"><div class="kader"><div class="binnen"><div class="icoon">!</div><div><h3 class="vuurtekst">'+esc(m.titel)+'</h3>'+(m.tekst?'<p>'+esc(m.tekst)+'</p>':'')+'</div></div></div></div>';
