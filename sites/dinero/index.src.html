@@ -363,8 +363,8 @@ footer a:hover{color:#fff}
   /* Intro */
   var intro=$('intro'), introKlaar=false;
   function sluitIntro(){ if(introKlaar) return; introKlaar=true; intro.classList.add('weg'); document.body.style.overflow=''; }
-  try{ if(sessionStorage.getItem('dinero-intro')){ intro.style.display='none'; introKlaar=true; } else { document.body.style.overflow='hidden'; setTimeout(sluitIntro,3600); sessionStorage.setItem('dinero-intro','1'); } }
-  catch(e){ document.body.style.overflow='hidden'; setTimeout(sluitIntro,3600); }
+  // de intro speelt bij elk bezoek en elke herlaad
+  document.body.style.overflow='hidden'; setTimeout(sluitIntro,3600);
   $('overslaan').addEventListener('click',sluitIntro);
 
   /* Header en animaties */
