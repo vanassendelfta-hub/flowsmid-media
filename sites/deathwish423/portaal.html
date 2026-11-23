@@ -1,0 +1,551 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Members | Deathwish Brotherhood</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#070505">
+<link rel="icon" href="/img/favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rye&family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --zwart:#070505; --kool:#0f0b0a; --kaart:#141010; --kaart2:#1a1413; --lijn:#2c2220;
+  --rood:#d8261a; --oranje:#ff6a13; --tekst:#ece7e4; --zacht:#a89f9a; --ok:#7bd88f; --fout:#ff6b5e;
+  --vuur:linear-gradient(180deg,#ffb23a 0%,#ff6a13 38%,#d8261a 72%,#8e0f0a 100%);
+  --zilverrand:linear-gradient(135deg,#f4f5f6 0%,#8d9399 22%,#e6e8ea 45%,#6f757b 70%,#d9dcdf 100%);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{overflow-x:clip;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{background:radial-gradient(ellipse 80% 50% at 50% 0%,#2a0906 0%,var(--zwart) 60%) fixed,var(--zwart);color:var(--tekst);font:15px/1.6 Inter,system-ui,sans-serif;min-height:100svh}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+button,input,textarea,select{font:inherit;color:inherit}
+button{cursor:pointer;background:none;border:0}
+.rye{font-family:Rye,Georgia,serif;font-weight:400}
+.vuurtekst{background:var(--vuur);-webkit-background-clip:text;background-clip:text;color:transparent}
+.label{font:600 11px/1 Oswald,sans-serif;letter-spacing:.3em;text-transform:uppercase;color:var(--oranje)}
+.knop{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:44px;padding:0 20px;border-radius:4px;
+  font:600 14px/1 Oswald,sans-serif;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;color:#fff;white-space:nowrap;
+  background:linear-gradient(180deg,#ff7a1f,#c8200f);box-shadow:0 0 0 1.5px #e9ebee inset,0 0 0 3px #2a2a2a inset;transition:transform .15s,opacity .15s}
+.knop:hover{transform:translateY(-1px)}
+.knop:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.knop.lijn{background:rgba(0,0,0,.3);box-shadow:0 0 0 1.5px #8d9399 inset}
+.knop.klein{height:34px;padding:0 12px;font-size:12px}
+.knop.gevaar{background:rgba(0,0,0,.3);box-shadow:0 0 0 1.5px #b23a2f inset;color:#ff9c90}
+.linkje{color:var(--zacht);font-size:13px;text-decoration:underline;text-underline-offset:3px}
+.linkje:hover{color:#fff}
+.verborgen{display:none!important}
+
+/* Formulieren */
+label.veld{display:block;margin-bottom:14px}
+label.veld>span{display:block;font:600 12px/1 Oswald,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#cfc7c3;margin-bottom:7px}
+input[type=text],input[type=password],input[type=datetime-local],textarea{width:100%;background:#0b0808;border:1px solid #3a2e2b;border-radius:4px;padding:11px 12px;color:#fff;outline:none;transition:border-color .15s}
+input:focus,textarea:focus{border-color:var(--oranje)}
+textarea{resize:vertical;min-height:90px}
+.vink{display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none;margin:6px 0;font-size:14px}
+.vink input{width:18px;height:18px;accent-color:var(--oranje)}
+.hint{color:var(--zacht);font-size:13px}
+.fouttekst{color:var(--fout);font-size:14px;min-height:20px;margin-top:6px}
+
+/* Kader zoals patches */
+.kader{border-radius:6px;padding:2px;background:var(--zilverrand)}
+.kader>.binnen{border-radius:4px;background:linear-gradient(180deg,#140e0d,#0b0808)}
+
+/* Login */
+#login{min-height:100svh;display:grid;place-items:center;padding:24px 16px}
+#login .kader{width:min(100%,400px)}
+#login .binnen{padding:30px 26px 26px;text-align:center}
+#login img.schild{width:92px;margin:0 auto 12px;filter:drop-shadow(0 0 20px rgba(255,80,20,.35))}
+#login h1{font-size:28px;line-height:1.1;margin:8px 0 4px}
+#login p.sub{color:var(--zacht);font-size:14px;margin-bottom:22px}
+#login form{text-align:left}
+#login .knop{width:100%;margin-top:4px}
+#login .onder{margin-top:18px;text-align:center;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+
+/* App */
+#app header{position:sticky;top:0;z-index:20;background:rgba(7,5,5,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid #241b19}
+#app header .rij{max-width:980px;margin:0 auto;padding:0 16px;height:62px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+#app header .merk{display:flex;align-items:center;gap:10px;text-decoration:none;min-width:0}
+#app header .merk img{height:38px;width:auto}
+#app header .merk b{font-family:Rye,serif;font-weight:400;font-size:17px;white-space:nowrap}
+#app header .merk small{display:block;font:600 10px/1 Oswald,sans-serif;letter-spacing:.26em;text-transform:uppercase;color:var(--zacht);margin-top:3px}
+#app header .rechts{display:flex;align-items:center;gap:14px;font-size:13px;color:var(--zacht)}
+#app header .wie{max-width:30vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+nav.tabs{max-width:980px;margin:0 auto;padding:0 16px;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+nav.tabs::-webkit-scrollbar{display:none}
+nav.tabs button{padding:12px 14px;font:600 13px/1 Oswald,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#a99f9a;border-bottom:2px solid transparent;white-space:nowrap}
+nav.tabs button.aan{color:#fff;border-bottom-color:var(--oranje)}
+main{max-width:980px;margin:0 auto;padding:26px 16px 80px}
+.kopje{display:flex;align-items:flex-end;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:18px}
+.kopje h2{font-family:Rye,serif;font-weight:400;font-size:clamp(24px,4vw,32px);line-height:1.1}
+.leeg{padding:34px 20px;text-align:center;color:var(--zacht);border:1px dashed #3a2e2b;border-radius:6px}
+
+/* Kaarten */
+.kaart{background:var(--kaart);border:1px solid var(--lijn);border-radius:6px;padding:16px 16px 14px;margin-bottom:14px}
+.kaart .meta{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+.avatar{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font:600 14px/1 Oswald,sans-serif;background:linear-gradient(180deg,#ff7a1f,#a3180c);color:#fff;flex:none;box-shadow:0 0 0 1.5px #c9ccd0}
+.kaart .naam{font-weight:600;color:#fff}
+.kaart .tijd{color:var(--zacht);font-size:12.5px}
+.kaart .tekst{white-space:pre-wrap;word-wrap:break-word}
+.acties{display:flex;gap:12px;margin-left:auto}
+.acties button{color:var(--zacht);font-size:12.5px}
+.acties button:hover{color:#fff}
+.reacties{margin-top:12px;padding-top:10px;border-top:1px solid #241b19;display:grid;gap:10px}
+.reactie{display:flex;gap:10px}
+.reactie .avatar{width:26px;height:26px;font-size:11px}
+.reactie .bol{background:var(--kaart2);border-radius:6px;padding:8px 11px;flex:1;min-width:0}
+.reactie .bol .kop{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap;font-size:13px}
+.reactie .bol .tekst{font-size:14px}
+.reageer{display:flex;gap:8px;margin-top:10px}
+.reageer input{flex:1;min-width:0;padding:9px 11px}
+.nieuwpost textarea{min-height:80px}
+.nieuwpost .rij{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:10px;flex-wrap:wrap}
+
+/* Events */
+.event{display:grid;grid-template-columns:74px 1fr;gap:16px;align-items:start}
+.datumblok{border-radius:5px;padding:2px;background:var(--zilverrand);text-align:center}
+.datumblok div{background:#0b0808;border-radius:4px;padding:8px 4px}
+.datumblok .d{font-family:Rye,serif;font-size:28px;line-height:1}
+.datumblok .m{font:600 11px/1 Oswald,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--oranje);margin-top:4px}
+.event h3{font-family:Rye,serif;font-weight:400;font-size:20px;line-height:1.2;margin-bottom:4px}
+.event .info{color:var(--zacht);font-size:13.5px;margin-bottom:6px}
+.badge{display:inline-block;font:600 10.5px/1 Oswald,sans-serif;letter-spacing:.16em;text-transform:uppercase;padding:5px 8px;border-radius:3px;vertical-align:middle}
+.badge.open{background:rgba(123,216,143,.12);color:var(--ok);box-shadow:0 0 0 1px rgba(123,216,143,.35) inset}
+.badge.dicht{background:rgba(255,106,19,.12);color:#ffad7a;box-shadow:0 0 0 1px rgba(255,106,19,.4) inset}
+.badge.grijs{background:rgba(255,255,255,.06);color:#bbb;box-shadow:0 0 0 1px #3a3a3a inset}
+details.verleden summary{cursor:pointer;color:var(--zacht);margin:18px 0 12px;font-size:14px}
+
+/* Leden-tabel */
+.lid{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center}
+.lid .rechten{display:flex;flex-wrap:wrap;gap:4px 16px;margin-top:8px}
+.lid .rechten .vink{margin:0;font-size:13px}
+.lid .knoppen{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.lid.uit{opacity:.55}
+@media (max-width:640px){.lid{grid-template-columns:1fr}.lid .knoppen{justify-content:flex-start}}
+.ledenlijst{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.ledenlijst .kaart{display:flex;gap:12px;align-items:center;margin:0}
+
+/* Modal en melding */
+.modal{position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.72);display:none;align-items:center;justify-content:center;padding:16px}
+.modal.open{display:flex}
+.modal .kader{width:min(100%,520px);max-height:calc(100svh - 32px);display:flex}
+.modal .binnen{padding:22px 20px;overflow:auto;width:100%}
+.modal h3{font-family:Rye,serif;font-weight:400;font-size:24px;margin-bottom:16px}
+.modal .knoppen{display:flex;justify-content:flex-end;gap:10px;margin-top:8px;flex-wrap:wrap}
+.twee{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:520px){.twee{grid-template-columns:1fr}}
+.melding{position:fixed;left:50%;bottom:22px;transform:translate(-50%,30px);opacity:0;z-index:80;background:#1d1514;border:1px solid #4a3a36;border-radius:6px;padding:11px 16px;font-size:14px;transition:opacity .25s,transform .25s;pointer-events:none;max-width:calc(100% - 32px)}
+.melding.zicht{opacity:1;transform:translate(-50%,0)}
+.melding.fout{border-color:#8a2f27;color:#ffb3aa}
+.wwvak{font:600 18px/1 ui-monospace,Menlo,monospace;letter-spacing:.06em;background:#0b0808;border:1px dashed #6a5a55;border-radius:4px;padding:12px;text-align:center;margin:10px 0;user-select:all}
+</style>
+</head>
+<body>
+
+<!-- ============ Inloggen ============ -->
+<section id="login">
+  <div class="kader"><div class="binnen">
+    <img class="schild" src="/img/deel-schild.webp" alt="">
+    <span class="label" id="l-label">Members only</span>
+    <h1 class="rye vuurtekst" id="l-titel">Members login</h1>
+    <p class="sub" id="l-sub">Log in met de naam en het wachtwoord die je van de club hebt gekregen.</p>
+    <form id="loginform" autocomplete="on">
+      <label class="veld"><span>Gebruikersnaam</span><input type="text" id="l-naam" autocomplete="username" autocapitalize="none" spellcheck="false" required></label>
+      <label class="veld"><span>Wachtwoord</span><input type="password" id="l-ww" autocomplete="current-password" required></label>
+      <button class="knop" id="loginknop" type="submit">Inloggen</button>
+      <div class="fouttekst" id="loginfout"></div>
+    </form>
+    <div class="onder"><a class="linkje" href="/">Terug naar de homepage</a><a class="linkje" id="l-wissel" href="/beheer">Beheer</a></div>
+  </div></div>
+</section>
+
+<!-- ============ App ============ -->
+<div id="app" class="verborgen">
+  <header>
+    <div class="rij">
+      <a class="merk" href="/"><img src="/img/deel-schild.webp" alt=""><div><b class="vuurtekst">Deathwish</b><small id="modus">Members</small></div></a>
+      <div class="rechts"><span class="wie" id="wie"></span><a class="linkje verborgen" id="naarbeheer" href="/beheer">Beheer</a><button class="linkje" id="uitknop" type="button">Uitloggen</button></div>
+    </div>
+    <nav class="tabs" id="tabs"></nav>
+  </header>
+  <main id="inhoud"></main>
+</div>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true"><div class="kader"><div class="binnen" id="modaldoos"></div></div></div>
+<div class="melding" id="melding" role="status"></div>
+
+<script>
+(function(){
+  'use strict';
+  var SUPA='https://uywydquzvdbpfjjrwsbt.supabase.co', KEY='sb_publishable_J1Ewyl4he9-KRj_jv8fIPA_S8vZ2v5_', SLUG='deathwish423';
+  var BEHEER=/^\/beheer/.test(location.pathname);
+  var OPSLAG='deathwish-'+(BEHEER?'beheer':'leden')+'-sessie';
+  var MAANDEN=['jan','feb','mrt','apr','mei','jun','jul','aug','sep','okt','nov','dec'];
+  var MAANDEN_LANG=['januari','februari','maart','april','mei','juni','juli','augustus','september','oktober','november','december'];
+  var DAGEN=['zondag','maandag','dinsdag','woensdag','donderdag','vrijdag','zaterdag'];
+  var $=function(id){return document.getElementById(id);};
+  var sessie=null, club=null, rol=null, ik=null, tab=null;
+  var D={posts:[],reacties:[],events:[],leden:[],mededelingen:[]};
+
+  /* ---------- hulp ---------- */
+  function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+  function pad(n){return (n<10?'0':'')+n;}
+  function tijd(d){d=new Date(d);return pad(d.getHours())+':'+pad(d.getMinutes());}
+  function datum(d){d=new Date(d);return DAGEN[d.getDay()]+' '+d.getDate()+' '+MAANDEN_LANG[d.getMonth()]+(d.getFullYear()!==new Date().getFullYear()?' '+d.getFullYear():'');}
+  function geleden(d){
+    var s=(Date.now()-new Date(d))/1000;
+    if(s<60) return 'zojuist'; if(s<3600) return Math.floor(s/60)+' min geleden'; if(s<86400) return Math.floor(s/3600)+' uur geleden';
+    if(s<86400*6) return Math.floor(s/86400)+(Math.floor(s/86400)===1?' dag':' dagen')+' geleden';
+    return datum(d);
+  }
+  function lokaal(d){d=new Date(d);return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())+'T'+pad(d.getHours())+':'+pad(d.getMinutes());}
+  function letter(n){return esc(String(n||'?').trim().charAt(0).toUpperCase()||'?');}
+  function melding(t,fout){var m=$('melding');m.textContent=t;m.classList.toggle('fout',!!fout);m.classList.add('zicht');clearTimeout(melding.t);melding.t=setTimeout(function(){m.classList.remove('zicht');},2800);}
+  function eigenaar(){return rol==='eigenaar';}
+  function recht(r){if(eigenaar()) return true; return !!(ik&&ik[r]);}
+  function maakWachtwoord(){var t='abcdefghjkmnpqrstuvwxyz23456789',s='';var a=new Uint32Array(10);crypto.getRandomValues(a);for(var i=0;i<10;i++){s+=t[a[i]%t.length];if(i===4)s+='-';}return s;}
+  function slugNaam(n){return String(n||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]+/g,'.').replace(/^\.+|\.+$/g,'').slice(0,30);}
+
+  /* ---------- Supabase ---------- */
+  function bewaar(s){sessie=s;try{sessionStorage.setItem(OPSLAG,JSON.stringify(s));}catch(e){}}
+  function auth(body,grant){
+    return fetch(SUPA+'/auth/v1/token?grant_type='+grant,{method:'POST',headers:{apikey:KEY,'Content-Type':'application/json'},body:JSON.stringify(body)})
+      .then(function(r){return r.json().then(function(j){if(!r.ok) throw new Error('x'); return j;});})
+      .then(function(j){bewaar({token:j.access_token,refresh:j.refresh_token,verloopt:Date.now()+(j.expires_in-60)*1000});return sessie;});
+  }
+  function geldig(){ if(!sessie) return Promise.reject(new Error('Niet ingelogd')); if(Date.now()<sessie.verloopt) return Promise.resolve(); return auth({refresh_token:sessie.refresh},'refresh_token').catch(function(){uitloggen();throw new Error('Sessie verlopen, log opnieuw in.');}); }
+  function api(pad,o){
+    o=o||{};
+    return geldig().then(function(){
+      var h={apikey:KEY,Authorization:'Bearer '+sessie.token,'Accept-Profile':'flowsmid','Content-Profile':'flowsmid','Content-Type':'application/json'};
+      if(o.terug) h.Prefer='return=representation';
+      return fetch(SUPA+'/rest/v1/'+pad,{method:o.methode||'GET',headers:h,body:o.body?JSON.stringify(o.body):undefined});
+    }).then(function(r){ if(r.status===401){uitloggen();throw new Error('Sessie verlopen, log opnieuw in.');}
+      return r.text().then(function(t){var j=t?JSON.parse(t):null; if(!r.ok) throw new Error(vertaal(j)); return j;}); });
+  }
+  function vertaal(j){var m=j&&j.message||''; if(/row-level security|permission denied/i.test(m)) return 'Je hebt hier geen rechten voor.'; return m||'Er ging iets mis.';}
+  function functie(body){
+    return geldig().then(function(){return fetch(SUPA+'/functions/v1/mc-account',{method:'POST',headers:{apikey:KEY,Authorization:'Bearer '+sessie.token,'Content-Type':'application/json'},body:JSON.stringify(Object.assign({slug:SLUG},body))});})
+      .then(function(r){return r.json().then(function(j){if(!r.ok) throw new Error(j.fout||'Er ging iets mis'); return j;});});
+  }
+
+  /* ---------- Inloggen ---------- */
+  if(BEHEER){
+    document.title='Beheer | Deathwish Brotherhood';
+    $('l-label').textContent='Beheer'; $('l-titel').textContent='Beheer';
+    $('l-sub').textContent='Log in met je Flowsmid-account om leden, events en de homepage te beheren.';
+    $('l-wissel').textContent='Members login'; $('l-wissel').href='/leden';
+    $('modus').textContent='Beheer';
+  }
+  $('loginform').addEventListener('submit',function(e){
+    e.preventDefault();
+    var naam=$('l-naam').value.trim().toLowerCase(), ww=$('l-ww').value, knop=$('loginknop');
+    if(!naam||!ww) return;
+    knop.disabled=true;knop.textContent='Bezig…';$('loginfout').textContent='';
+    sessie=null;
+    var lid=naam+'@'+SLUG+'.lid.flowsmid.nl', fs=naam+'@login.flowsmid.nl';
+    var pogingen=naam.indexOf('@')>-1?[naam]:(BEHEER?[fs,lid]:[lid,fs]);
+    (function probeer(i){
+      if(i>=pogingen.length) return Promise.reject(new Error('x'));
+      return auth({email:pogingen[i],password:ww},'password').catch(function(){return probeer(i+1);});
+    })(0).then(function(){return start();})
+      .catch(function(err){sessie=null;try{sessionStorage.removeItem(OPSLAG);}catch(x){}$('loginfout').textContent=err&&err.message&&err.message!=='x'?err.message:'Gebruikersnaam of wachtwoord klopt niet.';})
+      .then(function(){knop.disabled=false;knop.textContent='Inloggen';});
+  });
+  $('uitknop').addEventListener('click',uitloggen);
+  function uitloggen(){
+    if(sessie) fetch(SUPA+'/auth/v1/logout',{method:'POST',headers:{apikey:KEY,Authorization:'Bearer '+sessie.token}}).catch(function(){});
+    sessie=null;club=null;rol=null;ik=null;try{sessionStorage.removeItem(OPSLAG);}catch(e){}
+    $('app').classList.add('verborgen');$('login').classList.remove('verborgen');$('l-ww').value='';sluit();
+  }
+  function start(){
+    return api('rpc/mc_mijn_club',{methode:'POST',body:{p_slug:SLUG}}).then(function(z){
+      if(!z) throw new Error('Dit account heeft geen toegang tot Deathwish Brotherhood.');
+      if(BEHEER&&z.rol!=='eigenaar') throw new Error('Alleen de eigenaar kan het beheer openen. Gebruik de members login.');
+      club=z; rol=z.rol; ik=z.lid;
+      $('wie').textContent=ik?ik.naam:(eigenaar()?'Eigenaar':'');
+      $('naarbeheer').classList.toggle('verborgen',BEHEER||!eigenaar());
+      if(BEHEER){$('naarbeheer').classList.add('verborgen');}
+      $('login').classList.add('verborgen');$('app').classList.remove('verborgen');
+      bouwTabs();
+    });
+  }
+
+  /* ---------- Tabs ---------- */
+  var TABS_LEDEN=[['prikbord','Prikbord'],['events','Events'],['leden','Members'],['account','Mijn account']];
+  var TABS_BEHEER=[['beheer-leden','Members'],['events','Events'],['homepage','Homepage'],['prikbord','Prikbord']];
+  function bouwTabs(){
+    var t=BEHEER?TABS_BEHEER:TABS_LEDEN;
+    $('tabs').innerHTML=t.map(function(x){return '<button type="button" data-tab="'+x[0]+'">'+x[1]+'</button>';}).join('');
+    var gewenst=(location.hash||'').slice(1); if(!t.some(function(x){return x[0]===gewenst;})) gewenst=t[0][0];
+    kies(gewenst);
+  }
+  $('tabs').addEventListener('click',function(e){var b=e.target.closest('button[data-tab]'); if(b) kies(b.dataset.tab);});
+  function kies(t){
+    tab=t; history.replaceState(null,'','#'+t);
+    [].forEach.call($('tabs').children,function(b){b.classList.toggle('aan',b.dataset.tab===t);});
+    $('inhoud').innerHTML='<div class="leeg">Laden…</div>';
+    var f={prikbord:laadPrikbord,events:laadEvents,leden:laadLeden,account:toonAccount,'beheer-leden':laadLeden,homepage:laadHomepage}[t];
+    Promise.resolve().then(f).catch(function(err){$('inhoud').innerHTML='<div class="leeg">'+esc(err.message)+'</div>';});
+  }
+
+  /* ---------- Prikbord ---------- */
+  function laadPrikbord(){
+    var k='klant_id=eq.'+club.klant_id;
+    return Promise.all([api('mc_posts?select=*&'+k+'&order=aangemaakt_op.desc&limit=60'),api('mc_reacties?select=*&'+k+'&order=aangemaakt_op&limit=1000')])
+      .then(function(r){D.posts=r[0];D.reacties=r[1];toonPrikbord();});
+  }
+  function magBeheren(rij){return eigenaar()||rij.auteur_id===mijnId();}
+  function mijnId(){try{return JSON.parse(atob(sessie.token.split('.')[1].replace(/-/g,'+').replace(/_/g,'/'))).sub;}catch(e){return null;}}
+  function toonPrikbord(){
+    var h='<div class="kopje"><div><span class="label">Alleen voor members</span><h2 class="vuurtekst">Prikbord</h2></div></div>';
+    if(recht('mag_posten')) h+='<div class="kaart nieuwpost"><form id="postform"><textarea id="posttekst" maxlength="4000" placeholder="Deel iets met de broeders…" required></textarea><div class="rij"><span class="hint">Alleen ingelogde members zien dit.</span><button class="knop klein" type="submit">Plaatsen</button></div></form></div>';
+    else h+='<p class="hint" style="margin-bottom:14px">Je kunt berichten lezen. Plaatsen staat voor jou uit.</p>';
+    if(!D.posts.length) h+='<div class="leeg">Nog geen berichten. '+(recht('mag_posten')?'Plaats het eerste.':'')+'</div>';
+    D.posts.forEach(function(p){
+      var re=D.reacties.filter(function(r){return r.post_id===p.id;});
+      h+='<article class="kaart" data-post="'+p.id+'"><div class="meta"><div class="avatar">'+letter(p.auteur_naam)+'</div><div><div class="naam">'+esc(p.auteur_naam)+'</div><div class="tijd">'+esc(geleden(p.aangemaakt_op))+(p.bewerkt_op?' · bewerkt':'')+'</div></div>'+
+        (magBeheren(p)?'<div class="acties">'+(p.auteur_id===mijnId()?'<button type="button" data-bewerk="'+p.id+'">Bewerken</button>':'')+'<button type="button" data-wegpost="'+p.id+'">Verwijderen</button></div>':'')+
+        '</div><div class="tekst">'+esc(p.tekst)+'</div>';
+      if(re.length||recht('mag_reageren')){
+        h+='<div class="reacties">'+re.map(function(r){
+          return '<div class="reactie"><div class="avatar">'+letter(r.auteur_naam)+'</div><div class="bol"><div class="kop"><b>'+esc(r.auteur_naam)+'</b><span class="tijd">'+esc(geleden(r.aangemaakt_op))+'</span>'+
+            (magBeheren(r)?'<span class="acties"><button type="button" data-wegreactie="'+r.id+'">Verwijderen</button></span>':'')+'</div><div class="tekst">'+esc(r.tekst)+'</div></div></div>';
+        }).join('');
+        if(recht('mag_reageren')) h+='<form class="reageer" data-reageer="'+p.id+'"><input type="text" maxlength="2000" placeholder="Reageer…" required><button class="knop klein" type="submit">Stuur</button></form>';
+        h+='</div>';
+      }
+      h+='</article>';
+    });
+    $('inhoud').innerHTML=h;
+    var pf=$('postform'); if(pf) pf.addEventListener('submit',function(e){
+      e.preventDefault(); var t=$('posttekst').value.trim(); if(!t) return; var b=pf.querySelector('button'); b.disabled=true;
+      api('mc_posts',{methode:'POST',body:{klant_id:club.klant_id,tekst:t},terug:true}).then(function(r){D.posts.unshift(r[0]);toonPrikbord();melding('Bericht geplaatst');})
+        .catch(function(err){melding(err.message,true);b.disabled=false;});
+    });
+  }
+  $('inhoud').addEventListener('submit',function(e){
+    var f=e.target.closest('form[data-reageer]'); if(!f) return; e.preventDefault();
+    var inp=f.querySelector('input'), t=inp.value.trim(); if(!t) return; var b=f.querySelector('button'); b.disabled=true;
+    api('mc_reacties',{methode:'POST',body:{klant_id:club.klant_id,post_id:f.dataset.reageer,tekst:t},terug:true}).then(function(r){D.reacties.push(r[0]);toonPrikbord();})
+      .catch(function(err){melding(err.message,true);b.disabled=false;});
+  });
+  $('inhoud').addEventListener('click',function(e){
+    var b=e.target.closest('button'); if(!b) return;
+    if(b.dataset.wegpost){ if(!confirm2('Dit bericht en alle reacties verwijderen?',function(){api('mc_posts?id=eq.'+b.dataset.wegpost,{methode:'DELETE'}).then(function(){D.posts=D.posts.filter(function(p){return p.id!==b.dataset.wegpost;});toonPrikbord();melding('Bericht verwijderd');}).catch(function(err){melding(err.message,true);});})) return; }
+    if(b.dataset.wegreactie){ api('mc_reacties?id=eq.'+b.dataset.wegreactie,{methode:'DELETE'}).then(function(){D.reacties=D.reacties.filter(function(r){return r.id!==b.dataset.wegreactie;});toonPrikbord();}).catch(function(err){melding(err.message,true);}); }
+    if(b.dataset.bewerk){ var p=D.posts.filter(function(x){return x.id===b.dataset.bewerk;})[0]; if(p) bewerkPost(p); }
+    if(b.dataset.event){ var ev=D.events.filter(function(x){return x.id===b.dataset.event;})[0]; eventForm(ev); }
+    if(b.id==='nieuwevent') eventForm(null);
+    if(b.dataset.lidww) lidWachtwoord(b.dataset.lidww);
+    if(b.dataset.lidweg) lidVerwijderen(b.dataset.lidweg);
+    if(b.dataset.lidbewerk) lidForm(D.leden.filter(function(x){return x.id===b.dataset.lidbewerk;})[0]);
+    if(b.id==='nieuwlid') lidForm(null);
+    if(b.dataset.med) medForm(D.mededelingen.filter(function(x){return x.id===b.dataset.med;})[0]);
+    if(b.dataset.medweg) medVerwijderen(b.dataset.medweg);
+    if(b.id==='nieuwmed') medForm(null);
+  });
+  function bewerkPost(p){
+    open('<h3>Bericht bewerken</h3><form id="mf"><label class="veld"><textarea id="m-tekst" maxlength="4000" required>'+esc(p.tekst)+'</textarea></label><div class="knoppen"><button class="knop lijn" type="button" data-sluit>Annuleren</button><button class="knop" type="submit">Opslaan</button></div></form>');
+    $('mf').addEventListener('submit',function(e){e.preventDefault();var t=$('m-tekst').value.trim();if(!t)return;
+      api('mc_posts?id=eq.'+p.id,{methode:'PATCH',body:{tekst:t},terug:true}).then(function(r){Object.assign(p,r[0]);sluit();toonPrikbord();melding('Opgeslagen');}).catch(function(err){melding(err.message,true);});});
+  }
+
+  /* ---------- Events ---------- */
+  function laadEvents(){
+    return api('mc_events?select=*&klant_id=eq.'+club.klant_id+'&order=start').then(function(r){D.events=r;toonEvents();});
+  }
+  function eventKaart(e){
+    var s=new Date(e.start);
+    return '<article class="kaart event"><div class="datumblok"><div><div class="d">'+s.getDate()+'</div><div class="m">'+MAANDEN[s.getMonth()]+'</div></div></div><div>'+
+      '<div style="display:flex;gap:10px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap"><h3>'+esc(e.titel)+'</h3><span class="badge '+(e.openbaar?'open">Openbaar':'dicht">Besloten')+'</span></div>'+
+      '<div class="info">'+esc(datum(e.start))+' · '+tijd(e.start)+(e.eind?' tot '+(new Date(e.eind).toDateString()===s.toDateString()?tijd(e.eind):esc(datum(e.eind))+' '+tijd(e.eind)):'')+(e.locatie?' · '+esc(e.locatie):'')+'</div>'+
+      (e.omschrijving?'<div class="tekst" style="white-space:pre-wrap">'+esc(e.omschrijving)+'</div>':'')+
+      (recht('mag_events')?'<div style="margin-top:10px"><button class="knop lijn klein" type="button" data-event="'+e.id+'">Bewerken</button></div>':'')+
+      '</div></article>';
+  }
+  function toonEvents(){
+    var nu=Date.now()-6*3600*1000;
+    var komend=D.events.filter(function(e){return new Date(e.eind||e.start)>=nu;}), oud=D.events.filter(function(e){return new Date(e.eind||e.start)<nu;}).reverse();
+    var h='<div class="kopje"><div><span class="label">'+(BEHEER?'Beheer':'Agenda')+'</span><h2 class="vuurtekst">Events</h2></div>'+(recht('mag_events')?'<button class="knop" type="button" id="nieuwevent">Nieuw event</button>':'')+'</div>';
+    if(BEHEER) h+='<p class="hint" style="margin:-6px 0 16px">Openbare events staan ook op de homepage. Besloten events zien alleen members met dat recht.</p>';
+    h+=komend.length?komend.map(eventKaart).join(''):'<div class="leeg">Geen komende events.</div>';
+    if(oud.length) h+='<details class="verleden"><summary>Eerdere events ('+oud.length+')</summary>'+oud.map(eventKaart).join('')+'</details>';
+    $('inhoud').innerHTML=h;
+  }
+  function eventForm(e){
+    var nieuw=!e; e=e||{titel:'',omschrijving:'',locatie:'',start:null,eind:null,openbaar:false};
+    var st=e.start?lokaal(e.start):lokaal(new Date(Date.now()+7*864e5).setHours(20,0,0,0));
+    open('<h3>'+(nieuw?'Nieuw event':'Event bewerken')+'</h3><form id="mf">'+
+      '<label class="veld"><span>Titel</span><input type="text" id="e-titel" maxlength="120" required value="'+esc(e.titel)+'"></label>'+
+      '<div class="twee"><label class="veld"><span>Begint</span><input type="datetime-local" id="e-start" required value="'+st+'"></label>'+
+      '<label class="veld"><span>Eindigt (optioneel)</span><input type="datetime-local" id="e-eind" value="'+(e.eind?lokaal(e.eind):'')+'"></label></div>'+
+      '<label class="veld"><span>Locatie</span><input type="text" id="e-loc" maxlength="160" value="'+esc(e.locatie||'')+'"></label>'+
+      '<label class="veld"><span>Omschrijving</span><textarea id="e-oms" maxlength="4000">'+esc(e.omschrijving||'')+'</textarea></label>'+
+      '<label class="vink"><input type="checkbox" id="e-open"'+(e.openbaar?' checked':'')+'> Openbaar: ook zichtbaar op de homepage</label>'+
+      '<p class="hint" style="margin:2px 0 12px">Uit = besloten, alleen voor members.</p>'+
+      '<div class="fouttekst" id="m-fout"></div>'+
+      '<div class="knoppen">'+(nieuw?'':'<button class="knop gevaar" type="button" id="e-weg" style="margin-right:auto">Verwijderen</button>')+'<button class="knop lijn" type="button" data-sluit>Annuleren</button><button class="knop" type="submit">Opslaan</button></div></form>');
+    $('mf').addEventListener('submit',function(ev){
+      ev.preventDefault();
+      var s=new Date($('e-start').value), ei=$('e-eind').value?new Date($('e-eind').value):null;
+      if(isNaN(s)) {$('m-fout').textContent='Kies een begintijd.';return;}
+      if(ei&&ei<s){$('m-fout').textContent='Het einde ligt voor het begin.';return;}
+      var body={titel:$('e-titel').value.trim(),start:s.toISOString(),eind:ei?ei.toISOString():null,locatie:$('e-loc').value.trim()||null,omschrijving:$('e-oms').value.trim()||null,openbaar:$('e-open').checked};
+      var p=nieuw?api('mc_events',{methode:'POST',body:Object.assign({klant_id:club.klant_id},body),terug:true}):api('mc_events?id=eq.'+e.id,{methode:'PATCH',body:body,terug:true});
+      p.then(function(){sluit();melding('Event opgeslagen');return laadEvents();}).catch(function(err){$('m-fout').textContent=err.message;});
+    });
+    if(!nieuw) $('e-weg').addEventListener('click',function(){
+      confirm2('Event "'+e.titel+'" verwijderen?',function(){api('mc_events?id=eq.'+e.id,{methode:'DELETE'}).then(function(){melding('Event verwijderd');return laadEvents();}).catch(function(err){melding(err.message,true);});});
+    });
+  }
+
+  /* ---------- Members ---------- */
+  function laadLeden(){
+    return api('mc_leden?select=*&klant_id=eq.'+club.klant_id+'&order=naam').then(function(r){D.leden=r;BEHEER?toonLedenBeheer():toonLeden();});
+  }
+  function toonLeden(){
+    var l=D.leden.filter(function(x){return x.actief;});
+    var h='<div class="kopje"><div><span class="label">Broeders</span><h2 class="vuurtekst">Members</h2></div><span class="hint">'+l.length+' members</span></div>';
+    h+=l.length?'<div class="ledenlijst">'+l.map(function(x){return '<div class="kaart"><div class="avatar">'+letter(x.naam)+'</div><div><div class="naam">'+esc(x.naam)+'</div>'+(x.functie?'<div class="tijd">'+esc(x.functie)+'</div>':'')+'</div></div>';}).join('')+'</div>':'<div class="leeg">Nog geen members.</div>';
+    $('inhoud').innerHTML=h;
+  }
+  var RECHTEN=[['mag_posten','Berichten plaatsen'],['mag_reageren','Reageren'],['ziet_besloten','Besloten events zien'],['mag_events','Events beheren']];
+  function toonLedenBeheer(){
+    var h='<div class="kopje"><div><span class="label">Beheer</span><h2 class="vuurtekst">Members</h2></div><button class="knop" type="button" id="nieuwlid">Nieuw member</button></div>'+
+      '<p class="hint" style="margin:-6px 0 16px">Members loggen in op <b>'+esc(location.host)+'/leden</b> met alleen hun gebruikersnaam en wachtwoord, zonder e-mail. Vink rechten direct aan of uit.</p>';
+    if(!D.leden.length) h+='<div class="leeg">Nog geen members. Maak het eerste account aan.</div>';
+    D.leden.forEach(function(x){
+      h+='<div class="kaart lid'+(x.actief?'':' uit')+'" data-lid="'+x.id+'"><div><div class="meta" style="margin:0"><div class="avatar">'+letter(x.naam)+'</div><div><div class="naam">'+esc(x.naam)+(x.functie?' <span class="tijd">· '+esc(x.functie)+'</span>':'')+'</div><div class="tijd">'+(x.gebruikersnaam?'Gebruikersnaam: '+esc(x.gebruikersnaam):'Geen account')+'</div></div>'+(x.actief?'':'<span class="badge grijs">Geblokkeerd</span>')+'</div>'+
+        '<div class="rechten">'+RECHTEN.map(function(r){return '<label class="vink"><input type="checkbox" data-recht="'+r[0]+'"'+(x[r[0]]?' checked':'')+'> '+r[1]+'</label>';}).join('')+
+        '<label class="vink"><input type="checkbox" data-recht="actief"'+(x.actief?' checked':'')+'> Toegang</label></div></div>'+
+        '<div class="knoppen"><button class="knop lijn klein" type="button" data-lidbewerk="'+x.id+'">Naam</button><button class="knop lijn klein" type="button" data-lidww="'+x.id+'">Nieuw wachtwoord</button><button class="knop gevaar klein" type="button" data-lidweg="'+x.id+'">Verwijderen</button></div></div>';
+    });
+    $('inhoud').innerHTML=h;
+  }
+  $('inhoud').addEventListener('change',function(e){
+    var c=e.target; if(!c.dataset||!c.dataset.recht) return;
+    var kaart=c.closest('[data-lid]'), id=kaart.dataset.lid, body={}; body[c.dataset.recht]=c.checked;
+    c.disabled=true;
+    api('mc_leden?id=eq.'+id,{methode:'PATCH',body:body,terug:true}).then(function(r){
+      var i=D.leden.findIndex(function(x){return x.id===id;}); D.leden[i]=r[0]; if(c.dataset.recht==='actief') toonLedenBeheer(); melding('Opgeslagen');
+    }).catch(function(err){c.checked=!c.checked;melding(err.message,true);}).then(function(){c.disabled=false;});
+  });
+  function lidForm(x){
+    if(x){
+      open('<h3>Member bewerken</h3><form id="mf"><label class="veld"><span>Naam</span><input type="text" id="n-naam" maxlength="60" required value="'+esc(x.naam)+'"></label>'+
+        '<label class="veld"><span>Functie (optioneel)</span><input type="text" id="n-functie" maxlength="40" placeholder="bijv. President, Road captain" value="'+esc(x.functie||'')+'"></label>'+
+        '<p class="hint">Gebruikersnaam: '+esc(x.gebruikersnaam||'-')+' (vast)</p><div class="fouttekst" id="m-fout"></div><div class="knoppen"><button class="knop lijn" type="button" data-sluit>Annuleren</button><button class="knop" type="submit">Opslaan</button></div></form>');
+      $('mf').addEventListener('submit',function(e){e.preventDefault();
+        api('mc_leden?id=eq.'+x.id,{methode:'PATCH',body:{naam:$('n-naam').value.trim(),functie:$('n-functie').value.trim()||null},terug:true}).then(function(){sluit();melding('Opgeslagen');return laadLeden();}).catch(function(err){$('m-fout').textContent=err.message;});});
+      return;
+    }
+    var ww=maakWachtwoord();
+    open('<h3>Nieuw member</h3><form id="mf" autocomplete="off">'+
+      '<label class="veld"><span>Naam</span><input type="text" id="n-naam" maxlength="60" required placeholder="Zoals de broeders hem kennen"></label>'+
+      '<div class="twee"><label class="veld"><span>Gebruikersnaam</span><input type="text" id="n-gebr" maxlength="30" required autocapitalize="none" spellcheck="false"></label>'+
+      '<label class="veld"><span>Wachtwoord</span><input type="text" id="n-ww" minlength="8" maxlength="128" required value="'+ww+'" spellcheck="false"></label></div>'+
+      '<label class="veld"><span>Functie (optioneel)</span><input type="text" id="n-functie" maxlength="40" placeholder="bijv. President, Road captain"></label>'+
+      '<div class="rechten" style="margin-bottom:12px">'+RECHTEN.map(function(r){return '<label class="vink"><input type="checkbox" data-nr="'+r[0]+'"'+(r[0]!=='mag_events'?' checked':'')+'> '+r[1]+'</label>';}).join('')+'</div>'+
+      '<p class="hint">Geen e-mail nodig. Geef de gebruikersnaam en het wachtwoord zelf door; het member kan het wachtwoord daarna wijzigen.</p>'+
+      '<div class="fouttekst" id="m-fout"></div><div class="knoppen"><button class="knop lijn" type="button" data-sluit>Annuleren</button><button class="knop" type="submit">Account aanmaken</button></div></form>');
+    var handmatig=false;
+    $('n-gebr').addEventListener('input',function(){handmatig=true;});
+    $('n-naam').addEventListener('input',function(){if(!handmatig) $('n-gebr').value=slugNaam(this.value);});
+    $('mf').addEventListener('submit',function(e){
+      e.preventDefault(); var b=this.querySelector('button[type=submit]'); b.disabled=true; $('m-fout').textContent='';
+      var rechten={}; [].forEach.call(document.querySelectorAll('[data-nr]'),function(c){rechten[c.dataset.nr]=c.checked;});
+      var gebr=$('n-gebr').value.trim().toLowerCase(), pw=$('n-ww').value;
+      functie({actie:'nieuw',naam:$('n-naam').value.trim(),gebruikersnaam:gebr,wachtwoord:pw,functie:$('n-functie').value.trim()||null,rechten:rechten})
+        .then(function(){toonGegevens('Account aangemaakt',gebr,pw);return laadLeden();})
+        .catch(function(err){$('m-fout').textContent=err.message;b.disabled=false;});
+    });
+  }
+  function toonGegevens(titel,gebr,pw){
+    open('<h3>'+esc(titel)+'</h3><p>Geef deze gegevens door aan het member. Het wachtwoord zie je hierna niet meer.</p>'+
+      '<div class="wwvak">'+esc(gebr)+'<br>'+esc(pw)+'</div><p class="hint">Inloggen op '+esc(location.host)+'/leden</p><div class="knoppen"><button class="knop" type="button" data-sluit>Klaar</button></div>');
+  }
+  function lidWachtwoord(id){
+    var x=D.leden.filter(function(y){return y.id===id;})[0]; if(!x) return; var ww=maakWachtwoord();
+    open('<h3>Nieuw wachtwoord</h3><form id="mf"><p class="hint" style="margin-bottom:12px">Voor '+esc(x.naam)+'. Het oude wachtwoord werkt daarna niet meer.</p><label class="veld"><span>Wachtwoord</span><input type="text" id="w-ww" minlength="8" maxlength="128" required value="'+ww+'" spellcheck="false"></label><div class="fouttekst" id="m-fout"></div><div class="knoppen"><button class="knop lijn" type="button" data-sluit>Annuleren</button><button class="knop" type="submit">Instellen</button></div></form>');
+    $('mf').addEventListener('submit',function(e){e.preventDefault();var pw=$('w-ww').value;
+      functie({actie:'wachtwoord',lid_id:id,wachtwoord:pw}).then(function(){toonGegevens('Wachtwoord ingesteld',x.gebruikersnaam,pw);}).catch(function(err){$('m-fout').textContent=err.message;});});
+  }
+  function lidVerwijderen(id){
+    var x=D.leden.filter(function(y){return y.id===id;})[0]; if(!x) return;
+    confirm2(x.naam+' en zijn account verwijderen? Zijn berichten blijven staan. Tijdelijk blokkeren kan ook met het vinkje Toegang.',function(){
+      functie({actie:'verwijderen',lid_id:id}).then(function(){melding('Member verwijderd');return laadLeden();}).catch(function(err){melding(err.message,true);});
+    });
+  }
+
+  /* ---------- Mijn account ---------- */
+  function toonAccount(){
+    var h='<div class="kopje"><div><span class="label">Account</span><h2 class="vuurtekst">Mijn account</h2></div></div>';
+    if(!ik){ h+='<div class="kaart">Je bent ingelogd als eigenaar met je Flowsmid-account. Je wachtwoord wijzig je in Mijn Flowsmid. Leden, events en de homepage beheer je via <a href="/beheer">Beheer</a>.</div>'; $('inhoud').innerHTML=h; return; }
+    var rr=RECHTEN.filter(function(r){return ik[r[0]];}).map(function(r){return r[1].toLowerCase();});
+    h+='<div class="kaart"><div class="meta"><div class="avatar">'+letter(ik.naam)+'</div><div><div class="naam">'+esc(ik.naam)+(ik.functie?' <span class="tijd">· '+esc(ik.functie)+'</span>':'')+'</div><div class="tijd">Gebruikersnaam: '+esc(ik.gebruikersnaam)+'</div></div></div><p class="hint">Je mag: '+esc(rr.join(', ')||'alleen lezen')+'.</p></div>'+
+      '<div class="kaart" style="max-width:460px"><h3 class="rye" style="font-size:20px;margin-bottom:12px">Wachtwoord wijzigen</h3><form id="wwform">'+
+      '<label class="veld"><span>Nieuw wachtwoord</span><input type="password" id="a-ww1" minlength="8" maxlength="128" autocomplete="new-password" required></label>'+
+      '<label class="veld"><span>Herhaal wachtwoord</span><input type="password" id="a-ww2" minlength="8" maxlength="128" autocomplete="new-password" required></label>'+
+      '<div class="fouttekst" id="a-fout"></div><button class="knop" type="submit">Wijzigen</button></form></div>';
+    $('inhoud').innerHTML=h;
+    $('wwform').addEventListener('submit',function(e){
+      e.preventDefault(); var a=$('a-ww1').value,b=$('a-ww2').value; $('a-fout').textContent='';
+      if(a.length<8){$('a-fout').textContent='Minimaal 8 tekens.';return;}
+      if(a!==b){$('a-fout').textContent='De wachtwoorden zijn niet gelijk.';return;}
+      var k=this.querySelector('button'); k.disabled=true;
+      functie({actie:'eigen_wachtwoord',wachtwoord:a}).then(function(){$('a-ww1').value='';$('a-ww2').value='';melding('Je wachtwoord is gewijzigd');})
+        .catch(function(err){$('a-fout').textContent=err.message;}).then(function(){k.disabled=false;});
+    });
+  }
+
+  /* ---------- Homepage-bericht ---------- */
+  function laadHomepage(){
+    return api('mc_mededelingen?select=*&klant_id=eq.'+club.klant_id+'&order=bijgewerkt_op.desc').then(function(r){D.mededelingen=r;toonHomepage();});
+  }
+  function toonHomepage(){
+    var h='<div class="kopje"><div><span class="label">Beheer</span><h2 class="vuurtekst">Bericht op de homepage</h2></div><button class="knop" type="button" id="nieuwmed">Nieuw bericht</button></div>'+
+      '<p class="hint" style="margin:-6px 0 16px">Zichtbare berichten staan bovenaan de homepage voor iedereen. Openbare events verschijnen daar vanzelf.</p>';
+    h+=D.mededelingen.length?D.mededelingen.map(function(m){
+      return '<div class="kaart"><div class="meta"><b class="rye" style="font-size:19px">'+esc(m.titel)+'</b><span class="badge '+(m.zichtbaar?'open">Zichtbaar':'grijs">Verborgen')+'</span><span class="tijd">'+esc(geleden(m.bijgewerkt_op))+'</span>'+
+        '<div class="acties"><button type="button" data-med="'+m.id+'">Bewerken</button><button type="button" data-medweg="'+m.id+'">Verwijderen</button></div></div>'+(m.tekst?'<div class="tekst">'+esc(m.tekst)+'</div>':'')+'</div>';
+    }).join(''):'<div class="leeg">Er staat nu geen bericht op de homepage.</div>';
+    h+='<p style="margin-top:14px"><a class="linkje" href="/" target="_blank" rel="noopener">Bekijk de homepage</a></p>';
+    $('inhoud').innerHTML=h;
+  }
+  function medForm(m){
+    var nieuw=!m; m=m||{titel:'',tekst:'',zichtbaar:true};
+    open('<h3>'+(nieuw?'Nieuw bericht':'Bericht bewerken')+'</h3><form id="mf">'+
+      '<label class="veld"><span>Titel</span><input type="text" id="h-titel" maxlength="120" required value="'+esc(m.titel)+'"></label>'+
+      '<label class="veld"><span>Tekst</span><textarea id="h-tekst" maxlength="2000">'+esc(m.tekst||'')+'</textarea></label>'+
+      '<label class="vink"><input type="checkbox" id="h-zicht"'+(m.zichtbaar?' checked':'')+'> Zichtbaar op de homepage</label>'+
+      '<div class="fouttekst" id="m-fout"></div><div class="knoppen"><button class="knop lijn" type="button" data-sluit>Annuleren</button><button class="knop" type="submit">Opslaan</button></div></form>');
+    $('mf').addEventListener('submit',function(e){e.preventDefault();
+      var body={titel:$('h-titel').value.trim(),tekst:$('h-tekst').value.trim()||null,zichtbaar:$('h-zicht').checked};
+      (nieuw?api('mc_mededelingen',{methode:'POST',body:Object.assign({klant_id:club.klant_id},body)}):api('mc_mededelingen?id=eq.'+m.id,{methode:'PATCH',body:body}))
+        .then(function(){sluit();melding('Opgeslagen');return laadHomepage();}).catch(function(err){$('m-fout').textContent=err.message;});});
+  }
+  function medVerwijderen(id){
+    confirm2('Dit bericht van de homepage verwijderen?',function(){api('mc_mededelingen?id=eq.'+id,{methode:'DELETE'}).then(function(){melding('Verwijderd');return laadHomepage();}).catch(function(err){melding(err.message,true);});});
+  }
+
+  /* ---------- Modal ---------- */
+  function open(html){$('modaldoos').innerHTML=html;$('modal').classList.add('open');var f=$('modaldoos').querySelector('input,textarea');if(f&&!('ontouchstart' in window))f.focus();}
+  function sluit(){$('modal').classList.remove('open');$('modaldoos').innerHTML='';}
+  $('modal').addEventListener('click',function(e){if(e.target===$('modal')||e.target.closest('[data-sluit]')) sluit();});
+  addEventListener('keydown',function(e){if(e.key==='Escape') sluit();});
+  function confirm2(tekst,ja){
+    open('<h3>Zeker weten?</h3><p>'+esc(tekst)+'</p><div class="knoppen"><button class="knop lijn" type="button" data-sluit>Annuleren</button><button class="knop gevaar" type="button" id="c-ja">Verwijderen</button></div>');
+    $('c-ja').addEventListener('click',function(){sluit();ja();});
+    return true;
+  }
+
+  /* ---------- Sessie herstellen ---------- */
+  try{var s=JSON.parse(sessionStorage.getItem(OPSLAG)||'null'); if(s&&s.refresh){sessie=s; start().catch(function(){uitloggen();});}}catch(e){}
+})();
+</script>
+</body>
+</html>
