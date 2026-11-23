@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Deathwish Brotherhood | Netherlands 423</title>
+<meta name="description" content="Deathwish Brotherhood Netherlands. Broederschap, loyaliteit en respect. Support your local Deathwish Brotherhood.">
+<meta name="theme-color" content="#070505">
+<link rel="icon" href="/img/favicon.png" type="image/png">
+<meta property="og:title" content="Deathwish Brotherhood Netherlands">
+<meta property="og:description" content="Support your local Deathwish Brotherhood. 423.">
+<meta property="og:image" content="/img/og.jpg">
+<link rel="preload" as="image" href="/img/deel-schild.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rye&family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --zwart:#070505; --kool:#0f0b0a; --kaart:#151010; --lijn:#2a1f1d;
+  --rood:#d8261a; --oranje:#ff6a13; --geel:#ffb23a; --gloed:rgba(255,80,20,.55);
+  --zilver:#d7d9dc; --staal:#9aa0a6; --tekst:#ece7e4; --zacht:#a89f9a;
+  --vuur:linear-gradient(180deg,#ffb23a 0%,#ff6a13 38%,#d8261a 72%,#8e0f0a 100%);
+  --zilverrand:linear-gradient(135deg,#f4f5f6 0%,#8d9399 22%,#e6e8ea 45%,#6f757b 70%,#d9dcdf 100%);
+  --max:1160px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;overflow-x:clip;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{background:var(--zwart);color:var(--tekst);font:16px/1.65 Inter,system-ui,sans-serif;overflow-x:clip}
+body.intro-loopt{overflow:hidden}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+.rye{font-family:Rye,Georgia,serif;font-weight:400;letter-spacing:.02em}
+.vuurtekst{background:var(--vuur);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 2px 0 #3a0603) drop-shadow(0 0 18px rgba(255,90,20,.25))}
+.zilvertekst{background:linear-gradient(180deg,#ffffff 0%,#c9ccd0 40%,#7d838a 55%,#e9ebee 80%,#a7acb2 100%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 2px 0 #000)}
+.label{font:600 12px/1 Oswald,sans-serif;letter-spacing:.32em;text-transform:uppercase;color:var(--oranje)}
+.knop{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:52px;padding:0 26px;border-radius:4px;
+  font:600 15px/1 Oswald,sans-serif;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;color:#fff;
+  background:linear-gradient(180deg,#ff7a1f,#c8200f);box-shadow:0 0 0 1.5px #e9ebee inset,0 0 0 3px #2a2a2a inset,0 10px 30px rgba(216,38,26,.35);transition:transform .2s,box-shadow .2s}
+.knop:hover{transform:translateY(-2px);box-shadow:0 0 0 1.5px #fff inset,0 0 0 3px #2a2a2a inset,0 14px 38px rgba(255,106,19,.5)}
+.knop.lijn{background:rgba(0,0,0,.35);box-shadow:0 0 0 1.5px #c9ccd0 inset}
+.knop.lijn:hover{box-shadow:0 0 0 1.5px #fff inset}
+
+/* Zilveren kader zoals de patches */
+.kader{position:relative;border-radius:6px;background:var(--kaart);padding:3px;
+  background-image:var(--zilverrand);box-shadow:0 18px 50px rgba(0,0,0,.6),0 0 40px rgba(255,70,20,.08)}
+.kader>.binnen{border-radius:4px;background:linear-gradient(180deg,#120d0c,#0a0707);height:100%;box-shadow:0 0 0 3px #050303 inset}
+
+/* ---------- Vonken (canvas) ---------- */
+canvas.vonken{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+
+/* ---------- Intro ---------- */
+#intro{position:fixed;inset:0;z-index:100;overflow:hidden;
+  background:radial-gradient(ellipse 70% 55% at 50% 52%,#3a0c06 0%,#160605 45%,#050303 80%);
+  display:grid;place-items:center;transition:opacity .9s ease,visibility .9s}
+#intro.weg{opacity:0;visibility:hidden}
+#intro .gloed{position:absolute;left:50%;top:52%;width:120vmax;height:120vmax;transform:translate(-50%,-50%) scale(.6);border-radius:50%;
+  background:radial-gradient(circle,rgba(255,90,20,.35) 0%,rgba(200,30,10,.12) 30%,transparent 60%);opacity:0;transition:opacity 1.2s,transform 1.2s}
+#intro.gloeit .gloed{opacity:1;transform:translate(-50%,-50%) scale(1)}
+#intro .overslaan{position:absolute;right:16px;top:14px;z-index:3;font:500 12px/1 Oswald,sans-serif;letter-spacing:.22em;text-transform:uppercase;color:#8f8480;background:none;border:0;padding:12px;cursor:pointer}
+#intro .overslaan:hover{color:#fff}
+#intro .slot{position:absolute;left:0;right:0;bottom:max(4vh,18px);text-align:center;z-index:3;opacity:0;transform:translateY(10px);transition:opacity .7s,transform .7s}
+#intro.klaar .slot{opacity:1;transform:none}
+#intro .slot p{font:600 clamp(11px,1.6vw,14px)/1.6 Oswald,sans-serif;letter-spacing:clamp(.18em,1vw,.42em);padding:0 16px;text-transform:uppercase;color:#cfc7c3}
+#intro .slot p b{color:var(--oranje);font-weight:600}
+
+.embleem{position:relative;aspect-ratio:2048/2860;height:min(88svh,calc(92vw * 2860 / 2048));z-index:2}
+.embleem img{position:absolute;height:auto;user-select:none;-webkit-user-drag:none}
+.embleem .d-boven{left:11.33%;top:15.77%;width:77.25%}
+.embleem .d-schild{left:24.41%;top:27.38%;width:50.49%}
+.embleem .d-kogel{left:1.76%;top:38.46%;width:21.34%}
+.embleem .d-bg{left:78.47%;top:43.18%;width:17.82%}
+.embleem .d-onder{left:9.18%;top:62.31%;width:80.47%}
+.embleem .d-dffd{left:25.59%;top:.7%;width:48.83%}
+.embleem .d-n423{left:25.59%;top:85.31%;width:48.83%}
+
+/* Elk onderdeel start onzichtbaar en krijgt zijn eigen entree */
+#intro .embleem img{opacity:0}
+#intro .embleem img.in{opacity:1;transform:none;filter:none}
+#intro .d-schild{transform:scale(1.9);filter:blur(14px) brightness(2.2);transition:transform .95s cubic-bezier(.2,.9,.2,1),opacity .5s,filter .95s}
+#intro .d-boven{transform:translateY(-120%) rotate(-4deg);transition:transform .7s cubic-bezier(.3,1.35,.5,1),opacity .25s}
+#intro .d-onder{transform:translateY(120%) rotate(4deg);transition:transform .7s cubic-bezier(.3,1.35,.5,1),opacity .25s}
+#intro .d-kogel{transform:translateX(-170%) rotate(-50deg);transition:transform .65s cubic-bezier(.25,1.3,.5,1),opacity .2s}
+#intro .d-bg{transform:translateX(190%) rotate(40deg);transition:transform .65s cubic-bezier(.25,1.3,.5,1),opacity .2s}
+#intro .d-dffd{transform:translateY(-60%) scale(1.5);filter:blur(8px);transition:transform .6s cubic-bezier(.3,1.3,.5,1),opacity .3s,filter .6s}
+#intro .d-n423{transform:translateY(60%) scale(1.5);filter:blur(8px);transition:transform .6s cubic-bezier(.3,1.3,.5,1),opacity .3s,filter .6s}
+#intro .embleem.schok{animation:schok .38s linear}
+#intro.klaar .embleem{animation:ademen 2.4s ease-in-out infinite}
+@keyframes schok{0%,100%{transform:translate(0,0)}20%{transform:translate(-6px,4px)}40%{transform:translate(5px,-3px)}60%{transform:translate(-3px,2px)}80%{transform:translate(2px,-1px)}}
+@keyframes ademen{0%,100%{filter:drop-shadow(0 0 18px rgba(255,80,20,.25))}50%{filter:drop-shadow(0 0 42px rgba(255,90,20,.55))}}
+#intro .flits{position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(255,170,90,.55),transparent 55%);opacity:0;pointer-events:none;z-index:1}
+#intro .flits.aan{animation:flits .5s ease-out}
+@keyframes flits{0%{opacity:1}100%{opacity:0}}
+
+/* ---------- Header ---------- */
+header.balk{position:fixed;top:0;left:0;right:0;z-index:50;transition:background .3s,box-shadow .3s}
+header.balk.vast{background:rgba(7,5,5,.9);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 1px 0 #2b2b2b}
+header .binnen{display:flex;align-items:center;justify-content:space-between;height:72px}
+header .merk{display:flex;align-items:center;gap:12px;text-decoration:none}
+header .merk img{height:44px;width:auto}
+header .merk span{font-family:Rye,serif;font-size:19px;line-height:1}
+header nav{display:flex;gap:26px;align-items:center}
+header nav a{font:500 13px/1 Oswald,sans-serif;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;color:#cbc3bf}
+header nav a:hover{color:#fff}
+@media (max-width:820px){header nav{display:none}}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;min-height:100svh;display:flex;align-items:center;padding:96px 0 60px;overflow:hidden;
+  background:radial-gradient(ellipse 60% 55% at 72% 55%,rgba(150,25,10,.55),transparent 70%),radial-gradient(ellipse 90% 60% at 50% 115%,rgba(255,90,20,.35),transparent 60%),var(--zwart)}
+.hero::before{content:"";position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.05'/%3E%3C/svg%3E");pointer-events:none}
+.hero .wrap{position:relative;z-index:2;display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;width:100%}
+.hero .tekst .label{margin-bottom:18px;display:block}
+.hero h1{font-family:Rye,serif;font-weight:400;font-size:clamp(42px,6.4vw,86px);line-height:1.02;margin-bottom:6px}
+.hero h1 .zilvertekst{display:block}
+.hero .sub{font:500 clamp(15px,1.8vw,19px)/1.4 Oswald,sans-serif;letter-spacing:.32em;text-transform:uppercase;color:#cfc7c3;margin:14px 0 22px}
+.hero .sub b{color:var(--oranje);font-weight:600}
+.hero p.intro{max-width:52ch;color:#d6cfcb;font-size:17px;margin-bottom:30px}
+.hero .knoppen{display:flex;gap:14px;flex-wrap:wrap}
+.hero .logo{justify-self:center;width:min(100%,480px);filter:drop-shadow(0 0 40px rgba(255,80,20,.35)) drop-shadow(0 30px 40px rgba(0,0,0,.7));animation:zweef 7s ease-in-out infinite}
+@keyframes zweef{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@media (max-width:900px){
+  .hero{padding-top:88px}
+  .hero .wrap{grid-template-columns:1fr;text-align:center;gap:18px}
+  .hero .logo{order:-1;width:min(74vw,360px)}
+  .hero p.intro{margin-left:auto;margin-right:auto}
+  .hero .knoppen{justify-content:center}
+}
+
+/* ---------- Secties ---------- */
+section{position:relative;padding:96px 0}
+.kop2{font-family:Rye,serif;font-weight:400;font-size:clamp(32px,4.4vw,54px);line-height:1.08;margin:14px 0 18px}
+.lead{color:#d0c8c4;max-width:60ch;font-size:17px}
+.scheiding{height:3px;background:var(--zilverrand);opacity:.65;box-shadow:0 0 18px rgba(255,90,20,.25)}
+
+/* Waarden */
+.waarden{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:44px}
+.waarde .binnen{padding:28px 24px}
+.waarde h3{font-family:Rye,serif;font-weight:400;font-size:26px;margin-bottom:8px}
+.waarde p{color:#bfb6b1;font-size:15px}
+@media (max-width:820px){.waarden{grid-template-columns:1fr}}
+
+/* Het vest */
+.vest{background:linear-gradient(180deg,var(--zwart),#120807 50%,var(--zwart))}
+.vest .rij{display:grid;grid-template-columns:.95fr 1.05fr;gap:54px;align-items:center}
+.vest .foto{padding:3px}
+.vest .foto img{border-radius:4px;width:100%}
+.delen{list-style:none;margin-top:26px;display:grid;gap:12px}
+.delen li{display:grid;grid-template-columns:64px 1fr;gap:16px;align-items:center;padding:12px 14px;border:1px solid var(--lijn);border-radius:6px;background:rgba(255,255,255,.015)}
+.delen li img{width:64px;height:48px;object-fit:contain}
+.delen b{font:600 14px/1.2 Oswald,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#fff;display:block;margin-bottom:2px}
+.delen span{color:#b4aba6;font-size:14.5px;line-height:1.45}
+@media (max-width:900px){.vest .rij{grid-template-columns:1fr;gap:36px}}
+
+/* 423 */
+.nummer{text-align:center;overflow:hidden;background:radial-gradient(ellipse 60% 70% at 50% 55%,rgba(200,40,10,.35),transparent 70%)}
+.nummer img{width:min(100%,900px);margin:26px auto 22px;filter:drop-shadow(0 0 30px rgba(255,70,20,.35))}
+.nummer .lead{margin:0 auto}
+
+/* Support */
+.support{text-align:center}
+.support .banner{max-width:900px;margin:0 auto 30px}
+.support .banner img{width:100%}
+
+/* Contact */
+.contact .kader{max-width:760px;margin:0 auto}
+.contact .binnen{padding:44px 30px;text-align:center}
+.contact .lead{margin:0 auto 26px}
+
+footer{padding:36px 0 46px;border-top:1px solid #1f1716;color:#7f7672;font-size:13px}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
+footer .rye{color:#cfc7c3;font-size:16px}
+
+/* Verschijnen bij scrollen */
+.op{opacity:0;transform:translateY(26px);transition:opacity .8s ease,transform .8s ease}
+.op.zicht{opacity:1;transform:none}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .op{opacity:1;transform:none}
+}
+</style>
+</head>
+<body class="intro-loopt">
+
+<!-- ================= Intro: het embleem bouwt zich op ================= -->
+<div id="intro" aria-label="Intro">
+  <canvas class="vonken" id="vonkenIntro"></canvas>
+  <div class="gloed"></div>
+  <div class="flits" id="flits"></div>
+  <button class="overslaan" id="overslaan" type="button">Overslaan</button>
+  <div class="embleem" id="embleem">
+    <img class="d-schild" data-stap="0" src="/img/deel-schild.webp" alt="">
+    <img class="d-boven"  data-stap="1" src="/img/deel-boven.webp" alt="">
+    <img class="d-onder"  data-stap="2" src="/img/deel-onder.webp" alt="">
+    <img class="d-kogel"  data-stap="3" src="/img/deel-kogel.webp" alt="">
+    <img class="d-bg"     data-stap="4" src="/img/deel-bg.webp" alt="">
+    <img class="d-dffd"   data-stap="5" src="/img/deel-dffd.webp" alt="">
+    <img class="d-n423"   data-stap="6" src="/img/deel-n423.webp" alt="">
+  </div>
+  <div class="slot"><p>Support your local <b>Deathwish Brotherhood</b></p></div>
+</div>
+
+<!-- ================= Header ================= -->
+<header class="balk" id="balk">
+  <div class="wrap binnen">
+    <a class="merk" href="#top"><img src="/img/deel-schild.webp" alt=""><span class="vuurtekst">Deathwish</span></a>
+    <nav>
+      <a href="#over">Over ons</a>
+      <a href="#kleuren">Onze kleuren</a>
+      <a href="#nummer">423</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <!-- ================= Hero ================= -->
+  <section class="hero">
+    <canvas class="vonken" id="vonkenHero"></canvas>
+    <div class="wrap">
+      <div class="tekst">
+        <span class="label">Brotherhood · Netherlands</span>
+        <h1><span class="vuurtekst">Deathwish</span><span class="zilvertekst">Brotherhood</span></h1>
+        <div class="sub">Netherlands · <b>423</b></div>
+        <p class="intro">Wij zijn Deathwish Brotherhood. Een broederschap uit Nederland, gebouwd op loyaliteit, respect en de liefde voor de weg. Wat we dragen, dragen we samen. Wie één van ons kent, kent ons allemaal.</p>
+        <div class="knoppen">
+          <a class="knop" href="#over">Leer ons kennen</a>
+          <a class="knop lijn" href="#contact">Neem contact op</a>
+        </div>
+      </div>
+      <img class="logo" src="/img/logo-volledig.webp" alt="Rugembleem van Deathwish Brotherhood Netherlands: bovenboog DEATHWISH, schild met de reaper, onderboog NETHERLANDS, kogel, BG, DFFD en 423" width="1024" height="1430">
+    </div>
+  </section>
+
+  <div class="scheiding"></div>
+
+  <!-- ================= Over ons ================= -->
+  <section id="over">
+    <div class="wrap">
+      <div class="op">
+        <span class="label">Over ons</span>
+        <h2 class="kop2"><span class="vuurtekst">Eén familie.</span> <span class="zilvertekst">Eén kleur.</span></h2>
+        <p class="lead">Deathwish Brotherhood is meer dan een naam op een vest. Het is een belofte aan elkaar. We rijden samen, staan voor elkaar klaar en houden onze eigen regels hoog. Broeders voor het leven.</p>
+      </div>
+      <div class="waarden">
+        <div class="kader waarde op"><div class="binnen"><h3 class="vuurtekst">Loyaliteit</h3><p>We laten niemand vallen. Wat binnen de broederschap gebeurt, blijft binnen de broederschap.</p></div></div>
+        <div class="kader waarde op"><div class="binnen"><h3 class="vuurtekst">Respect</h3><p>Respect verdien je. Voor de kleuren, voor elkaar en voor de mensen om ons heen.</p></div></div>
+        <div class="kader waarde op"><div class="binnen"><h3 class="vuurtekst">Broederschap</h3><p>Samen op de weg, samen aan tafel. Een familie die je zelf kiest.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Onze kleuren / het vest ================= -->
+  <section class="vest" id="kleuren">
+    <div class="wrap rij">
+      <div class="kader foto op"><img src="/img/vest.webp" alt="Het vest van Deathwish Brotherhood met het volledige rugembleem" loading="lazy"></div>
+      <div class="op">
+        <span class="label">Onze kleuren</span>
+        <h2 class="kop2"><span class="zilvertekst">Gedragen</span> <span class="vuurtekst">met trots</span></h2>
+        <p class="lead">Ons rugembleem vertelt wie we zijn. Elk onderdeel heeft zijn plek, en samen vormen ze de kleuren die alleen een broeder mag dragen.</p>
+        <ul class="delen">
+          <li><img src="/img/deel-boven.webp" alt="" loading="lazy"><div><b>Bovenboog</b><span>De naam waar alles om draait: Deathwish.</span></div></li>
+          <li><img src="/img/deel-schild.webp" alt="" loading="lazy"><div><b>Het schild</b><span>De reaper in het midden, het hart van ons embleem.</span></div></li>
+          <li><img src="/img/deel-onder.webp" alt="" loading="lazy"><div><b>Onderboog</b><span>Netherlands. Hier komen we vandaan.</span></div></li>
+          <li><img src="/img/deel-kogel.webp" alt="" loading="lazy"><div><b>Kogel &amp; BG</b><span>De zijpatches links en rechts van het schild.</span></div></li>
+          <li><img src="/img/deel-n423.webp" alt="" loading="lazy"><div><b>DFFD &amp; 423</b><span>De extra bogen boven en onder. 423 is ons nummer.</span></div></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 423 ================= -->
+  <section class="nummer" id="nummer">
+    <div class="wrap op">
+      <span class="label">Ons nummer</span>
+      <img src="/img/423.webp" alt="423" loading="lazy" width="1600" height="526">
+      <p class="lead">Je ziet het op onze vesten, op onze stickers en op de weg. Wie het weet, die weet het.</p>
+    </div>
+  </section>
+
+  <div class="scheiding"></div>
+
+  <!-- ================= Support ================= -->
+  <section class="support" id="support">
+    <div class="wrap op">
+      <div class="banner"><img src="/img/support.webp" alt="Support your local Deathwish Brotherhood" loading="lazy" width="1600" height="630"></div>
+      <p class="lead" style="margin:0 auto">Support-gear zoals shirts, hoodies en stickers komt binnenkort. Zo laat jij zien dat je achter de broederschap staat.</p>
+    </div>
+  </section>
+
+  <!-- ================= Contact ================= -->
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <div class="kader op"><div class="binnen">
+        <span class="label">Contact</span>
+        <h2 class="kop2"><span class="vuurtekst">Spreek ons aan</span></h2>
+        <p class="lead">Vragen, een evenement of interesse in support-gear? Laat het ons weten. We reageren zo snel mogelijk.</p>
+        <a class="knop" href="#contact" onclick="return false" title="Contactgegevens volgen">Stuur een bericht</a>
+      </div></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span class="rye">Deathwish Brotherhood · Netherlands · 423</span>
+    <span>Demo gemaakt door Flowsmid</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var intro=document.getElementById('intro'), emb=document.getElementById('embleem'), flits=document.getElementById('flits');
+  var delen=[].slice.call(emb.querySelectorAll('img')).sort(function(a,b){return a.dataset.stap-b.dataset.stap});
+  var stil=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var timers=[], klaar=false;
+
+  /* ---- Vonken ---- */
+  function vonken(cv,aantal){
+    var ctx=cv.getContext('2d'),w,h,d=Math.min(window.devicePixelRatio||1,2),v=[];
+    function maat(){w=cv.clientWidth;h=cv.clientHeight;cv.width=w*d;cv.height=h*d;ctx.setTransform(d,0,0,d,0,0)}
+    function nieuw(start){return{x:Math.random()*w,y:start?Math.random()*h:h+10,r:Math.random()*1.8+.4,vy:-(Math.random()*.7+.25),vx:(Math.random()-.5)*.35,l:Math.random()*.6+.4,f:Math.random()*Math.PI*2}}
+    maat();window.addEventListener('resize',maat);
+    for(var i=0;i<aantal;i++)v.push(nieuw(true));
+    var aan=true;
+    (function tik(){
+      if(!aan)return;
+      ctx.clearRect(0,0,w,h);
+      for(var i=0;i<v.length;i++){var p=v[i];p.x+=p.vx+Math.sin(p.f+=.03)*.25;p.y+=p.vy;
+        if(p.y<-10)v[i]=nieuw(false);
+        var a=Math.max(0,Math.min(1,p.y/h))*p.l;
+        ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,7);ctx.fillStyle='rgba(255,'+(110+Math.random()*60|0)+',30,'+a+')';ctx.shadowBlur=8;ctx.shadowColor='rgba(255,90,20,.9)';ctx.fill()}
+      requestAnimationFrame(tik)
+    })();
+    return function(){aan=false};
+  }
+  var stopIntroVonken=stil?function(){}:vonken(document.getElementById('vonkenIntro'),70);
+  if(!stil)vonken(document.getElementById('vonkenHero'),45);
+
+  /* ---- Opbouw van het logo ---- */
+  function schok(){emb.classList.remove('schok');void emb.offsetWidth;emb.classList.add('schok');flits.classList.remove('aan');void flits.offsetWidth;flits.classList.add('aan')}
+  var plan=[ [350,0,true], [1350,1,true], [1950,2,true], [2600,3,false], [3050,4,false], [3600,5,false], [4050,6,true] ];
+  function afronden(){
+    if(klaar)return;klaar=true;
+    timers.forEach(clearTimeout);
+    intro.classList.add('weg');document.body.classList.remove('intro-loopt');
+    setTimeout(function(){stopIntroVonken();intro.remove()},1000);
+  }
+  function start(){
+    if(stil){delen.forEach(function(d){d.classList.add('in')});intro.classList.add('gloeit','klaar');timers.push(setTimeout(afronden,1500));return}
+    intro.classList.add('gloeit');
+    plan.forEach(function(s){timers.push(setTimeout(function(){delen[s[1]].classList.add('in');if(s[2])timers.push(setTimeout(schok,s[1]===0?420:330))},s[0]))});
+    timers.push(setTimeout(function(){intro.classList.add('klaar')},4800));
+    timers.push(setTimeout(afronden,7200));
+  }
+  document.getElementById('overslaan').addEventListener('click',afronden);
+  /* Wachten tot de onderdelen geladen zijn, zodat ze echt één voor één verschijnen */
+  var laden=delen.map(function(i){return i.decode?i.decode().catch(function(){}):Promise.resolve()});
+  var gestart=false;function go(){if(!gestart){gestart=true;start()}}
+  Promise.all(laden).then(go);setTimeout(go,2500);
+
+  /* ---- Header en scroll-animaties ---- */
+  var balk=document.getElementById('balk');
+  function sc(){balk.classList.toggle('vast',window.scrollY>30)}sc();window.addEventListener('scroll',sc,{passive:true});
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('zicht');io.unobserve(e.target)}})},{threshold:.15});
+  document.querySelectorAll('.op').forEach(function(el){io.observe(el)});
+})();
+</script>
+</body>
+</html>
