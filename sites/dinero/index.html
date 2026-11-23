@@ -1,0 +1,526 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Barbershop Dinero | Knippen op afspraak in Spijkenisse</title>
+<meta name="description" content="Barbershop Dinero in Spijkenisse. Knippen op afspraak, Europees en afro haar, gratis parkeren. Boek direct online bij Moetch, Chauwa of Gio.">
+<meta name="theme-color" content="#0d0d0d">
+<link rel="icon" href="/logo/dinero-logo.svg" type="image/svg+xml">
+<meta property="og:title" content="Barbershop Dinero">
+<meta property="og:description" content="Knippen op afspraak. Europees & afro. Gratis parkeren. Boek online.">
+<meta property="og:image" content="/img/fade-baard.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Monsieur+La+Doulaise&display=swap" rel="stylesheet">
+<style>
+:root{
+  --zwart:#0d0d0d; --kool:#151515; --kaart:#1b1b1b; --lijn:#2b2b2b; --staal:#a9a9a9; --zilver:#d9d9d9; --wit:#f5f5f2;
+  --tekst:#ececea; --zacht:#9b9b98; --accent:#f5f5f2; --goud:#c9a227; --fout:#ff6b5e; --ok:#7bd88f;
+  --r:14px; --max:1160px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--zwart);color:var(--tekst);font:16px/1.6 Inter,system-ui,sans-serif;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit}
+button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+h1,h2,h3,.kop{font-family:Oswald,Impact,sans-serif;text-transform:uppercase;letter-spacing:.02em;line-height:1.05;font-weight:600}
+.script{font-family:'Monsieur La Doulaise',cursive;text-transform:none;letter-spacing:0;font-weight:400}
+.label{font:600 12px/1 Inter,sans-serif;letter-spacing:.22em;text-transform:uppercase;color:var(--zacht)}
+.knop{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:52px;padding:0 26px;border-radius:999px;background:var(--wit);color:#0d0d0d;
+  font:600 15px/1 Inter,sans-serif;text-decoration:none;transition:transform .2s,background .2s;white-space:nowrap}
+.knop:hover{transform:translateY(-2px);background:#fff}
+.knop.lijn{background:transparent;color:var(--wit);box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.4)}
+.knop.lijn:hover{box-shadow:inset 0 0 0 1.5px #fff}
+.knop:disabled{opacity:.4;cursor:not-allowed;transform:none}
+
+/* ---------- Intro ---------- */
+#intro{position:fixed;inset:0;z-index:100;background:radial-gradient(ellipse at 50% 45%,#1f1f1f 0%,#0b0b0b 70%);display:grid;place-items:center;transition:opacity .7s ease, visibility .7s}
+#intro.weg{opacity:0;visibility:hidden}
+#intro .logo-groot{width:min(78vw,620px);filter:drop-shadow(0 24px 50px rgba(0,0,0,.6))}
+#intro .ondertitel{position:absolute;left:0;right:0;bottom:12vh;text-align:center;font:600 13px/1 Inter,sans-serif;letter-spacing:.42em;text-transform:uppercase;color:#bdbdbd;opacity:0;animation:inFade .8s 2.3s forwards}
+#intro .overslaan{position:absolute;right:20px;top:18px;font-size:13px;color:#8d8d8d;letter-spacing:.1em;padding:10px}
+#intro #schaar-a,#intro #schaar-b{transform-box:view-box;transform-origin:306px 206px}
+#intro #schaar{opacity:0;animation:inFade .35s .1s forwards}
+#intro #schaar-a{animation:knipA 1.1s .25s ease-in-out 1}
+#intro #schaar-b{animation:knipB 1.1s .25s ease-in-out 1}
+#intro #lintgroep{transform-box:view-box;transform-origin:370px 230px;transform:scaleX(0);animation:lint .7s 1.05s cubic-bezier(.2,.9,.25,1.1) forwards}
+#intro .krul{opacity:0;animation:inFade .6s 1.9s forwards}
+#intro #woord{clip-path:inset(0 100% 0 0);animation:schrijf 1s 1.45s cubic-bezier(.6,0,.3,1) forwards}
+@keyframes knipA{0%,100%{transform:rotate(0)}20%{transform:rotate(-13deg)}40%{transform:rotate(0)}60%{transform:rotate(-13deg)}80%{transform:rotate(0)}}
+@keyframes knipB{0%,100%{transform:rotate(0)}20%{transform:rotate(13deg)}40%{transform:rotate(0)}60%{transform:rotate(13deg)}80%{transform:rotate(0)}}
+@keyframes lint{to{transform:scaleX(1)}}
+@keyframes schrijf{to{clip-path:inset(0 -10% 0 0)}}
+@keyframes inFade{to{opacity:1}}
+@media (prefers-reduced-motion:reduce){#intro *{animation-duration:.01s!important;animation-delay:0s!important}}
+
+/* ---------- Header ---------- */
+header.kop-balk{position:fixed;top:0;left:0;right:0;z-index:50;transition:background .3s, box-shadow .3s}
+header.kop-balk.vast{background:rgba(13,13,13,.92);backdrop-filter:blur(10px);box-shadow:0 1px 0 var(--lijn)}
+header .binnen{display:flex;align-items:center;justify-content:space-between;height:74px}
+header .merk{display:flex;align-items:center;gap:10px;text-decoration:none}
+header .merk img{height:46px;width:auto}
+header nav{display:flex;gap:28px;align-items:center}
+header nav a{font:500 14px/1 Inter,sans-serif;text-decoration:none;color:#cfcfcf;letter-spacing:.04em}
+header nav a:hover{color:#fff}
+header .knop{height:42px;padding:0 20px;font-size:14px}
+@media (max-width:860px){header nav a:not(.knop){display:none}}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;padding:120px 0 64px;overflow:hidden}
+.hero .bg{position:absolute;left:0;right:0;top:0;height:calc(100vw * var(--foto-h, 1.25) * .42);background:url(/img/vacature.jpg) center top/100% auto no-repeat;
+  filter:grayscale(1) contrast(1.08) brightness(.6);-webkit-mask-image:linear-gradient(180deg,#000 55%,transparent 98%);mask-image:linear-gradient(180deg,#000 55%,transparent 98%)}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,13,13,.25) 0%,rgba(13,13,13,.45) 50%,var(--zwart) 100%)}
+@media (max-width:760px){.hero .bg{height:100%;background:url(/img/fade-baard.jpg) center 20%/cover no-repeat;filter:grayscale(1) brightness(.45);-webkit-mask-image:none;mask-image:none}}
+.hero .wrap{position:relative;z-index:2;width:100%}
+.hero .logo-hero{width:min(520px,86vw);margin:0 0 18px -10px;filter:drop-shadow(0 20px 40px rgba(0,0,0,.55))}
+.hero h1{font-size:clamp(40px,7vw,84px);max-width:13ch}
+.hero h1 .script{font-size:1.15em;display:inline-block;transform:translateY(.08em);color:#fff;margin-left:-.05em}
+.hero .tags{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0 30px}
+.hero .tags span{padding:9px 16px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);font-size:14px;backdrop-filter:blur(6px)}
+.hero .acties{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.hero .score{display:flex;align-items:center;gap:10px;margin-left:8px;font-size:14px;color:#cfcfcf}
+.hero .score b{font:600 22px/1 Oswald,sans-serif;color:#fff}
+.sterren{color:var(--goud);letter-spacing:2px}
+
+/* ---------- Secties ---------- */
+section{padding:96px 0}
+.sectie-kop{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:40px;flex-wrap:wrap}
+.sectie-kop h2{font-size:clamp(34px,5vw,56px)}
+.sectie-kop p{color:var(--zacht);max-width:46ch}
+
+/* Behandelingen */
+.diensten{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.dienst{position:relative;padding:28px;border-radius:var(--r);background:var(--kaart);border:1px solid var(--lijn);display:flex;flex-direction:column;gap:12px;transition:border-color .2s, transform .2s}
+.dienst:hover{border-color:#4a4a4a;transform:translateY(-3px)}
+.dienst h3{font-size:24px}
+.dienst p{color:var(--zacht);font-size:15px;flex:1}
+.dienst .rij{display:flex;justify-content:space-between;align-items:center;margin-top:6px}
+.dienst .prijs{font:600 30px/1 Oswald,sans-serif}
+.dienst .duur{font-size:13px;color:var(--zacht)}
+.dienst .knop{height:42px;padding:0 18px;font-size:14px}
+
+/* Werk */
+.werk{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.werk figure{position:relative;overflow:hidden;border-radius:10px;aspect-ratio:1;background:#111}
+.werk figure:nth-child(1){grid-column:span 2;grid-row:span 2}
+.werk img{width:100%;height:100%;object-fit:cover;transition:transform .6s, filter .6s;filter:grayscale(.25)}
+.werk figure:hover img{transform:scale(1.06);filter:none}
+@media (max-width:700px){.werk{grid-template-columns:repeat(2,1fr)}}
+.ig-link{display:inline-flex;align-items:center;gap:10px;font-weight:600;text-decoration:none;border-bottom:1px solid #555;padding-bottom:4px}
+.ig-link:hover{border-color:#fff}
+
+/* Team */
+.team{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.kapper{padding:26px;border-radius:var(--r);background:linear-gradient(160deg,#1e1e1e,#141414);border:1px solid var(--lijn);text-align:center}
+.kapper .mono{width:92px;height:92px;margin:0 auto 16px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 30% 30%,#3a3a3a,#161616);border:2px solid #3a3a3a;
+  font:400 54px/1 'Monsieur La Doulaise',cursive;color:#fff;padding-top:10px}
+.kapper h3{font-size:26px}
+.kapper p{color:var(--zacht);font-size:14px;margin:6px 0 16px}
+.kapper .knop{height:40px;font-size:14px;padding:0 18px}
+
+/* Boeken */
+#boeken{background:linear-gradient(180deg,var(--zwart),#121212 30%,#121212 70%,var(--zwart))}
+.boek{display:grid;grid-template-columns:340px 1fr;gap:24px;align-items:start}
+@media (max-width:900px){.boek{grid-template-columns:1fr}}
+.samenvatting{position:sticky;top:96px;padding:26px;border-radius:var(--r);background:var(--kaart);border:1px solid var(--lijn)}
+.samenvatting img{width:220px;margin:-6px auto 14px}
+.samenvatting dl{display:grid;grid-template-columns:auto 1fr;gap:10px 16px;font-size:15px}
+.samenvatting dt{color:var(--zacht)}
+.samenvatting dd{text-align:right;font-weight:600}
+.samenvatting .totaal{margin-top:16px;padding-top:16px;border-top:1px dashed #3a3a3a;display:flex;justify-content:space-between;font:600 22px/1 Oswald,sans-serif}
+.stappen{padding:28px;border-radius:var(--r);background:var(--kaart);border:1px solid var(--lijn)}
+.stap{padding:6px 0 26px;border-bottom:1px solid var(--lijn);margin-bottom:24px}
+.stap:last-child{border:0;margin:0;padding-bottom:0}
+.stap h3{font-size:20px;display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.stap h3 i{font-style:normal;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:#fff;color:#000;font:700 14px/1 Inter,sans-serif}
+.stap.dicht{opacity:.38;pointer-events:none}
+.keuzes{display:flex;flex-wrap:wrap;gap:10px}
+.keuze{padding:12px 16px;border-radius:12px;border:1.5px solid #333;background:#141414;text-align:left;transition:border-color .15s, background .15s;min-width:0}
+.keuze:hover{border-color:#666}
+.keuze[aria-pressed="true"]{border-color:#fff;background:#232323}
+.keuze small{display:block;color:var(--zacht);font-size:13px}
+.keuze b{font-weight:600}
+.dagen{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;scrollbar-width:thin;-webkit-overflow-scrolling:touch}
+.dag{flex:0 0 64px;padding:10px 0;border-radius:12px;border:1.5px solid #333;background:#141414;text-align:center}
+.dag small{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--zacht)}
+.dag b{display:block;font:600 22px/1.2 Oswald,sans-serif}
+.dag[aria-pressed="true"]{border-color:#fff;background:#fff;color:#000}
+.dag[aria-pressed="true"] small{color:#333}
+.dag:disabled{opacity:.28;cursor:not-allowed}
+.tijden{display:grid;grid-template-columns:repeat(auto-fill,minmax(82px,1fr));gap:8px}
+.tijd{height:44px;border-radius:10px;border:1.5px solid #333;background:#141414;font-weight:600}
+.tijd:hover{border-color:#777}
+.tijd[aria-pressed="true"]{background:#fff;color:#000;border-color:#fff}
+.leeg{color:var(--zacht);font-size:15px;padding:8px 0}
+.velden{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:560px){.velden{grid-template-columns:1fr}}
+.veld{display:flex;flex-direction:column;gap:6px}
+.veld.vol{grid-column:1/-1}
+.veld label{font-size:13px;color:var(--zacht)}
+.veld input,.veld textarea{width:100%;padding:13px 14px;border-radius:10px;border:1.5px solid #333;background:#111;color:#fff;font:inherit;outline:none}
+.veld input:focus,.veld textarea:focus{border-color:#bbb}
+.lok{position:absolute;left:-9999px}
+.melding-fout{color:var(--fout);font-size:14px;min-height:20px;margin-top:10px}
+.klaar{text-align:center;padding:30px 10px}
+.klaar .vink{width:74px;height:74px;border-radius:50%;margin:0 auto 18px;display:grid;place-items:center;background:#fff;color:#000;font-size:36px}
+.klaar h3{font-size:34px;margin-bottom:10px}
+.klaar p{color:var(--zacht)}
+
+/* Info */
+.info{display:grid;grid-template-columns:1.1fr .9fr;gap:24px}
+@media (max-width:860px){.info{grid-template-columns:1fr}}
+.paneel{padding:30px;border-radius:var(--r);background:var(--kaart);border:1px solid var(--lijn)}
+.tijden-lijst{list-style:none}
+.tijden-lijst li{display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--lijn)}
+.tijden-lijst li:last-child{border:0}
+.tijden-lijst li.vandaag{font-weight:700;color:#fff}
+.tijden-lijst li .dicht{color:var(--zacht)}
+.contact-rij{display:flex;gap:14px;align-items:flex-start;padding:12px 0}
+.contact-rij svg{flex:0 0 22px;margin-top:3px;opacity:.8}
+.contact-rij a{text-decoration:none}
+.foto-paneel{position:relative;border-radius:var(--r);overflow:hidden;min-height:320px;background:url(/img/fade-zij.jpg) center/cover}
+.foto-paneel::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.8))}
+.foto-paneel span{position:absolute;z-index:2;left:24px;bottom:22px;font:600 26px/1.1 Oswald,sans-serif;text-transform:uppercase}
+
+/* Footer */
+footer{padding:48px 0 calc(40px + env(safe-area-inset-bottom));border-top:1px solid var(--lijn);color:var(--zacht);font-size:14px}
+footer .binnen{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center}
+footer img{height:54px}
+footer a{text-decoration:none}
+footer a:hover{color:#fff}
+.mobiel-boek{position:fixed;left:16px;right:16px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:40;display:none}
+.mobiel-boek .knop{width:100%;box-shadow:0 12px 30px rgba(0,0,0,.5)}
+@media (max-width:700px){.mobiel-boek.zicht{display:block}}
+.zichtbaar{opacity:0;transform:translateY(24px);transition:opacity .8s, transform .8s}
+.zichtbaar.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<div id="intro" aria-hidden="true">
+  <button class="overslaan" type="button" id="overslaan">Overslaan</button>
+  <div class="logo-groot"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" role="img" aria-label="Barbershop Dinero">
+
+<defs>
+ <linearGradient id="staal" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e9e9e9"/><stop offset=".45" stop-color="#a9a9a9"/><stop offset=".55" stop-color="#8d8d8d"/><stop offset="1" stop-color="#cfcfcf"/></linearGradient>
+ <linearGradient id="lint" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#ececec"/></linearGradient>
+ <linearGradient id="lintschaduw" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d4d4d4"/><stop offset="1" stop-color="#9c9c9c"/></linearGradient>
+</defs>
+<g id="schaar" stroke="#141414" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+ <g id="schaar-b">
+ <path d="M300,214 L548,250 Q560,254 552,260 L330,236 Z" fill="url(#staal)"/>
+ <path d="M308,200 C262,178 214,160 176,128 C160,114 150,96 128,86" fill="none" stroke-width="20"/>
+ <path d="M308,200 C262,178 214,160 176,128 C160,114 150,96 128,86" fill="none" stroke="url(#staal)" stroke-width="13"/>
+ <ellipse cx="96" cy="88" rx="44" ry="36" fill="none" stroke-width="17" transform="rotate(-14 96 88)"/>
+ <ellipse cx="96" cy="88" rx="44" ry="36" fill="none" stroke="url(#staal)" stroke-width="10" transform="rotate(-14 96 88)"/>
+ </g>
+ <g id="schaar-a">
+ <path d="M300,196 L338,168 M338.0,168.0 L348.2,156.9 L351.1,162.2 L361.2,151.1 L364.1,156.5 L374.3,145.4 L377.2,150.7 L387.4,139.6 L390.2,144.9 L400.4,133.8 L403.3,139.2 L413.5,128.1 L416.4,133.4 L426.5,122.3 L429.4,127.6 L439.6,116.5 L442.5,121.9 L452.6,110.8 L455.5,116.1 L465.7,105.0 L468.6,110.4 L478.8,99.2 L481.6,104.6 L491.8,93.5 L494.7,98.8 L504.9,87.7 L507.8,93.1 L517.9,82.0 L520.8,87.3 L531.0,76.2 L533.9,81.5 L544.1,70.4 L546.9,75.8 L557.1,64.7 L560.0,70.0 L566,74 Q574,72 570,82 L332,214 Z" fill="url(#staal)"/>
+ <path d="M306,214 C262,236 212,262 176,290 C160,302 150,312 130,318" fill="none" stroke-width="20"/>
+ <path d="M306,214 C262,236 212,262 176,290 C160,302 150,312 130,318" fill="none" stroke="url(#staal)" stroke-width="13"/>
+ <ellipse cx="96" cy="318" rx="44" ry="36" fill="none" stroke-width="17" transform="rotate(14 96 318)"/>
+ <ellipse cx="96" cy="318" rx="44" ry="36" fill="none" stroke="url(#staal)" stroke-width="10" transform="rotate(14 96 318)"/>
+ <path d="M150,322 q-6,26 -32,40" fill="none" stroke-width="7"/>
+ </g>
+ <circle cx="306" cy="206" r="9" fill="#ddd"/>
+</g>
+<!-- lint -->
+<g id="lintgroep" stroke="#141414" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round">
+ <!-- achterkant linkerkrul: band die omhoog loopt en oprolt -->
+ <path d="M170,180 C176,150 196,128 230,120 C262,112 290,112 318,106 L326,138 C298,142 270,142 244,150 C222,156 210,168 206,184 Z" fill="url(#lintschaduw)"/>
+ <circle cx="322" cy="122" r="17" fill="#e4e4e4"/>
+ <path d="M322,122 m-8,0 a8,8 0 1,1 8,8" fill="none" stroke-width="2.2"/>
+ <!-- achterkant rechterkrul -->
+ <path d="M560,252 C556,288 532,312 494,322 C462,330 430,330 404,336 L396,304 C424,300 452,298 476,290 C500,282 516,268 520,250 Z" fill="url(#lintschaduw)"/>
+ <circle cx="400" cy="320" r="17" fill="#e4e4e4"/>
+ <path d="M400,320 m8,0 a8,8 0 1,1 -8,-8" fill="none" stroke-width="2.2"/>
+ <!-- voorkant lint -->
+ <path d="M132,186 C196,160 246,176 304,176 C386,176 430,150 512,156 C548,158 572,170 600,164
+          L584,204 L606,246 C574,258 548,244 512,248 C432,256 386,292 304,292 C246,292 200,274 150,286
+          L166,236 Z" fill="url(#lint)"/>
+</g>
+<!-- sierkrullen -->
+<g class="krul" fill="none" stroke="#6f6f6f" stroke-width="1.8" stroke-linecap="round">
+ <path d="M236,104 C262,92 300,88 336,92 C352,94 360,84 352,78 C346,74 338,80 344,86"/>
+ <path d="M248,96 C232,90 222,96 226,104"/>
+ <path d="M386,350 C420,356 470,352 500,342 C516,336 520,350 510,354 C504,356 500,350 504,346"/>
+</g>
+<g class="krul" fill="none" stroke="#c9c9c9" stroke-width="1.4" stroke-linecap="round">
+ <path d="M440,190 C480,180 520,178 560,184"/>
+ <path d="M200,262 C230,256 260,262 290,270"/>
+</g>
+<!-- woordmerk -->
+<g id="woord" transform="translate(206.7,258) rotate(-4 159.3 0)">
+ <path d="M11.04-5.98Q2.81-5.98 2.81-2.56Q2.81 0.85 9.09 4.09Q15.37 7.32 25.19 7.32Q35.01 7.32 46.60 1.71Q43.55 0.98 35.26-1.46Q19.28-5.98 11.04-5.98M59.90-55.27Q59.90-48.19 70.88-48.19Q76.49-48.19 83.57-51.36Q90.65-54.53 96.99-59.66Q103.33-64.78 107.66-72.47Q112-80.15 112-88.21Q112-90.77 111.39-93.21Q101.87-91.74 92.17-87.23Q82.47-82.72 75.58-77.10Q68.69-71.49 64.29-65.51Q59.90-59.54 59.90-55.27M55.88 1.10Q63.44 2.56 68.81 2.56Q79.79 2.56 90.83-0.73Q101.87-4.03 111.02-9.58Q120.17-15.13 128.16-22.45Q136.15-29.77 141.64-37.58Q153.48-54.66 153.48-68.81Q153.48-76.37 149.82-82.11Q136.27-71.74 106.14-39.77Q95.77-28.91 81.92-17.20Q68.08-5.49 55.88 1.10M91.26-106.51Q78.69-106.51 62.83-99.80Q46.97-93.09 38.92-85.03L37.33-86.01Q48.43-95.53 64.05-101.99Q79.67-108.46 92.35-108.46Q109.68-108.46 113.34-95.89Q117.24-96.26 121.15-96.26Q140.18-96.26 149.82-85.64Q165.07-95.04 177.88-95.04Q185.56-95.04 189.95-91.62Q194.35-88.21 194.35-83.14Q194.35-78.08 190.38-73.20Q186.42-68.32 178.73-64.78L178.49-66.12Q184.59-68.56 188.31-73.32Q192.03-78.08 192.03-82.78Q192.03-87.47 188.06-90.46Q184.10-93.45 176.17-93.45Q165.19-93.45 151.65-83.45Q157.01-75.88 157.01-66.12Q157.01-56.36 153.17-46.73Q149.33-37.09 141.52-27.94Q133.71-18.79 123.10-11.53Q112.48-4.27 97.66 0.18Q82.84 4.64 66.37 4.64Q59.66 4.64 52.09 3.05Q36.36 10.61 21.35 10.61Q12.32 10.61 5.92 6.65Q-0.49 2.68-0.49-1.59Q-0.49-4.39 2.62-6.10Q5.73-7.81 11.71-7.81Q17.69-7.81 23.55-6.71Q29.40-5.61 38.61-3.11Q47.82-0.61 50.26 0Q61.49-6.10 75.09-17.93Q88.69-29.77 99.49-41.11Q110.29-52.46 123.83-65.03Q137.37-77.59 147.86-84.42Q139.32-93.94 119.80-93.94Q116.75-93.94 113.83-93.57Q114.19-91.74 114.19-89.55Q114.19-80.64 109.56-72.22Q104.92-63.81 98.09-58.07Q91.26-52.34 83.63-48.92Q76.01-45.51 70.15-45.51Q64.29-45.51 61.37-48.37Q58.44-51.24 58.44-56.30Q58.44-61.37 61.91-67.53Q65.39-73.69 71.67-79.54Q77.96-85.40 88.27-89.85Q98.58-94.31 110.78-95.65Q106.87-106.51 91.26-106.51M164.94-32.21Q164.94-30.50 162.99-28.91Q161.04-27.33 159.39-27.33Q157.75-27.33 157.75-28.67Q157.75-30.01 159.70-31.78Q161.65-33.55 163.30-33.55Q164.94-33.55 164.94-32.21M154.57-19.03Q138.10-4.15 138.10-0.37Q138.10 0.85 139.75 0.85Q141.40 0.85 144.69-0.61Q147.99-2.07 150.55-3.60Q153.11-5.12 156.71-7.38Q160.31-9.64 160.55-9.76L160.80-7.93Q155.18-4.27 147.99-0.61Q140.79 3.05 137.07 3.05Q133.35 3.05 133.35 0Q133.35-2.56 137.74-7.75Q142.13-12.93 146.52-16.84L150.91-20.74Q151.52-21.23 153.23-21.11Q154.94-20.98 154.94-19.89Q154.94-19.40 154.57-19.03M181.54-21.96Q184.10-21.96 184.10-19.21Q184.10-16.47 180.19-11.22Q194.10-20.86 202.52-20.86Q205.81-20.86 205.81-18.06Q205.81-15.25 203.37-12.26Q200.93-9.27 198.01-7.08Q190.20-1.46 190.20 0Q190.20 0.85 191.60 0.85Q193 0.85 196.30-0.61Q199.59-2.07 202.15-3.60Q204.72-5.12 208.32-7.38Q211.91-9.64 212.16-9.76L212.40-7.93Q195.93 3.05 189.34 3.05Q186.17 3.05 186.17 0Q186.17-2.07 188.80-4.94Q191.42-7.81 194.47-10.25Q202.89-16.59 202.89-18.67Q202.89-19.28 201.54-19.28Q197.03-19.28 188.12-14.40Q179.22-9.52 168.36 1.46Q167.63 2.20 165.62 2.20Q163.60 2.20 163.60 1.10Q163.60 0.73 172.02-7.93Q180.44-16.59 180.44-19.15Q180.44-19.76 179.65-19.76Q178.85-19.76 176.35-18.18Q173.85-16.59 168.67-13.12Q163.48-9.64 159.82-7.32L159.45-9.03Q161.28-10.25 164.46-12.44Q167.63-14.64 169.70-16.04Q171.78-17.45 174.22-19.03Q178.97-21.96 181.54-21.96M237.17-20.50Q237.17-21.47 235.22-21.47Q233.26-21.47 227.29-17.75Q221.31-14.03 217.16-9.76Q225.33-11.10 231.25-14.70Q237.17-18.30 237.17-20.50M213.26-3.29Q213.26 0.24 218.14 0.24Q227.41 0.24 241.19-9.76L241.44-7.93Q227.04 2.20 216.79 2.20Q209.47 2.20 209.47-3.90Q209.47-10 218.56-16.59Q227.65-23.18 237.29-23.18Q240.34-23.18 240.34-21.35Q240.34-18.42 233.57-14.33Q226.80-10.25 215.82-8.30Q213.26-5.37 213.26-3.29M257.66-17.32L263.40-18.06Q264.86-18.06 265.72-17.08Q266.57-16.10 266.57-14.76Q266.57-12.08 262.79-8.91Q259.01-5.73 255.29-2.93Q251.56-0.12 251.56 1.59Q251.56 2.56 253.15 2.56Q258.40 2.56 269.13-3.54Q273.77-6.10 279.01-9.76L279.26-7.93Q275.11-5.25 269.99-2.44Q267.06-0.61 261.45 1.77Q255.83 4.15 252.17 4.15Q248.51 4.15 248.51 0.85Q248.51-2.93 252.42-6.28Q256.32-9.64 260.17-11.89Q264.01-14.15 264.01-15.37Q264.01-15.74 263.15-15.74L256.32-15.13Q254.37-15.13 252.78-15.49Q246.93-11.35 240.46-7.32L240.10-9.03L251.69-17.08Q251.81-19.40 254.61-21.72Q257.42-24.03 259.37-24.03Q261.32-24.03 261.32-23Q261.32-21.96 259.01-20.37Q256.69-18.79 256.69-18.06Q256.69-17.32 257.66-17.32M281.94 0.98Q290.73 0.98 299.02-7.81L299.02-7.93Q299.02-13.79 304.63-18.91Q304.27-20.25 302.56-20.25Q293.53-20.25 286.58-13.48Q279.62-6.71 279.62-1.59Q279.62 0.98 281.94 0.98M300.85-22.08Q307.32-22.08 307.32-17.81Q307.32-14.15 302.80-9.03L302.80-8.05Q302.80-4.03 306.34-4.03Q308.54-4.03 311.22-5.86L317.20-9.76L317.44-7.93L311.83-4.39Q307.93-1.83 304.21-1.83Q300.49-1.83 299.27-5.61Q289.51 3.05 280.72 3.05Q275.48 3.05 275.48-1.95Q275.48-8.30 282.92-15.19Q290.36-22.08 300.85-22.08" fill="#141414" stroke="#141414" stroke-width="5" stroke-linejoin="round"/>
+</g>
+</svg></div>
+  <div class="ondertitel">Barbershop · Spijkenisse</div>
+</div>
+
+<header class="kop-balk" id="kopbalk">
+  <div class="wrap binnen">
+    <a class="merk" href="#top" aria-label="Barbershop Dinero"><img src="/logo/dinero-logo.svg" alt="Barbershop Dinero" width="74" height="46"></a>
+    <nav>
+      <a href="#behandelingen">Behandelingen</a>
+      <a href="#team">Team</a>
+      <a href="#werk">Werk</a>
+      <a href="#contact">Contact</a>
+      <a class="knop" href="#boeken">Afspraak maken</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="bg" aria-hidden="true"></div>
+    <div class="wrap">
+      <img class="logo-hero" src="/logo/dinero-logo.svg" alt="" width="520" height="325">
+      <h1>Fresh cuts, <span class="script">op afspraak.</span></h1>
+      <div class="tags"><span>Knippen op afspraak</span><span>Europees &amp; afro</span><span>Gratis parkeren</span></div>
+      <div class="acties">
+        <a class="knop" href="#boeken">Afspraak maken
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="knop lijn" href="#behandelingen">Prijzen</a>
+        <div class="score"><b>4,8</b><span><span class="sterren">★★★★★</span><br>859 beoordelingen</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="behandelingen">
+    <div class="wrap">
+      <div class="sectie-kop zichtbaar">
+        <div><div class="label">Prijslijst</div><h2>Behandelingen</h2></div>
+        <p>Elke behandeling duurt ongeveer 40 minuten. Kies wat je wilt, wij zorgen dat je strak de deur uit gaat.</p>
+      </div>
+      <div class="diensten" id="dienstenlijst"></div>
+    </div>
+  </section>
+
+  <section id="boeken">
+    <div class="wrap">
+      <div class="sectie-kop zichtbaar">
+        <div><div class="label">Online boeken</div><h2>Plan je <span class="script" style="font-size:1.2em">knipbeurt</span></h2></div>
+        <p>Kies een behandeling, je kapper en een tijd die je past. Je afspraak staat meteen vast.</p>
+      </div>
+      <div class="boek">
+        <aside class="samenvatting">
+          <img src="/logo/dinero-logo.svg" alt="" width="220" height="138">
+          <dl>
+            <dt>Behandeling</dt><dd id="s-dienst">–</dd>
+            <dt>Kapper</dt><dd id="s-kapper">–</dd>
+            <dt>Datum</dt><dd id="s-datum">–</dd>
+            <dt>Tijd</dt><dd id="s-tijd">–</dd>
+          </dl>
+          <div class="totaal"><span>Totaal</span><span id="s-prijs">€ 0</span></div>
+        </aside>
+        <div class="stappen" id="stappen">
+          <div class="stap" id="stap1"><h3><i>1</i>Behandeling</h3><div class="keuzes" id="k-dienst"></div></div>
+          <div class="stap dicht" id="stap2"><h3><i>2</i>Kapper</h3><div class="keuzes" id="k-kapper"></div></div>
+          <div class="stap dicht" id="stap3"><h3><i>3</i>Datum en tijd</h3>
+            <div class="dagen" id="k-dagen"></div>
+            <div style="height:16px"></div>
+            <div class="tijden" id="k-tijden"><div class="leeg">Kies eerst een dag.</div></div>
+          </div>
+          <form class="stap dicht" id="stap4" novalidate>
+            <h3><i>4</i>Jouw gegevens</h3>
+            <div class="velden">
+              <div class="veld"><label for="f-naam">Naam</label><input id="f-naam" autocomplete="name" required maxlength="80"></div>
+              <div class="veld"><label for="f-tel">Telefoon</label><input id="f-tel" type="tel" autocomplete="tel" required maxlength="20" inputmode="tel"></div>
+              <div class="veld vol"><label for="f-mail">E-mail (optioneel)</label><input id="f-mail" type="email" autocomplete="email" maxlength="120"></div>
+              <div class="veld vol"><label for="f-opm">Opmerking (optioneel)</label><textarea id="f-opm" rows="2" maxlength="500" placeholder="Bijvoorbeeld: skin fade, lijntje erin"></textarea></div>
+              <input class="lok" id="f-web" tabindex="-1" autocomplete="off" aria-hidden="true">
+            </div>
+            <div style="height:18px"></div>
+            <button class="knop" type="submit" id="boekknop" style="width:100%">Afspraak bevestigen</button>
+            <div class="melding-fout" id="boekfout" role="alert"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="team">
+    <div class="wrap">
+      <div class="sectie-kop zichtbaar">
+        <div><div class="label">De stoel</div><h2>Ons team</h2></div>
+        <p>Drie barbers, ieder met een eigen stijl. Boek bij je vaste kapper of kies geen voorkeur.</p>
+      </div>
+      <div class="team" id="teamlijst"></div>
+    </div>
+  </section>
+
+  <section id="werk">
+    <div class="wrap">
+      <div class="sectie-kop zichtbaar">
+        <div><div class="label">Uit de zaak</div><h2>Ons werk</h2></div>
+        <a class="ig-link" href="https://www.instagram.com/barbershopdinero/" target="_blank" rel="noopener">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+          @barbershopdinero</a>
+      </div>
+      <div class="werk zichtbaar">
+        <figure><img src="/img/fade-baard.jpg" alt="Skin fade met strak opgeschoren baard" loading="lazy"></figure>
+        <figure><img src="/img/fade-zij.jpg" alt="High fade, zijaanzicht" loading="lazy"></figure>
+        <figure><img src="/img/afro.jpg" alt="Afro knipbeurt in de stoel" loading="lazy"></figure>
+        <figure><img src="/img/barber.jpg" alt="Barber aan het werk in de zaak" loading="lazy"></figure>
+        <figure><img src="/img/fade.jpg" alt="Fade met baard" loading="lazy"></figure>
+        <figure><img src="/img/dreads.jpg" alt="Klant met dreads" loading="lazy"></figure>
+        <figure><img src="/img/kids.jpg" alt="Kleine klant in de kappersstoel" loading="lazy"></figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <div class="sectie-kop zichtbaar"><div><div class="label">Langskomen</div><h2>Openingstijden &amp; contact</h2></div></div>
+      <div class="info">
+        <div class="paneel">
+          <ul class="tijden-lijst" id="tijdenlijst"></ul>
+          <div style="height:18px"></div>
+          <div class="contact-rij"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>
+            <a href="https://www.google.com/maps/search/?api=1&query=Hongerlandsedijk+1002+Spijkenisse" target="_blank" rel="noopener">Hongerlandsedijk 1002<br>3201 LW Spijkenisse<br><small style="color:var(--zacht)">Gratis parkeren voor de deur</small></a></div>
+          <div class="contact-rij"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>
+            <a href="tel:+31181856715">0181 856 715</a></div>
+        </div>
+        <div class="foto-paneel" role="img" aria-label="Fade uit de zaak"><span>Strak de deur uit.<br>Elke keer.</span></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap binnen">
+    <img src="/logo/dinero-logo.svg" alt="Barbershop Dinero" width="86" height="54">
+    <div>© <span id="jaar"></span> Barbershop Dinero · Hongerlandsedijk 1002, Spijkenisse</div>
+    <div><a href="https://www.instagram.com/barbershopdinero/" target="_blank" rel="noopener">Instagram</a> · <a href="/beheer/">Beheer</a></div>
+  </div>
+</footer>
+<div class="mobiel-boek" id="mobielboek"><a class="knop" href="#boeken">Afspraak maken</a></div>
+
+<script>
+(function(){
+  'use strict';
+  var SUPA='https://uywydquzvdbpfjjrwsbt.supabase.co', KEY='sb_publishable_J1Ewyl4he9-KRj_jv8fIPA_S8vZ2v5_', SLUG='dinero';
+  var DAGNAMEN=['Maandag','Dinsdag','Woensdag','Donderdag','Vrijdag','Zaterdag','Zondag'];
+  var KORT=['ma','di','wo','do','vr','za','zo'], MAANDEN=['jan','feb','mrt','apr','mei','jun','jul','aug','sep','okt','nov','dec'];
+  var $=function(id){return document.getElementById(id);};
+  var Z=null, B={dienst:null,kapper:'',datum:null,tijd:null}, cache={};
+  function pad(n){return (n<10?'0':'')+n;}
+  function iso(d){return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());}
+  function euro(n){n=Number(n)||0;return '€ '+(Math.round(n)===n?n:n.toFixed(2).replace('.',','));}
+  function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+  function rpc(naam,body){
+    return fetch(SUPA+'/rest/v1/rpc/'+naam,{method:'POST',headers:{apikey:KEY,Authorization:'Bearer '+KEY,'Content-Type':'application/json','Content-Profile':'flowsmid','Accept-Profile':'flowsmid'},body:JSON.stringify(body)})
+      .then(function(r){return r.json().then(function(j){if(!r.ok) throw new Error(j&&j.message||'Er ging iets mis'); return j;});});
+  }
+
+  /* Intro */
+  var intro=$('intro'), introKlaar=false;
+  function sluitIntro(){ if(introKlaar) return; introKlaar=true; intro.classList.add('weg'); document.body.style.overflow=''; }
+  try{ if(sessionStorage.getItem('dinero-intro')){ intro.style.display='none'; introKlaar=true; } else { document.body.style.overflow='hidden'; setTimeout(sluitIntro,3600); sessionStorage.setItem('dinero-intro','1'); } }
+  catch(e){ document.body.style.overflow='hidden'; setTimeout(sluitIntro,3600); }
+  $('overslaan').addEventListener('click',sluitIntro);
+
+  /* Header en animaties */
+  function scrol(){ $('kopbalk').classList.toggle('vast',scrollY>40); var b=$('boeken').getBoundingClientRect(); $('mobielboek').classList.toggle('zicht',scrollY>500&&(b.top>innerHeight||b.bottom<0)); }
+  addEventListener('scroll',scrol,{passive:true}); scrol();
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.15});
+    document.querySelectorAll('.zichtbaar').forEach(function(el){io.observe(el);});
+  } else document.querySelectorAll('.zichtbaar').forEach(function(el){el.classList.add('in');});
+  $('jaar').textContent=new Date().getFullYear();
+
+  /* Gegevens laden */
+  rpc('kb_publiek',{p_slug:SLUG}).then(function(z){ Z=z; tekenDiensten(); tekenTeam(); tekenTijdenlijst(); tekenStap1(); })
+    .catch(function(){ $('dienstenlijst').innerHTML='<p class="leeg">De prijslijst kon niet geladen worden. Bel ons op 0181 856 715.</p>'; });
+
+  function tekenDiensten(){
+    $('dienstenlijst').innerHTML=Z.diensten.map(function(d){
+      return '<article class="dienst"><h3>'+esc(d.naam)+'</h3><p>'+esc(d.omschrijving||'')+'</p><div class="rij"><div><div class="prijs">'+euro(d.prijs)+'</div><div class="duur">'+d.duur+' min</div></div>'+
+        '<button class="knop" data-dienst="'+d.id+'">Boeken</button></div></article>';
+    }).join('');
+  }
+  function tekenTeam(){
+    $('teamlijst').innerHTML=Z.kappers.map(function(k){
+      return '<article class="kapper zichtbaar in"><div class="mono">'+esc(k.naam.charAt(0))+'</div><h3>'+esc(k.naam)+'</h3><p>'+esc(k.bio||'')+'</p><button class="knop lijn" data-kapper="'+k.id+'">Boek bij '+esc(k.naam)+'</button></article>';
+    }).join('');
+  }
+  function tekenTijdenlijst(){
+    var t=Z.openingstijden||[], vandaag=(new Date().getDay()+6)%7;
+    $('tijdenlijst').innerHTML=DAGNAMEN.map(function(n,i){var d=t[i]||{};return '<li'+(i===vandaag?' class="vandaag"':'')+'><span>'+n+'</span>'+(d.gesloten||!d.open?'<span class="dicht">Gesloten</span>':'<span>'+d.open+' – '+d.dicht+'</span>')+'</li>';}).join('');
+  }
+
+  /* Boeken */
+  function knoppen(el,lijst,huidig,maak){ el.innerHTML=lijst.map(maak).join(''); }
+  function tekenStap1(){
+    knoppen($('k-dienst'),Z.diensten,B.dienst,function(d){return '<button type="button" class="keuze" data-id="'+d.id+'" aria-pressed="'+(B.dienst&&B.dienst.id===d.id)+'"><b>'+esc(d.naam)+'</b><small>'+d.duur+' min · '+euro(d.prijs)+'</small></button>';});
+  }
+  function tekenStap2(){
+    var lijst=[{id:'',naam:'Geen voorkeur',bio:'Eerste vrije kapper'}].concat(Z.kappers);
+    knoppen($('k-kapper'),lijst,B.kapper,function(k){return '<button type="button" class="keuze" data-id="'+k.id+'" aria-pressed="'+(B.kapper===k.id)+'"><b>'+esc(k.naam)+'</b><small>'+esc(k.bio||'')+'</small></button>';});
+  }
+  function tekenDagen(){
+    var html='', nu=new Date(); nu.setHours(0,0,0,0);
+    for(var i=0;i<Math.min(Z.vooruit||42,42);i++){
+      var d=new Date(nu); d.setDate(d.getDate()+i); var wd=(d.getDay()+6)%7, o=(Z.openingstijden||[])[wd]||{};
+      var dicht=o.gesloten||!o.open;
+      html+='<button type="button" class="dag" data-d="'+iso(d)+'" '+(dicht?'disabled':'')+' aria-pressed="'+(B.datum===iso(d))+'"><small>'+(i===0?'vandaag':KORT[wd])+'</small><b>'+d.getDate()+'</b><small>'+MAANDEN[d.getMonth()]+'</small></button>';
+    }
+    $('k-dagen').innerHTML=html;
+  }
+  function tekenTijden(){
+    var el=$('k-tijden');
+    if(!B.datum){el.innerHTML='<div class="leeg">Kies eerst een dag.</div>';return;}
+    var sl=B.dienst.id+'|'+B.kapper+'|'+B.datum;
+    if(!cache[sl]){
+      el.innerHTML='<div class="leeg">Vrije tijden laden…</div>';
+      rpc('kb_tijden',{p_slug:SLUG,p_datum:B.datum,p_dienst:B.dienst.id,p_kapper:B.kapper||null}).then(function(l){cache[sl]=l||[];tekenTijden();})
+        .catch(function(){el.innerHTML='<div class="leeg">Tijden laden lukte niet. Probeer het opnieuw.</div>';});
+      return;
+    }
+    var l=cache[sl];
+    el.innerHTML=l.length?l.map(function(t){return '<button type="button" class="tijd" data-t="'+t.t+'" aria-pressed="'+(B.tijd===t.t)+'">'+t.t+'</button>';}).join('')
+      :'<div class="leeg">Geen vrije tijden op deze dag'+(B.kapper?' bij deze kapper':'')+'. Kies een andere dag.</div>';
+  }
+  function open(n){ for(var i=1;i<=4;i++) $('stap'+i).classList.toggle('dicht',i>n); }
+  function samenvatting(){
+    $('s-dienst').textContent=B.dienst?B.dienst.naam:'–';
+    var k=Z&&Z.kappers.filter(function(x){return x.id===B.kapper;})[0];
+    $('s-kapper').textContent=B.dienst?(k?k.naam:'Geen voorkeur'):'–';
+    if(B.datum){var p=B.datum.split('-'),d=new Date(+p[0],p[1]-1,+p[2]);$('s-datum').textContent=KORT[(d.getDay()+6)%7]+' '+d.getDate()+' '+MAANDEN[d.getMonth()];} else $('s-datum').textContent='–';
+    $('s-tijd').textContent=B.tijd||'–';
+    $('s-prijs').textContent=euro(B.dienst?B.dienst.prijs:0);
+  }
+  function kiesDienst(id){ B.dienst=Z.diensten.filter(function(d){return d.id===id;})[0]; B.tijd=null; tekenStap1(); tekenStap2(); open(2); if(B.kapper!==null&&$('k-kapper').querySelector('[aria-pressed="true"]')){ tekenDagen(); open(3); tekenTijden(); } samenvatting(); }
+  function kiesKapper(id){ B.kapper=id; B.tijd=null; tekenStap2(); tekenDagen(); open(3); if(B.datum) tekenTijden(); samenvatting(); }
+  $('k-dienst').addEventListener('click',function(e){var b=e.target.closest('.keuze');if(b) kiesDienst(b.dataset.id);});
+  $('k-kapper').addEventListener('click',function(e){var b=e.target.closest('.keuze');if(b) kiesKapper(b.dataset.id);});
+  $('k-dagen').addEventListener('click',function(e){var b=e.target.closest('.dag');if(!b||b.disabled) return; B.datum=b.dataset.d; B.tijd=null; tekenDagen(); tekenTijden(); open(3); samenvatting();});
+  $('k-tijden').addEventListener('click',function(e){var b=e.target.closest('.tijd');if(!b) return; B.tijd=b.dataset.t; tekenTijden(); open(4); samenvatting(); setTimeout(function(){$('f-naam').focus({preventScroll:true});},50);});
+  document.addEventListener('click',function(e){
+    var d=e.target.closest('[data-dienst]'), k=e.target.closest('[data-kapper]');
+    if(d){ e.preventDefault(); kiesDienst(d.dataset.dienst); $('boeken').scrollIntoView({behavior:'smooth'}); }
+    if(k){ e.preventDefault(); if(!B.dienst) kiesDienst(Z.diensten[0].id); kiesKapper(k.dataset.kapper); $('boeken').scrollIntoView({behavior:'smooth'}); }
+  });
+  $('stap4').addEventListener('submit',function(e){
+    e.preventDefault();
+    var naam=$('f-naam').value.trim(), tel=$('f-tel').value.trim(), fout=$('boekfout');
+    if(!naam||!/^[0-9 +()-]{8,20}$/.test(tel)){fout.textContent='Vul je naam en een geldig telefoonnummer in.';return;}
+    var knop=$('boekknop'); knop.disabled=true; knop.textContent='Bezig…'; fout.textContent='';
+    rpc('kb_boeken',{p_slug:SLUG,p:{dienst:B.dienst.id,kapper:B.kapper||'',start:B.datum+'T'+B.tijd,naam:naam,telefoon:tel,email:$('f-mail').value.trim(),opmerking:$('f-opm').value.trim(),website:$('f-web').value}})
+      .then(function(r){
+        var p=B.datum.split('-'),d=new Date(+p[0],p[1]-1,+p[2]);
+        $('stappen').innerHTML='<div class="klaar"><div class="vink">✓</div><h3>Tot dan, '+esc(naam.split(' ')[0])+'!</h3><p>'+esc(B.dienst.naam)+(r.kapper?' bij <b style="color:#fff">'+esc(r.kapper)+'</b>':'')+'<br>'+
+          DAGNAMEN[(d.getDay()+6)%7].toLowerCase()+' '+d.getDate()+' '+MAANDEN[d.getMonth()]+' om '+B.tijd+'</p><p style="margin-top:14px">Kun je niet? Bel of app ons op tijd: <a href="tel:+31181856715">0181 856 715</a>.</p></div>';
+        if(r.kapper){ var k=Z.kappers.filter(function(x){return x.naam===r.kapper;})[0]; if(k) B.kapper=k.id; }
+        samenvatting();
+      })
+      .catch(function(err){ fout.textContent=err.message; delete cache[B.dienst.id+'|'+B.kapper+'|'+B.datum]; B.tijd=null; tekenTijden(); })
+      .then(function(){ knop.disabled=false; knop.textContent='Afspraak bevestigen'; });
+  });
+})();
+</script>
+</body>
+</html>
