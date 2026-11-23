@@ -89,6 +89,7 @@ canvas.vonken{position:absolute;inset:0;width:100%;height:100%;pointer-events:no
 @keyframes schok{0%,100%{transform:translate(0,0)}20%{transform:translate(-6px,4px)}40%{transform:translate(5px,-3px)}60%{transform:translate(-3px,2px)}80%{transform:translate(2px,-1px)}}
 @keyframes ademen{0%,100%{filter:drop-shadow(0 0 18px rgba(255,80,20,.25))}50%{filter:drop-shadow(0 0 42px rgba(255,90,20,.55))}}
 /* Intro 2: de rijder */
+#intro:not(.opbouw):not(.rijder) .embleem{visibility:hidden}
 #intro svg.rit{position:absolute;inset:0;width:100%;height:100%;display:block}
 #intro.rijder{perspective:1600px;background:#050303}
 #intro.rijder .embleem{visibility:hidden;transform-style:preserve-3d;will-change:transform}
@@ -371,12 +372,19 @@ footer .rye{color:#cfc7c3;font-size:16px}
 <script src="/intro-rijder.js"></script>
 <script>
 (function(){
-  /* Actieve intro: 'rijder' (standaard) of 'opbouw'. Te testen met ?intro=opbouw of ?intro=rijder. */
-  var STANDAARD_INTRO='rijder';
-  var KEUZE=(new URLSearchParams(location.search).get('intro')||STANDAARD_INTRO);
-  if(KEUZE!=='opbouw'&&KEUZE!=='rijder')KEUZE=STANDAARD_INTRO;
-  if(KEUZE==='rijder'&&typeof window.IntroRijder!=='function')KEUZE='opbouw';
-  document.getElementById('intro').classList.add(KEUZE);
+  /* Actieve intro: 'rijder' of 'opbouw'. De eigenaar kiest hem in Beheer (mc_clubs.intro, via mc_publiek).
+     Te testen met ?intro=opbouw of ?intro=rijder. Zonder antwoord binnen 1,5 s wordt het STANDAARD_INTRO. */
+  var STANDAARD_INTRO='rijder', KEUZE=null;
+  var URLKEUZE=new URLSearchParams(location.search).get('intro');
+  function kies(k){
+    if(KEUZE)return;
+    if(k!=='opbouw'&&k!=='rijder')k=STANDAARD_INTRO;
+    if(k==='rijder'&&typeof window.IntroRijder!=='function')k='opbouw';
+    KEUZE=k;document.getElementById('intro').classList.add(k);
+  }
+  var publiek=fetch('https://uywydquzvdbpfjjrwsbt.supabase.co/rest/v1/rpc/mc_publiek',{method:'POST',headers:{apikey:'sb_publishable_J1Ewyl4he9-KRj_jv8fIPA_S8vZ2v5_','Content-Type':'application/json','Content-Profile':'flowsmid','Accept-Profile':'flowsmid'},body:JSON.stringify({p_slug:'deathwish423'})})
+    .then(function(r){return r.ok?r.json():null;}).catch(function(){return null;});
+  var keuzeKlaar=URLKEUZE?Promise.resolve(kies(URLKEUZE)):Promise.race([publiek,new Promise(function(r){setTimeout(r,1500)})]).then(function(j){kies(j&&j.intro);});
   var stopRijder=function(){};
   var intro=document.getElementById('intro'), emb=document.getElementById('embleem'), flits=document.getElementById('flits');
   var delen=[].slice.call(emb.querySelectorAll('img')).sort(function(a,b){return a.dataset.stap-b.dataset.stap});
@@ -429,16 +437,15 @@ footer .rye{color:#cfc7c3;font-size:16px}
   document.getElementById('overslaan').addEventListener('click',afronden);
   /* Wachten tot de onderdelen geladen zijn, zodat ze echt één voor één verschijnen */
   var laden=delen.map(function(i){return i.decode?i.decode().catch(function(){}):Promise.resolve()});
-  var gestart=false;function go(){if(!gestart){gestart=true;start()}}
-  Promise.all(laden).then(go);setTimeout(go,2500);
+  var gestart=false;function go(){if(!gestart){gestart=true;kies(STANDAARD_INTRO);start()}}
+  Promise.all(laden.concat([keuzeKlaar])).then(go);setTimeout(go,2500);
 
   /* ---- Openbare mededelingen en events ---- */
   var MND=['jan','feb','mrt','apr','mei','jun','jul','aug','sep','okt','nov','dec'], DGN=['zondag','maandag','dinsdag','woensdag','donderdag','vrijdag','zaterdag'];
   function esc(x){return String(x==null?'':x).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
   function p2(n){return (n<10?'0':'')+n;}
   function tijd(d){return p2(d.getHours())+':'+p2(d.getMinutes());}
-  fetch('https://uywydquzvdbpfjjrwsbt.supabase.co/rest/v1/rpc/mc_publiek',{method:'POST',headers:{apikey:'sb_publishable_J1Ewyl4he9-KRj_jv8fIPA_S8vZ2v5_','Content-Type':'application/json','Content-Profile':'flowsmid','Accept-Profile':'flowsmid'},body:JSON.stringify({p_slug:'deathwish423'})})
-    .then(function(r){if(!r.ok)throw 0;return r.json();}).then(function(j){
+  publiek.then(function(j){
       if(!j) return;
       $m=document.getElementById('mededelingen');
       $m.innerHTML=(j.mededelingen||[]).map(function(m){

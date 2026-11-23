@@ -514,7 +514,24 @@ details.verleden summary{cursor:pointer;color:var(--zacht);margin:18px 0 12px;fo
         '<div class="acties"><button type="button" data-med="'+m.id+'">Bewerken</button><button type="button" data-medweg="'+m.id+'">Verwijderen</button></div></div>'+(m.tekst?'<div class="tekst">'+esc(m.tekst)+'</div>':'')+'</div>';
     }).join(''):'<div class="leeg">Er staat nu geen bericht op de homepage.</div>';
     h+='<p style="margin-top:14px"><a class="linkje" href="/" target="_blank" rel="noopener">Bekijk de homepage</a></p>';
+    var nu=club.intro||'rijder';
+    h+='<div class="kopje" style="margin-top:30px"><div><span class="label">Beheer</span><h2 class="vuurtekst">Intro van de homepage</h2></div></div>'+
+      '<p class="hint" style="margin:-6px 0 16px">Kies welke intro bezoekers zien als ze de homepage openen.</p>'+
+      [['rijder','De rijder','Een member rijdt binnen op zijn motor, stapt af en laat zijn rug zien. Het embleem komt in 3D naar voren.'],
+       ['opbouw','Logo-opbouw','Het embleem bouwt zich stuk voor stuk op tussen de vonken.']].map(function(i){
+        return '<div class="kaart"><label class="vink" style="margin:0"><input type="radio" name="intro" value="'+i[0]+'"'+(nu===i[0]?' checked':'')+'> <b>'+i[1]+'</b>'+(nu===i[0]?' <span class="badge open">Actief</span>':'')+'</label>'+
+          '<div class="tekst" style="margin:6px 0 0 28px">'+i[2]+' <a class="linkje" href="/?intro='+i[0]+'" target="_blank" rel="noopener">Bekijk</a></div></div>';
+      }).join('');
     $('inhoud').innerHTML=h;
+    Array.prototype.forEach.call(document.querySelectorAll('input[name=intro]'),function(r){
+      r.addEventListener('change',function(){
+        var keuze=r.value;
+        api('mc_clubs?klant_id=eq.'+club.klant_id,{methode:'PATCH',body:{intro:keuze},terug:true}).then(function(x){
+          if(!x||!x.length) throw new Error('Opslaan lukte niet.');
+          club.intro=keuze;toonHomepage();melding('Intro aangepast');
+        }).catch(function(err){melding(err.message,true);toonHomepage();});
+      });
+    });
   }
   function medForm(m){
     var nieuw=!m; m=m||{titel:'',tekst:'',zichtbaar:true};
