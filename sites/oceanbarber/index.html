@@ -1,0 +1,600 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Barbershop Ocean | Kapper in Hoogvliet, Rotterdam</title>
+<meta name="description" content="Barbershop Ocean in Hoogvliet. Heren, dames en kids knippen, baard, harsen en beauty. Erkend leerbedrijf. Boek direct online.">
+<meta name="theme-color" content="#051a2c">
+<link rel="icon" href="/logo/oceanbarber-logo.svg" type="image/svg+xml">
+<meta property="og:title" content="Barbershop Ocean">
+<meta property="og:description" content="Ocean cuts, stylish waves. Knippen, baard, harsen en beauty in Hoogvliet. Boek online.">
+<meta property="og:image" content="/img/fade.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Roboto+Slab:wght@500;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --diep:#041526; --zee:#072238; --kaart:#0b2b46; --kaart2:#0e3352; --lijn:#1a4669; --turq:#1fa2c4; --licht:#7fd3ea; --schuim:#d8f3fb;
+  --wit:#f4fbfd; --tekst:#e3eef4; --zacht:#8fb0c4; --fout:#ff7b6e; --ok:#7bd88f;
+  --r:16px; --max:1160px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;overflow-x:clip;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{background:var(--diep);color:var(--tekst);font:16px/1.6 Inter,system-ui,sans-serif;overflow-x:hidden;overflow-x:clip;max-width:100%}
+img{display:block;max-width:100%}
+a{color:inherit}
+button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+h1,h2,h3,.kop{font-family:'Alfa Slab One',Rockwell,Georgia,serif;font-weight:400;line-height:1.08;letter-spacing:.01em}
+.label{font:700 12px/1 'Roboto Slab',Georgia,serif;letter-spacing:.24em;text-transform:uppercase;color:var(--licht)}
+.knop{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:52px;padding:0 26px;border-radius:999px;background:var(--turq);color:#fff;
+  font:600 15px/1 Inter,sans-serif;text-decoration:none;transition:transform .2s,background .2s,box-shadow .2s;white-space:nowrap;box-shadow:0 10px 30px rgba(31,162,196,.25)}
+.knop:hover{transform:translateY(-2px);background:#25b3d8}
+.knop.lijn{background:transparent;color:var(--wit);box-shadow:inset 0 0 0 1.5px rgba(216,243,251,.45)}
+.knop.lijn:hover{box-shadow:inset 0 0 0 1.5px #fff}
+.knop.wit{background:var(--wit);color:var(--diep);box-shadow:none}
+.knop:disabled{opacity:.4;cursor:not-allowed;transform:none}
+
+/* ---------- Intro ---------- */
+#intro{position:fixed;inset:0;z-index:100;background:radial-gradient(ellipse at 50% 40%,#0c3a5e 0%,#062038 55%,#030f1c 100%);display:grid;place-items:center;overflow:hidden;
+  transition:transform 1s cubic-bezier(.7,0,.25,1), visibility 1s}
+#intro.weg{transform:translateY(-112%);visibility:hidden}
+#intro .golfrand{position:absolute;left:0;right:0;top:100%;height:12vh;display:block}
+#intro .logo-groot{position:relative;z-index:2;width:min(86vw,640px);filter:drop-shadow(0 26px 50px rgba(0,0,0,.55))}
+#intro .logo-groot svg{display:block;width:100%;height:auto;overflow:visible}
+#intro .ondertitel{position:absolute;z-index:2;left:0;right:0;bottom:15vh;text-align:center;font:700 13px/1 'Roboto Slab',serif;letter-spacing:.42em;text-transform:uppercase;color:var(--schuim);opacity:0;animation:inFade .8s 2.4s forwards}
+#intro .overslaan{position:absolute;z-index:3;right:20px;top:18px;font-size:13px;color:#9cc3d6;letter-spacing:.1em;padding:10px}
+#intro .golven{position:absolute;left:0;right:0;bottom:0;height:34vh;z-index:1;pointer-events:none}
+#intro .golven svg{position:absolute;bottom:0;left:0;width:200%;height:100%}
+#intro .g1{animation:golf 7s linear infinite;opacity:.35}
+#intro .g2{animation:golf 11s linear infinite reverse;opacity:.25}
+#intro .g3{animation:golf 15s linear infinite;opacity:.18}
+#intro .golven{transform:translateY(100%);animation:stijg 1.6s .1s cubic-bezier(.2,.8,.2,1) forwards}
+#intro .bel{position:absolute;bottom:-20px;border-radius:50%;border:1.5px solid rgba(216,243,251,.45);animation:bel 3.4s ease-in infinite;opacity:0}
+@keyframes golf{to{transform:translateX(-50%)}}
+@keyframes stijg{to{transform:none}}
+@keyframes bel{0%{opacity:0;transform:translateY(0)}15%{opacity:.8}100%{opacity:0;transform:translateY(-70vh)}}
+/* logo-opbouw */
+#intro #band{transform-box:view-box;transform-origin:300px 220px;transform:scaleX(0);animation:breed .8s .35s cubic-bezier(.2,.9,.25,1.05) forwards}
+#intro #ring{transform-box:view-box;transform-origin:300px 220px;transform:scale(.2);opacity:0;animation:pop .7s .15s cubic-bezier(.2,1.3,.4,1) forwards}
+#intro #boogtekst{opacity:0;transform-box:view-box;transform-origin:300px 220px;transform:rotate(-25deg);animation:draai .9s .75s cubic-bezier(.2,.9,.3,1) forwards}
+#intro #sterren path{opacity:0;animation:inFade .3s forwards}
+#intro #sterren path:nth-child(1),#intro #sterren path:nth-child(4){animation-delay:1.35s}
+#intro #sterren path:nth-child(2),#intro #sterren path:nth-child(5){animation-delay:1.5s}
+#intro #sterren path:nth-child(3),#intro #sterren path:nth-child(6){animation-delay:1.65s}
+#intro #schaar{opacity:0;animation:inFade .3s .55s forwards}
+#intro #schaar-a,#intro #schaar-b{transform-box:view-box;transform-origin:300px 224px}
+#intro #schaar-a{animation:knipA 1.1s .6s ease-in-out 1}
+#intro #schaar-b{animation:knipB 1.1s .6s ease-in-out 1}
+#intro #lint{transform-box:view-box;transform-origin:300px 297px;transform:scaleX(0);animation:breed .7s 1.55s cubic-bezier(.2,.9,.25,1.1) forwards}
+#intro #oceanwoord{clip-path:inset(0 100% 0 0);animation:schrijf .8s 1.95s cubic-bezier(.6,0,.3,1) forwards}
+#intro #besttekst{opacity:0;animation:inFade .6s 2.2s forwards}
+@keyframes knipA{0%,100%{transform:rotate(0)}20%{transform:rotate(-12deg)}40%{transform:rotate(0)}60%{transform:rotate(-12deg)}80%{transform:rotate(0)}}
+@keyframes knipB{0%,100%{transform:rotate(0)}20%{transform:rotate(12deg)}40%{transform:rotate(0)}60%{transform:rotate(12deg)}80%{transform:rotate(0)}}
+@keyframes breed{to{transform:scaleX(1)}}
+@keyframes pop{to{transform:scale(1);opacity:1}}
+@keyframes draai{to{transform:none;opacity:1}}
+@keyframes schrijf{to{clip-path:inset(0 -10% 0 0)}}
+@keyframes inFade{to{opacity:1}}
+@media (prefers-reduced-motion:reduce){#intro *{animation-duration:.01s!important;animation-delay:0s!important}}
+
+/* ---------- Header ---------- */
+header.kop-balk{position:fixed;top:0;left:0;right:0;z-index:50;transition:background .3s, box-shadow .3s}
+header.kop-balk.vast{background:rgba(4,21,38,.9);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 1px 0 var(--lijn)}
+header .binnen{display:flex;align-items:center;justify-content:space-between;height:76px}
+header .merk{display:flex;align-items:center;gap:10px;text-decoration:none}
+header .merk img{height:52px;width:auto}
+header nav{display:flex;gap:28px;align-items:center}
+header nav a{font:500 14px/1 Inter,sans-serif;text-decoration:none;color:#c6dbe6;letter-spacing:.04em}
+header nav a:hover{color:#fff}
+header .knop{height:42px;padding:0 20px;font-size:14px}
+@media (max-width:860px){header nav a:not(.knop){display:none}}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;min-height:100svh;display:flex;align-items:center;padding:120px 0 150px;overflow:hidden;
+  background:radial-gradient(ellipse at 80% 20%,rgba(31,162,196,.22),transparent 55%),linear-gradient(180deg,#062038 0%,var(--diep) 100%)}
+.hero .wrap{position:relative;z-index:2;width:100%;display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center}
+@media (max-width:900px){.hero .wrap{grid-template-columns:1fr}.hero{padding-top:110px}}
+.hero h1{font-size:clamp(42px,6.4vw,82px);color:var(--wit)}
+.hero h1 em{font-style:normal;color:var(--turq);display:block}
+.hero .lead{font-size:18px;color:#b9d2df;max-width:44ch;margin:20px 0 0}
+.hero .tags{display:flex;flex-wrap:wrap;gap:10px;margin:24px 0 30px}
+.hero .tags span{padding:9px 16px;border-radius:999px;background:rgba(216,243,251,.07);border:1px solid rgba(216,243,251,.16);font-size:14px}
+.hero .acties{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.collage{position:relative;aspect-ratio:1/1.02;max-width:520px;width:100%;justify-self:end}
+@media (max-width:900px){.collage{justify-self:center;max-width:440px}}
+.collage figure{position:absolute;overflow:hidden;border-radius:22px;box-shadow:0 30px 60px rgba(0,0,0,.45);border:3px solid rgba(216,243,251,.12)}
+.collage figure img{width:100%;height:100%;object-fit:cover}
+.collage .f1{left:0;top:6%;width:58%;height:66%;transform:rotate(-3deg)}
+.collage .f2{right:0;top:0;width:46%;height:46%;transform:rotate(4deg)}
+.collage .f3{right:4%;bottom:0;width:52%;height:50%;transform:rotate(-1.5deg)}
+.collage .badge{position:absolute;left:4%;bottom:2%;width:42%;filter:drop-shadow(0 18px 30px rgba(0,0,0,.5));animation:dobber 5s ease-in-out infinite}
+@keyframes dobber{50%{transform:translateY(-8px) rotate(-1.5deg)}}
+.hero .zeebodem{position:absolute;left:0;right:0;bottom:-1px;height:140px;z-index:1;pointer-events:none}
+.hero .zeebodem svg{position:absolute;bottom:0;left:0;width:200%;height:100%}
+
+/* ---------- Secties ---------- */
+section{padding:96px 0;position:relative}
+.sectie-kop{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:40px;flex-wrap:wrap}
+.sectie-kop h2{font-size:clamp(34px,5vw,54px);color:var(--wit);margin-top:10px}
+.sectie-kop p{color:var(--zacht);max-width:46ch}
+
+/* Behandelingen */
+.groepen{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+.groep{padding:10px 18px;border-radius:999px;border:1.5px solid var(--lijn);background:var(--zee);font-weight:600;font-size:14px;color:#c6dbe6}
+.groep[aria-pressed="true"]{background:var(--wit);border-color:var(--wit);color:var(--diep)}
+.prijslijst{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px}
+@media (max-width:420px){.prijslijst{grid-template-columns:1fr}}
+.dienst{display:flex;align-items:center;gap:16px;padding:18px 18px 18px 22px;border-radius:var(--r);background:var(--kaart);border:1px solid var(--lijn);transition:border-color .2s, transform .2s}
+.dienst:hover{border-color:#2c6a96;transform:translateY(-2px)}
+.dienst .tekst{flex:1;min-width:0}
+.dienst h3{font:700 17px/1.25 'Roboto Slab',Georgia,serif;color:var(--wit)}
+.dienst p{color:var(--zacht);font-size:14px;margin-top:3px}
+.dienst .prijs{font:400 22px/1 'Alfa Slab One',Georgia,serif;color:var(--wit);text-align:right;white-space:nowrap}
+.dienst .duur{font-size:12px;color:var(--zacht);text-align:right;margin-top:4px}
+.dienst .knop{height:38px;padding:0 14px;font-size:13px;box-shadow:none}
+
+/* Boeken */
+#boeken{background:linear-gradient(180deg,var(--diep),#06223a 30%,#06223a 70%,var(--diep))}
+.boek{max-width:840px}
+.stappen{padding:28px;border-radius:var(--r);background:var(--kaart);border:1px solid var(--lijn)}
+@media (max-width:560px){.stappen{padding:20px}}
+.stap{padding:6px 0 26px;border-bottom:1px solid var(--lijn);margin-bottom:24px}
+.stap:last-child{border:0;margin:0;padding-bottom:0}
+.stap h3{font:700 19px/1.2 'Roboto Slab',serif;display:flex;align-items:center;gap:12px;margin-bottom:16px;color:var(--wit)}
+.stap h3 i{font-style:normal;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:var(--turq);color:#fff;font:700 14px/1 Inter,sans-serif}
+.stap.dicht{opacity:.38;pointer-events:none}
+.keuzes{display:flex;flex-wrap:wrap;gap:10px}
+.keuze{padding:12px 16px;border-radius:12px;border:1.5px solid var(--lijn);background:var(--zee);text-align:left;transition:border-color .15s, background .15s;min-width:0}
+.keuze:hover{border-color:#3a7cab}
+.keuze[aria-pressed="true"]{border-color:var(--turq);background:#0f3a5c}
+.keuze small{display:block;color:var(--zacht);font-size:13px}
+.keuze b{font-weight:600}
+.keuze .mini{width:34px;height:34px;border-radius:50%;object-fit:cover;float:left;margin:0 10px 0 0;border:1px solid var(--lijn)}
+.dienstfilter{margin:-4px 0 12px}
+.dagen{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;scrollbar-width:thin;-webkit-overflow-scrolling:touch}
+.dag{flex:0 0 64px;padding:10px 0;border-radius:12px;border:1.5px solid var(--lijn);background:var(--zee);text-align:center}
+.dag small{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--zacht)}
+.dag b{display:block;font:400 21px/1.25 'Alfa Slab One',serif}
+.dag[aria-pressed="true"]{border-color:var(--turq);background:var(--turq);color:#fff}
+.dag[aria-pressed="true"] small{color:#e6f8fd}
+.dag:disabled{opacity:.28;cursor:not-allowed}
+.tijden{display:grid;grid-template-columns:repeat(auto-fill,minmax(82px,1fr));gap:8px}
+.tijd{height:44px;border-radius:10px;border:1.5px solid var(--lijn);background:var(--zee);font-weight:600}
+.tijd:hover{border-color:#3a7cab}
+.tijd[aria-pressed="true"]{background:var(--turq);color:#fff;border-color:var(--turq)}
+.leeg{color:var(--zacht);font-size:15px;padding:8px 0}
+.velden{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:560px){.velden{grid-template-columns:1fr}}
+.veld{display:flex;flex-direction:column;gap:6px}
+.veld.vol{grid-column:1/-1}
+.veld label{font-size:13px;color:var(--zacht)}
+.veld input,.veld textarea{width:100%;padding:13px 14px;border-radius:10px;border:1.5px solid var(--lijn);background:#05192b;color:#fff;font:inherit;outline:none}
+.veld input:focus,.veld textarea:focus{border-color:var(--turq)}
+.lok{position:absolute;left:0;top:0;width:1px;height:1px;opacity:0;pointer-events:none;overflow:hidden}
+.keuze-regel{margin:-6px 0 16px;padding:12px 14px;border-radius:10px;background:var(--zee);border:1px solid var(--lijn);color:#d7e8f0;font-size:15px}
+.keuze-regel:empty{display:none}
+.melding-fout{color:var(--fout);font-size:14px;min-height:20px;margin-top:10px}
+.klaar{text-align:center;padding:30px 10px}
+.klaar .vink{width:74px;height:74px;border-radius:50%;margin:0 auto 18px;display:grid;place-items:center;background:var(--turq);color:#fff;font-size:36px}
+.klaar h3{font-size:32px;margin-bottom:10px;color:var(--wit)}
+.klaar p{color:var(--zacht)}
+
+/* Team */
+.team{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;max-width:760px}
+.kapper{padding:28px;border-radius:var(--r);background:linear-gradient(160deg,var(--kaart2),var(--kaart));border:1px solid var(--lijn);text-align:center}
+.kapper .mono{width:92px;height:92px;margin:0 auto 16px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 30% 30%,#2bb7d6,#0a3c63);border:3px solid rgba(216,243,251,.25);
+  font:400 40px/1 'Alfa Slab One',serif;color:#fff}
+.kapper .portret{width:132px;height:132px;margin:0 auto 16px;border-radius:50%;overflow:hidden;border:3px solid rgba(216,243,251,.25)}
+.kapper .portret img{width:100%;height:100%;object-fit:cover}
+.kapper h3{font-size:26px;color:var(--wit)}
+.kapper p{color:var(--zacht);font-size:14px;margin:6px 0 16px}
+.kapper .knop{height:40px;font-size:14px;padding:0 18px}
+
+/* Werk */
+.werk{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.werk figure{position:relative;overflow:hidden;border-radius:14px;aspect-ratio:1;background:var(--zee)}
+.werk figure:nth-child(1){grid-column:span 2;grid-row:span 2}
+.werk img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.werk figure:hover img{transform:scale(1.06)}
+.werk figcaption{position:absolute;left:12px;bottom:10px;font:700 13px/1 'Roboto Slab',serif;letter-spacing:.08em;text-transform:uppercase;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.6)}
+@media (max-width:700px){.werk{grid-template-columns:repeat(2,1fr)}}
+.ig-link{display:inline-flex;align-items:center;gap:10px;font-weight:600;text-decoration:none;border-bottom:1px solid #3a6a8c;padding-bottom:4px}
+.ig-link:hover{border-color:#fff}
+
+/* Leerbedrijf */
+.strook{display:grid;grid-template-columns:auto 1fr auto;gap:28px;align-items:center;padding:30px 34px;border-radius:22px;
+  background:linear-gradient(120deg,#0f4a74,#0b2f4d 60%);border:1px solid #1f5a85;overflow:hidden;position:relative}
+.strook .icoon{width:70px;height:70px;border-radius:18px;background:rgba(216,243,251,.1);display:grid;place-items:center}
+.strook h3{font-size:clamp(22px,3vw,30px);color:var(--wit)}
+.strook p{color:#bcd5e2;margin-top:6px;max-width:60ch}
+@media (max-width:760px){.strook{grid-template-columns:1fr;padding:26px}}
+
+/* Info */
+.info{display:grid;grid-template-columns:1.1fr .9fr;gap:24px}
+@media (max-width:860px){.info{grid-template-columns:1fr}}
+.paneel{padding:30px;border-radius:var(--r);background:var(--kaart);border:1px solid var(--lijn)}
+.tijden-lijst{list-style:none}
+.tijden-lijst li{display:flex;justify-content:space-between;padding:11px 0;border-bottom:1px solid var(--lijn)}
+.tijden-lijst li:last-child{border:0}
+.tijden-lijst li.vandaag{font-weight:700;color:#fff}
+.tijden-lijst li.vandaag span:first-child::after{content:" · vandaag";color:var(--licht);font-weight:500;font-size:13px}
+.tijden-lijst li .dicht{color:var(--zacht)}
+.contact-rij{display:flex;gap:14px;align-items:flex-start;padding:12px 0}
+.contact-rij svg{flex:0 0 22px;margin-top:3px;color:var(--licht)}
+.contact-rij a{text-decoration:none}
+.contact-rij a:hover{color:#fff}
+.foto-paneel{position:relative;border-radius:var(--r);overflow:hidden;min-height:340px;background:url(/img/zaak.jpg) center/cover}
+.foto-paneel::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(4,21,38,0) 35%,rgba(4,21,38,.9))}
+.foto-paneel span{position:absolute;z-index:2;left:24px;right:24px;bottom:22px;font:400 26px/1.15 'Alfa Slab One',serif;color:#fff}
+
+/* Footer */
+footer{padding:48px 0 calc(40px + env(safe-area-inset-bottom));border-top:1px solid var(--lijn);color:var(--zacht);font-size:14px}
+footer .binnen{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center}
+footer img{height:64px;width:auto}
+footer a{text-decoration:none}
+footer a:hover{color:#fff}
+.mobiel-boek{position:fixed;left:16px;right:16px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:40;display:none}
+.mobiel-boek .knop{width:100%;box-shadow:0 12px 30px rgba(0,0,0,.5)}
+@media (max-width:700px){.mobiel-boek.zicht{display:block}}
+.zichtbaar{opacity:0;transform:translateY(24px);transition:opacity .8s, transform .8s}
+.zichtbaar.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<div id="intro" aria-hidden="true">
+  <button class="overslaan" type="button" id="overslaan">Overslaan</button>
+  <div class="golven">
+    <svg class="g3" viewBox="0 0 2400 300" preserveAspectRatio="none"><path fill="#2bb7d6" d="M0,120 C200,60 400,180 600,120 C800,60 1000,180 1200,120 C1400,60 1600,180 1800,120 C2000,60 2200,180 2400,120 L2400,300 L0,300Z"/></svg>
+    <svg class="g2" viewBox="0 0 2400 300" preserveAspectRatio="none"><path fill="#1583a8" d="M0,170 C150,120 450,220 600,170 C750,120 1050,220 1200,170 C1350,120 1650,220 1800,170 C1950,120 2250,220 2400,170 L2400,300 L0,300Z"/></svg>
+    <svg class="g1" viewBox="0 0 2400 300" preserveAspectRatio="none"><path fill="#7fd3ea" d="M0,220 C250,190 350,250 600,220 C850,190 950,250 1200,220 C1450,190 1550,250 1800,220 C2050,190 2150,250 2400,220 L2400,300 L0,300Z"/></svg>
+    <span class="bel" style="left:12%;width:14px;height:14px;animation-delay:.6s"></span>
+    <span class="bel" style="left:27%;width:8px;height:8px;animation-delay:1.4s"></span>
+    <span class="bel" style="left:71%;width:12px;height:12px;animation-delay:.9s"></span>
+    <span class="bel" style="left:86%;width:7px;height:7px;animation-delay:2s"></span>
+  </div>
+  <div class="logo-groot"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 440" aria-hidden="true">
+
+<defs>
+  <linearGradient id="zee" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#2bb7d6"/><stop offset=".45" stop-color="#1583a8"/><stop offset="1" stop-color="#0a3c63"/>
+  </linearGradient>
+  <linearGradient id="zeeBand" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0" stop-color="#0b4670"/><stop offset=".25" stop-color="#1a8db4"/><stop offset=".5" stop-color="#0f5f8a"/><stop offset=".75" stop-color="#1b93b9"/><stop offset="1" stop-color="#0b4670"/>
+  </linearGradient>
+  <linearGradient id="tekstblauw" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#2aa9cf"/><stop offset="1" stop-color="#11648f"/>
+  </linearGradient>
+  <linearGradient id="staal" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#243b55"/><stop offset=".5" stop-color="#0e2238"/><stop offset="1" stop-color="#1c3550"/>
+  </linearGradient>
+  <linearGradient id="blad" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#2b9fc6"/><stop offset=".6" stop-color="#16506f"/><stop offset="1" stop-color="#0e2238"/>
+  </linearGradient>
+  <linearGradient id="snor" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#9aa3ab"/><stop offset="1" stop-color="#4c5660"/>
+  </linearGradient>
+  <filter id="aquarel" x="-5%" y="-5%" width="110%" height="110%">
+    <feTurbulence type="fractalNoise" baseFrequency=".008 .035" numOctaves="3" seed="7" result="ruis"/>
+    <feColorMatrix in="ruis" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .45 -.2" result="licht"/>
+    <feComposite in="licht" in2="SourceGraphic" operator="in" result="vlek"/>
+    <feMerge><feMergeNode in="SourceGraphic"/><feMergeNode in="vlek"/></feMerge>
+  </filter>
+  <clipPath id="binnen"><circle cx="300" cy="220" r="152"/></clipPath>
+</defs>
+<g id="band" filter="url(#aquarel)">
+  <path d="M30,168 Q300,158 570,168 L570,272 Q300,282 30,272Z" fill="url(#zeeBand)"/>
+</g>
+<g id="ring">
+  <circle cx="300" cy="220" r="180" fill="url(#zee)" filter="url(#aquarel)"/>
+  <circle cx="300" cy="220" r="153" fill="#fff"/>
+  <circle cx="300" cy="220" r="146" fill="none" stroke="#0e3a5c" stroke-width="2.6"/>
+</g>
+<path id="boogtekst" d="M183.91016627363064 185.73769484719523 184.65464517356787 183.98962414852534 168.92200888553884 177.2893140490902 168.1775299856016 179.0373847477601 162.44385809396437 176.59549395596594 169.27817439538822 160.54820494217634Q171.1393716452313 156.1780281955016 173.96467421778675 154.49009769529977Q176.78997679034217 152.8021671950979 180.11131111781495 154.21667710497866Q182.1740345422454 155.09516220690458 183.17306362420317 156.67710970710888Q184.17209270616092 158.2590572073132 184.33044251766268 159.8753465802899Q184.4887923291644 161.49163595326655 184.21238699702212 162.8195124883267L184.5620011367561 162.96840826831414Q185.86389107248075 160.59037492219412 188.04113074939832 159.16337828966275Q190.2183704263159 157.73638165713137 193.6445889957089 159.19556030100836Q197.31553746291564 160.75896599087656 197.8348893787246 164.24306222771412Q198.35424129453355 167.72715846455165 196.4781544666917 172.13229662519979L189.64383816526785 188.17958563898938ZM179.62879982875685 168.05409257376945Q180.06059759072045 167.04021156854094 179.7345945551146 166.3024826069461Q179.40859151950872 165.5647536453513 178.25486485838658 165.07339757139272L176.99625395534426 164.53737276343793Q175.84252729422212 164.04601668947933 175.08472649665265 164.32216873311307Q174.3269256990832 164.5983207767468 173.8951279371196 165.61220178197533L173.09109072518737 167.5001181365388L178.82476261682461 169.94200892833294ZM189.73199127113983 172.0677819835967Q190.16378903310343 171.05390097836815 189.83778599749758 170.31617201677335Q189.5117829618917 169.57844305517852 188.35805630076956 169.08708698121995L186.81975408594008 168.43194554927518Q185.66602742481794 167.94058947531659 184.90822662724847 168.2167415189503Q184.150425829679 168.49289356258404 183.7186280677154 169.50677456781258L182.81036380979197 171.63942082018986L188.8237270132164 174.20042823597396Z M213.93614522542902 134.99030073373066 214.87855686981175 133.79771518437505 219.76815762216978 137.66160292634424 210.53252350721905 149.3489413100293 205.64292275486102 145.48505356806012 207.0565402214351 143.69617524402668 204.29440446497077 142.28838617500347 201.09020487406949 146.34317704281258 203.09841131502765 148.7050345513203 204.51202878160174 146.91615622728685 209.40162953395978 150.78004396925604 201.34400997448745 160.97665041624657 196.4544092221294 157.1127626742774 197.39682086651214 155.92017712492176 183.0723218814204 136.41548443761943 191.64826784530325 125.56295593848328ZM198.4481795726876 143.18986413305277 200.61572635476787 140.44691736953484 193.71664131123137 136.98081962682028 193.4810384001357 137.27896601415918Z M217.34341865976404 131.50063850430922 218.87671459068352 130.37858521313905 208.77823497015203 116.57892183486382 207.24493903923255 117.70097512603398 203.5646042441944 112.67176447261812 217.64026089003514 102.37131525967601Q221.59616439180738 99.476417768457 224.87082334649824 99.57571897924021Q228.14548230118908 99.67502019002342 230.81596913417408 103.32426450561175Q232.31952054434208 105.37888105304384 232.59115296699235 107.48741984257681Q232.8627853896426 109.59595863210978 231.75586970936777 111.30066437702935L232.01094628622022 111.58488249738984Q235.29149046093664 109.89052895761895 237.60292024074718 113.04911857531307L239.33088230914922 115.41039430892906L240.77218048421352 114.3556642152291L244.45251527925166 119.38487486864496L234.73141907722223 126.4986927346638L229.45776860872246 119.2922018593423Q228.58256704160974 118.09623103322511 227.7810876610302 117.74098491782647Q226.97960828045063 117.38573880242781 226.07120581353627 117.72088348477246Q225.16280334662193 118.05602816711712 223.7828370087944 119.06587612917026L227.46317180383252 124.09508678258612L229.48712243264623 122.61397643824151L233.16745722768437 127.64318709165737L221.02375345480218 136.52984915772507ZM222.70098658373223 114.11281650326299Q223.5902982236655 113.46202559438429 223.6871175233694 112.6613084013599Q223.7839368230733 111.86059120833552 223.04338165090098 110.84861589392867L222.23550328125847 109.74464282366665Q221.49494810908618 108.73266750925981 220.7024557688568 108.58274122511412Q219.90996342862738 108.43281494096843 219.0206517886941 109.08360584984712L217.36469218330106 110.2954234043109L221.0450269783392 115.32463405772677Z M243.86507789574662 112.7636928584847 245.63881608611248 112.08262543741857 239.50920929651735 96.11898172412589 237.73547110615152 96.800049145192 235.5015699650546 90.982187880792 251.78448655261317 84.72998895540498Q256.2188320285278 83.02732040273966 259.39675426452743 83.88303896742026Q262.5746765005271 84.73875753210086 263.86870460055275 88.10886009379598Q264.67236415741075 90.2018711584277 264.2307353818694 92.01999684842107Q263.7891066063281 93.83812253841444 262.73804060619085 95.07615576226404Q261.6869746060536 96.31418898611363 260.5407073117467 97.03925952751113L260.67692079596 97.39400716558431Q263.2909784652287 96.67521477432163 265.83065124225607 97.2468389389843Q268.3703240192834 97.81846310364696 269.70521616457296 101.29498995676404Q271.13545774881186 105.01984015653234 268.99358680646793 107.8164527264717Q266.851715864124 110.61306529641105 262.3818956244021 112.32935519749768L246.09897903684353 118.58155412288471ZM253.59168154925817 97.38731261580418Q254.62044969967036 96.99229351158581 254.92370287434596 96.24492512046322Q255.22695604902157 95.49755672934064 254.7774515511179 94.32688952369918L254.28708300795032 93.04979802663576Q253.83757851004665 91.87913082099429 253.11206353431007 91.52678153409005Q252.38654855857348 91.17443224718582 251.3577804081613 91.56945135140417L249.44214316256614 92.30500416615558L251.67604430366305 98.12286543055559ZM257.7357105444076 107.43774562574761Q258.7644786948198 107.04272652152926 259.0677318694954 106.29535813040667Q259.370985044171 105.54798973928408 258.9214805462674 104.37732253364261L258.3221412157292 102.81643292612065Q257.8726367178255 101.64576572047919 257.1471217420889 101.29341643357495Q256.42160676635234 100.94106714667072 255.39283861594015 101.33608625088907L253.2288780236938 102.16698850458974L255.57174995216127 108.26864787944828Z M274.10653218576994 108.24564575125748 273.38534894466136 102.05551499878189 275.27258393017223 101.83564205941953 273.29372747591094 84.85052718982183 271.40649249040007 85.07040012918421 270.6853092492915 78.88026937670861 296.16298155368804 75.91198469531665 297.49101410743674 87.3108840078022 289.0362013723481 88.29591477614561 288.429352059708 83.08714621613565 283.8622433947717 83.61923872939258 284.5570418831568 89.58290128360687 287.87857545765587 89.19592491032911 288.3798857594021 93.49882067729386 285.058352184903 93.88579705057163 285.841099849033 100.60435359899027 290.40820851396927 100.07226108573334 289.7134100255842 94.10859853151905 298.16822276067285 93.12356776317564 299.5842044901665 105.27736106986553Z M302.3354539292059 98.92649720543906 304.2171769747425 99.18940095188792 306.5833106927821 82.25389354205942 304.7015876472456 81.99098979561057 305.56391193559784 75.81893820625085 322.8381294936229 78.23239459865131Q327.6929749511071 78.91068626448934 329.9734403218009 81.26286178792847Q332.25390569249475 83.61503731136759 331.6281947759465 88.09353815974447Q331.27590375570503 90.61504704076337 330.00212763959547 92.31716760230677Q328.7283515234859 94.01928816385015 326.74672505429885 94.47143917470517L326.7317787659198 94.85304185874145Q330.2658158894152 95.92233396558419 329.7242341717306 99.79868343938938L329.3193624021994 102.69653692951559L331.08818206500365 102.9436664511775L330.2258577766514 109.11571804053723L318.29573366795 107.44890828805151L319.5313812762596 98.60480997402996Q319.7364461984897 97.1370659985115 319.40881139659587 96.32390891861365Q319.081176594702 95.51075183871582 318.19593882689196 95.11848777658076Q317.3107010590819 94.72622371444572 315.61715031809905 94.48961034264177L314.7548260297468 100.66166193200148L317.238700449855 101.00869487731396L316.3763761615028 107.18074646667368L301.4731296408537 105.09854879479877ZM318.29089634861367 90.18214215769747Q319.38229571502484 90.3346263306378 320.0094955596296 89.82753427299166Q320.63669540423433 89.32044221534551 320.81021187689055 88.07850500529142L320.99950257433375 86.72366441250513Q321.17301904698996 85.48172720245104 320.70881952518357 84.82215097186456Q320.2446200033771 84.16257474127808 319.1532206369659 84.01009056833774L317.1209597477865 83.72615452217299L316.2586354594343 89.8982061115327Z M332.3506415054604 108.43758700088463 335.1910837809945 101.47034481481427 342.93246398773937 104.62639178762993Q342.4877482779335 105.71722263494398 342.77954221100174 106.41069527364328Q343.07133614406996 107.10416791234259 344.373295542477 107.63495763049795Q345.4641263897911 108.0796733403038 346.07544947630385 107.93905298652624Q346.6867725628166 107.79843263274867 346.9593402559234 107.1298588876207Q347.18887094485547 106.56684941803925 346.89640093349044 105.9756926770203Q346.6039309221254 105.38453593600136 345.65005999966155 104.50321745595117L343.0542541424089 102.2138472474762Q339.7508940056343 99.14357823535882 338.86197463028594 96.44209209914965Q337.9730552549376 93.74060596294049 339.36458505658817 90.32736105360298Q341.057373887462 86.17516621543983 344.66670959132966 85.12288784125076Q348.2760452951974 84.0706094670617 354.64508991983746 86.6671753856055Q357.70645391068655 87.91524850667352 360.1472937461034 89.62848372048458Q362.58813358152025 91.34171893429564 363.8259495247264 93.0364199966499L361.2580749422991 99.3350884375923L354.2204565725311 96.46595482594171Q354.9377399754437 94.70655023349968 352.75607828081564 93.817118813888Q351.70043552535043 93.38674877214041 351.15299186680306 93.47133861027855Q350.60554820825564 93.5559284484167 350.3329805151488 94.22450219354465Q350.08910415815853 94.82269975497493 350.45587480938417 95.38259286030801Q350.8226454606098 95.94248596564108 351.82605014298076 96.80296202190067L354.45704409208224 99.1066778984339Q357.67053777796224 101.89409001916697 358.5522843192814 104.61317020130056Q359.4340308606006 107.33225038343414 358.0998837311831 110.60474292537629Q356.27798388778496 115.073630590179 352.33693361092264 116.13430194137297Q348.3958833340604 117.19497329256696 342.58984817900176 114.82793806295521Q339.21179136151306 113.45075392936292 336.4399130313984 111.64359579487642Q333.6680347012837 109.83643766038992 332.3506415054604 108.43758700088463Z M394.4158279172389 119.12002347986825 392.8942081908936 117.98218631735475 382.65367372827205 131.67676385446265 384.17529345461736 132.81460101697616 380.44318756157304 137.80551371938878 368.9397424304024 129.20346477078667 372.67184832344674 124.21255206837402 374.1326032607382 125.30487574438699 377.8874658970328 120.28353064744744 373.6269306632659 117.09758659240961 369.8720680269713 122.11893168934917 371.33282296426285 123.21125536536213 367.6007170712185 128.20216806777478 356.0972719400479 119.60011911917267 359.8293778330922 114.60920641676002 361.35099755943753 115.74704357927352 371.5915320220591 102.05246604216563 370.0699122957138 100.91462887965213 373.8020181887581 95.92371617723947 385.3054633199287 104.5257651258416 381.5733574268844 109.51667782825425 380.1126024895929 108.42435415224128 376.65357751555183 113.05007812033105 380.91411274931875 116.23602217536887 384.37313772335983 111.6102982072791 382.9123827860683 110.51797453126613 386.6444886791126 105.52706182885348 398.14793381028323 114.1291107774556Z M393.3699456703431 130.1246917918098Q399.73306646886465 125.24626810137224 404.92862454401444 126.0273195002864Q410.12418261916423 126.80837089920055 414.3552325497333 132.3270965206671Q418.5862824803024 137.84582214213367 417.9917021985036 143.06600789443178Q417.3971219167049 148.28619364672988 411.03400111818337 153.16461733716744Q404.6708803196618 158.043041027605 399.47532224451203 157.26198962869086Q394.27976416936224 156.48093822977668 390.04871423879314 150.96221260831013Q385.8176643082241 145.44348698684357 386.41224459002285 140.22330123454546Q387.00682487182155 135.00311548224735 393.3699456703431 130.1246917918098ZM399.22046424911156 147.18652277091297 408.32786937306184 140.2041343609028Q409.4738342562079 139.32555568679558 409.62361137296597 138.39671834081102Q409.773388489724 137.46788099482646 408.98729178131225 136.44254399411682Q408.20119507290053 135.41720699340718 407.26532124773075 135.3207073386821Q406.329447422561 135.22420768395705 405.1834825394149 136.10278635806426L396.0760774154646 143.08517476807444Q394.8999555617094 143.98687393360555 394.76525693025593 144.90415103387818Q394.63055829880244 145.8214281341508 395.41665500721416 146.84676513486045Q396.20275171562594 147.87210213557006 397.1386255407957 147.96860179029514Q398.0744993659655 148.06510144502022 399.22046424911156 147.18652277091297Z M405.78520261600437 161.33906431456361 406.51888765956056 163.09169269983585 422.2925431270106 156.48852730783005 421.5588580834544 154.73589892255785 427.30747918714735 152.3294119796935 433.7492338695708 167.71748920238366Q435.6421412819458 172.23927043638602 434.69453543353006 175.43723543870362Q433.7469295851143 178.63520044102125 429.40041118963916 180.4547393490406Q425.053892794164 182.27427825706 422.1106636272754 180.70509405143713Q419.1674344603868 179.1359098458143 417.2745270480118 174.61412861181194L415.6750936530593 170.79339873191847L410.62752390347526 172.90641165736034L412.0361991871032 176.271458157083L406.28757808341027 178.67794509994735L400.03658151231144 163.74555125742796ZM421.15146409685065 169.901520510204Q422.00253874737587 171.9345694371198 424.2459030805243 170.99545258136786L425.5077955179203 170.46719935000738Q426.66453025219994 169.98296722126028 426.99507638900303 169.2472626260289Q427.3256225258061 168.51155803079754 426.9000852005436 167.49503356733968L426.4011793709253 166.30324626535455L420.65255826723245 168.70973320821886Z" fill="url(#tekstblauw)" stroke="#0e3a5c" stroke-width=".6"/>
+<g id="sterren" fill="#0e2f4d"><path d="M196.00,196.50 L198.35,202.77 L205.04,203.06 L199.79,207.23 L201.58,213.69 L196.00,209.99 L190.42,213.69 L192.21,207.23 L186.96,203.06 L193.65,202.77Z"/><path d="M196.00,230.50 L198.35,236.77 L205.04,237.06 L199.79,241.23 L201.58,247.69 L196.00,243.99 L190.42,247.69 L192.21,241.23 L186.96,237.06 L193.65,236.77Z"/><path d="M206.00,262.50 L208.35,268.77 L215.04,269.06 L209.79,273.23 L211.58,279.69 L206.00,275.99 L200.42,279.69 L202.21,273.23 L196.96,269.06 L203.65,268.77Z"/><path d="M404.00,196.50 L406.35,202.77 L413.04,203.06 L407.79,207.23 L409.58,213.69 L404.00,209.99 L398.42,213.69 L400.21,207.23 L394.96,203.06 L401.65,202.77Z"/><path d="M404.00,230.50 L406.35,236.77 L413.04,237.06 L407.79,241.23 L409.58,247.69 L404.00,243.99 L398.42,247.69 L400.21,241.23 L394.96,237.06 L401.65,236.77Z"/><path d="M394.00,262.50 L396.35,268.77 L403.04,269.06 L397.79,273.23 L399.58,279.69 L394.00,275.99 L388.42,279.69 L390.21,273.23 L384.96,269.06 L391.65,268.77Z"/></g>
+<g id="schaar">
+  <g id="schaar-b"><path d="M297.1,220.6 L259.2,253.7 L263.7,259.0 L302.9,227.4Z" fill="url(#staal)"/><ellipse cx="250.0" cy="266.0" rx="17" ry="12.5" transform="rotate(140.0 250.0 266.0)" fill="none" stroke="url(#staal)" stroke-width="6.5"/><path d="M306.2,235.0 Q342.3,196.2 360.0,158.0 Q328.2,189.4 295.8,225.6Z" fill="url(#blad)"/><path d="M308.9,218.6 Q336.7,191.1 356.7,163.1" fill="none" stroke="#e9f6fb" stroke-width="1.6" stroke-linecap="round" opacity=".9"/></g>
+  <g id="schaar-a"><path d="M297.1,227.4 L336.3,259.0 L340.8,253.7 L302.9,220.6Z" fill="url(#staal)"/><ellipse cx="350.0" cy="266.0" rx="17" ry="12.5" transform="rotate(40.0 350.0 266.0)" fill="none" stroke="url(#staal)" stroke-width="6.5"/><path d="M311.6,218.9 Q276.3,179.2 240.0,158.0 Q268.2,192.6 301.2,228.3Z" fill="url(#blad)"/><path d="M295.5,214.6 Q270.7,184.3 244.8,161.8" fill="none" stroke="#e9f6fb" stroke-width="1.6" stroke-linecap="round" opacity=".9"/></g>
+  <circle cx="300" cy="224" r="5" fill="#e9f6fb" stroke="#0e2238" stroke-width="2.4"/>
+  <path id="snorpad" transform="translate(300 256) scale(.72) translate(-300 -254)" d="M300,252 C292,244 280,243 271,248 C262,253 254,256 246,251 C242,248 241,243 245,241 C240,241 236,247 239,254 C244,265 262,268 276,263 C287,259 295,256 300,258 C305,256 313,259 324,263 C338,268 356,265 361,254 C364,247 360,241 355,241 C359,243 358,248 354,251 C346,256 338,253 329,248 C320,243 308,244 300,252Z" fill="url(#snor)" stroke="#2f3942" stroke-width="1.2"/>
+</g>
+<g id="lint">
+  <path d="M240,284 L226,284 L233,297 L226,310 L240,310Z" fill="#0a2a45"/><path d="M360,284 L374,284 L367,297 L374,310 L360,310Z" fill="#0a2a45"/>
+  <path d="M240,284 L360,284 L360,310 L240,310Z" fill="#0e3a5c"/>
+  <path d="M244,287.5 L356,287.5 M244,306.5 L356,306.5" stroke="#5fc3e0" stroke-width="1" opacity=".55"/>
+  <path id="oceanwoord" d="M264.11083984375 303.7255859375Q262.51025390625 303.7255859375 261.18359375 303.134765625Q259.85693359375 302.5439453125 258.89013671875 301.4697265625Q257.92333984375 300.3955078125 257.40234375 298.95068359375Q256.88134765625 297.505859375 256.88134765625 295.7978515625V295.55078125Q256.88134765625 293.853515625 257.40234375 292.4140625Q257.92333984375 290.974609375 258.884765625 289.900390625Q259.84619140625 288.826171875 261.1728515625 288.22998046875Q262.49951171875 287.6337890625 264.10009765625 287.6337890625Q265.68994140625 287.6337890625 267.02197265625 288.22998046875Q268.35400390625 288.826171875 269.34228515625 289.900390625Q270.33056640625 290.974609375 270.86767578125 292.4140625Q271.40478515625 293.853515625 271.40478515625 295.55078125V295.7978515625Q271.40478515625 297.505859375 270.86767578125 298.95068359375Q270.33056640625 300.3955078125 269.34765625 301.4697265625Q268.36474609375 302.5439453125 267.03271484375 303.134765625Q265.70068359375 303.7255859375 264.11083984375 303.7255859375ZM264.11083984375 301.09375Q265.36767578125 301.09375 266.232421875 300.427734375Q267.09716796875 299.76171875 267.53759765625 298.57470703125Q267.97802734375 297.3876953125 267.97802734375 295.7978515625V295.529296875Q267.97802734375 293.9716796875 267.5322265625 292.7900390625Q267.08642578125 291.6083984375 266.2216796875 290.9423828125Q265.35693359375 290.2763671875 264.10009765625 290.2763671875Q262.81103515625 290.2763671875 261.97314453125 290.93701171875Q261.13525390625 291.59765625 260.72705078125 292.77392578125Q260.31884765625 293.9501953125 260.31884765625 295.529296875V295.7978515625Q260.31884765625 297.3876953125 260.732421875 298.580078125Q261.14599609375 299.7724609375 261.9892578125 300.43310546875Q262.83251953125 301.09375 264.11083984375 301.09375Z M282.60595703125 303.7255859375Q280.35009765625 303.7255859375 278.63134765625 302.79638671875Q276.91259765625 301.8671875 275.95654296875 300.1376953125Q275.00048828125 298.408203125 275.00048828125 295.9912109375V295.37890625Q275.00048828125 293.1123046875 275.90283203125 291.36669921875Q276.80517578125 289.62109375 278.4755859375 288.62744140625Q280.14599609375 287.6337890625 282.44482421875 287.6337890625Q284.05615234375 287.6337890625 285.490234375 288.07421875Q286.92431640625 288.5146484375 288.09521484375 289.5029296875V293.40234375H285.57080078125L285.22705078125 291.060546875Q284.86181640625 290.8134765625 284.45361328125 290.630859375Q284.04541015625 290.4482421875 283.57275390625 290.3515625Q283.10009765625 290.2548828125 282.55224609375 290.2548828125Q281.28466796875 290.2548828125 280.36083984375 290.8671875Q279.43701171875 291.4794921875 278.93212890625 292.6181640625Q278.42724609375 293.7568359375 278.42724609375 295.357421875V295.9912109375Q278.42724609375 297.5380859375 278.9482421875 298.69287109375Q279.46923828125 299.84765625 280.42529296875 300.4814453125Q281.38134765625 301.115234375 282.64892578125 301.115234375Q283.31494140625 301.115234375 283.98095703125 300.97021484375Q284.64697265625 300.8251953125 285.22705078125 300.5888671875L285.58154296875 298.38671875H288.10595703125V302.2109375Q287.18212890625 302.833984375 285.7802734375 303.27978515625Q284.37841796875 303.7255859375 282.60595703125 303.7255859375Z M291.83056640625 303.5V301.4697265625L293.48486328125 301.13671875V290.2333984375L291.83056640625 289.900390625V287.859375H304.14111328125V292.220703125H301.53076171875L301.41259765625 290.501953125H296.92236328125V294.08984375H302.06787109375V296.7431640625H296.92236328125V300.857421875H301.63818359375L301.75634765625 299.07421875H304.34521484375V303.5Z M308.20947265625 303.5V301.4697265625L309.32666015625 301.30859375L314.14990234375 287.859375H317.77001953125L322.58251953125 301.30859375L323.68896484375 301.4697265625V303.5H318.12451171875V301.4697265625L319.17724609375 301.2763671875L318.58642578125 299.3427734375H313.31201171875L312.74267578125 301.2763671875L313.79541015625 301.4697265625V303.5ZM314.08544921875 296.8720703125H317.81298828125L316.13720703125 291.8017578125L315.97607421875 291.296875H315.91162109375L315.73974609375 291.8447265625Z M327.05908203125 303.5V301.4697265625L328.69189453125 301.13671875V290.2333984375L327.05908203125 289.900390625V287.859375H328.69189453125H332.19384765625L338.74658203125 298.3115234375L338.81103515625 298.30078125V290.2333984375L336.78076171875 289.900390625V287.859375H341.87255859375H343.51611328125V289.900390625L341.87255859375 290.2333984375V303.5H338.51025390625L331.81787109375 293.208984375H331.75341796875V301.13671875L333.79443359375 301.4697265625V303.5Z" fill="#fff"/>
+</g>
+<path id="besttekst" d="M225.7834198871807 318.3615420497736 226.8785316064913 316.85585594277444 230.46524729226977 319.4645367050347 229.37013557295916 320.9702228120338Z M234.63494043642405 328.99065726613696 235.3242877839926 327.7373012164459 236.4586084158817 328.0934147295948 240.16065898615722 321.36242853680966 239.25247346299432 320.59516118725423 239.94546815102618 319.3351736240728 240.9667212285522 319.89686405542494 244.2758464602761 321.7168869466244Q246.03982904873016 322.687079509869 246.6580510854946 323.89517667446097Q247.27627312225903 325.1032738390529 246.55045237005723 326.42294502364825Q246.178423642798 327.099359399672 245.54328979074322 327.4453582017902Q244.90815593868842 327.79135700390844 244.08220060366835 327.6912203297568Q244.59647432202289 328.13818504684764 244.7997298324558 328.65594091707567Q245.0029853428887 329.1736967873037 244.94280382306437 329.7149942971587Q244.88262230324 330.2562918070136 244.5981297471006 330.77354985926706Q243.82854090933887 332.17279920574754 242.50439258040802 332.3816907545935Q241.18024425147718 332.59058230343936 239.44278771698487 331.6349791020481ZM238.6682289039387 329.10140735408874 240.3327387900363 330.0168898103835Q241.06220527398347 330.41809726134926 241.60980287448254 330.3176302904539Q242.1574004749816 330.21716331955855 242.48930845714426 329.6136955919295Q242.85768984394014 328.94391272939623 242.72240738700208 328.42035434519096Q242.587124930064 327.89679596098574 241.87755298658814 327.5065305314099L240.08704434417237 326.521748606312ZM240.87486988425073 325.0893416923794 242.0486477720566 325.734920954388Q242.85106090439848 326.1762491504504 243.42269772119138 326.11059766559777Q243.9943345379843 326.04494618074506 244.3116531582936 325.46800450707775Q244.66544518323622 324.82474769850614 244.4283689379149 324.3056654934056Q244.19129269259363 323.78658328830517 243.38224804676133 323.34160775177946L242.1952071319746 322.6887338088442Z M245.41500674111828 334.76285902841016 245.98238557594036 333.44977776257286 247.14536578132885 333.69671332512127 250.19240026463262 326.64498060118035 249.21554433310112 325.9672988032779 249.78592517234026 324.6472700175156 257.74778300646466 328.08756707945264 256.52896921314317 330.908260169029 254.84072187135237 330.1787730956864 255.24461985890434 329.0341478590884 252.34055653022722 327.7793100127623 251.33788705493316 330.099781667734 254.66574909903926 331.53774178350005 253.92425400802838 333.2537792049911 250.5963919639223 331.8158190892251 249.44662427219288 334.47671922052496 252.4965855192964 335.79459915960905 253.07134097170209 334.6743329006358 254.74569327364273 335.3978159651444 253.50886745381894 338.26019417427113Z M260.76885258879724 340.95609221848315Q259.5529840011897 340.55905383874966 258.66395491221726 339.9900858989255Q257.77492582324476 339.42111795910137 257.03904321372727 338.4563066715445L257.8965521403706 335.83031830185956L259.67359084533547 336.41060516454695L259.4244027500065 337.9295269153212Q259.6108677575743 338.28499789858364 260.13004270369856 338.6456127890053Q260.6492176498228 339.00622767942696 261.3326940748093 339.2294149343067Q261.8578917487463 339.4009167196354 262.2634283036882 339.37809116654853Q262.6689648586301 339.3552656134617 262.9417724570802 339.15374960414454Q263.2145800555303 338.95223359482736 263.3320470317828 338.59250916062393Q263.4448153289852 338.24717370378863 263.363845077099 337.9221708992974Q263.28287482521273 337.5971680948062 262.96955130107466 337.2400801225633Q262.6562277769366 336.8829921503204 262.0671643432788 336.4438237648097Q260.9013700540243 335.62524577267686 260.2076965031209 334.9090866639383Q259.51402295221754 334.1929275551998 259.29885904275034 333.44990623870564Q259.08369513328313 332.7068849222115 259.37266389486433 331.82196281407107Q259.65223529834526 330.9658186606669 260.35047851153695 330.4732978526996Q261.0487217247286 329.9807770447323 262.0198370447513 329.8838856971166Q262.99095236477393 329.786994349501 264.10360230117055 330.1344036589906Q265.35764620161456 330.512061442088 266.21819027606864 331.1194976349665Q267.07873435052267 331.72693382784496 267.61008958681657 332.5134940694982L266.81366348782456 334.9524257333974L265.1013751810163 334.39328292643546L265.27641552008845 332.881995074672Q265.06675005748804 332.6463345894047 264.6474894584505 332.382039710619Q264.2282288594129 332.1177448318332 263.6742532307397 331.93684568840433Q263.19941697759117 331.781789279751 262.7926325178323 331.79624567439123Q262.3858480580734 331.81070206903144 262.0878597492291 332.00399539001097Q261.78987144038473 332.1972887109905 261.66535644555705 332.5785966112461Q261.5643348459799 332.88795962466105 261.66431951922993 333.1913057280456Q261.7643041924799 333.4946518314302 262.129163807169 333.8645879360064Q262.4940234218581 334.23452404058264 263.1817532977856 334.7616432792826Q264.77275476994475 335.83849633127966 265.4244302407239 336.92708153644605Q266.07610571150303 338.0156667416124 265.6461765784188 339.3322581707969Q265.34781045873746 340.2459582336736 264.64237275686173 340.7361297021158Q263.936935054986 341.2263011705581 262.93924464964323 341.2826678658122Q261.9415542443004 341.3390345610663 260.76885258879724 340.95609221848315Z M269.8188355252644 343.3846867535131 270.13257258897715 341.9890971978952 271.3211791526822 342.01582858195667 272.9629037876659 334.7129816480619 271.14642214384577 334.3046254698961 270.77487179041003 335.50880157785537 268.99531050520415 335.10874532201 269.68088408887274 332.0591237004746 279.45739504992093 334.256943130928 278.77182146625233 337.30656475246343 276.9701079658779 336.90152854322577 277.15705652624246 335.65585282366425 275.3258067389766 335.24417667657025 273.6840821039929 342.54702361046503 274.7697696309245 343.0315674413429 274.4560325672117 344.42715699696083Z M285.3317781350252 346.1723934973634 285.4703904150416 344.7487054034588 286.6531679131464 344.6281337643661 287.3975671947158 336.9824014082121 286.2602603916428 336.6359430905742 286.3996060699662 335.2047222554321 291.1151020846976 335.6638295955921 290.9757564063743 337.09505043073426 289.8005116495071 337.21635546813394 289.05611236793766 344.8620878242879 290.18588642977306 345.2078127436189 290.0472741497567 346.6315008375234Z M292.7736324314158 346.92310247075585 292.7906271224765 345.4927835086454 293.94372404133185 345.27184861560727 294.03499182665763 337.59050604131056 292.88746988582216 337.3422357721749 292.90455449588313 335.90434898486814 294.05486392572857 335.9180166729169 296.52197493973915 335.9473302670215 301.0508571222012 343.3656747732673 301.09635399237965 343.35864646207284 301.1638831616207 337.6752097396129 299.7363516885202 337.4236124674654 299.75343629858116 335.9857256801586 303.3405854416518 336.02834728631075 304.49846269669354 336.04210489335986 304.48137808663256 337.4799916806666 303.32071334258086 337.7008366547044 303.2096633771844 347.0471007721984 300.8409340907265 347.018956125098 296.21232139570697 339.7129600497933 296.16691444452886 339.7124205357914 296.10055422229203 345.29747553069876 297.5356535205888 345.54916272184664 297.5186588295282 346.9794816839571Z M315.1763356843444 346.1124991803338 314.97880788409344 344.695783287494 316.1007702422392 344.3024633196809 315.0671459329894 336.8890663989477 313.22316651691216 337.14616607546486 313.29921047582616 338.40406395702394 311.49271031617326 338.65593803035983 311.06107549340265 335.5601514497099 320.98558259456615 334.1764117273168 321.4172174173368 337.2721983079668 319.5882297038293 337.5272077432114 319.32478946279366 336.2954378775585 317.4658183441467 336.55462779534815 318.49944265339656 343.96802471608135 319.68620249098973 344.03944752792995 319.8837302912407 345.45616342076977Z M330.1568942374053 343.531196947849Q329.06138062062996 343.7986377975534 328.0546344568347 343.61592434799536Q327.0478882930394 343.43321089843727 326.2066781555883 342.8595083131746Q325.36546801813716 342.2858057279119 324.76745993291 341.38395539069296Q324.1694518476829 340.482105053474 323.8840619476628 339.3130670328883L323.84277913193665 339.1439609041243Q323.55918413694815 337.98227532391957 323.67526022119796 336.9099954188286Q323.7913363054477 335.83771551373763 324.2698892163937 334.9418274753076Q324.74844212733973 334.0459394368776 325.5568512851462 333.41620822433043Q326.3652604429526 332.7864770117833 327.46077405972795 332.5190361620789Q328.54893523612225 332.25339021740615 329.5602550726238 332.4388824346389Q330.5715749091254 332.62437465187173 331.42748992733857 333.1944874270713Q332.28340494555175 333.7646002022708 332.8915442388347 334.66008196175187Q333.4996835321176 335.55556372123294 333.7832785271061 336.7172493014376L333.8245613428323 336.8863554302016Q334.1099512428524 338.0553934507874 333.9837439505468 339.13404193361623Q333.85753665824126 340.2126904164451 333.36427886653314 341.1121682649383Q332.8710210748251 342.0116461134315 332.05803824431234 342.6385985583039Q331.2450554137996 343.26555100317626 330.1568942374053 343.531196947849ZM329.71714250466994 341.7298490544936Q330.57737802925186 341.51984516579955 331.0579653679683 340.9195040071333Q331.5385527066847 340.31916284846704 331.6416657563186 339.4331270800674Q331.74477880595254 338.54709131166766 331.4791328612797 337.4589301352734L331.4342602354904 337.2751191257473Q331.1739990059123 336.20901527049614 330.671433176626 335.4747353873918Q330.16886734733976 334.74045550428735 329.46571178470833 334.42909405570435Q328.76255622207685 334.11773260712135 327.9023206974949 334.3277364958154Q327.0200278517698 334.54312509960414 326.5569241614902 335.1353027755009Q326.0938204712106 335.72748045139775 326.0109698376882 336.60077906432167Q325.92811920416585 337.4740776772456 326.19197024380713 338.5548864132589L326.23684286959644 338.7386974227849Q326.5024888142692 339.8268585991792 326.98479222744396 340.5738756377594Q327.4670956406187 341.32089267633955 328.1546488699723 341.6321677147952Q328.84220209932585 341.9434427532508 329.71714250466994 341.7298490544936Z M341.1712743206305 340.22549928373707 335.4064034171721 332.2936104877162 334.2560348641593 332.6121014529739 333.74228010538616 331.26902053774563 338.12496519718354 329.5925576406965 338.6387199559567 330.9356385559247 337.56989581393174 331.5308576214718 340.5776607704431 335.8985869271184 341.0811373671155 336.6216554017244 341.12355044864904 336.60543156723685 341.0371358203896 335.72282872016973 340.6414747015059 328.62994346110054 342.2531717997798 328.01343775057273 346.87063548544904 333.75070224861577 347.3216935359226 334.3155521185176 347.3641066174561 334.29932828403 347.287697453862 333.59116787615466 346.5826756398054 328.08329279286266 345.3470556851756 328.36956873447366 344.83330092640244 327.0264878192454 349.13115985513275 325.3824725911714 349.6449146139059 326.72555350639965 348.6463537025535 327.229070155179 349.58320215811256 337.00777211036853 347.54737424450343 337.786516165772 343.5072048356937 332.81701195773314 342.9754528513323 332.1047593727855 342.93303976979877 332.12098320727307 342.97371951233856 333.053493221346 343.24244646885086 339.43323536626065Z M355.32219696464256 334.4602500960205 354.64243012006233 333.2016722518224 355.54312355993596 332.44854805316453 351.8925238390421 325.6895188898785 350.76883810094637 326.0297762825031 350.0854746063948 324.76453929627223 351.09766419537954 324.21784850063096 353.2685444980704 323.04534060997935 360.83016156017305 327.3307293253804 360.8665197623985 327.30249028351966 358.1654356339342 322.30147461689126 356.79536164062506 322.7748080584549 356.1119981460735 321.509571072224 359.2684314696179 319.8047589858164 360.2872802006354 319.2544715402039 360.970643695187 320.5197085264347 360.0632911132805 321.2764293750639 364.5051538278657 329.5004697855647 362.4208423716011 330.6262212265891 354.826606212642 326.4874760913072 354.7866513604452 326.50905599113514 357.4409790392823 331.4235028113372 358.81771217462426 330.94657271980225 359.4974790192045 332.20515056400035Z M370.71555388028474 320.9078993808535 369.62044216097416 319.4022132738544 373.2071578467526 316.79353251159415 374.3022695660632 318.29921861859333Z" fill="#0e2f4d"/>
+<g id="streepjes" display="none" fill="#0e2f4d"><rect x="196" y="333" width="10" height="2.6" rx="1.3" transform="rotate(-34 201 334)"/><rect x="394" y="333" width="10" height="2.6" rx="1.3" transform="rotate(34 399 334)"/></g>
+</svg>
+</div>
+  <div class="ondertitel">Barbershop · Hoogvliet</div>
+  <svg class="golfrand" viewBox="0 0 1200 100" preserveAspectRatio="none"><path fill="#030f1c" d="M0,0 L1200,0 L1200,40 C1000,100 800,0 600,40 C400,80 200,0 0,40Z"/></svg>
+</div>
+
+<header class="kop-balk" id="kopbalk">
+  <div class="wrap binnen">
+    <a class="merk" href="#top" aria-label="Barbershop Ocean"><img src="/logo/oceanbarber-logo.svg" alt="Barbershop Ocean" width="71" height="52"></a>
+    <nav>
+      <a href="#behandelingen">Prijzen</a>
+      <a href="#team">Team</a>
+      <a href="#werk">Werk</a>
+      <a href="#contact">Contact</a>
+      <a class="knop" href="#boeken">Afspraak maken</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <div class="label">Barbershop · Hoogvliet Rotterdam</div>
+        <h1 style="margin-top:16px">Ocean cuts, <em>stylish waves.</em></h1>
+        <p class="lead">Fades, baard, kids, dames en beauty onder één dak aan het Lokhorsterland. Kies je behandeling en je tijd, je afspraak staat meteen vast.</p>
+        <div class="tags"><span>Heren · Dames · Kids</span><span>Harsen &amp; beauty</span><span>Erkend leerbedrijf</span></div>
+        <div class="acties">
+          <a class="knop" href="#boeken">Afspraak maken
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a class="knop lijn" href="#behandelingen">Bekijk prijzen</a>
+        </div>
+      </div>
+      <div class="collage" aria-hidden="true">
+        <figure class="f1"><img src="/img/fade.jpg" alt=""></figure>
+        <figure class="f2"><img src="/img/baard.jpg" alt=""></figure>
+        <figure class="f3"><img src="/img/skinfade.jpg" alt=""></figure>
+        <img class="badge" src="/logo/oceanbarber-logo.svg" alt="">
+      </div>
+    </div>
+    <div class="zeebodem" aria-hidden="true">
+      <svg viewBox="0 0 2400 140" preserveAspectRatio="none" style="animation:golf 18s linear infinite;opacity:.5"><path fill="#0b2b46" d="M0,60 C200,20 400,100 600,60 C800,20 1000,100 1200,60 C1400,20 1600,100 1800,60 C2000,20 2200,100 2400,60 L2400,140 L0,140Z"/></svg>
+      <svg viewBox="0 0 2400 140" preserveAspectRatio="none" style="animation:golf 12s linear infinite reverse"><path fill="#041526" d="M0,90 C150,60 450,120 600,90 C750,60 1050,120 1200,90 C1350,60 1650,120 1800,90 C1950,60 2250,120 2400,90 L2400,140 L0,140Z"/></svg>
+    </div>
+  </section>
+
+  <section id="behandelingen">
+    <div class="wrap">
+      <div class="sectie-kop zichtbaar">
+        <div><div class="label">Prijslijst</div><h2>Behandelingen</h2></div>
+        <p>Van een strakke skin fade tot kleuren, epileren of harsen. Bij dames gelden vanaf-prijzen, afhankelijk van lengte en dikte van het haar.</p>
+      </div>
+      <div class="groepen" id="groepen" role="group" aria-label="Filter op soort"></div>
+      <div class="prijslijst" id="dienstenlijst"><p class="leeg">Prijslijst laden…</p></div>
+    </div>
+  </section>
+
+  <section id="boeken">
+    <div class="wrap">
+      <div class="sectie-kop zichtbaar">
+        <div><div class="label">Online boeken</div><h2>Plan je afspraak</h2></div>
+        <p>Kies een behandeling, je kapper en een tijd die je past. Je krijgt meteen bevestiging.</p>
+      </div>
+      <div class="boek">
+        <div class="stappen" id="stappen">
+          <div class="stap" id="stap1"><h3><i>1</i>Behandeling</h3><div class="keuzes dienstfilter" id="k-groep"></div><div class="keuzes" id="k-dienst"></div></div>
+          <div class="stap dicht" id="stap2"><h3><i>2</i>Kapper</h3><div class="keuzes" id="k-kapper"></div></div>
+          <div class="stap dicht" id="stap3"><h3><i>3</i>Datum en tijd</h3>
+            <div class="dagen" id="k-dagen"></div>
+            <div style="height:16px"></div>
+            <div class="tijden" id="k-tijden"><div class="leeg">Kies eerst een dag.</div></div>
+          </div>
+          <form class="stap dicht" id="stap4" novalidate>
+            <h3><i>4</i>Jouw gegevens</h3>
+            <p class="keuze-regel" id="s-regel"></p>
+            <div class="velden">
+              <div class="veld"><label for="f-naam">Naam</label><input id="f-naam" autocomplete="name" required maxlength="80"></div>
+              <div class="veld"><label for="f-tel">Telefoon</label><input id="f-tel" type="tel" autocomplete="tel" required maxlength="20" inputmode="tel"></div>
+              <div class="veld vol"><label for="f-mail">E-mail (optioneel)</label><input id="f-mail" type="email" autocomplete="email" maxlength="120"></div>
+              <div class="veld vol"><label for="f-opm">Opmerking (optioneel)</label><textarea id="f-opm" rows="2" maxlength="500" placeholder="Bijvoorbeeld: low fade, bovenop iets korter"></textarea></div>
+              <input class="lok" id="f-web" tabindex="-1" autocomplete="off" aria-hidden="true">
+            </div>
+            <div style="height:18px"></div>
+            <button class="knop" type="submit" id="boekknop" style="width:100%">Afspraak bevestigen</button>
+            <div class="melding-fout" id="boekfout" role="alert"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="team">
+    <div class="wrap">
+      <div class="sectie-kop zichtbaar">
+        <div><div class="label">De stoel</div><h2>Ons team</h2></div>
+        <p>Boek bij je vaste kapper of kies geen voorkeur, dan pak je de eerste vrije plek.</p>
+      </div>
+      <div class="team" id="teamlijst"></div>
+    </div>
+  </section>
+
+  <section id="werk">
+    <div class="wrap">
+      <div class="sectie-kop zichtbaar">
+        <div><div class="label">Uit de zaak</div><h2>Ons werk</h2></div>
+        <a class="ig-link" href="https://www.instagram.com/barbershop.ocean/" target="_blank" rel="noopener">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+          @barbershop.ocean</a>
+      </div>
+      <div class="werk zichtbaar">
+        <figure><img src="/img/fade.jpg" alt="Mid fade met textuur bovenop" loading="lazy"><figcaption>Fade</figcaption></figure>
+        <figure><img src="/img/taper.jpg" alt="Taper in de nek, achteraanzicht" loading="lazy"><figcaption>Taper</figcaption></figure>
+        <figure><img src="/img/baard-fade.jpg" alt="Fade met strak getrimde baard" loading="lazy"><figcaption>Baard</figcaption></figure>
+        <figure><img src="/img/skinfade.jpg" alt="Skin fade, zijaanzicht" loading="lazy"><figcaption>Skin fade</figcaption></figure>
+        <figure><img src="/img/baard.jpg" alt="Baard in model geschoren" loading="lazy"><figcaption>Baard</figcaption></figure>
+        <figure><img src="/img/harsen.jpg" alt="Harsen in de zaak" loading="lazy"><figcaption>Harsen</figcaption></figure>
+        <figure><img src="/img/taper-2.jpg" alt="Taper met strakke nek" loading="lazy"><figcaption>Taper</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="strook zichtbaar">
+        <div class="icoon"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#d8f3fb" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg></div>
+        <div><h3>Erkend leerbedrijf</h3><p>Barbershop Ocean leidt vakmensen op. Zoek je een stageplek als kapper of barber? Kom langs of bel ons.</p></div>
+        <a class="knop wit" href="tel:+31625300778">Bel ons</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <div class="sectie-kop zichtbaar"><div><div class="label">Langskomen</div><h2>Openingstijden &amp; contact</h2></div></div>
+      <div class="info">
+        <div class="paneel">
+          <ul class="tijden-lijst" id="tijdenlijst"></ul>
+          <div style="height:18px"></div>
+          <div class="contact-rij"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>
+            <a href="https://www.google.com/maps/search/?api=1&query=Lokhorsterland+5+3193+ET+Hoogvliet+Rotterdam" target="_blank" rel="noopener">Lokhorsterland 5<br>3193 ET Hoogvliet Rotterdam</a></div>
+          <div class="contact-rij"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>
+            <a href="tel:+31625300778">06 25 30 07 78</a></div>
+          <div class="contact-rij"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+            <a href="mailto:info@salonocean.nl">info@salonocean.nl</a></div>
+        </div>
+        <div class="foto-paneel" role="img" aria-label="De zaak van Barbershop Ocean"><span>Fris de deur uit.<br>Elke keer weer.</span></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap binnen">
+    <img src="/logo/oceanbarber-logo.svg" alt="Barbershop Ocean" width="87" height="64">
+    <div>© <span id="jaar"></span> Barbershop Ocean · Lokhorsterland 5, Hoogvliet Rotterdam</div>
+    <div><a href="https://www.instagram.com/barbershop.ocean/" target="_blank" rel="noopener">Instagram</a> · <a href="/beheer/">Beheer</a></div>
+  </div>
+</footer>
+<div class="mobiel-boek" id="mobielboek"><a class="knop" href="#boeken">Afspraak maken</a></div>
+
+<script>
+(function(){
+  'use strict';
+  var SUPA='https://uywydquzvdbpfjjrwsbt.supabase.co', KEY='sb_publishable_J1Ewyl4he9-KRj_jv8fIPA_S8vZ2v5_', SLUG='oceanbarber', TEL='06 25 30 07 78';
+  var DAGNAMEN=['Maandag','Dinsdag','Woensdag','Donderdag','Vrijdag','Zaterdag','Zondag'];
+  var KORT=['ma','di','wo','do','vr','za','zo'], MAANDEN=['jan','feb','mrt','apr','mei','jun','jul','aug','sep','okt','nov','dec'];
+  var $=function(id){return document.getElementById(id);};
+  var Z=null, B={dienst:null,kapper:'',datum:null,tijd:null}, cache={}, groepLijst='Alles', groepBoek='Alles';
+  function pad(n){return (n<10?'0':'')+n;}
+  function iso(d){return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());}
+  function euro(n){n=Number(n)||0;return '€ '+(Math.round(n)===n?n:n.toFixed(2).replace('.',','));}
+  function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+  function fotoOk(u){return typeof u==='string'&&(u.indexOf(SUPA+'/storage/v1/object/public/flowsmid-sites/')===0||/^\/img\/[\w.-]+$/.test(u));}
+  // omschrijving "Groep · tekst" -> groep en tekst
+  function groep(d){var m=/^([^·]{2,20}) · (.*)$/.exec(d.omschrijving||'');return m?m[1].trim():'Overig';}
+  function uitleg(d){var m=/^([^·]{2,20}) · (.*)$/.exec(d.omschrijving||'');return m?m[2]:(d.omschrijving||'');}
+  function groepen(){var g=[];Z.diensten.forEach(function(d){var x=groep(d);if(g.indexOf(x)<0)g.push(x);});return g;}
+  function rpc(naam,body){
+    return fetch(SUPA+'/rest/v1/rpc/'+naam,{method:'POST',headers:{apikey:KEY,Authorization:'Bearer '+KEY,'Content-Type':'application/json','Content-Profile':'flowsmid','Accept-Profile':'flowsmid'},body:JSON.stringify(body)})
+      .then(function(r){return r.json().then(function(j){if(!r.ok) throw new Error(j&&j.message||'Er ging iets mis'); return j;});});
+  }
+
+  /* Intro: speelt bij elk bezoek */
+  var intro=$('intro'), introKlaar=false;
+  function sluitIntro(){ if(introKlaar) return; introKlaar=true; intro.classList.add('weg'); document.body.style.overflow=''; }
+  document.body.style.overflow='hidden'; setTimeout(sluitIntro,3700);
+  $('overslaan').addEventListener('click',sluitIntro);
+
+  /* Header en animaties */
+  function scrol(){ $('kopbalk').classList.toggle('vast',scrollY>40); var b=$('boeken').getBoundingClientRect(); $('mobielboek').classList.toggle('zicht',scrollY>500&&(b.top>innerHeight||b.bottom<0)); }
+  addEventListener('scroll',scrol,{passive:true}); scrol();
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.15});
+    document.querySelectorAll('.zichtbaar').forEach(function(el){io.observe(el);});
+  } else document.querySelectorAll('.zichtbaar').forEach(function(el){el.classList.add('in');});
+  $('jaar').textContent=new Date().getFullYear();
+
+  /* Gegevens laden */
+  rpc('kb_publiek',{p_slug:SLUG}).then(function(z){ Z=z; tekenGroepen(); tekenDiensten(); tekenTeam(); tekenTijdenlijst(); tekenStap1(); })
+    .catch(function(){ $('dienstenlijst').innerHTML='<p class="leeg">De prijslijst kon niet geladen worden. Bel ons op '+TEL+'.</p>'; });
+
+  function groepKnoppen(huidig){return ['Alles'].concat(groepen()).map(function(g){return '<button type="button" class="groep" data-g="'+esc(g)+'" aria-pressed="'+(g===huidig)+'">'+esc(g)+'</button>';}).join('');}
+  function tekenGroepen(){ $('groepen').innerHTML=groepKnoppen(groepLijst); }
+  $('groepen').addEventListener('click',function(e){var b=e.target.closest('.groep');if(!b) return;groepLijst=b.dataset.g;tekenGroepen();tekenDiensten();});
+  function tekenDiensten(){
+    $('dienstenlijst').innerHTML=Z.diensten.filter(function(d){return groepLijst==='Alles'||groep(d)===groepLijst;}).map(function(d){
+      return '<article class="dienst"><div class="tekst"><h3>'+esc(d.naam)+'</h3><p>'+esc(uitleg(d))+'</p></div><div><div class="prijs">'+euro(d.prijs)+'</div><div class="duur">'+d.duur+' min</div></div>'+
+        '<button class="knop" data-dienst="'+d.id+'" aria-label="'+esc(d.naam)+' boeken">Boek</button></article>';
+    }).join('');
+  }
+  function tekenTeam(){
+    $('teamlijst').innerHTML=Z.kappers.map(function(k){
+      return '<article class="kapper">'+(fotoOk(k.foto)?'<div class="portret"><img src="'+esc(k.foto)+'" alt="'+esc(k.naam)+'" loading="lazy"></div>':'<div class="mono">'+esc(k.naam.charAt(0))+'</div>')+'<h3>'+esc(k.naam)+'</h3><p>'+esc(k.bio||'')+'</p><button class="knop lijn" data-kapper="'+k.id+'">Boek bij '+esc(k.naam)+'</button></article>';
+    }).join('');
+  }
+  function tekenTijdenlijst(){
+    var t=Z.openingstijden||[], vandaag=(new Date().getDay()+6)%7;
+    $('tijdenlijst').innerHTML=DAGNAMEN.map(function(n,i){var d=t[i]||{};return '<li'+(i===vandaag?' class="vandaag"':'')+'><span>'+n+'</span>'+(d.gesloten||!d.open?'<span class="dicht">Gesloten</span>':'<span>'+d.open+' – '+d.dicht+'</span>')+'</li>';}).join('');
+  }
+
+  /* Boeken */
+  function tekenStap1(){
+    $('k-groep').innerHTML=groepKnoppen(groepBoek);
+    $('k-dienst').innerHTML=Z.diensten.filter(function(d){return groepBoek==='Alles'||groep(d)===groepBoek||(B.dienst&&B.dienst.id===d.id);}).map(function(d){return '<button type="button" class="keuze" data-id="'+d.id+'" aria-pressed="'+(!!B.dienst&&B.dienst.id===d.id)+'"><b>'+esc(d.naam)+'</b><small>'+d.duur+' min · '+euro(d.prijs)+'</small></button>';}).join('');
+  }
+  $('k-groep').addEventListener('click',function(e){var b=e.target.closest('.groep');if(!b) return;groepBoek=b.dataset.g;tekenStap1();});
+  function tekenStap2(){
+    var lijst=[{id:'',naam:'Geen voorkeur',bio:'Eerste vrije kapper'}].concat(Z.kappers);
+    $('k-kapper').innerHTML=lijst.map(function(k){return '<button type="button" class="keuze" data-id="'+k.id+'" aria-pressed="'+(B.kapper===k.id)+'">'+(fotoOk(k.foto)?'<img class="mini" src="'+esc(k.foto)+'" alt="">':'')+'<b>'+esc(k.naam)+'</b><small>'+esc(k.bio||'')+'</small></button>';}).join('');
+  }
+  function tekenDagen(){
+    var html='', nu=new Date(); nu.setHours(0,0,0,0);
+    for(var i=0;i<Math.min(Z.vooruit||42,42);i++){
+      var d=new Date(nu); d.setDate(d.getDate()+i); var wd=(d.getDay()+6)%7, o=(Z.openingstijden||[])[wd]||{};
+      var dicht=o.gesloten||!o.open;
+      html+='<button type="button" class="dag" data-d="'+iso(d)+'" '+(dicht?'disabled':'')+' aria-pressed="'+(B.datum===iso(d))+'"><small>'+(i===0?'vandaag':KORT[wd])+'</small><b>'+d.getDate()+'</b><small>'+MAANDEN[d.getMonth()]+'</small></button>';
+    }
+    $('k-dagen').innerHTML=html;
+  }
+  function tekenTijden(){
+    var el=$('k-tijden');
+    if(!B.datum){el.innerHTML='<div class="leeg">Kies eerst een dag.</div>';return;}
+    var sl=B.dienst.id+'|'+B.kapper+'|'+B.datum;
+    if(!cache[sl]){
+      el.innerHTML='<div class="leeg">Vrije tijden laden…</div>';
+      rpc('kb_tijden',{p_slug:SLUG,p_datum:B.datum,p_dienst:B.dienst.id,p_kapper:B.kapper||null}).then(function(l){cache[sl]=l||[];tekenTijden();})
+        .catch(function(){el.innerHTML='<div class="leeg">Tijden laden lukte niet. Probeer het opnieuw.</div>';});
+      return;
+    }
+    var l=cache[sl];
+    el.innerHTML=l.length?l.map(function(t){return '<button type="button" class="tijd" data-t="'+t.t+'" aria-pressed="'+(B.tijd===t.t)+'">'+t.t+'</button>';}).join('')
+      :'<div class="leeg">Geen vrije tijden op deze dag'+(B.kapper?' bij deze kapper':'')+'. Kies een andere dag.</div>';
+  }
+  function open(n){ for(var i=1;i<=4;i++) $('stap'+i).classList.toggle('dicht',i>n); }
+  function samenvatting(){
+    var el=$('s-regel'); if(!el) return;
+    if(!B.dienst||!B.datum||!B.tijd){el.textContent='';return;}
+    var k=Z&&Z.kappers.filter(function(x){return x.id===B.kapper;})[0], p=B.datum.split('-'), d=new Date(+p[0],p[1]-1,+p[2]);
+    el.innerHTML='<b>'+esc(B.dienst.naam)+'</b> · '+(k?esc(k.naam):'geen voorkeur')+' · '+KORT[(d.getDay()+6)%7]+' '+d.getDate()+' '+MAANDEN[d.getMonth()]+' om '+B.tijd+' · <b>'+euro(B.dienst.prijs)+'</b>';
+  }
+  var kapperGekozen=false;
+  function kiesDienst(id){ B.dienst=Z.diensten.filter(function(d){return d.id===id;})[0]; B.tijd=null; tekenStap1(); tekenStap2(); open(2); if(kapperGekozen){ tekenDagen(); open(3); tekenTijden(); } samenvatting(); }
+  function kiesKapper(id){ B.kapper=id; kapperGekozen=true; B.tijd=null; tekenStap2(); tekenDagen(); open(3); if(B.datum) tekenTijden(); samenvatting(); }
+  $('k-dienst').addEventListener('click',function(e){var b=e.target.closest('.keuze');if(b) kiesDienst(b.dataset.id);});
+  $('k-kapper').addEventListener('click',function(e){var b=e.target.closest('.keuze');if(b) kiesKapper(b.dataset.id);});
+  $('k-dagen').addEventListener('click',function(e){var b=e.target.closest('.dag');if(!b||b.disabled) return; B.datum=b.dataset.d; B.tijd=null; tekenDagen(); tekenTijden(); open(3); samenvatting();});
+  $('k-tijden').addEventListener('click',function(e){var b=e.target.closest('.tijd');if(!b) return; B.tijd=b.dataset.t; tekenTijden(); open(4); samenvatting(); setTimeout(function(){$('f-naam').focus({preventScroll:true});},50);});
+  document.addEventListener('click',function(e){
+    var d=e.target.closest('[data-dienst]'), k=e.target.closest('[data-kapper]');
+    if(d){ e.preventDefault(); kiesDienst(d.dataset.dienst); $('boeken').scrollIntoView({behavior:'smooth'}); }
+    if(k){ e.preventDefault(); if(!B.dienst) kiesDienst(Z.diensten[0].id); kiesKapper(k.dataset.kapper); $('boeken').scrollIntoView({behavior:'smooth'}); }
+  });
+  $('stap4').addEventListener('submit',function(e){
+    e.preventDefault();
+    var naam=$('f-naam').value.trim(), tel=$('f-tel').value.trim(), fout=$('boekfout');
+    if(!naam||!/^[0-9 +()-]{8,20}$/.test(tel)){fout.textContent='Vul je naam en een geldig telefoonnummer in.';return;}
+    var knop=$('boekknop'); knop.disabled=true; knop.textContent='Bezig…'; fout.textContent='';
+    rpc('kb_boeken',{p_slug:SLUG,p:{dienst:B.dienst.id,kapper:B.kapper||'',start:B.datum+'T'+B.tijd,naam:naam,telefoon:tel,email:$('f-mail').value.trim(),opmerking:$('f-opm').value.trim(),website:$('f-web').value}})
+      .then(function(r){
+        var p=B.datum.split('-'),d=new Date(+p[0],p[1]-1,+p[2]);
+        $('stappen').innerHTML='<div class="klaar"><div class="vink">✓</div><h3>Tot dan, '+esc(naam.split(' ')[0])+'!</h3><p>'+esc(B.dienst.naam)+(r.kapper?' bij <b style="color:#fff">'+esc(r.kapper)+'</b>':'')+'<br>'+
+          DAGNAMEN[(d.getDay()+6)%7].toLowerCase()+' '+d.getDate()+' '+MAANDEN[d.getMonth()]+' om '+B.tijd+'</p><p style="margin-top:14px">Kun je niet? Bel of app ons op tijd: <a href="tel:+31625300778">'+TEL+'</a>.</p></div>';
+      })
+      .catch(function(err){ fout.textContent=err.message; delete cache[B.dienst.id+'|'+B.kapper+'|'+B.datum]; B.tijd=null; tekenTijden(); })
+      .then(function(){ knop.disabled=false; knop.textContent='Afspraak bevestigen'; });
+  });
+})();
+</script>
+</body>
+</html>
