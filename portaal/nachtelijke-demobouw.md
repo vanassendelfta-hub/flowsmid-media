@@ -15,12 +15,19 @@ Flowsmid doet zelf **niets op Instagram**: niet volgen, liken, reageren of DM'en
 - Werkwijze en voorbeelden: projectgeheugen `flowsmid-demo-werkwijze`, en de branches `sites-oceanbarber` en `sites-dinero`
   van deze repository (README per site).
 
+## Elke dag 3 nieuwe
+
+Anthony benadert 3 nieuwe prospects per dag. Om 00:51 (Amsterdam) zet de database-functie `flowsmid.opvolging_aanvullen(3)`
+(cron `opvolging-aanvullen`) zoveel prospects uit de lijst (status Nieuw, hoogste prioriteit, soort Afspraken eerst) in de opvolging
+dat er die dag 3 gestart zijn. Die krijgen `demo_status = 'aangevraagd'` en komen dus vannacht in deze bouw.
+De meeste prospects uit de lijst hebben nog geen Instagram: zoek die eerst op (zie stap 2), want de opvolging loopt via Instagram-DM's.
+
 ## Stappen per prospect
 
-Pak hooguit 3 prospects per nacht, oudste `demo_aangevraagd_op` eerst:
+Pak hooguit 5 prospects per nacht, oudste `demo_aangevraagd_op` eerst:
 
 ```sql
-select * from flowsmid.prospects where demo_status = 'aangevraagd' order by demo_aangevraagd_op limit 3;
+select * from flowsmid.prospects where demo_status = 'aangevraagd' order by demo_aangevraagd_op limit 5;
 ```
 
 1. **Claimen**: `update flowsmid.prospects set demo_status = 'bezig' where id = ... and demo_status = 'aangevraagd'`.
@@ -28,6 +35,11 @@ select * from flowsmid.prospects where demo_status = 'aangevraagd' order by demo
    (Salonized, Fresha, Treatwell en eigen sites laten zich meestal lezen met WebFetch), kleuren en stijl, logo, een paar foto's,
    en één concreet "haakje" uit hun posts of pagina (een behandeling, een specialiteit, iets waar ze trots op zijn).
    Lukt Instagram niet, werk dan met wat wel lukt en noteer wat ontbreekt.
+   Staat `instagram` leeg: zoek het Instagram-account van de zaak op (websearch op naam + plaats, links op hun site of boekingspagina)
+   en vul `instagram` in met de volledige profiel-URL. Niet zeker dat het het juiste account is? Laat het leeg en zeg dat in `demo_fout`
+   als de demo verder wel klaar is (status blijft dan 'klaar'), zodat Anthony het zelf invult.
+   Niet elke prospect is een barbershop: kies de passende eerdere demo als basis (afspraken: Dinero/Ocean; rijschool: proefles en
+   lespakketten; bestellen/afhalen: Mom's Thai Food-achtige bestelsite).
 3. **Klant aanmaken** als `klant_id` leeg is: `klanten` (status 'Prospect', gegevens overnemen), `prospects.klant_id` zetten,
    `klant_log` regel "Demo automatisch gebouwd".
 4. **Demo-site bouwen** zoals bij Barbershop Ocean (barbershops: kappersagenda `kb_*`, beheer = kopie van Dinero; andere branches:
