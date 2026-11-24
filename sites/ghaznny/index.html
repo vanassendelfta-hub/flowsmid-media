@@ -272,8 +272,8 @@ section{padding:clamp(80px,11vw,140px) 0;position:relative}
 .gelukt .samen span{color:var(--tekst)}
 @media (max-width:860px){
   .boeker{grid-template-columns:1fr}
-  .stappen{border-right:0;border-bottom:1px solid var(--lijn);flex-direction:row;overflow-x:auto;padding:18px 16px;gap:16px}
-  .stappen .st{border:0;padding:0;grid-template-columns:28px auto;min-width:max-content}
+  .stappen{border-right:0;border-bottom:1px solid var(--lijn);display:grid;grid-template-columns:1fr 1fr;padding:16px;gap:12px 14px}
+  .stappen .st{border:0;padding:0;grid-template-columns:28px 1fr;gap:8px;align-items:center;min-width:0}
   .stappen .st span{display:none}
   .stappen .totaal{display:none}
 }
