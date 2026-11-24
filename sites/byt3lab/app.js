@@ -140,7 +140,7 @@
     }) : []);
     $('mCat').textContent = p.categorie;
     $('mNaam').textContent = p.naam;
-    $('mPrijs').replaceChildren(prijsTekst(p), p.status !== 'Te koop' ? el('small', { text: p.status }) : null);
+    $('mPrijs').replaceChildren(prijsTekst(p), p.status !== 'Te koop' ? el('small', { text: p.status }) : '');
     $('mOms').textContent = p.omschrijving || '';
     $('mDm').textContent = p.status === 'Uitverkocht' ? 'Vraag naar nieuwe voorraad' : p.status === 'Binnenkort' ? 'Reserveer via DM' : 'Bestel via DM';
     var bestelbaar = window.Mandje && window.Mandje.bestelbaar(p);
