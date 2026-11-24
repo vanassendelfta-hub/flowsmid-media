@@ -65,7 +65,9 @@
     '.op-nu a:hover{border-color:var(--lijn-sterk)}.op-nu .op-num{font-weight:800;font-size:20px;min-width:28px;text-align:center}' +
     '.op-nu .op-pijl{color:var(--lavendel);font-weight:700}' +
     '.op-sub{font-size:12px;color:var(--zacht);text-transform:uppercase;letter-spacing:.08em;margin:14px 0 8px}' +
-    '.op-detail{margin-bottom:16px}';
+    '.op-detail{margin-bottom:16px}' +
+    /* Vandaag staat in het zijmenu bovenaan bij Overzicht; de lege groep Overig verdwijnt dan. */
+    'body.fd-zij #hoofdnav .fd-groep[data-g="6"]{display:none}';
 
   function el(tag, attrs, kinderen) {
     var n = document.createElement(tag);
@@ -362,6 +364,7 @@
   function nav() {
     var n = $('hoofdnav');
     if (!isBeheerNav()) return;
+    css();
     var a = n.querySelector('.opvolging-link');
     if (!a) {
       a = el('a', { href: '#/vandaag', class: 'opvolging-link' }, ['Vandaag']);
@@ -373,7 +376,7 @@
     if (aan) n.querySelectorAll('a.actief').forEach(function (x) { if (x !== a) { x.classList.remove('actief'); x.removeAttribute('aria-current'); } });
     a.classList.toggle('actief', aan);
     if (aan) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current');
-    setTimeout(function () { if (document.body.classList.contains('fd-zij')) a.style.setProperty('--fd-o', '11'); }, 0);
+    [0, 80].forEach(function (ms) { setTimeout(function () { if (document.body.classList.contains('fd-zij') && a.style.getPropertyValue('--fd-o') !== '11') a.style.setProperty('--fd-o', '11'); }, ms); });
   }
   var navTal = null, navTalOp = 0;
   async function tellerNav() {
