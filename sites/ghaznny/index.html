@@ -760,6 +760,16 @@ footer .legal .rechts{display:flex;gap:22px;align-items:center;flex-wrap:wrap}
   /* ---------- Afsprakensysteem ---------- */
   var B={stap:1, dienst:null, datum:null, tijd:null, groep:'Barber', bezet:{}, naam:'', telefoon:'', email:'', opmerking:''};
   var paneel=document.getElementById('paneel');
+  // Koppeling met de agenda in het beheer: behandelingen, prijzen en duur komen uit de kappersagenda
+  var KB=null, kbLaden=null;
+  function laadKB(){
+    if(!kbLaden) kbLaden=rpc('kb_publiek',{p_slug:SLUG}).then(function(z){
+      KB=z||{diensten:[]};
+      DIENSTEN.forEach(function(d){ (KB.diensten||[]).forEach(function(x){ if(x.naam===d.naam){ d.uuid=x.id; d.prijs=+x.prijs; d.duur=x.duur; } }); });
+      return KB;
+    }).catch(function(e){ kbLaden=null; throw e; });
+    return kbLaden;
+  }
 
   function rpc(naam, body){
     return fetch(SUPA+'/rest/v1/rpc/'+naam,{method:'POST',headers:{'apikey':KEY,'Authorization':'Bearer '+KEY,'Content-Type':'application/json','Content-Profile':'flowsmid','Accept-Profile':'flowsmid'},body:JSON.stringify(body)})
@@ -831,12 +841,14 @@ footer .legal .rechts{display:flex;gap:22px;align-items:center;flex-wrap:wrap}
   function stapTijd(){
     paneel.innerHTML='<h3>Kies een tijd</h3><p class="sub">'+esc(datumTekst(B.datum,true))+' · '+esc(dienst(B.dienst).naam)+'</p><div class="leeg">Beschikbaarheid ophalen…</div>';
     var iso=B.datum;
-    rpc('site_bezet',{p_slug:SLUG,p_datum:iso}).then(function(lijst){ B.bezet[iso]=lijst||[]; tekenTijden(); })
-      .catch(function(){ B.bezet[iso]=[]; tekenTijden(true); });
+    var sl=iso+'|'+B.dienst;
+    laadKB().then(function(){ var d=dienst(B.dienst); if(!d.uuid) throw new Error('x'); return rpc('kb_tijden',{p_slug:SLUG,p_datum:iso,p_dienst:d.uuid,p_kapper:null}); })
+      .then(function(l){ B.bezet[sl]=(l||[]).map(function(x){return x.t;}); tekenTijden(); })
+      .catch(function(){ B.bezet[sl]=null; tekenTijden(true); });
   }
   function tekenTijden(offline){
     if (B.stap!==3) return;
-    var lijst=slots(B.datum,B.bezet), html='<h3>Kies een tijd</h3><p class="sub">'+esc(datumTekst(B.datum,true))+' · '+esc(dienst(B.dienst).naam)+' · ca. '+dienst(B.dienst).duur+' min</p>';
+    var vrij=B.bezet[B.datum+'|'+B.dienst], lijst=vrij||slots(B.datum,{}), html='<h3>Kies een tijd</h3><p class="sub">'+esc(datumTekst(B.datum,true))+' · '+esc(dienst(B.dienst).naam)+' · ca. '+dienst(B.dienst).duur+' min</p>';
     if (!lijst.length) html+='<div class="leeg">Er zijn op deze dag geen tijden meer vrij. Kies een andere dag.</div>';
     else { html+='<div class="tijden" role="group" aria-label="Tijd">'; lijst.forEach(function(t){ html+='<button type="button" class="tijd" data-tijd="'+t+'" aria-pressed="'+(B.tijd===t)+'">'+t+'</button>'; }); html+='</div>'; }
     if (offline) html+='<p class="fout">De actuele bezetting kon niet worden opgehaald. Je keuze wordt bij het bevestigen gecontroleerd.</p>';
@@ -862,9 +874,9 @@ footer .legal .rechts{display:flex;gap:22px;align-items:center;flex-wrap:wrap}
       if (!B.naam.trim()) { fout.textContent='Vul je naam in.'; return; }
       if (!/^[0-9 +()-]{8,20}$/.test(B.telefoon.trim())) { fout.textContent='Vul een geldig telefoonnummer in.'; return; }
       var knop=document.getElementById('bevestig'); knop.disabled=true; knop.textContent='Bezig met boeken…'; fout.textContent='';
-      rpc('site_afspraak_boeken',{p_slug:SLUG,p:{dienst:B.dienst,start:B.datum+'T'+B.tijd,naam:B.naam.trim(),telefoon:B.telefoon.trim(),email:B.email.trim(),opmerking:B.opmerking.trim()}})
+      laadKB().then(function(){ return rpc('kb_boeken',{p_slug:SLUG,p:{dienst:dienst(B.dienst).uuid||'',kapper:'',start:B.datum+'T'+B.tijd,naam:B.naam.trim(),telefoon:B.telefoon.trim(),email:B.email.trim(),opmerking:B.opmerking.trim()}}); })
         .then(function(){ B.stap=5; zijbalk(); gelukt(); })
-        .catch(function(err){ fout.textContent=err.message; knop.disabled=false; knop.textContent='Afspraak bevestigen'; delete B.bezet[B.datum]; });
+        .catch(function(err){ fout.textContent=err.message; knop.disabled=false; knop.textContent='Afspraak bevestigen'; delete B.bezet[B.datum+'|'+B.dienst]; });
     });
   }
   function bewaar(){
@@ -885,6 +897,7 @@ footer .legal .rechts{display:flex;gap:22px;align-items:center;flex-wrap:wrap}
     B.dienst=d.id; B.groep=d.groep; B.tijd=null; B.stap=2; toon();
     afspraakSectie.scrollIntoView({behavior:reduce?'auto':'smooth'});
   });
+  laadKB().then(function(){ if(B.stap===1) toon(); }).catch(function(){});
   toon();
 })();
 </script>
