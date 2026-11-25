@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="nl"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700;9..40,800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#07060f}
+body{font-family:'DM Sans',sans-serif;color:#fff}
+#film{position:relative;width:1080px;height:1920px;overflow:hidden;
+  background:radial-gradient(ellipse 900px 700px at 85% 8%,rgba(124,77,255,.38),transparent 70%),radial-gradient(ellipse 900px 800px at 0% 100%,rgba(45,108,255,.28),transparent 70%),linear-gradient(180deg,#0b0a1a,#07060f)}
+.laag{position:absolute;inset:0}
+#kop{position:absolute;left:0;right:0;top:92px;text-align:center}
+#kop .stap{display:inline-block;font:700 26px/1 'DM Sans';letter-spacing:.28em;color:#c9b8ff;padding:14px 26px;border-radius:999px;background:rgba(124,77,255,.18);border:1.5px solid rgba(160,130,255,.4)}
+#kop h1{font:800 64px/1.1 'DM Sans';margin-top:26px;letter-spacing:-.01em}
+#telefoon{position:absolute;left:50%;top:300px;width:710px;height:1420px;margin-left:-355px;border-radius:84px;background:#0c0c10;
+  box-shadow:0 0 0 3px #2c2b38,0 50px 120px rgba(0,0,0,.6),0 0 140px rgba(124,77,255,.25);padding:14px}
+#telefoon .binnen{position:relative;width:682px;height:1392px;border-radius:70px;overflow:hidden;background:#000}
+#scherm{position:absolute;left:0;top:0;width:390px;height:796px;border:0;transform:scale(1.7487);transform-origin:0 0;background:#000}
+#vol{background:#000}
+#volscherm{position:absolute;left:0;top:0;width:390px;height:693.3px;border:0;transform:scale(2.7692);transform-origin:0 0}
+#onder{position:absolute;left:70px;right:70px;bottom:118px;text-align:center}
+#onder span{display:inline-block;font:500 38px/1.3 'DM Sans';padding:22px 34px;border-radius:26px;background:rgba(10,9,22,.82);border:1.5px solid rgba(255,255,255,.12);backdrop-filter:blur(8px)}
+#ring{position:absolute;width:120px;height:120px;margin:-60px 0 0 -60px;border-radius:50%;border:7px solid #fff;box-shadow:0 0 30px rgba(255,255,255,.6);opacity:0;pointer-events:none}
+#kader{position:absolute;border:6px solid #ff4fa3;border-radius:22px;box-shadow:0 0 30px rgba(255,79,163,.6);opacity:0;pointer-events:none}
+#intro{display:grid;place-items:center;text-align:center}
+#intro .merk{font:800 120px/1 'DM Sans';letter-spacing:-.03em;background:linear-gradient(90deg,#b49cff,#6f8bff);-webkit-background-clip:text;background-clip:text;color:transparent}
+#intro .merk-wrap{clip-path:inset(0 100% 0 0)}
+#intro h2{font:800 76px/1.12 'DM Sans';margin-top:70px;letter-spacing:-.01em}
+#intro p{font:500 40px/1.35 'DM Sans';color:#c3bddb;margin-top:28px}
+#slot{display:flex;flex-direction:column;justify-content:center;padding:0 90px}
+#slot h2{font:800 72px/1.1 'DM Sans';margin-bottom:60px}
+#slot h2 em{font-style:normal;background:linear-gradient(90deg,#b49cff,#6f8bff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.kaartje{display:flex;gap:30px;align-items:center;padding:34px 36px;border-radius:30px;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.12);margin-bottom:26px;opacity:0}
+.kaartje i{font-style:normal;font-size:56px;width:84px;text-align:center}
+.kaartje b{display:block;font:700 40px/1.2 'DM Sans'}
+.kaartje small{display:block;font:500 30px/1.3 'DM Sans';color:#b5afcd;margin-top:6px}
+#zwart{position:absolute;inset:0;background:#000;opacity:0;pointer-events:none}
+</style></head>
+<body><div id="film">
+  <div class="laag" id="intro"><div><div class="merk-wrap"><div class="merk">Flowsmid</div></div><h2 id="i-titel">Zo werkt jouw demo site.</h2><p id="i-sub"></p></div></div>
+  <div class="laag" id="vol"><iframe id="volscherm"></iframe></div>
+  <div class="laag" id="scene"><div id="kop"><div class="stap" id="k-stap">STAP 1</div><h1 id="k-titel"></h1></div>
+    <div id="telefoon"><div class="binnen"><iframe id="scherm"></iframe></div></div></div>
+  <div class="laag" id="slot"><h2>Later uit te breiden <em>met</em></h2><div id="kaartjes"></div></div>
+  <div id="onder"><span id="o-tekst"></span></div>
+  <div id="ring"></div><div id="kader"></div>
+  <div id="zwart"></div>
+</div>
+<script>
+var geboorte=new WeakMap();
+function seek(doc,t){ try{ doc.getAnimations().forEach(function(a){ if(!geboorte.has(a)) geboorte.set(a,t); a.pause(); a.currentTime=Math.max(0,(t-geboorte.get(a))*1000); }); }catch(e){} }
+window.zet=function(t){ ['scherm','volscherm'].forEach(function(id){var f=document.getElementById(id); if(f.contentDocument) seek(f.contentDocument,t);}); };
+window.$=function(id){return document.getElementById(id);};
+</script>
+</body></html>

@@ -72,3 +72,10 @@ Anthony ziet dat op het Overzicht en kan op de prospect "Opnieuw proberen" kieze
 
 Alleen berichten klaarzetten (geen demo nodig): prospects met `opvolg_fase` gevuld, `berichten = '{}'` en `demo_status` leeg
 krijgen ook `opening`, `reminder`, `langsgaan` en `haakje`.
+
+## Ervaringen
+
+- 25-11-2026: Instagram is vanuit de cloud niet leesbaar (robots). Gegevens kwamen van de eigen site van de zaak, Fresha en Treatwell (via WebFetch). Kijk altijd of de zaak een eigen site heeft: daar staan vaak prijzen, team en foto's.
+- Foto's ophalen: edge function met vaste URL-lijst naar `flowsmid-sites/<slug>/ig/`, aanroepen met pg_net en het Vault-geheim, daarna op 410 zetten.
+- Het gereedschap van die run (site- en beheergenerator, SQL, video) staat in `demobouw/` op deze branch.
+- Prijs in `langsgaan` zonder notitie: de prijslijst (Afspraakwebsite €825 eenmalig, Smederij €119 p/m, ex btw).
