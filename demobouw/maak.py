@@ -76,6 +76,8 @@ footer .woordmerk b{font-size:32px}
 @keyframes logoIn{to{opacity:1;transform:none}}
 .collage.duo .f1{left:0;top:4%;width:62%;height:72%;transform:rotate(-2.5deg)}
 .collage.duo .f2{right:0;bottom:6%;width:52%;height:56%;transform:rotate(3deg)}
+.collage.woord{display:grid;place-items:center;background:radial-gradient(circle at 50% 45%,rgba(ACRGB,.28),transparent 62%)}
+.collage.woord .badge-woord{position:relative;left:auto;bottom:auto;width:86%}
 .collage.portret .f1{left:8%;top:2%;width:74%;height:86%;transform:rotate(-2deg)}
 .badge-woord{position:absolute;left:0;bottom:2%;width:56%;padding:18px 16px;border-radius:22px;background:rgba(BGRGB,.88);border:1.5px solid rgba(ACRGB,.5);box-shadow:0 18px 40px rgba(0,0,0,.45);animation:dobber 5s ease-in-out infinite}
 .badge-woord svg{display:block;width:100%;height:auto}
@@ -115,6 +117,8 @@ def bouw_index(slug, c):
     if h['soort'] == 'collage':
         rechts = ('<div class="collage" aria-hidden="true">' + ''.join('<figure class="f%d"><img src="%s%s" alt=""></figure>' % (i + 1, S, f) for i, f in enumerate(h['fotos'])) +
                   '<img class="badge-img" src="%s%s" alt=""></div>' % (S, h['badge']))
+    elif h['soort'] == 'woord':
+        rechts = '<div class="collage woord" aria-hidden="true"><div class="badge-woord">%s</div></div>' % woordmerk_svg(c)
     else:
         rechts = ('<div class="collage %s" aria-hidden="true">' % h['soort'] + ''.join('<figure class="f%d"><img src="%s%s" alt=""></figure>' % (i + 1, S, f) for i, f in enumerate(h['fotos'])) +
                   '<div class="badge-woord">%s</div></div>' % woordmerk_svg(c))
@@ -150,6 +154,8 @@ def bouw_index(slug, c):
     paneel = '<div class="foto-paneel%s" role="img" aria-label="%s"%s><span>%s</span></div>' % ('' if pn['foto'] else ' zonder', esc(c['naam']), ' style="background-image:url(%s%s)"' % (S, pn['foto']) if pn['foto'] else '', pn['tekst'])
     mail = ('''          <div class="contact-rij"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
             <a href="mailto:%s">%s</a></div>''' % (c['mail'], c['mail'])) if c['mail'] else ''
+    telrij_begin, telrij_eind = ('', '') if c['tel'] else ('<!--', '-->')
+    adresregel = esc(c['adres1']) + ((', ' + esc(c['adres2'].split(' ', 2)[-1])) if c['adres2'] else '')
     body = f'''<body>
 
 <div id="intro" aria-hidden="true">
@@ -193,7 +199,7 @@ def bouw_index(slug, c):
   <section id="behandelingen">
     <div class="wrap">
       <div class="sectie-kop zichtbaar">
-        <div><div class="label">Prijslijst</div><h2>Behandelingen</h2></div>
+        <div><div class="label">Prijslijst</div><h2>{c.get('prijs_titel', 'Behandelingen')}</h2></div>
         <p>{esc(c['prijs_intro'])}</p>
       </div>
       <div class="groepen" id="groepen" role="group" aria-label="Filter op soort"></div>
@@ -266,8 +272,8 @@ def bouw_index(slug, c):
           <div style="height:18px"></div>
           <div class="contact-rij"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>
             <a href="{maps}" target="_blank" rel="noopener">{esc(c['adres1'])}<br>{esc(c['adres2'])}</a></div>
-          <div class="contact-rij"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>
-            <a href="tel:{c['telint']}">{c['tel']}</a></div>
+          {telrij_begin}<div class="contact-rij"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>
+            <a href="tel:{c['telint']}">{c['tel']}</a></div>{telrij_eind}
 {mail}
         </div>
         {paneel}
@@ -279,20 +285,31 @@ def bouw_index(slug, c):
 <footer>
   <div class="wrap binnen">
     {wm_klein}
-    <div>© <span id="jaar"></span> {esc(c['naam'])} · {esc(c['adres1'])}, {esc(c['adres2'].split(' ', 2)[-1])}</div>
+    <div>© <span id="jaar"></span> {esc(c['naam'])} · {adresregel}</div>
     <div><a href="https://www.instagram.com/{c['ig']}/" target="_blank" rel="noopener">Instagram</a> · <a href="/beheer/">Beheer</a></div>
   </div>
 </footer>
 <div class="mobiel-boek" id="mobielboek"><a class="knop" href="#boeken">Afspraak maken</a></div>
 
 '''
+    if not c['ig']:
+        body = re.sub(r'\s*<p style="margin-top:18px"><a class="ig-link" href="https://www.instagram.com/None/".*?</p>', '', body, flags=re.S)
+        body = body.replace('<a href="https://www.instagram.com/None/" target="_blank" rel="noopener">Instagram</a> · ', '')
+        import sys as _s; [print('NONE:', m) for m in re.findall(r'.{0,80}None.{0,40}', body)]
+    body = re.sub(r'<!--<div class="contact-rij">.*?-->', '', body, flags=re.S)
     body = th(body)
     sc = SCRIPT
     def rep(s, a, b, n=1):
         assert s.count(a) >= n, (a, s.count(a))
         return s.replace(a, b)
-    sc = rep(sc, "SLUG='oceanbarber', TEL='06 25 30 07 78'", "SLUG='%s', TEL='%s'" % (slug, c['tel']))
-    sc = rep(sc, 'tel:+31625300778', 'tel:' + c['telint'])
+    sc = rep(sc, "SLUG='oceanbarber', TEL='06 25 30 07 78'", "SLUG='%s', TEL='%s'" % (slug, c['tel'] or ''))
+    if c['tel']:
+        sc = rep(sc, 'tel:+31625300778', 'tel:' + c['telint'])
+    else:
+        sc = rep(sc, "Bel ons op '+TEL+'.", "Probeer het straks opnieuw.")
+        sc = rep(sc, "Kun je niet? Bel of app ons op tijd: <a href=\"tel:+31625300778\">'+TEL+'</a>.", "Kun je niet? Laat het ons op tijd weten via Instagram.")
+    for a, b in c.get('script_vervang', []):
+        sc = rep(sc, a, b)
     sc = rep(sc, "bio:'Eerste vrije kapper'", "bio:'Eerste vrije %s'" % term)
     sc = rep(sc, "' bij deze kapper'", "' bij deze %s'" % term)
     sc = rep(sc, "function euro(n){n=Number(n)||0;return", "function euro(n){n=Number(n)||0;if(!n) return 'Gratis';return")
@@ -308,7 +325,7 @@ def bouw_index(slug, c):
 <link rel="icon" href="/logo/{slug}-logo.svg" type="image/svg+xml">
 <meta property="og:title" content="{esc(c['naam'])}">
 <meta property="og:description" content="{esc(c['lead'])}">
-<meta property="og:image" content="/img/{c['fotos'][0] if not c['fotos'][0].endswith('.png') else c['fotos'][1] if len(c['fotos'])>1 else c['fotos'][0]}">
+<meta property="og:image" content="{('/img/' + c['fotos'][0]) if c['fotos'] else ('/logo/' + slug + '-logo.svg')}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?{c['fontlink']}&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -377,18 +394,19 @@ mkdir -p out/beheer out/logo out/img
 curl -fsSL $B/index.html -o out/index.html
 curl -fsSL $B/beheer/index.html -o out/beheer/index.html
 curl -fsSL $B/logo/{slug}-logo.svg -o out/logo/{slug}-logo.svg
-for f in {fotos}; do
+for f in {fotos or '""'}; do
+  [ -n "$f" ] || continue
   curl -fsSL "$F/$f" -o out/img/$f
 done
 ls -la out out/img
 '''
 
-VERCEL = open('/home/claude/flowsmid-media/sites/oceanbarber/vercel.json').read()
+VERCEL = open('/home/claude/bouw/vercel.json').read()
 
 def readme(slug, c):
     return f'''# {c['naam']} (demo)
 
-Afsprakensite met beheerportaal voor {c['naam']}, {c['adres1']}, {c['adres2']} (Instagram @{c['ig']}). Gebouwd in de nachtelijke demobouw van 25-11-2026 op de basis van Barbershop Ocean (site) en Dinero (beheer).
+Afsprakensite met beheerportaal voor {c['naam']}, {c['adres1']}, {c['adres2']} (Instagram {('@' + c['ig']) if c['ig'] else 'onbekend'}). Gebouwd in de nachtelijke demobouw van 26-11-2026 op de basis van Barbershop Ocean (site) en Dinero (beheer).
 
 - `index.html` is de website, `beheer/index.html` het portaal (kappersagenda, slug `{slug}`), `logo/{slug}-logo.svg` een voorlopig woordmerk.
 - Data staat in Supabase, schema `flowsmid`, tabellen `kb_*`, slug `{slug}`. Publiek via `kb_publiek`, `kb_tijden`, `kb_boeken`.

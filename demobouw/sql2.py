@@ -2,12 +2,12 @@ import json
 from sites import SITES
 def q(s): return "'"+str(s).replace("'","''")+"'" if s is not None else 'null'
 for slug,c in SITES.items():
-    pc=' '.join(c['adres2'].split(' ')[:2]); plaats=c['adres2'].split(' ',2)[2]
+    pc=c.get('postcode'); plaats=c['stad']
     inst=json.dumps({'slot':15,'vooruit':42,'minVooraf':1,'openingstijden':[{'gesloten':True} if not o else {'open':o[0],'dicht':o[1]} for o in c['open']]})
     s=[f"do $$\ndeclare kid uuid; k1 uuid; k2 uuid;\nbegin\n"]
-    s.append(f"insert into flowsmid.klanten (naam,email,telefoon,mobiel,status,adres,postcode,plaats,website,branche,instagram) values ({q(c['naam'])},{q(c['mail'])},{q(c['tel'])},{q(c['tel'])},'Prospect',{q(c['adres1'])},{q(pc)},{q(plaats)},'https://{slug}.flowsmid.nl',{q(c['soort'])},'https://www.instagram.com/{c['ig']}/') returning id into kid;\n")
+    s.append(f"insert into flowsmid.klanten (naam,email,telefoon,mobiel,status,adres,postcode,plaats,website,branche,instagram) values ({q(c['naam'])},{q(c['mail'])},{q(c['tel'])},{q(c['tel'])},'Prospect',{q(c['adres1'])},{q(pc)},{q(plaats)},'https://{slug}.flowsmid.nl',{q(c['soort'])},{q('https://www.instagram.com/'+c['ig']+'/' if c['ig'] else None)}) returning id into kid;\n")
     s.append(f"update flowsmid.prospects set klant_id=kid where id='{c['prospect']}';\n")
-    s.append(f"insert into flowsmid.kb_zaken (klant_id,slug,naam,telefoon,adres,instellingen) values (kid,'{slug}',{q(c['naam'])},{q(c['tel'])},{q(c['adres1']+', '+c['adres2'])},{q(inst)}::jsonb);\n")
+    s.append(f"insert into flowsmid.kb_zaken (klant_id,slug,naam,telefoon,adres,instellingen) values (kid,'{slug}',{q(c['naam'])},{q(c['tel'])},{q(c['adres1']+(', '+c['adres2'] if c['adres2'] else ''))},{q(inst)}::jsonb);\n")
     for i,k in enumerate(c['kappers']):
         var='k%d'%(i+1)
         s.append(f"insert into flowsmid.kb_kappers (klant_id,naam,bio,kleur,rol,volgorde) values (kid,{q(k['naam'])},{q(k['bio'])},'{k['kleur']}','{k['rol']}',{i+1}) returning id into {var};\n")
@@ -17,7 +17,7 @@ for slug,c in SITES.items():
     for i,(n,om,p,du) in enumerate(c['diensten']):
         s.append(f"insert into flowsmid.kb_diensten (klant_id,naam,omschrijving,prijs,duur,volgorde) values (kid,{q(n)},{q(om)},{p},{du},{i+1});\n")
     s.append(f"insert into flowsmid.domeinen (domein,naam,soort,klant_id,beheer_pad,notitie) values ('{slug}.flowsmid.nl',{q(c['naam'])},'Demo',kid,'/beheer/','Online afspraken');\n")
-    log=f"Demo automatisch gebouwd (nachtelijke demobouw 25-11-2026): afsprakensite op {slug}.flowsmid.nl met beheer op /beheer (kappersagenda, slug {slug}), op de basis van Barbershop Ocean. Bronnen: hun eigen website, Fresha en Instagram-link (Instagram zelf was niet leesbaar). "+c['extra_log']+f" Bestanden in flowsmid-media, branch sites-{slug}."
+    log=f"Demo automatisch gebouwd (nachtelijke demobouw 26-11-2026): afsprakensite op {slug}.flowsmid.nl met beheer op /beheer (kappersagenda, slug {slug}), op de basis van Barbershop Ocean. "+c['extra_log']+f" Bestanden in flowsmid-media, branch sites-{slug}."
     s.append(f"insert into flowsmid.klant_log (klant_id,tekst,auteur) values (kid,{q(log)},null);\n")
     # voorbeeldafspraken komende 14 dagen, ~4 per werkdag per kapper
     namen=c['demo_namen']
