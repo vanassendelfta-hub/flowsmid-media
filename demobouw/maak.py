@@ -406,7 +406,7 @@ VERCEL = open('/home/claude/bouw/vercel.json').read()
 def readme(slug, c):
     return f'''# {c['naam']} (demo)
 
-Afsprakensite met beheerportaal voor {c['naam']}, {c['adres1']}, {c['adres2']} (Instagram {('@' + c['ig']) if c['ig'] else 'onbekend'}). Gebouwd in de nachtelijke demobouw van 26-11-2026 op de basis van Barbershop Ocean (site) en Dinero (beheer).
+Afsprakensite met beheerportaal voor {c['naam']}, {c['adres1']}, {c['adres2']} (Instagram {('@' + c['ig']) if c['ig'] else 'onbekend'}). Gebouwd in de nachtelijke demobouw van 27-11-2026 op de basis van Barbershop Ocean (site) en Dinero (beheer).
 
 - `index.html` is de website, `beheer/index.html` het portaal (kappersagenda, slug `{slug}`), `logo/{slug}-logo.svg` een voorlopig woordmerk.
 - Data staat in Supabase, schema `flowsmid`, tabellen `kb_*`, slug `{slug}`. Publiek via `kb_publiek`, `kb_tijden`, `kb_boeken`.

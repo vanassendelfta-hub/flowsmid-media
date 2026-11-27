@@ -17,7 +17,7 @@ for slug,c in SITES.items():
     for i,(n,om,p,du) in enumerate(c['diensten']):
         s.append(f"insert into flowsmid.kb_diensten (klant_id,naam,omschrijving,prijs,duur,volgorde) values (kid,{q(n)},{q(om)},{p},{du},{i+1});\n")
     s.append(f"insert into flowsmid.domeinen (domein,naam,soort,klant_id,beheer_pad,notitie) values ('{slug}.flowsmid.nl',{q(c['naam'])},'Demo',kid,'/beheer/','Online afspraken');\n")
-    log=f"Demo automatisch gebouwd (nachtelijke demobouw 26-11-2026): afsprakensite op {slug}.flowsmid.nl met beheer op /beheer (kappersagenda, slug {slug}), op de basis van Barbershop Ocean. "+c['extra_log']+f" Bestanden in flowsmid-media, branch sites-{slug}."
+    log=f"Demo automatisch gebouwd (nachtelijke demobouw 27-11-2026): afsprakensite op {slug}.flowsmid.nl met beheer op /beheer (kappersagenda, slug {slug}), op de basis van Barbershop Ocean. "+c['extra_log']+f" Bestanden in flowsmid-media, branch sites-{slug}."
     s.append(f"insert into flowsmid.klant_log (klant_id,tekst,auteur) values (kid,{q(log)},null);\n")
     # voorbeeldafspraken komende 14 dagen, ~4 per werkdag per kapper
     namen=c['demo_namen']
